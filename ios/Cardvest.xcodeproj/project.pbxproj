@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CardvestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CardvestTests.m */; };
-		13B07FBD1A68108700A75B9A /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		13B07FBD1A68108700A75B9A /* (null) in Resources */ = {isa = PBXBuildFile; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351AD53139B04D48A492DCC9 /* Lato-Bold.ttf */; };
@@ -19,6 +19,7 @@
 		3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E5A87598B4B46995B7027 /* Lato-BlackItalic.ttf */; };
 		461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06933F48076D471682E306AD /* Lato-LightItalic.ttf */; };
 		4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */; };
+		88BC8C8D294C9D5A0092346E /* ios in Resources */ = {isa = PBXBuildFile; fileRef = 88BC8C8C294C9D5A0092346E /* ios */; };
 		8FFDD27FE0E111D8E34219F6 /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */; };
 		90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68E5EF259E8E4558AB107594 /* Lato-Black.ttf */; };
 		BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */; };
@@ -70,6 +71,7 @@
 		71214528D2EC48BF83240B17 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80158D7EF8F8B6C4DAB7F7C7 /* Pods-CardvestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardvestTests.debug.xcconfig"; path = "Target Support Files/Pods-CardvestTests/Pods-CardvestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		88BC8C8C294C9D5A0092346E /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; sourceTree = "<group>"; };
 		93DF87D1A45954192A4C560D /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A24869C88D743A5A01D67B0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		9B58E33039ED4B5A83C5FE58 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				88BC8C8C294C9D5A0092346E /* ios */,
 				13B07FAE1A68108700A75B9A /* Cardvest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CardvestTests */,
@@ -326,9 +329,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
+				13B07FBD1A68108700A75B9A /* (null) in Resources */,
 				90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */,
 				3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */,
+				88BC8C8D294C9D5A0092346E /* ios in Resources */,
 				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
 				FA8B7193E87645ABA6EEB43E /* Lato-BoldItalic.ttf in Resources */,
 				4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */,
@@ -654,7 +658,6 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
