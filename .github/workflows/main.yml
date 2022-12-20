@@ -15,7 +15,7 @@ jobs:
         distribution: 'temurin' # See 'Supported distributions' for available options
         java-version: '11'
     - name: build release 
-      run: cd android && ./gradlew assembleRelease
+      run: npm run android:assemble:debug
     - name: upload artifact to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
