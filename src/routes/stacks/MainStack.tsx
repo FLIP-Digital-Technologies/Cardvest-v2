@@ -15,39 +15,53 @@ import {
   Settings,
 } from '@assets/SVG';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import AddAccountFeedbackPage from '@scenes/AddAccountFeedbackPage';
 import AddAccountPage from '@scenes/AddAccountPage';
 import BuyAirtimePage from '@scenes/BuyAirtimePage';
 import BuyCablePage from '@scenes/BuyCablePage';
 import BuyDatePage from '@scenes/BuyDatePage';
+import BuyGiftCardPage from '@scenes/BuyGiftCardPage';
+import BuyGiftCardTradeFeedbackPage from '@scenes/BuyGiftCardTradeFeedbackPage';
+import BuyGiftCardTradeSummaryPage from '@scenes/BuyGiftCardTradeSummaryPage';
 import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
+import ChangePinPage from '@scenes/ChangePinPage';
 import DashboardPage from '@scenes/DashboardPage';
 import DepositPage from '@scenes/DepositPage';
+import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
 import Homepage from '@scenes/Homepage';
+import KYCPage from '@scenes/KYCPage';
 import LovePage from '@scenes/LovePage';
 import NotificationsPage from '@scenes/NotificationsPage';
+import PasswordPage from '@scenes/PasswordPage';
+import ProfilePage from '@scenes/ProfilePage';
+import ReferralPage from '@scenes/ReferralPage';
+import ResetPinFeedbackPage from '@scenes/ResetPinFeedbackPage';
+import SecurityPage from '@scenes/SecurityPage';
+import SecurityPinPage from '@scenes/SecurityPinPage';
 import SelectCardPage from '@scenes/SelectCardPage';
-import SellGiftCardPage from '@scenes/SellGiftCardPage';
+import SellGiftCardPage from '@scenes/SellGiftCard';
+import SellGiftCardTradeFeedbackPage from '@scenes/SellGiftCardTradeFeedbackPage';
+import SellGiftCardTradeSummaryPage from '@scenes/SellGiftCardTradeSummaryPage';
+import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
+import TradeDetailPage from '@scenes/TradeDetailPage';
 import TransactionHistoryPage from '@scenes/TransactionHistoryPage';
-import UserDetails from '@scenes/UserDetails';
-import UsersList from '@scenes/UsersList';
 import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
 import WithdrawalFeedbackPage from '@scenes/WithdrawalFeedbackPage';
 import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
-import customTheme from '@theme';
-import { View, Flex, Icon, ScrollView, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
+import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
 import { FC } from 'react';
 import * as React from 'react';
 
 const MainStack = createStackNavigator();
 const DashboardDrawer = createDrawerNavigator();
 const WalletStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
@@ -58,13 +72,82 @@ function HomeScreen() {
   );
 }
 
-function SettingsScreen() {
+const SettingsStackScreen: FC = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
+    <SettingsStack.Navigator initialRouteName="Settings">
+      <SettingsStack.Screen
+        name="Settings"
+        component={SettingPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="Profile"
+        component={ProfilePage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="Security"
+        component={SecurityPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="Password"
+        component={PasswordPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="Pin"
+        component={SecurityPinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="ChangePin"
+        component={ChangePinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="ResetPin"
+        component={ForgotPinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="ResetPinFeedback"
+        component={ResetPinFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="Referrals"
+        component={ReferralPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <SettingsStack.Screen
+        name="KYC"
+        component={KYCPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </SettingsStack.Navigator>
   );
-}
+};
 
 const WalletStackScreen: FC = () => {
   return (
@@ -139,6 +222,7 @@ const DashboardBottomTabStack: FC = () => {
       />
       <Tab.Screen
         options={{
+          header: () => null,
           tabBarLabel: 'Settings',
           tabBarLabelStyle: {
             color: 'black',
@@ -152,7 +236,7 @@ const DashboardBottomTabStack: FC = () => {
           ),
         }}
         name="Settings"
-        component={HomeScreen}
+        component={SettingsStackScreen}
       />
     </Tab.Navigator>
   );
@@ -264,7 +348,6 @@ const DashboardDrawerStack: FC = () => {
           headerShown: false,
         }}
       />
-      <DashboardDrawer.Screen name="Home" component={HomeScreen} />
     </DashboardDrawer.Navigator>
   );
 };
@@ -282,6 +365,20 @@ export const MainStackScreen: FC = () => {
       <MainStack.Screen
         name="SellGiftCard"
         component={SellGiftCardPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="SellGiftCardTradeSummaryPage"
+        component={SellGiftCardTradeSummaryPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="SellGiftCardTradeFeedbackPage"
+        component={SellGiftCardTradeFeedbackPage}
         options={{
           headerShown: false,
         }}
@@ -371,6 +468,13 @@ export const MainStackScreen: FC = () => {
         }}
       />
       <MainStack.Screen
+        name="TradeDetail"
+        component={TradeDetailPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
         name="Notifications"
         component={NotificationsPage}
         options={{
@@ -392,6 +496,27 @@ export const MainStackScreen: FC = () => {
         }}
       />
       <MainStack.Screen
+        name="BuyGiftCard"
+        component={BuyGiftCardPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="BuyGiftCardTradeSummaryPage"
+        component={BuyGiftCardTradeSummaryPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="BuyGiftCardTradeFeedbackPage"
+        component={BuyGiftCardTradeFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
         name="FundAccountFeedback"
         component={FundAccountFeedbackPage}
         options={{
@@ -404,36 +529,6 @@ export const MainStackScreen: FC = () => {
         options={{
           headerShown: true,
           headerTitleAlign: 'center',
-          ...TransitionPresets.SlideFromRightIOS,
-        }}
-      />
-      <MainStack.Screen
-        name="UsersList"
-        component={UsersList}
-        options={{
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerLeftContainerStyle: {
-            paddingLeft: customTheme.space[5],
-          },
-          headerRightContainerStyle: {
-            paddingRight: customTheme.space[5],
-          },
-          ...TransitionPresets.SlideFromRightIOS,
-        }}
-      />
-      <MainStack.Screen
-        name="UserDetails"
-        component={UserDetails}
-        options={{
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerLeftContainerStyle: {
-            paddingLeft: customTheme.space[5],
-          },
-          headerRightContainerStyle: {
-            paddingRight: customTheme.space[5],
-          },
           ...TransitionPresets.SlideFromRightIOS,
         }}
       />

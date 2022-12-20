@@ -14,6 +14,7 @@ const palette = {
     300: '#F7F9FB',
     400: '#7E7E7E',
     500: '#F9F9F9',
+    900: '#212121',
   },
   SUN_FLOWER: '#FAC915',
   ORANGE: '#f39c12',

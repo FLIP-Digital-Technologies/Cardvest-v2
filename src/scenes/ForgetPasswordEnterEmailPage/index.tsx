@@ -12,7 +12,6 @@ const ForgetPasswordEnterEmail: FC = () => {
     <CSafeAreaView>
       <ScrollView
         _contentContainerStyle={{
-          padding: '20px',
           flex: 1,
           justifyContent: 'center',
         }}
@@ -21,10 +20,10 @@ const ForgetPasswordEnterEmail: FC = () => {
           <Box p="4" width={20} height={20}>
             <Logo />
           </Box>
-          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
+          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg" fontWeight="bold">
             Forget Password
           </Text>
-          <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
+          <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" w="85%" fontWeight="light">
             Please Enter the email address of your account
           </Text>
         </Center>

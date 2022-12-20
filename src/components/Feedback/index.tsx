@@ -21,7 +21,7 @@ const SuccessFeedback = ({
       <Text textAlign="center" fontSize="3xl" mb="1" color="CARDVESTGREEN">
         {title}
       </Text>
-      <Text textAlign="center" fontSize="md">
+      <Text textAlign="center" fontSize="md" color="CARDVESTGREY.50">
         {message}
       </Text>
       {action && (

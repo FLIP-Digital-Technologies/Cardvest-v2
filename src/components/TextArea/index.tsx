@@ -1,7 +1,7 @@
-import { Input as NBInput, Box, Text } from 'native-base';
+import { TextArea as NBTextArea, Box, Text } from 'native-base';
 import React from 'react';
 
-const Input = ({
+const TextArea = ({
   label = '',
   placeholder = '',
   fontWeight = '',
@@ -19,14 +19,16 @@ const Input = ({
   return (
     <Box my="2">
       {label && (
-        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+        <Text mb="2" color="CARDVESTGREY.50" fontWeight={'light'}>
           {label}
         </Text>
       )}
       <Box backgroundColor="#F7F9FB">
-        <NBInput
+        <NBTextArea
           color={color}
           size="xl"
+          h={20}
+          autoCompleteType
           fontWeight={fontWeight || 'light'}
           borderWidth={0}
           py="3"
@@ -41,4 +43,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextArea;

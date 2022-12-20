@@ -35,7 +35,7 @@ const App: FC = () => {
   }, []);
 
   useEffect(() => {
-    // SplashScreen.hide();
+    SplashScreen.hide();
   }, []);
 
   return (

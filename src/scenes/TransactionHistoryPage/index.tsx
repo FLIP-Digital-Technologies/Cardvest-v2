@@ -12,6 +12,7 @@ const arr: string[] = ['', '', ''];
 
 const FirstRoute = () => (
   <ScrollView
+    showsVerticalScrollIndicator={false}
     _contentContainerStyle={{
       flexGrow: 1,
     }}
@@ -24,6 +25,7 @@ const FirstRoute = () => (
 
 const SecondRoute = () => (
   <ScrollView
+    showsVerticalScrollIndicator={false}
     _contentContainerStyle={{
       flexGrow: 1,
     }}
@@ -36,6 +38,7 @@ const SecondRoute = () => (
 
 const ThirdRoute = () => (
   <ScrollView
+    showsVerticalScrollIndicator={false}
     _contentContainerStyle={{
       flexGrow: 1,
     }}

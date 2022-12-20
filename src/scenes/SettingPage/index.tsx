@@ -1,4 +1,4 @@
-import { Connect, Rate, Refer, RightAngle, Suggestion } from '@assets/SVG';
+import { Logout, Profile, Referral, RightAngle, Security, Suggestion } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
@@ -6,31 +6,36 @@ import { Divider, HStack, Text, View, VStack } from 'native-base';
 import React, { FC, memo } from 'react';
 import { Pressable } from 'react-native';
 
-const KYCPage: FC = () => {
+const SettingsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   return (
-    <BackButtonTitleCenter title="Show some love">
+    <BackButtonTitleCenter title="Settings">
       <VStack my="7">
         {[
           {
-            name: 'Rate Us',
-            link: '',
-            icon: <Rate />,
+            name: 'Profile',
+            link: 'Profile',
+            icon: <Profile />,
           },
           {
-            name: 'Suggestion Box',
-            link: '',
+            name: 'KYC',
+            link: 'KYC',
             icon: <Suggestion />,
           },
           {
-            name: 'Refer Friends',
-            link: '',
-            icon: <Refer />,
+            name: 'Security',
+            link: 'Security',
+            icon: <Security />,
           },
           {
-            name: 'Connect with Us',
+            name: 'Referrals',
+            link: 'Referrals',
+            icon: <Referral />,
+          },
+          {
+            name: 'Log Out',
             link: '',
-            icon: <Connect />,
+            icon: <Logout />,
           },
         ].map((item, index) => (
           <Pressable key={index} onPress={() => navigation.navigate(item.link)}>
@@ -55,4 +60,4 @@ const KYCPage: FC = () => {
   );
 };
 
-export default memo(KYCPage);
+export default memo(SettingsPage);

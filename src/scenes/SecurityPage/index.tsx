@@ -1,36 +1,26 @@
-import { Connect, Rate, Refer, RightAngle, Suggestion } from '@assets/SVG';
+import { FingerScan, Key, Password, RightAngle } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { Divider, HStack, Text, View, VStack } from 'native-base';
+import { Divider, HStack, Switch, Text, View, VStack } from 'native-base';
 import React, { FC, memo } from 'react';
 import { Pressable } from 'react-native';
 
-const KYCPage: FC = () => {
+const SecurityPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   return (
-    <BackButtonTitleCenter title="Show some love">
+    <BackButtonTitleCenter title="Security">
       <VStack my="7">
         {[
           {
-            name: 'Rate Us',
-            link: '',
-            icon: <Rate />,
+            name: 'Password',
+            link: 'Password',
+            icon: <Password />,
           },
           {
-            name: 'Suggestion Box',
-            link: '',
-            icon: <Suggestion />,
-          },
-          {
-            name: 'Refer Friends',
-            link: '',
-            icon: <Refer />,
-          },
-          {
-            name: 'Connect with Us',
-            link: '',
-            icon: <Connect />,
+            name: 'Transaction PIN',
+            link: 'Pin',
+            icon: <Key />,
           },
         ].map((item, index) => (
           <Pressable key={index} onPress={() => navigation.navigate(item.link)}>
@@ -50,9 +40,24 @@ const KYCPage: FC = () => {
             {index !== 3 && <Divider bg="#F7F9FB" />}
           </Pressable>
         ))}
+        <Pressable>
+          <HStack py="4" justifyContent="space-between" alignItems="center">
+            <HStack justifyContent="space-between" alignItems="center">
+              <View width="5" h="8">
+                <FingerScan />
+              </View>
+              <Text fontWeight="light" px="4">
+                Face ID or Touch ID
+              </Text>
+            </HStack>
+            <View h="8">
+              <Switch size="md" onThumbColor="CARDVESTGREEN" onTrackColor="#EFEFEF" />
+            </View>
+          </HStack>
+        </Pressable>
       </VStack>
     </BackButtonTitleCenter>
   );
 };
 
-export default memo(KYCPage);
+export default memo(SecurityPage);

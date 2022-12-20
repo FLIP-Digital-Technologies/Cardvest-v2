@@ -37,6 +37,7 @@ const Home: FC = () => {
     <CSafeAreaView>
       <ScrollView
         backgroundColor="pageBackground"
+        showsVerticalScrollIndicator={false}
         _contentContainerStyle={{
           alignItems: 'center',
           flex: 1,

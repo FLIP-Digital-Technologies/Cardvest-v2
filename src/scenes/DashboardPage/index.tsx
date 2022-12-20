@@ -138,45 +138,50 @@ export const EmptyPanel = () => (
   </VStack>
 );
 
-export const TransactionPanel = () => (
-  <HStack
-    backgroundColor="#F9F9F9"
-    px="3"
-    py="5"
-    mb="3"
-    borderRadius="lg"
-    justifyContent="space-between"
-    alignItems="center">
-    <HStack alignItems="center">
-      <Avatar
-        bg="cyan.500"
-        borderColor="white"
-        borderWidth="1"
-        size="12"
-        source={{
-          uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-        }}>
-        TE
-      </Avatar>
-      <VStack mx="4">
-        <Text color="CARDVESTBLACK.50" fontSize="md">
-          Gift Card Sell
-        </Text>
-        <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
-          Today, 10:14AM
-        </Text>
-      </VStack>
-    </HStack>
-    <VStack alignItems="flex-end">
-      <Text color="CARDVESTBLACK.50" fontSize="md">
-        +NGN 20,000
-      </Text>
-      <Text color="green.700" fontSize="xs">
-        Successful
-      </Text>
-    </VStack>
-  </HStack>
-);
+export const TransactionPanel = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  return (
+    <Pressable onPress={() => navigation.navigate('TradeDetail')}>
+      <HStack
+        backgroundColor="#F9F9F9"
+        px="3"
+        py="5"
+        mb="3"
+        borderRadius="lg"
+        justifyContent="space-between"
+        alignItems="center">
+        <HStack alignItems="center">
+          <Avatar
+            bg="cyan.500"
+            borderColor="white"
+            borderWidth="1"
+            size="12"
+            source={{
+              uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+            }}>
+            TE
+          </Avatar>
+          <VStack mx="4">
+            <Text color="CARDVESTBLACK.50" fontSize="md">
+              Gift Card Sell
+            </Text>
+            <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
+              Today, 10:14AM
+            </Text>
+          </VStack>
+        </HStack>
+        <VStack alignItems="flex-end">
+          <Text color="CARDVESTBLACK.50" fontSize="md">
+            +NGN 20,000
+          </Text>
+          <Text color="green.700" fontSize="xs">
+            Successful
+          </Text>
+        </VStack>
+      </HStack>
+    </Pressable>
+  );
+};
 
 export const MenuCard = ({
   title,
@@ -213,10 +218,11 @@ const Dashboard: FC = () => {
   return (
     <CSafeAreaView>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         _contentContainerStyle={{
           // flex: 1,
           flexGrow: 1,
-          padding: '20px',
+          padding: '18px',
         }}>
         <GreetingPanel />
         <BalancePanel {...{ currency, setCurrency }} />
@@ -229,7 +235,7 @@ const Dashboard: FC = () => {
             },
             {
               title: 'Buy Giftcard',
-              action: () => navigation.navigate('BuyDate'),
+              action: () => navigation.navigate('BuyGiftCard'),
               icon: <BuyGiftCard />,
             },
             {
