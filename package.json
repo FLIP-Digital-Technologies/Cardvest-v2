@@ -58,7 +58,7 @@
     "react-native-flipper": "0.159.0",
     "react-native-gesture-handler": "2.5.0",
     "react-native-indicators": "^0.17.0",
-    "react-native-localize": "2.2.3",
+    "react-native-localize": "2.2.4",
     "react-native-otp-inputs": "^7.4.0",
     "react-native-pager-view": "^6.1.0",
     "react-native-reanimated": "^3.0.0-rc.0",
