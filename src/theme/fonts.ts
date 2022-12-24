@@ -34,12 +34,16 @@ const typography = {
         italic: 'Satoshi-Italic',
       },
       600: {
-        normal: 'Satoshi-Black',
-        italic: 'Satoshi-BlackItalic',
+        normal: 'Satoshi-Medium',
+        italic: 'Satoshi-MediumItalic',
       },
-      900: {
+      700: {
         normal: 'Satoshi-Bold',
         italic: 'Satoshi-Bold',
+      },
+      900: {
+        normal: 'Satoshi-Black',
+        italic: 'Satoshi-BlackItalic',
       },
     },
   },
