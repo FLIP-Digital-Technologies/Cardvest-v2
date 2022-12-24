@@ -19,6 +19,16 @@
 		3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E5A87598B4B46995B7027 /* Lato-BlackItalic.ttf */; };
 		461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06933F48076D471682E306AD /* Lato-LightItalic.ttf */; };
 		4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */; };
+		884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */; };
+		884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */; };
+		884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */; };
+		884CBE3329559CA8001DD801 /* Satoshi-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */; };
+		884CBE3429559CA8001DD801 /* Satoshi-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */; };
+		884CBE3529559CA8001DD801 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */; };
+		884CBE3629559CA8001DD801 /* Satoshi-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2929559CA8001DD801 /* Satoshi-Light.otf */; };
+		884CBE3729559CA8001DD801 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */; };
+		884CBE3829559CA8001DD801 /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */; };
+		884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */; };
 		8FFDD27FE0E111D8E34219F6 /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */; };
 		90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68E5EF259E8E4558AB107594 /* Lato-Black.ttf */; };
 		BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */; };
@@ -70,6 +80,26 @@
 		71214528D2EC48BF83240B17 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80158D7EF8F8B6C4DAB7F7C7 /* Pods-CardvestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardvestTests.debug.xcconfig"; path = "Target Support Files/Pods-CardvestTests/Pods-CardvestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		884CBE1C29559CA8001DD801 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-LightItalic.otf"; path = "../src/assets/fonts/Satoshi-LightItalic.otf"; sourceTree = "<group>"; };
+		884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Bold.otf"; path = "../src/assets/fonts/Satoshi-Bold.otf"; sourceTree = "<group>"; };
+		884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-MediumItalic.otf"; path = "../src/assets/fonts/Satoshi-MediumItalic.otf"; sourceTree = "<group>"; };
+		884CBE2029559CA8001DD801 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-BoldItalic.otf"; path = "../src/assets/fonts/Satoshi-BoldItalic.otf"; sourceTree = "<group>"; };
+		884CBE2229559CA8001DD801 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../src/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
+		884CBE2329559CA8001DD801 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
+		884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-BlackItalic.otf"; path = "../src/assets/fonts/Satoshi-BlackItalic.otf"; sourceTree = "<group>"; };
+		884CBE2529559CA8001DD801 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/fonts/Lato-Thin.ttf"; sourceTree = "<group>"; };
+		884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Regular.otf"; path = "../src/assets/fonts/Satoshi-Regular.otf"; sourceTree = "<group>"; };
+		884CBE2729559CA8001DD801 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../src/assets/fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
+		884CBE2829559CA8001DD801 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-BlackItalic.ttf"; path = "../src/assets/fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		884CBE2929559CA8001DD801 /* Satoshi-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Light.otf"; path = "../src/assets/fonts/Satoshi-Light.otf"; sourceTree = "<group>"; };
+		884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Medium.otf"; path = "../src/assets/fonts/Satoshi-Medium.otf"; sourceTree = "<group>"; };
+		884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Italic.otf"; path = "../src/assets/fonts/Satoshi-Italic.otf"; sourceTree = "<group>"; };
+		884CBE2C29559CA8001DD801 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		884CBE2D29559CA8001DD801 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Black.otf"; path = "../src/assets/fonts/Satoshi-Black.otf"; sourceTree = "<group>"; };
 		93DF87D1A45954192A4C560D /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A24869C88D743A5A01D67B0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		9B58E33039ED4B5A83C5FE58 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -163,6 +193,26 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				884CBE2729559CA8001DD801 /* Lato-Black.ttf */,
+				884CBE2829559CA8001DD801 /* Lato-BlackItalic.ttf */,
+				884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */,
+				884CBE2C29559CA8001DD801 /* Lato-BoldItalic.ttf */,
+				884CBE2229559CA8001DD801 /* Lato-Italic.ttf */,
+				884CBE2329559CA8001DD801 /* Lato-Light.ttf */,
+				884CBE2D29559CA8001DD801 /* Lato-LightItalic.ttf */,
+				884CBE2029559CA8001DD801 /* Lato-Regular.ttf */,
+				884CBE2529559CA8001DD801 /* Lato-Thin.ttf */,
+				884CBE1C29559CA8001DD801 /* Lato-ThinItalic.ttf */,
+				884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */,
+				884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */,
+				884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */,
+				884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */,
+				884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */,
+				884CBE2929559CA8001DD801 /* Satoshi-Light.otf */,
+				884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */,
+				884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */,
+				884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */,
+				884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */,
 				13B07FAE1A68108700A75B9A /* Cardvest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CardvestTests */,
@@ -325,18 +375,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
-				90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */,
-				3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */,
-				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
-				FA8B7193E87645ABA6EEB43E /* Lato-BoldItalic.ttf in Resources */,
+				BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */,
+				884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */,
+				884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */,
+				884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */,
+				391165B8EE75497793EADEC4 /* Lato-Regular.ttf in Resources */,
+				884CBE3329559CA8001DD801 /* Satoshi-BoldItalic.otf in Resources */,
 				4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */,
 				C8342581F70D47B98C3CEDB4 /* Lato-Light.ttf in Resources */,
-				461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */,
-				391165B8EE75497793EADEC4 /* Lato-Regular.ttf in Resources */,
+				884CBE3429559CA8001DD801 /* Satoshi-BlackItalic.otf in Resources */,
 				2909319D33DD472694DDAF1F /* Lato-Thin.ttf in Resources */,
-				BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */,
+				884CBE3529559CA8001DD801 /* Satoshi-Regular.otf in Resources */,
+				90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */,
+				3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */,
+				884CBE3629559CA8001DD801 /* Satoshi-Light.otf in Resources */,
+				884CBE3729559CA8001DD801 /* Satoshi-Medium.otf in Resources */,
+				884CBE3829559CA8001DD801 /* Satoshi-Italic.otf in Resources */,
+				FA8B7193E87645ABA6EEB43E /* Lato-BoldItalic.ttf in Resources */,
+				461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */,
+				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
+				884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */,
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
 				3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,7 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=/Users/biguncleyemi/.nvm/versions/node/v14.20.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		4CEC92E26BC4954EDC617273 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -541,7 +601,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
 			};
@@ -565,7 +625,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
 			};
@@ -577,7 +637,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = UH5452SVAT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -589,7 +650,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cardvest;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -603,7 +664,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = UH5452SVAT;
 				INFOPLIST_FILE = Cardvest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -614,7 +676,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cardvest;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

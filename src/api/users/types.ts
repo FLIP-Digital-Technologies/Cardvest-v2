@@ -61,3 +61,8 @@ export type ModifyUserSuccessPayload = {
 export type DeleteUserRequestPayload = {
   userId: string;
 };
+
+export type LoginUserRequestPayload = {
+  email: string;
+  password: string;
+};

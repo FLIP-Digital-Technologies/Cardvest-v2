@@ -8,6 +8,8 @@ const Input = ({
   color = 'CARDVESTBLACK.50',
   InputRightElement,
   value,
+  type,
+  onChangeText,
 }: {
   label?: string;
   fontWeight?: string;
@@ -15,6 +17,8 @@ const Input = ({
   color?: string;
   InputRightElement?: any;
   value?: string;
+  onChangeText?: (value: string) => void;
+  type?: 'text' | 'password' | undefined;
 }) => {
   return (
     <Box my="2">
@@ -35,6 +39,8 @@ const Input = ({
           style={{ backgroundColor: '#F7F9FB' }}
           placeholder={placeholder}
           InputRightElement={InputRightElement}
+          type={type}
+          onChangeText={onChangeText}
         />
       </Box>
     </Box>

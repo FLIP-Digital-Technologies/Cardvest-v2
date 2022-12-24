@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>10</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -36,20 +36,20 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Satoshi-Black.ttf</string>
-		<string>Satoshi-BlackItalic.ttf</string>
-		<string>Satoshi-Bold.ttf</string>
-		<string>Satoshi-BoldItalic.ttf</string>
-		<string>Satoshi-Italic.ttf</string>
-		<string>Satoshi-Light.ttf</string>
-		<string>Satoshi-LightItalic.ttf</string>
-		<string>Satoshi-Regular.ttf</string>
-		<string>Satoshi-Thin.ttf</string>
-		<string>Satoshi-ThinItalic.ttf</string>
 		<string>Roboto_medium.ttf</string>
+		<string>Satoshi-Black.otf</string>
+		<string>Satoshi-BlackItalic.otf</string>
+		<string>Satoshi-Bold.otf</string>
+		<string>Satoshi-BoldItalic.otf</string>
+		<string>Satoshi-Italic.otf</string>
+		<string>Satoshi-Light.otf</string>
+		<string>Satoshi-LightItalic.otf</string>
+		<string>Satoshi-Medium.otf</string>
+		<string>Satoshi-MediumItalic.otf</string>
+		<string>Satoshi-Regular.otf</string>
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
 		<string>AntDesign.ttf</string>

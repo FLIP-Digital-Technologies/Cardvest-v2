@@ -44,7 +44,7 @@ const WithdrawalPage: FC = () => {
           </Button>
           <View position="relative">
             <Divider my="60px" backgroundColor="#909090" />
-            <View backgroundColor="#EFEFEF" w="6" zIndex={9} position="absolute" top="40%" left="45%" right="0%">
+            <View backgroundColor="#fff" w="6" zIndex={9} position="absolute" top="40%" left="45%" right="0%">
               <Text m="auto">OR</Text>
             </View>
           </View>

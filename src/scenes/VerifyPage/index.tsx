@@ -11,7 +11,6 @@ const Verify: FC = () => {
     <CSafeAreaView>
       <ScrollView
         _contentContainerStyle={{
-          padding: '20px',
           flex: 1,
           justifyContent: 'center',
         }}

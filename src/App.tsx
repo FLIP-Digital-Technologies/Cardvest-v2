@@ -8,11 +8,22 @@ import customTheme from '@theme';
 import { NativeBaseProvider, StatusBar } from 'native-base';
 import React, { FC, Suspense, useEffect } from 'react';
 import 'react-native-gesture-handler';
+import { setCustomTextInput, setCustomText } from 'react-native-global-props';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import SplashScreen from 'react-native-splash-screen';
 
 enableScreens();
+
+const customTextProps = {
+  allowFontScaling: false,
+  style: {
+    fontFamily: 'Satoshi',
+  },
+};
+
+setCustomTextInput(customTextProps);
+setCustomText(customTextProps);
 
 // Create a react-query client
 const queryClient = new QueryClient({

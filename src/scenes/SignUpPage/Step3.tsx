@@ -12,7 +12,6 @@ const SignUpStep3: FC = () => {
     <CSafeAreaView>
       <ScrollView
         _contentContainerStyle={{
-          padding: '20px',
           flex: 1,
           justifyContent: 'center',
         }}
@@ -51,7 +50,7 @@ const SignUpStep3: FC = () => {
             </Svg>
           </HStack>
         </Center>
-        <View flex={3} p="3" my="8" mx="3">
+        <View flex={3} p="3" my="8">
           <Input label="Referral Code (Optional)" />
           <Input label="How did you hear about us?" />
           <Button

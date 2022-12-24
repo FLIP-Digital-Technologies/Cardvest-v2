@@ -11,7 +11,6 @@ const PasswordPage: FC = () => {
     <BackButtonTitleCenter title="Password">
       <ScrollView
         _contentContainerStyle={{
-          padding: '0px 20px',
           flex: 1,
           justifyContent: 'center',
         }}

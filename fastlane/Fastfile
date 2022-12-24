@@ -8,13 +8,13 @@ platform :android do
   desc 'Build the staging release APK.'
   private_lane :build_staging do
     gradle(task: 'clean', project_dir: 'android/')
-    sh("npm", "run", "make-apk:stagingRelease")
+    sh("npm", "run", "android:assemble:debug")
   end
 
   desc 'Build the production release APK.'
   private_lane :build_production do
     gradle(task: 'clean', project_dir: 'android/')
-    sh("npm", "run", "make-apk:productionRelease")
+    sh("npm", "run", "android:assemble:release")
   end
 
   desc 'Upload the release APK to App Center.'
@@ -24,7 +24,7 @@ platform :android do
         api_token: ENV["APPCENTER_API_TOKEN"],
         owner_name: ENV["APPCENTER_OWNER_NAME"],
         app_name: ENV["APPCENTER_APP_NAME"],
-        apk: "./android/app/build/outputs/apk/release/app-release.apk",
+        apk: "./android/app/build/outputs/apk/debug/app-debug.apk",
         notify_testers: ENV["NOTIFY_TESTERS"],
         destinations: ENV["DESTINATIONS"],
         release_notes: release_notes
@@ -67,7 +67,7 @@ platform :ios do
         }
     )
     match(
-      app_identifier: 'com.app.bundle',
+      app_identifier: 'org.app.cardvest',
       readonly: true, 
       force_for_new_devices: true, 
       )

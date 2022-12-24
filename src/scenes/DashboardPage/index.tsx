@@ -194,7 +194,7 @@ export const MenuCard = ({
   action: () => void;
   icon: () => () => ReactElement<any, JSXElementConstructor<any>>;
 }) => (
-  <Pressable w="33%" h="123" onPress={action}>
+  <Pressable w="33.3%" h="123" onPress={action}>
     <Box mx={ind % 3 === 1 ? '1' : '0'} my="2" backgroundColor="#FAFAF0" borderRadius="6">
       <VStack p="4" alignItems="center">
         <View h="16" w="90" p="2">
@@ -222,7 +222,6 @@ const Dashboard: FC = () => {
         _contentContainerStyle={{
           // flex: 1,
           flexGrow: 1,
-          padding: '18px',
         }}>
         <GreetingPanel />
         <BalancePanel {...{ currency, setCurrency }} />

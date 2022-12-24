@@ -7,7 +7,8 @@ import SignUpPage from '@scenes/SignUpPage';
 import Step2 from '@scenes/SignUpPage/Step2';
 import Step3 from '@scenes/SignUpPage/Step3';
 import VerifyPage from '@scenes/VerifyPage';
-import React, { FC } from 'react';
+import { cacheService } from '@utils/cache';
+import React, { FC, useLayoutEffect, useState } from 'react';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
 
@@ -86,6 +87,14 @@ export const AuthStackScreen: FC = () => {
 };
 
 export const RootStackScreen: FC = () => {
+  const [isUserLogin, setIsUserLogin] = useState<string | undefined | null>('');
+  async function getUser() {
+    const user = await cacheService.get('login-user');
+    setIsUserLogin(user);
+  }
+  useLayoutEffect(() => {
+    getUser();
+  }, []);
   return (
     <RootStack.Navigator initialRouteName="Intro">
       <RootStack.Screen
@@ -95,13 +104,7 @@ export const RootStackScreen: FC = () => {
           headerShown: false,
         }}
       />
-      <RootStack.Screen
-        name="Auth"
-        component={AuthStackScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+      {/* {isUserLogin ? ( */}
       <RootStack.Screen
         name="Dashboard"
         component={MainStackScreen}
@@ -109,6 +112,15 @@ export const RootStackScreen: FC = () => {
           headerShown: false,
         }}
       />
+      {/* ) : ( */}
+      <RootStack.Screen
+        name="Auth"
+        component={AuthStackScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      {/* )} */}
     </RootStack.Navigator>
   );
 };

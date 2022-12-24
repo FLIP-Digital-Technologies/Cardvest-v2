@@ -15,25 +15,22 @@ const BackButtonTitleCenter: FC<{
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <CSafeAreaView>
-      <View pt="6" px="2">
-        <HStack w="100%" alignItems="center">
-          <Pressable h="10" w="10" onPress={() => navigation.goBack()}>
-            <BackButton />
-          </Pressable>
-          <Text fontSize="lg" mx="auto" textAlign="center">
-            {title}
-          </Text>
-          <View w="10" />
-        </HStack>
-      </View>
+      <HStack w="100%" alignItems="center">
+        <Pressable h="10" w="10" onPress={() => navigation.goBack()}>
+          <BackButton />
+        </Pressable>
+        <Text fontSize="lg" mx="auto" textAlign="center">
+          {title}
+        </Text>
+        <View w="10" />
+      </HStack>
       <ScrollView
         showsVerticalScrollIndicator={false}
         _contentContainerStyle={{
           // flex: 1,
           flexGrow: 1,
-          padding: '5px 20px',
         }}>
-        <VStack pb="3" px="3">
+        <VStack pb="3">
           <VStack>{children}</VStack>
           {actionText && (
             <VStack>

@@ -92,7 +92,7 @@ const WithdrawalUSDT: FC = () => {
               </Text>
             </View>
             <HStack pb="3" justifyContent={'space-between'}>
-              <NInput w="70%" h="60" color="black" fontSize="4xl" value={'1,650,009.89'} variant="unstyled" />
+              <NInput w="70%" h="60" color="black" fontSize="3xl" value={'1,650,009.89'} variant="unstyled" />
               <CurrencyPicker {...{ currency, setCurrency }} />
             </HStack>
             <View position="relative">
@@ -107,10 +107,10 @@ const WithdrawalUSDT: FC = () => {
               </Text>
             </View>
             <HStack alignItems={'center'}>
-              <Text color="black" fontSize="4xl">
+              <Text color="black" fontSize="3xl">
                 $
               </Text>
-              <NInput w="100%" h="60" color="black" fontSize="4xl" value={'1,650,009.89'} variant="unstyled" />
+              <NInput w="100%" h="60" color="black" fontSize="3xl" value={'1,650,009.89'} variant="unstyled" />
             </HStack>
           </VStack>
         </Box>

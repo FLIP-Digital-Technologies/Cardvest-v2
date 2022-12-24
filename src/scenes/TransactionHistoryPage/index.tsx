@@ -56,7 +56,8 @@ const renderScene = SceneMap({
 });
 
 const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
-  const { tab } = route.params;
+  const { params = { tab: 0 } } = route;
+  const { tab } = params;
   const navigation = useNavigation<GenericNavigationProps>();
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(tab || 0);
