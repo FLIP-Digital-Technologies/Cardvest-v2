@@ -76,8 +76,8 @@ const Intro: FC = () => {
           color="white">
           Get Started
         </Button>
-        <Pressable onPress={() => navigation.navigate('Auth')}>
-          <Text fontSize="md" color="CARDVESTGREEN">
+        <Pressable w="100%" onPress={() => navigation.navigate('Auth')}>
+          <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
             Already have an account? <Text fontWeight={'bold'}>Login</Text>
           </Text>
         </Pressable>

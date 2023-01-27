@@ -48,14 +48,22 @@ export type CreateUserSuccessPayload = {
 
 export type ModifyUserRequestPayload = {
   userId: string;
-  name: string;
-  job: string;
+  username: string;
+  phonenumber: string;
+  email: string;
 };
 
 export type ModifyUserSuccessPayload = {
   name: string;
   job: string;
   updatedAt: string;
+};
+
+export type ModifyUserPasswordRequestPayload = {
+  userId: string;
+  current_password: string;
+  password: string;
+  password_confirmation: string;
 };
 
 export type DeleteUserRequestPayload = {
@@ -65,4 +73,12 @@ export type DeleteUserRequestPayload = {
 export type LoginUserRequestPayload = {
   email: string;
   password: string;
+};
+
+export type ForgotPasswordRequestPayload = {
+  email: string;
+};
+
+export type SendOTPRequestPayload = {
+  token: string;
 };

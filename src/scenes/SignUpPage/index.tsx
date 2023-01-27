@@ -1,13 +1,217 @@
+import { useCreateUser } from '@api/hooks/useAuth';
 import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { View, Text, Center, Button, Pressable, ScrollView, HStack } from 'native-base';
-import React, { FC, memo } from 'react';
-import Svg, { Circle, Line, Path } from 'react-native-svg';
+import { ProgressStepperIndicator } from '@scenes/KYCPage';
+import { validateEmail } from '@scenes/LoginPage';
+import { View, Text, Center, Button, Pressable, ScrollView, HStack, CheckIcon, Select, Box } from 'native-base';
+import React, { FC, memo, useCallback, useState } from 'react';
+
+// export const validateEmail = (value: string) => {
+//   if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$/i.test(value)) {
+//     return true;
+//   }
+//   return false;
+// };
+
+const ReferralSelect = (props: any) => {
+  const { value, setValue, label } = props;
+  return (
+    <Box my="2">
+      {label && (
+        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+          {label}
+        </Text>
+      )}
+      <Box backgroundColor="#F7F9FB">
+        <Select
+          selectedValue={value}
+          minWidth="200"
+          accessibilityLabel="How did you hear about us?"
+          placeholder="How did you hear about us?"
+          borderColor="#F7F9FB"
+          _selectedItem={{
+            bg: '#F7F2DD',
+            endIcon: <CheckIcon size="5" />,
+          }}
+          height="50px"
+          fontSize="md"
+          onValueChange={(itemValue: string) => setValue(itemValue)}>
+          <Select.Item
+            isDisabled
+            label="How did you hear about us?"
+            value="non"
+            _disabled={{ opacity: 1 }}
+            startIcon={
+              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
+                <Text fontSize="md" color="CARDVESTGREEN">
+                  Select County
+                </Text>
+              </HStack>
+            }
+          />
+          <Select.Item label="Referral" value="Referral" />
+          <Select.Item label="From a friend/colleague" value="From a friend/colleague" />
+          <Select.Item label="Sponsored Ads" value="Sponsored Ads" />
+          <Select.Item label="Instagram" value="Instagram" />
+          <Select.Item label="FaceBook" value="FaceBook" />
+        </Select>
+      </Box>
+    </Box>
+  );
+};
+
+export const CountrySelect = (props: any) => {
+  const { value, setValue, label } = props;
+  return (
+    <Box my="2">
+      {label && (
+        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+          {label}
+        </Text>
+      )}
+      <Box backgroundColor="#F7F9FB">
+        <Select
+          selectedValue={value}
+          minWidth="200"
+          accessibilityLabel="Select Country"
+          placeholder="Select Country"
+          borderColor="#F7F9FB"
+          _selectedItem={{
+            bg: '#F7F2DD',
+            endIcon: <CheckIcon size="5" />,
+          }}
+          height="50px"
+          fontSize="md"
+          onValueChange={(itemValue: string) => setValue(itemValue)}>
+          <Select.Item
+            isDisabled
+            label="Select Country"
+            value="non"
+            _disabled={{ opacity: 1 }}
+            startIcon={
+              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
+                <Text fontSize="md" color="CARDVESTGREEN">
+                  Select County
+                </Text>
+              </HStack>
+            }
+          />
+          <Select.Item label="Nigeria" value="Nigeria" />
+          <Select.Item label="Ghana" value="Ghana" />
+        </Select>
+      </Box>
+    </Box>
+  );
+};
+
+const StepOne = (props: any) => {
+  const { count, setCount, email, setEmail, password, setPassword, username, setUsername } = props;
+  const handleDisabled = () => !email || !password || !username || validateEmail(email);
+  return (
+    <View p="3" my="6">
+      <Input label="Username" onChangeText={setUsername} />
+      <Input label="Email Address" onChangeText={setEmail} />
+      <Input type="password" label="Password" onChangeText={setPassword} />
+      <Button
+        onPress={() => setCount(count + 1)}
+        isDisabled={handleDisabled()}
+        my="3"
+        size="lg"
+        p="4"
+        fontSize="md"
+        backgroundColor="CARDVESTGREEN"
+        color="white">
+        Next
+      </Button>
+    </View>
+  );
+};
+
+const StepTwo = (props: any) => {
+  const { count, setCount, country, setCountry, phoneNumber, setPhoneNumber } = props;
+  const handleDisabled = useCallback(() => {
+    return (
+      !phoneNumber ||
+      !country ||
+      (country === 'Nigeria' && phoneNumber.length !== 11) ||
+      (country === 'Ghana' && phoneNumber.length !== 10)
+    );
+  }, [country, phoneNumber]);
+  return (
+    <View flex={3} p="3" my="6">
+      <CountrySelect label="Country" value={country} setValue={setCountry} />
+      <Input label="Phone Number" onChangeText={setPhoneNumber} />
+      <Button
+        onPress={() => setCount(count + 1)}
+        isDisabled={handleDisabled()}
+        my="3"
+        size="lg"
+        p="4"
+        fontSize="md"
+        backgroundColor="CARDVESTGREEN"
+        color="white">
+        Next
+      </Button>
+    </View>
+  );
+};
+
+const StepThree = (props: any) => {
+  const { referrer, setReferrer, how, setHow, handleSubmit, isLoading } = props;
+  return (
+    <View flex={3} p="3" my="8">
+      <Input label="Referral Code (Optional)" onChangeText={setReferrer} value={referrer} />
+      <ReferralSelect label="How did you hear about us?" setValue={setHow} value={how} />
+      <Button
+        onPress={() => handleSubmit()}
+        isLoading={isLoading}
+        isLoadingText="Signing up"
+        my="3"
+        size="lg"
+        py="4"
+        _text={{
+          width: '150%',
+        }}
+        fontSize="md"
+        backgroundColor="CARDVESTGREEN"
+        color="white">
+        Continue
+      </Button>
+      <Text fontSize="2xs" textAlign="center">
+        By clicking continue you agree to our terms and conditions.
+      </Text>
+    </View>
+  );
+};
 
 const SignUp: FC = () => {
+  const { mutate: createUser, isLoading } = useCreateUser();
   const navigation = useNavigation<GenericNavigationProps>();
+  const [count, setCount] = useState<number>(1);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [country, setCountry] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [referrer, setReferrer] = useState('');
+  const [how, setHow] = useState('');
+  const handleSubmit = async () => {
+    try {
+      await createUser({
+        email,
+        password,
+        username,
+        phonenumber: phoneNumber,
+        terms: true,
+        referrer,
+        nationality: country,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <CSafeAreaView>
       <ScrollView
@@ -23,51 +227,18 @@ const SignUp: FC = () => {
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
             Enter your details to get started
           </Text>
-          <HStack mt="7" space="xs" alignItems="center">
-            <Svg height="36" width="36">
-              <Circle cx="18" cy="18" r="18" fill={'#235643'} />
-              <Path d="M18.8094 13.57V25H20.5014V11.986H16.0734V13.57H18.8094Z" fill="white" />
-            </Svg>
-            <Svg height="10" width="50">
-              <Line x1="0" y1="5" x2="60" y2="5" stroke="#E8E8E8" strokeWidth="2" />
-            </Svg>
-            <Svg height="36" width="36">
-              <Circle cx="18" cy="18" r="18" fill={'#D9D9D9'} />
-              <Path
-                d="M22.9352 24.982V23.344H16.9232L19.6232 21.004C21.9272 19.006 22.8452 17.692 22.8452 15.838C22.8452 13.336 21.1712 11.752 18.5612 11.752C15.9152 11.752 14.1512 13.57 14.0972 16.36H15.8612C15.8972 14.506 16.9412 13.336 18.5432 13.336C20.1092 13.336 21.0452 14.308 21.0452 15.946C21.0452 17.332 20.4512 18.214 18.3452 20.032L14.1512 23.65V25L22.9352 24.982Z"
-                fill="white"
-              />
-            </Svg>
-            <Svg height="10" width="50">
-              <Line x1="0" y1="5" x2="60" y2="5" stroke="#E8E8E8" strokeWidth="2" />
-            </Svg>
-            <Svg height="36" width="36">
-              <Circle cx="18" cy="18" r="18" fill={'#D9D9D9'} />
-              <Path
-                d="M17.9928 18.268C20.0628 18.268 21.1428 19.312 21.1428 20.878C21.1428 22.552 20.0448 23.632 18.3528 23.632C16.7148 23.632 15.6708 22.642 15.6708 20.95H13.9248C13.9248 23.65 15.7608 25.216 18.3168 25.216C20.9628 25.216 22.9428 23.542 22.9428 20.914C22.9428 18.574 21.2688 17.08 19.0548 16.81L22.6188 13.408V11.986H14.5368V13.552H20.3868L16.6968 17.098V18.268H17.9928Z"
-                fill="white"
-              />
-            </Svg>
-          </HStack>
+          <Center>
+            <ProgressStepperIndicator isDisabled count={count} setCount={setCount} />
+          </Center>
         </Center>
-        <View p="3" my="8">
-          <Input label="Username" />
-          <Input label="Email Address" />
-          <Input label="Password" />
-          <Button
-            onPress={() => navigation.navigate('SignUpStep2')}
-            my="3"
-            size="lg"
-            p="4"
-            fontSize="md"
-            backgroundColor="CARDVESTGREEN"
-            color="white">
-            Next
-          </Button>
-        </View>
+        {count === 1 && (
+          <StepOne {...{ count, setCount, email, setEmail, password, setPassword, username, setUsername }} />
+        )}
+        {count === 2 && <StepTwo {...{ count, setCount, country, setCountry, phoneNumber, setPhoneNumber }} />}
+        {count === 3 && <StepThree {...{ referrer, setReferrer, how, setHow, handleSubmit, isLoading }} />}
         <Center flex={1} px="4" justifyContent="space-between">
-          <Pressable mt="2" onPress={() => navigation.navigate('Login')}>
-            <Text fontSize="md" color="CARDVESTGREEN">
+          <Pressable mt="2" w="100%" onPress={() => navigation.navigate('Login')}>
+            <Text fontSize="md" textAlign="center" color="CARDVESTGREEN">
               Already have an account? <Text fontWeight={'bold'}>Login</Text>
             </Text>
           </Pressable>

@@ -1,27 +1,34 @@
-import { createUser, loginUser } from '@api/Auth/auth';
+import { createUser, getUserData, loginUser } from '@api/Auth/auth';
 import { LoginUserRequestPayload } from '@api/users/types';
-import { useMutation } from '@tanstack/react-query';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
 import { AxiosError } from 'axios';
 
 function useCreateUser() {
+  const navigation = useNavigation<GenericNavigationProps>();
   return useMutation(
     ['new-user'],
-    ({ email, password, username, phonenumber, terms, referrer }: any) =>
-      createUser({ email, password, username, phonenumber, terms, referrer }),
+    ({ email, password, username, phonenumber, terms, referrer, nationality }: any) =>
+      createUser({ email, password, username, phonenumber, terms, referrer, nationality }),
     {
-      onSuccess: async (/*data*/) => {
-        await cacheService.put('login-user', 'in');
+      onSuccess: async data => {
+        await navigation.navigate('Verify', {
+          email: data?.data?.email,
+        });
         onOpenToast({
           status: 'success',
-          message: 'User created successfully',
+          message: 'User created successfully, Kindly login with your email and password.',
         });
       },
-      onError: (/*data*/) => {
+      onError: (data: AxiosError) => {
+        navigation.navigate('Verify');
+        console.log(data?.response);
         onOpenToast({
           status: 'error',
-          message: 'User not created',
+          message: data?.response?.data?.message || 'User not created',
         });
       },
     },
@@ -29,11 +36,19 @@ function useCreateUser() {
 }
 
 function useLoginUser() {
-  return useMutation(['new-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
-    onSuccess: (/*data*/) => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  const queryClient = useQueryClient();
+  return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
+    onSuccess: async data => {
+      const user = await getUserData(data?.data?.token);
+      await queryClient.setQueryData(['login-user'], data?.data?.token);
+      await queryClient.setQueryData([`user`], user?.data);
+      await cacheService.put('user', user?.data);
+      await cacheService.put('login-user', data?.data?.token);
+      await navigation.navigate('Dashboard');
       onOpenToast({
         status: 'success',
-        message: 'User created successfully',
+        message: 'User Login successfully',
       });
     },
     onError: (data: AxiosError) => {
@@ -44,49 +59,5 @@ function useLoginUser() {
     },
   });
 }
-
-// function useUser({ userId }: UserDetailsRequestPayload) {
-//   return useQuery([`user-${userId}`, { userId }], () => getUserDetails({ userId }), {
-//     enabled: !!userId,
-//   });
-// }
-
-// function useModifyUser() {
-//   return useMutation(
-//     ['modify-user'],
-//     ({ userId, name, job }: ModifyUserRequestPayload) => modifyUser({ userId, name, job }),
-//     {
-//       onSuccess: (/*data*/) => {
-//         onOpenToast({
-//           status: 'success',
-//           message: 'User modified successfully',
-//         });
-//       },
-//       onError: (/*data*/) => {
-//         onOpenToast({
-//           status: 'error',
-//           message: 'User not modified',
-//         });
-//       },
-//     },
-//   );
-// }
-
-// function useDeleteUser() {
-//   return useMutation(['delete-user'], ({ userId }: DeleteUserRequestPayload) => deleteUser({ userId }), {
-//     onSuccess: (/*data*/) => {
-//       onOpenToast({
-//         status: 'success',
-//         message: 'User deleted successfully',
-//       });
-//     },
-//     onError: (/*data*/) => {
-//       onOpenToast({
-//         status: 'error',
-//         message: 'User not deleted',
-//       });
-//     },
-//   });
-// }
 
 export { useCreateUser, useLoginUser };

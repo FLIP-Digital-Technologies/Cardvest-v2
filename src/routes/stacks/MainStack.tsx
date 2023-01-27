@@ -14,6 +14,7 @@ import {
   Calculator,
   Settings,
 } from '@assets/SVG';
+import CLoader from '@components/CLoader';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
@@ -32,7 +33,6 @@ import DashboardPage from '@scenes/DashboardPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
-import Homepage from '@scenes/Homepage';
 import KYCPage from '@scenes/KYCPage';
 import LovePage from '@scenes/LovePage';
 import NotificationsPage from '@scenes/NotificationsPage';
@@ -54,6 +54,8 @@ import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
 import WithdrawalFeedbackPage from '@scenes/WithdrawalFeedbackPage';
 import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
+import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { cacheService } from '@utils/cache';
 import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
 import { FC } from 'react';
 import * as React from 'react';
@@ -63,14 +65,6 @@ const DashboardDrawer = createDrawerNavigator();
 const WalletStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
 
 const SettingsStackScreen: FC = () => {
   return (
@@ -244,6 +238,24 @@ const DashboardBottomTabStack: FC = () => {
 
 function CustomDrawerContent(props: any) {
   const { navigation } = props;
+  const { data, isFetching }: any = useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const res = await cacheService.get('user');
+      return JSON.parse(res);
+    },
+  });
+  const queryClient = useQueryClient();
+
+  async function handleLogout() {
+    await cacheService.del('login-user');
+    await cacheService.del('user');
+    await queryClient.setQueriesData(['user'], null);
+    await queryClient.setQueriesData(['login-user'], null);
+    await queryClient.invalidateQueries({ queryKey: ['login-user'] });
+    await queryClient.invalidateQueries({ queryKey: ['user'] });
+    await navigation.navigate('Auth');
+  }
 
   return (
     <DrawerContentScrollView {...props}>
@@ -259,14 +271,14 @@ function CustomDrawerContent(props: any) {
               source={{
                 uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
               }}>
-              TE
+              {data?.username?.[0]}
             </Avatar>
             <VStack px="4">
               <Text fontSize="md" color="white">
-                Kenny Michael
+                {data?.username}
               </Text>
               <Text fontSize="2xs" fontWeight="light" color="white">
-                kennymichael@gmail.com
+                {data?.email}
               </Text>
             </VStack>
             <Pressable onPress={() => navigation.closeDrawer()} width="7" marginLeft="auto">
@@ -322,7 +334,7 @@ function CustomDrawerContent(props: any) {
           ))}
         </View>
         <View p="6" flex="1">
-          <Pressable>
+          <Pressable onPress={() => handleLogout()}>
             <HStack py="4" alignItems="center">
               <View width="5" h="8">
                 <Logout />
@@ -340,7 +352,7 @@ function CustomDrawerContent(props: any) {
 
 const DashboardDrawerStack: FC = () => {
   return (
-    <DashboardDrawer.Navigator initialRouteName="Dashboard" drawerContent={props => <CustomDrawerContent {...props} />}>
+    <DashboardDrawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
       <DashboardDrawer.Screen
         name="Dashboard"
         component={DashboardBottomTabStack}
@@ -354,7 +366,7 @@ const DashboardDrawerStack: FC = () => {
 
 export const MainStackScreen: FC = () => {
   return (
-    <MainStack.Navigator initialRouteName="Dashboard">
+    <MainStack.Navigator>
       <MainStack.Screen
         name="Dashboard"
         component={DashboardDrawerStack}
@@ -521,15 +533,6 @@ export const MainStackScreen: FC = () => {
         component={FundAccountFeedbackPage}
         options={{
           headerShown: false,
-        }}
-      />
-      <MainStack.Screen
-        name="Home"
-        component={Homepage}
-        options={{
-          headerShown: true,
-          headerTitleAlign: 'center',
-          ...TransitionPresets.SlideFromRightIOS,
         }}
       />
     </MainStack.Navigator>

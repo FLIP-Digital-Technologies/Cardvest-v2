@@ -51,6 +51,7 @@
     "@react-navigation/stack": "6.2.2",
     "@tanstack/react-query": "^4.2.1",
     "axios": "^0.27.2",
+    "dayjs": "^1.11.7",
     "i18next": "21.9.1",
     "native-base": "3.4.13",
     "react": "18.2.0",
@@ -118,7 +119,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint",
+      "eslint --fix",
       "npm run prettier-format:staged",
       "npm run prettier-check:staged"
     ]

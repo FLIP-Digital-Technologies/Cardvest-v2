@@ -5,7 +5,7 @@ import {
   UserDetailsRequestPayload,
 } from '@api/users/types';
 import { createUser, deleteUser, getUserDetails, modifyUser } from '@api/users/users';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 
 function useUser({ userId }: UserDetailsRequestPayload) {
@@ -32,20 +32,23 @@ function useCreateUser() {
 }
 
 function useModifyUser() {
+  const queryClient = useQueryClient();
   return useMutation(
     ['modify-user'],
-    ({ userId, name, job }: ModifyUserRequestPayload) => modifyUser({ userId, name, job }),
+    ({ userId, email, username, phonenumber }: ModifyUserRequestPayload) =>
+      modifyUser({ userId, email, username, phonenumber }),
     {
       onSuccess: (/*data*/) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
         onOpenToast({
           status: 'success',
-          message: 'User modified successfully',
+          message: 'User details Updated successfully',
         });
       },
       onError: (/*data*/) => {
         onOpenToast({
           status: 'error',
-          message: 'User not modified',
+          message: 'User details fail to update',
         });
       },
     },

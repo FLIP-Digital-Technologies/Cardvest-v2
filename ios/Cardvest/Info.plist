@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto_medium.ttf</string>
@@ -68,6 +68,20 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Satoshi-Black.ttf</string>
+		<string>Satoshi-BlackItalic.ttf</string>
+		<string>Satoshi-Bold.ttf</string>
+		<string>Satoshi-BoldItalic.ttf</string>
+		<string>Satoshi-Italic.ttf</string>
+		<string>Satoshi-Light.ttf</string>
+		<string>Satoshi-LightItalic.ttf</string>
+		<string>Satoshi-Medium.ttf</string>
+		<string>Satoshi-MediumItalic.ttf</string>
+		<string>Satoshi-Regular.ttf</string>
+		<string>Satoshi-Thin.ttf</string>
+		<string>Satoshi-ThinItalic.ttf</string>
+		<string>Satoshi-Variable.ttf</string>
+		<string>Satoshi-VariableItalic.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -7,7 +7,7 @@ import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as N
 import React, { FC, memo } from 'react';
 
 const DepositPage: FC = () => {
-  const [currency, setCurrency] = React.useState('ngn');
+  const [currency, setCurrency] = React.useState('NGN');
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <BackButtonTitleCenter title="Fund Wallet" actionText="Continue" action={() => navigation.navigate('SelectCard')}>
@@ -46,14 +46,14 @@ const DepositPage: FC = () => {
           />
           <Select.Item
             label="NGN"
-            value="ngn"
+            value="NGN"
             startIcon={
               <HStack w="100%" justifyContent="space-between" alignItems="center">
                 <HStack w="12" mx="-3" h="7" alignItems="center">
                   <NGN />
                   <Text> NGN</Text>
                 </HStack>
-                {currency === 'ngn' ? (
+                {currency === 'NGN' ? (
                   <View w="6" h="5">
                     <RadioChecked />
                   </View>
@@ -67,14 +67,14 @@ const DepositPage: FC = () => {
           />
           <Select.Item
             label="GHS"
-            value="ghs"
+            value="GHS"
             startIcon={
               <HStack w="100%" justifyContent="space-between" alignItems="center">
                 <HStack w="12" mx="-3" h="7" alignItems="center">
                   <GHS />
                   <Text> GHS</Text>
                 </HStack>
-                {currency === 'ghs' ? (
+                {currency === 'GHS' ? (
                   <View w="6" h="5">
                     <RadioChecked />
                   </View>

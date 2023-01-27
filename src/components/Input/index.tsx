@@ -16,8 +16,8 @@ const Input = ({
   placeholder?: string;
   color?: string;
   InputRightElement?: any;
-  value?: string;
-  onChangeText?: (value: string) => void;
+  value?: any;
+  onChangeText?: (value: any) => void;
   type?: 'text' | 'password' | undefined;
 }) => {
   return (

@@ -10,13 +10,13 @@ const BackButtonTitleCenter: FC<{
   actionText?: string;
   children: React.ReactNode;
   title: string;
-  backAction?: () => void;
+  backAction?: (() => void) | null;
 }> = ({ action, actionText, children, title, backAction }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <CSafeAreaView>
       <HStack w="100%" alignItems="center">
-        <Pressable h="10" w="10" onPress={() => navigation.goBack()}>
+        <Pressable h="10" w="10" onPress={backAction ? backAction : () => navigation.goBack()}>
           <BackButton />
         </Pressable>
         <Text fontSize="lg" mx="auto" textAlign="center">
@@ -38,6 +38,9 @@ const BackButtonTitleCenter: FC<{
                 onPress={action}
                 my="3"
                 size="lg"
+                _text={{
+                  width: '150%',
+                }}
                 p="4"
                 fontSize="md"
                 backgroundColor="CARDVESTGREEN"

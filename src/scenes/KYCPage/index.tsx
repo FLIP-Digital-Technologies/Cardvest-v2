@@ -7,10 +7,18 @@ import { HStack, Text, View, Center, Button, Pressable, VStack } from 'native-ba
 import React, { FC, memo, useState } from 'react';
 import Svg, { Circle, Line, Path } from 'react-native-svg';
 
-const ProgressStepperIndicator = ({ count, setCount }: { count: number; setCount: any }) => {
+export const ProgressStepperIndicator = ({
+  count,
+  setCount,
+  isDisabled,
+}: {
+  count: number;
+  setCount: any;
+  isDisabled?: boolean;
+}) => {
   return (
     <HStack mt="7" space="xs" alignItems="center">
-      <Pressable onPress={() => setCount(1)}>
+      <Pressable disabled={isDisabled} onPress={() => setCount(1)}>
         <Svg height="36" width="36">
           <Circle cx="18" cy="18" r="18" fill={count >= 1 ? '#235643' : '#D9D9D9'} />
           <Path d="M18.8094 13.57V25H20.5014V11.986H16.0734V13.57H18.8094Z" fill="white" />
@@ -19,7 +27,7 @@ const ProgressStepperIndicator = ({ count, setCount }: { count: number; setCount
       <Svg height="10" width="50">
         <Line x1="0" y1="5" x2="60" y2="5" stroke="#E8E8E8" strokeWidth="2" />
       </Svg>
-      <Pressable onPress={() => setCount(2)}>
+      <Pressable disabled={isDisabled} onPress={() => setCount(2)}>
         <Svg height="36" width="36">
           <Circle cx="18" cy="18" r="18" fill={count >= 2 ? '#235643' : '#D9D9D9'} />
           <Path
@@ -31,7 +39,7 @@ const ProgressStepperIndicator = ({ count, setCount }: { count: number; setCount
       <Svg height="10" width="50">
         <Line x1="0" y1="5" x2="60" y2="5" stroke="#E8E8E8" strokeWidth="2" />
       </Svg>
-      <Pressable onPress={() => setCount(3)}>
+      <Pressable disabled={isDisabled} onPress={() => setCount(3)}>
         <Svg height="36" width="36">
           <Circle cx="18" cy="18" r="18" fill={count >= 3 ? '#235643' : '#D9D9D9'} />
           <Path

@@ -1,12 +1,41 @@
+import { useModifyUser } from '@api/hooks/useUser';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-// import { useNavigation } from '@react-navigation/native';
-// import { GenericNavigationProps } from '@routes/types';
-import { View, Text, Center, Button, Box, Pressable, ScrollView, VStack, Avatar } from 'native-base';
-import React, { FC, memo } from 'react';
+import { validateEmail } from '@scenes/LoginPage';
+import { useQueryClient } from '@tanstack/react-query';
+import { View, Text, Center, Button, Box, Pressable, ScrollView, Avatar } from 'native-base';
+import React, { FC, memo, useCallback, useState } from 'react';
 
 const ProfilePage: FC = () => {
-  // const navigation = useNavigation<GenericNavigationProps>();
+  const { mutate: updateUser, isLoading } = useModifyUser();
+  const queryClient = useQueryClient();
+  const data: any = queryClient.getQueryData(['user']);
+  const [email, setEmail] = useState(data?.email);
+  const [username, setUsername] = useState(data?.username);
+  const [phoneNumber, setPhoneNumber] = useState(data?.phonenumber);
+  const handleSubmit = async () => {
+    try {
+      await updateUser({
+        userId: data?.id,
+        email,
+        username,
+        phonenumber: phoneNumber,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDisabled = useCallback(() => {
+    return (
+      !email ||
+      !username ||
+      validateEmail(email) ||
+      !phoneNumber ||
+      !(phoneNumber.length >= 10) ||
+      !(phoneNumber.length <= 11)
+    );
+  }, [phoneNumber]);
   return (
     <BackButtonTitleCenter title="My Profile">
       <ScrollView
@@ -25,7 +54,7 @@ const ProfilePage: FC = () => {
               source={{
                 uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
               }}>
-              TE
+              {data?.username?.toString()[0]}
             </Avatar>
           </Box>
           <Pressable mt="2" onPress={() => console.log('jeje')}>
@@ -35,13 +64,16 @@ const ProfilePage: FC = () => {
           </Pressable>
         </Center>
         <View my="6">
-          <Input label="Email Address" />
-          <Input label="Username" />
-          <Input label="Mobile Number" />
+          <Input label="Email Address" value={email} onChangeText={setEmail} />
+          <Input label="Username" value={username} onChangeText={setUsername} />
+          <Input label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} />
         </View>
         <Center py="4">
           <Button
-            onPress={() => console.log('jeje')}
+            onPress={() => handleSubmit()}
+            isDisabled={handleDisabled()}
+            isLoading={isLoading}
+            isLoadingText="Updating"
             my="3"
             width="100%"
             size="lg"

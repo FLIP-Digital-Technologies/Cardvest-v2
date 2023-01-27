@@ -1,14 +1,17 @@
+import CLoader from '@components/CLoader';
 import { createStackNavigator } from '@react-navigation/stack';
 import ForgetPasswordEnterEmailPage from '@scenes/ForgetPasswordEnterEmailPage';
 import IntroPage from '@scenes/IntroPage';
 import LoginPage from '@scenes/LoginPage';
 import ResetPage from '@scenes/ResetPage';
+import SetTransactionPin from '@scenes/SetTransactionPin';
 import SignUpPage from '@scenes/SignUpPage';
 import Step2 from '@scenes/SignUpPage/Step2';
 import Step3 from '@scenes/SignUpPage/Step3';
 import VerifyPage from '@scenes/VerifyPage';
+import { useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC } from 'react';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
 
@@ -87,40 +90,46 @@ export const AuthStackScreen: FC = () => {
 };
 
 export const RootStackScreen: FC = () => {
-  const [isUserLogin, setIsUserLogin] = useState<string | undefined | null>('');
-  async function getUser() {
-    const user = await cacheService.get('login-user');
-    setIsUserLogin(user);
-  }
-  useLayoutEffect(() => {
-    getUser();
-  }, []);
+  const { data, isFetching } = useQuery({
+    queryKey: ['login-user'],
+    queryFn: async () => cacheService.get('login-user'),
+  });
+  if (isFetching) return <CLoader />;
   return (
-    <RootStack.Navigator initialRouteName="Intro">
+    <RootStack.Navigator initialRouteName={data ? 'Dashboard' : 'Intro'}>
+      {typeof data === 'string' ? (
+        <RootStack.Screen
+          name="Dashboard"
+          component={MainStackScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      ) : (
+        <React.Fragment>
+          <RootStack.Screen
+            name="Intro"
+            component={IntroPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="Auth"
+            component={AuthStackScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </React.Fragment>
+      )}
       <RootStack.Screen
-        name="Intro"
-        component={IntroPage}
+        name="SetTransactionPin"
+        component={SetTransactionPin}
         options={{
           headerShown: false,
         }}
       />
-      {/* {isUserLogin ? ( */}
-      <RootStack.Screen
-        name="Dashboard"
-        component={MainStackScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      {/* ) : ( */}
-      <RootStack.Screen
-        name="Auth"
-        component={AuthStackScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      {/* )} */}
     </RootStack.Navigator>
   );
 };

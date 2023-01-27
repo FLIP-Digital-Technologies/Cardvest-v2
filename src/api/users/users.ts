@@ -1,5 +1,6 @@
 import ApiClient from '@api';
 import env from '@env';
+import { cacheService } from '@utils/cache';
 import {
   CreateUserRequestPayload,
   CreateUserSuccessPayload,
@@ -10,6 +11,7 @@ import {
   UserDetailsSuccessPayload,
   UsersRequestPayload,
   UsersSuccessPayload,
+  ModifyUserPasswordRequestPayload,
 } from './types';
 
 export async function getUsers({ pageParam, per_page }: UsersRequestPayload) {
@@ -59,19 +61,49 @@ export async function createUser({ name, job }: CreateUserRequestPayload) {
   }
 }
 
-export async function modifyUser({ userId, name, job }: ModifyUserRequestPayload) {
+export async function modifyUser({ userId, username, phonenumber, email }: ModifyUserRequestPayload) {
   try {
     // You can use also patch
-    const response = await ApiClient.put<ModifyUserSuccessPayload>(`${env.API_URL}/users/${userId}`, {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.put<ModifyUserSuccessPayload>(
+      `${env.API_URL}/users/${userId}`,
+      {
+        username,
+        phonenumber,
+        email,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('modifyUser - Error: ', error);
+    throw error;
+  }
+}
+
+export async function modifyUserPassword({
+  userId,
+  current_password,
+  password,
+  password_confirmation,
+}: ModifyUserPasswordRequestPayload) {
+  try {
+    // You can use also patch
+    const response = await ApiClient.put<ModifyUserSuccessPayload>(`${env.API_URL}/users/${userId}/password`, {
       params: {
-        name,
-        job,
+        userId,
+        current_password,
+        password,
+        password_confirmation,
       },
     });
 
     return response.data;
   } catch (error) {
-    console.error('modifyUser - Error: ', error);
+    console.error('modifyUserPassword - Error: ', error);
     throw error;
   }
 }

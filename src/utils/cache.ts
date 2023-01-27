@@ -2,7 +2,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const put = async (key: string, value: string) => {
   try {
-    await AsyncStorage.setItem(key, value);
+    if (typeof value === 'string') {
+      await AsyncStorage.setItem(key, value);
+    } else {
+      await AsyncStorage.setItem(key, JSON.stringify(value));
+    }
   } catch (e) {
     console.warn('CacheService: Failed to put pair ' + `[${key}, ${value}]`);
     __DEV__ && console.log(e);
@@ -11,9 +15,26 @@ const put = async (key: string, value: string) => {
 
 const get = async (key: string) => {
   try {
-    return await AsyncStorage.getItem(key);
+    const res = await AsyncStorage.getItem(key);
+    if (
+      (res?.includes("'{") && res?.includes("}'") && res?.includes(':')) ||
+      (res?.includes("'[") && res?.includes("]'"))
+    ) {
+      return JSON.parse(res);
+    } else {
+      return res;
+    }
   } catch (e) {
     console.warn('CacheService: Failed to get ' + key);
+    __DEV__ && console.log(e);
+  }
+};
+
+const del = async (key: string) => {
+  try {
+    return await AsyncStorage.removeItem(key);
+  } catch (e) {
+    console.warn('CacheService: Failed to remove ' + key);
     __DEV__ && console.log(e);
   }
 };
@@ -21,4 +42,5 @@ const get = async (key: string) => {
 export const cacheService = {
   put,
   get,
+  del,
 };

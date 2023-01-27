@@ -5,10 +5,94 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
 import React, { FC, memo } from 'react';
 
+export const FormCurrencyPicker = (props: any) => {
+  const { currency, setCurrency, label } = props;
+  return (
+    <Box my="2">
+      {label && (
+        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+          {label}
+        </Text>
+      )}
+      <Box backgroundColor="#F7F9FB">
+        <Select
+          selectedValue={currency}
+          minWidth="200"
+          accessibilityLabel={`${label}`}
+          placeholder={`${label}`}
+          borderColor="#F7F9FB"
+          _selectedItem={{
+            bg: '#F7F2DD',
+            endIcon: <CheckIcon size="5" />,
+          }}
+          height="50px"
+          fontSize="md"
+          onValueChange={itemValue => setCurrency(itemValue)}>
+          <Select.Item
+            isDisabled
+            label={`${label}`}
+            value="non"
+            _disabled={{ opacity: 1 }}
+            startIcon={
+              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
+                <Text fontSize="md" color="CARDVESTGREEN">
+                  {label}
+                </Text>
+              </HStack>
+            }
+          />
+          <Select.Item
+            label="NGN"
+            value="NGN"
+            startIcon={
+              <HStack w="100%" justifyContent="space-between" alignItems="center">
+                <HStack w="12" mx="-3" h="7" alignItems="center">
+                  <NGN />
+                  <Text> NGN</Text>
+                </HStack>
+                {currency === 'NGN' ? (
+                  <View w="6" h="5">
+                    <RadioChecked />
+                  </View>
+                ) : (
+                  <View w="6" h="5">
+                    <RadioUnChecked />
+                  </View>
+                )}
+              </HStack>
+            }
+          />
+          <Select.Item
+            label="GHS"
+            value="GHS"
+            startIcon={
+              <HStack w="100%" justifyContent="space-between" alignItems="center">
+                <HStack w="12" mx="-3" h="7" alignItems="center">
+                  <GHS />
+                  <Text> GHS</Text>
+                </HStack>
+                {currency === 'GHS' ? (
+                  <View w="6" h="5">
+                    <RadioChecked />
+                  </View>
+                ) : (
+                  <View w="6" h="5">
+                    <RadioUnChecked />
+                  </View>
+                )}
+              </HStack>
+            }
+          />
+        </Select>
+      </Box>
+    </Box>
+  );
+};
+
 export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; setCurrency: any }) => (
   <Select
     selectedValue={currency}
-    w="98px"
+    w="85px"
     accessibilityLabel="Choose Currency"
     placeholder=""
     backgroundColor="#F7F2DD"
@@ -34,14 +118,14 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
     />
     <Select.Item
       label="NGN"
-      value="ngn"
+      value="NGN"
       startIcon={
         <HStack w="100%" justifyContent="space-between" alignItems="center">
           <HStack w="12" mx="-3" h="7" alignItems="center">
             <NGN />
             <Text> NGN</Text>
           </HStack>
-          {currency === 'ngn' ? (
+          {currency === 'NGN' ? (
             <View w="6" h="5">
               <RadioChecked />
             </View>
@@ -55,14 +139,14 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
     />
     <Select.Item
       label="GHS"
-      value="ghs"
+      value="GHS"
       startIcon={
         <HStack w="100%" justifyContent="space-between" alignItems="center">
           <HStack w="12" mx="-3" h="7" alignItems="center">
             <GHS />
             <Text> GHS</Text>
           </HStack>
-          {currency === 'ghs' ? (
+          {currency === 'GHS' ? (
             <View w="6" h="5">
               <RadioChecked />
             </View>
@@ -78,7 +162,7 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
 );
 
 const WithdrawalUSDT: FC = () => {
-  const [currency, setCurrency] = React.useState('ngn');
+  const [currency, setCurrency] = React.useState('NGN');
   const [modalVisible, setModalVisible] = React.useState(false);
   return (
     <BackButtonTitleCenter title="Withdraw USDT" actionText="Proceed" action={() => setModalVisible(true)}>

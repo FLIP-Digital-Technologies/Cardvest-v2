@@ -1,53 +1,98 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useGetAllTransactions, useGetPayoutTransactions } from '@api/hooks/useTransactions';
 import { BackButton } from '@assets/SVG';
+import CLoader from '@components/CLoader';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel, TransactionPanel } from '@scenes/DashboardPage';
-import { Box, Center, useColorModeValue, Pressable, Text, View, ScrollView, HStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Box, Center, useColorModeValue, Pressable, Text, View, ScrollView, HStack, FlatList } from 'native-base';
+import React, { FC, memo, useState } from 'react';
 import { Animated, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const arr: string[] = ['', '', ''];
 
-const FirstRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const FirstRoute = () => {
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const { data: getTrancationData, isFetching, isLoading } = useGetAllTransactions(currency, page);
+  console.log(getTrancationData);
+  if (isFetching) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="90%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel />
+      </View>
+    );
+  return (
+    <View w="90%" my="8">
+      <FlatList
+        data={getTrancationData?.data}
+        renderItem={({ item }) => <TransactionPanel data={item} currency={'NGN'} />}
+        keyExtractor={(item: any) => item?.id}
+        onRefresh={() => queryClient.invalidateQueries([`transactions-${currency}`])}
+        refreshing={isLoading}
+        // onEndReached={() => setPage(page + 1)}
+      />
+    </View>
+  );
+};
 
-const SecondRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const SecondRoute = () => {
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const { data: getTrancationData, isFetching, isLoading } = useGetPayoutTransactions(currency, page);
+  if (isFetching) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="90%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel />
+      </View>
+    );
+  return (
+    <View w="90%" my="8">
+      <FlatList
+        data={getTrancationData?.data}
+        renderItem={({ item }) => <TransactionPanel data={item} currency={'NGN'} />}
+        keyExtractor={(item: any) => item?.id}
+        onRefresh={() => queryClient.invalidateQueries([`payout-transactions-${currency}`])}
+        refreshing={isLoading}
+        // onEndReached={() => setPage(page + 1)}
+      />
+    </View>
+  );
+};
 
-const ThirdRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const ThirdRoute = () => {
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1);
+  const { data: getTrancationData, isFetching, isLoading } = useGetAllTransactions(currency, page);
+  console.log(getTrancationData);
+  if (isFetching) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="90%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel />
+      </View>
+    );
+  return (
+    <View w="90%" my="8">
+      <FlatList
+        data={[]}
+        renderItem={({ item }) => <TransactionPanel data={item} currency={'NGN'} />}
+        keyExtractor={(item: any) => item.id}
+        onRefresh={() => queryClient.invalidateQueries([`transactions-${currency}`])}
+        refreshing={isLoading}
+        // onEndReached={() => setPage(page + 1)}
+      />
+    </View>
+  );
+};
 
 const renderScene = SceneMap({
   first: FirstRoute,
@@ -58,6 +103,8 @@ const renderScene = SceneMap({
 const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
   const { params = { tab: 0 } } = route;
   const { tab } = params;
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
   const navigation = useNavigation<GenericNavigationProps>();
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(tab || 0);
@@ -88,10 +135,13 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
           const color = index === i ? useColorModeValue('#000', '#e5e5e5') : useColorModeValue('#1f2937', '#a1a1aa');
           const borderColor = index === i ? 'CARDVESTGREEN' : useColorModeValue('coolGray.200', 'gray.400');
           return (
-            <Box borderBottomWidth="3" borderColor={borderColor} flex={1} alignItems="center" p="3">
+            <Box borderBottomWidth="3" borderColor={borderColor} flex={1} key={i} alignItems="center" p="3">
               <Pressable
                 onPress={() => {
                   console.log(i);
+                  if (i === 0) queryClient.invalidateQueries([`transactions-${currency}`]);
+                  if (i === 1) queryClient.invalidateQueries([`payout-transactions-${currency}`]);
+                  if (i === 2) queryClient.invalidateQueries([`transactions-${currency}`]);
                   setIndex(i);
                 }}>
                 <Animated.Text

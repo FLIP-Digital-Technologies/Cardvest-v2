@@ -1,0 +1,141 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Lato-Black.ttf",
+      "sha1": "5fd35255dfd38b179c80db42e1b9d40b0d05e0b3"
+    },
+    {
+      "path": "src/assets/fonts/Lato-BlackItalic.ttf",
+      "sha1": "1bd4d9fbeaa6059b16f91f6195f4fc849a852712"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Bold.ttf",
+      "sha1": "d67fee08c79a82ce375ab9629ae5a903da8bb321"
+    },
+    {
+      "path": "src/assets/fonts/Lato-BoldItalic.ttf",
+      "sha1": "2bf1b50c9b2173944aec0662d16701f0964440f2"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Italic.ttf",
+      "sha1": "ebf006602bcfc0467d29735fdf3481bb6121860e"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Light.ttf",
+      "sha1": "e0132feb514feb3cdb745d479c71dee62ad37757"
+    },
+    {
+      "path": "src/assets/fonts/Lato-LightItalic.ttf",
+      "sha1": "1d0caca7d22d04bc6b84d67937498a1be04ceedd"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Regular.ttf",
+      "sha1": "83dc5921761a7c3d1ee7badba3fc7e1e1f5ed803"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Thin.ttf",
+      "sha1": "7e750140b50f7f2c705cf2f67c559f2c267096c7"
+    },
+    {
+      "path": "src/assets/fonts/Lato-ThinItalic.ttf",
+      "sha1": "15fe0f681d9ca679074add05c28e0899d49d8dc4"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Black.otf",
+      "sha1": "d92baad4dab9ca55bc72f1a8a0a6de72829e709f"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Black.ttf",
+      "sha1": "fd050e574e3e81d3468651f9bc6184319b25bfc6"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-BlackItalic.otf",
+      "sha1": "2fada5e2f31f7e2f252d458094603daca66f4a0a"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-BlackItalic.ttf",
+      "sha1": "0a1c6b51a4bffe2a9cd395608e6d6ee57a707363"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Bold.otf",
+      "sha1": "57a9e1c24984708865f7d0c31a03773912fb975f"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Bold.ttf",
+      "sha1": "b825a4a89b7257537a202316b08997a2d2f00a49"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-BoldItalic.otf",
+      "sha1": "c279f41805b46f030eb4a1d55ceaf7c4cacd1a39"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-BoldItalic.ttf",
+      "sha1": "757e25289d8912882ed3a5c111bee38facc75412"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Italic.otf",
+      "sha1": "1ee38a9969b628781bc30ed690f6571aca189451"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Italic.ttf",
+      "sha1": "6a4d18e57a4c55ce8005e86b3ec4430ec0b97e21"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Light.otf",
+      "sha1": "3b1b977f00db442bdf30f63603112e6e251b7dda"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Light.ttf",
+      "sha1": "ea23468d55ad9a76958cf84a52b71b65bea35db0"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-LightItalic.otf",
+      "sha1": "782b6239e9a537ffcd574fb26b69201b67b96dc2"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-LightItalic.ttf",
+      "sha1": "ee5d0d535e921f548f50eaf1ec7934567e70d10d"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Medium.otf",
+      "sha1": "704faccb5fff19f25c0b914d42d135ab75794a24"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Medium.ttf",
+      "sha1": "e4539f4688c865204a879dc3253d3547f0444818"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-MediumItalic.otf",
+      "sha1": "89936e7345cfa18dadc048e3a9266947c7f12839"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-MediumItalic.ttf",
+      "sha1": "df05084ca7401b6a92d49e3fc5720fbdffbfbfbc"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Regular.otf",
+      "sha1": "7dcb59994f2bee1a4ef1f6c079ba0e99b409878b"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Regular.ttf",
+      "sha1": "bc605aa08468cfb9a40275a6386ada56c92a5bed"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Thin.ttf",
+      "sha1": "ea23468d55ad9a76958cf84a52b71b65bea35db0"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-ThinItalic.ttf",
+      "sha1": "ee5d0d535e921f548f50eaf1ec7934567e70d10d"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-Variable.ttf",
+      "sha1": "d49872a745842f389bc9d24b73d0a3090fce50b1"
+    },
+    {
+      "path": "src/assets/fonts/Satoshi-VariableItalic.ttf",
+      "sha1": "62c34444221ff17e93a8e1cadfea5a8c68ea705b"
+    }
+  ]
+}

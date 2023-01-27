@@ -7,27 +7,30 @@ import { GenericNavigationProps } from '@routes/types';
 import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
+export const validateEmail = (value: string) => {
+  if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$/i.test(value)) {
+    return true;
+  }
+  return false;
+};
+
 const Login: FC = () => {
-  const { mutate: loginUser } = useLoginUser();
+  const { mutate: loginUser, isLoading } = useLoginUser();
   const navigation = useNavigation<GenericNavigationProps>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false);
   const handleSubmit = async () => {
     try {
-      setIsDisabled(true);
       await loginUser({
         email,
         password,
       });
-      await navigation.navigate('Dashboard');
-      setIsDisabled(false);
+      // await navigation.navigate('Dashboard');
     } catch (error) {
-      setIsDisabled(false);
       console.error(error);
     }
   };
-  const handleDisabled = () => !email || !password || isDisabled;
+  const handleDisabled = () => !email || !password || isLoading || validateEmail(email);
   return (
     <CSafeAreaView>
       <ScrollView
@@ -56,22 +59,26 @@ const Login: FC = () => {
             </Text>
           </Pressable>
         </View>
-        <Center px="4">
+        <Center px="2">
           <Button
             onPress={() => handleSubmit()}
-            isLoading={isDisabled}
             isDisabled={handleDisabled()}
             my="3"
             width="95%"
             size="lg"
             p="4"
+            _text={{
+              width: '150%',
+            }}
+            isLoading={isLoading}
+            isLoadingText="Logging in"
             fontSize="md"
             backgroundColor="CARDVESTGREEN"
             color="white">
             Login
           </Button>
-          <Pressable mt="2" onPress={() => navigation.navigate('SignUp')}>
-            <Text fontSize="md" color="CARDVESTGREEN">
+          <Pressable w="100%" mt="2" onPress={() => navigation.navigate('SignUp')}>
+            <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
               Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
             </Text>
           </Pressable>
