@@ -1,20 +1,22 @@
 import { getCurrencyWallet, getDefaultWallet, switchDefaultWallet } from '@api/wallets/wallet';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
 
 function useGetUserDefaultWallet() {
   return useQuery([`user-default-wallet`], () => getDefaultWallet());
 }
 
-function useGetUserCurrencyWallet(currency: string) {
-  return useQuery([`user-${currency}-wallet`], () => getCurrencyWallet(currency));
+function useGetUserCurrencyWallet(currency: string, token: string) {
+  return useQuery([`user-${currency}-wallet`, token], () => getCurrencyWallet(currency), {
+    enabled: !!token,
+  });
 }
 
 function useSwitchDefaultWallet() {
   const queryClient = useQueryClient();
   return useMutation(['switch-wallet'], (currency: string) => switchDefaultWallet({ currency }), {
     onSuccess: (data: any) => {
-      console.log('Switch default', data);
       queryClient.invalidateQueries({ queryKey: ['user-default-wallet'] });
       // queryClient.invalidateQueries({ queryKey: [`user-${currency}-wallet`] })
       onOpenToast({

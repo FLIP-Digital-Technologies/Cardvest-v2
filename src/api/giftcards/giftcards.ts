@@ -36,6 +36,7 @@ export async function getAllCategories() {
 }
 
 export async function getGiftcardsToSell({ category_id }: GiftCardsToSellRequestPayload) {
+  if (!category_id) return;
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.get(`${env.API_URL}/giftcard-categories/sell/${category_id}`, {
@@ -50,9 +51,9 @@ export async function getGiftcardsToSell({ category_id }: GiftCardsToSellRequest
 }
 
 export async function getGiftcardsToBuy({ category_id }: GiftCardsToBuyRequestPayload) {
+  if (!category_id) return;
   try {
     const token = await cacheService.get('login-user');
-    if (!category_id) return;
     const response = await ApiClient.get(`${env.API_URL}/giftcard-categories/buy/${category_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -93,16 +94,18 @@ export async function getBuyableGiftcards() {
 }
 
 export async function getGiftcard({ card_id }: GiftcardRequestPayload) {
+  console.log(card_id);
   if (!card_id) return;
-  try {
-    const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/giftcards/${card_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  console.log(card_id);
+  // try {
+  //   const token = await cacheService.get('login-user');
+  //   const response = await ApiClient.get(`${env.API_URL}/giftcards/${card_id}`, {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
 
-    return response.data;
-  } catch (error) {
-    console.error('getGiftcard - Error: ', error);
-    throw error;
-  }
+  //   return response.data;
+  // } catch (error) {
+  //   console.error('getGiftcard - Error: ', error);
+  //   throw error;
+  // }
 }

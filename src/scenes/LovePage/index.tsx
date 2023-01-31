@@ -24,7 +24,7 @@ const KYCPage: FC = () => {
           },
           {
             name: 'Refer Friends',
-            link: '',
+            link: 'Referrals',
             icon: <Refer />,
           },
           {

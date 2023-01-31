@@ -8,6 +8,7 @@ const TextArea = ({
   color = 'CARDVESTBLACK.50',
   InputRightElement,
   value,
+  onChangeText,
 }: {
   label?: string;
   fontWeight?: string;
@@ -15,6 +16,7 @@ const TextArea = ({
   color?: string;
   InputRightElement?: any;
   value?: string;
+  onChangeText?: (value: any) => void;
 }) => {
   return (
     <Box my="2">
@@ -37,6 +39,7 @@ const TextArea = ({
           style={{ backgroundColor: '#F7F9FB' }}
           placeholder={placeholder}
           InputRightElement={InputRightElement}
+          onChangeText={onChangeText}
         />
       </Box>
     </Box>

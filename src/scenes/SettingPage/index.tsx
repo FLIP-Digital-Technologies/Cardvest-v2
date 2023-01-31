@@ -1,3 +1,4 @@
+import { logoutUser } from '@api/Auth/auth';
 import { Logout, Profile, Referral, RightAngle, Security, Suggestion } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +13,7 @@ const SettingsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const queryClient = useQueryClient();
   async function handleLogout() {
+    await logoutUser();
     await cacheService.del('login-user');
     await cacheService.del('user');
     await queryClient.setQueriesData(['user'], null);

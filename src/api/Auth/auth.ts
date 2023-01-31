@@ -1,5 +1,6 @@
 import ApiClient from '@api';
 import { LoginUserRequestPayload, ForgotPasswordRequestPayload, SendOTPRequestPayload } from '@api/users/types';
+import { cacheService } from '@utils/cache';
 // import { cacheService } from '@utils/cache';
 import deviceInfoModule from 'react-native-device-info';
 
@@ -52,7 +53,7 @@ export async function forgotPassword({ email }: ForgotPasswordRequestPayload) {
   }
 }
 
-export async function getUserData(token) {
+export async function getUserData(token: string) {
   try {
     // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.get(`/auth/user`, {
@@ -81,7 +82,19 @@ export async function sendOTP({ token }: SendOTPRequestPayload) {
 export async function logoutUser() {
   try {
     // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
-    const response = await ApiClient.post(`/auth/logout`);
+    const token = await cacheService.get('login-user');
+    const data = await cacheService.get('user');
+    const response = await ApiClient.post(
+      `/auth/logout`,
+      {
+        email: data?.email,
+        // password,
+        device_name: deviceInfoModule.getDeviceId(),
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     return response.data;
   } catch (error) {
     console.error('logoutUser - Error: ', error);

@@ -15,7 +15,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 
 function useGetAllTransactions(currency: string, page?: number) {
-  return useQuery([`transactions-${currency}`, currency, page], () => getAllTransactions(currency, page));
+  return useQuery([`transactions-${currency}`, { currency, page }], () => getAllTransactions(currency, page));
 }
 
 function useGetPayoutTransactions(currency: string, page?: number) {

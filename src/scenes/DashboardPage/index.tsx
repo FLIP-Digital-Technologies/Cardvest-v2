@@ -21,8 +21,9 @@ import { CurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import * as dayjs from 'dayjs';
-import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
-import React, { FC, memo } from 'react';
+import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button, FlatList } from 'native-base';
+import React, { FC, memo, SetStateAction, Dispatch, ReactElement, JSXElementConstructor } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getWidth } from '../../App';
 
 export const Money = (amount: any, currency: string) =>
@@ -277,17 +278,19 @@ const Dashboard: FC = () => {
   // const [t, i18n] = useTranslation();
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, currencyLoading } = useCurrency();
+  const queryClient = useQueryClient();
   const { data: getTrancationData, isFetched } = useGetAllTransactions(currency);
   const { isFetching }: any = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
       const token = await cacheService.get('login-user');
       const res = await getUserData(token);
+      await queryClient.setQueryData([`user`], res?.data);
       await cacheService.put('user', res?.data);
       return res?.data;
     },
   });
-  if (isFetching || !isFetched || currencyLoading) return <CLoader />;
+  if (isFetching || !isFetched) return <CLoader />;
 
   return (
     <CSafeAreaView>
