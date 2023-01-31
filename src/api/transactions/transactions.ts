@@ -92,13 +92,21 @@ export async function createSellOrder({
   }
 }
 
-export async function createBuyOrder({ card_id, amount, comment }: CreateBuyOrderRequestPayload) {
+export async function createBuyOrder({ card_id, amount, comment, currency }: CreateBuyOrderRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/buy`, {
-      card_id,
-      amount,
-      comment,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/buy`,
+      {
+        card_id,
+        amount,
+        // comment,
+        currency,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {

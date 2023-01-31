@@ -1,10 +1,7 @@
-import {
-  CreateUserRequestPayload,
-  DeleteUserRequestPayload,
-  ModifyUserRequestPayload,
-  UserDetailsRequestPayload,
-} from '@api/users/types';
-import { createUser, deleteUser, getUserDetails, modifyUser } from '@api/users/users';
+import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
+import { createUser, getUserDetails, modifyUser, modifyUserPassword } from '@api/users/users';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 
@@ -55,21 +52,46 @@ function useModifyUser() {
   );
 }
 
-function useDeleteUser() {
-  return useMutation(['delete-user'], ({ userId }: DeleteUserRequestPayload) => deleteUser({ userId }), {
-    onSuccess: (/*data*/) => {
-      onOpenToast({
-        status: 'success',
-        message: 'User deleted successfully',
-      });
+function useModifyUserPassword() {
+  const queryClient = useQueryClient();
+  const navigation = useNavigation<GenericNavigationProps>();
+  return useMutation(
+    ['modify-user-password'],
+    ({ password_confirmation, current_password, password, userId }: any) =>
+      modifyUserPassword({ password_confirmation, current_password, password, userId }),
+    {
+      onSuccess: (/*data*/) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+        onOpenToast({
+          status: 'success',
+          message: 'User Password Updated successfully',
+        });
+        navigation.navigate('Security');
+      },
+      onError: data => {
+        onOpenToast({
+          status: 'error',
+          message: data?.response?.data?.message || 'User Password failed to update',
+        });
+      },
     },
-    onError: (/*data*/) => {
-      onOpenToast({
-        status: 'error',
-        message: 'User not deleted',
-      });
-    },
-  });
+  );
 }
+// function useDeleteUser() {
+//   return useMutation(['delete-user'], ({ userId }: DeleteUserRequestPayload) => deleteUser({ userId }), {
+//     onSuccess: (/*data*/) => {
+//       onOpenToast({
+//         status: 'success',
+//         message: 'User deleted successfully',
+//       });
+//     },
+//     onError: (/*data*/) => {
+//       onOpenToast({
+//         status: 'error',
+//         message: 'User not deleted',
+//       });
+//     },
+//   });
+// }
 
-export { useUser, useCreateUser, useModifyUser, useDeleteUser };
+export { useUser, useCreateUser, useModifyUser, useModifyUserPassword };

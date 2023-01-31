@@ -92,14 +92,19 @@ export async function modifyUserPassword({
 }: ModifyUserPasswordRequestPayload) {
   try {
     // You can use also patch
-    const response = await ApiClient.put<ModifyUserSuccessPayload>(`${env.API_URL}/users/${userId}/password`, {
-      params: {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.put<ModifyUserSuccessPayload>(
+      `${env.API_URL}/users/${userId}/password`,
+      {
         userId,
         current_password,
         password,
         password_confirmation,
       },
-    });
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {

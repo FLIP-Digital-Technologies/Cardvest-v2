@@ -7,10 +7,8 @@ function useGetUserDefaultWallet() {
   return useQuery([`user-default-wallet`], () => getDefaultWallet());
 }
 
-function useGetUserCurrencyWallet(currency: string, token: string) {
-  return useQuery([`user-${currency}-wallet`, token], () => getCurrencyWallet(currency), {
-    enabled: !!token,
-  });
+function useGetUserCurrencyWallet(currency: string, token?: string) {
+  return useQuery([`user-${currency}-wallet`, currency], () => getCurrencyWallet(currency));
 }
 
 function useSwitchDefaultWallet() {

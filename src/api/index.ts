@@ -37,31 +37,31 @@ ApiClient.interceptors.request.use(
 ApiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: any) => {
-    const notificationParam: any = {
-      status: 'error',
-      message: error?.response?.data?.errors
-        ? error?.response?.data?.errors.map((i: any) => i.message).join(' .')
-        : error?.response?.data?.message || '',
-    };
+    // const notificationParam: any = {
+    //   status: 'error',
+    //   message: error?.response?.data?.errors
+    //     ? error?.response?.data?.errors.map((i: any) => i.message).join(' .')
+    //     : error?.response?.data?.message || '',
+    // };
 
-    if (error?.response?.status === 403) {
-      notificationParam.message = 'Request Unauthentication';
-      // notificationParam.description += 'Please contact support.';
-    }
+    // if (error?.response?.status === 403) {
+    //   notificationParam.message = 'Request Unauthentication';
+    //   // notificationParam.description += 'Please contact support.';
+    // }
 
-    if (error?.response?.status === 404) {
-      notificationParam.message = 'Not Found';
-    }
+    // if (error?.response?.status === 404) {
+    //   notificationParam.message = 'Not Found';
+    // }
 
-    if (error?.response?.status === 500) {
-      notificationParam.message = 'Internal Server Error';
-    }
+    // if (error?.response?.status === 500) {
+    //   notificationParam.message = 'Internal Server Error';
+    // }
 
-    if (error?.response?.status === 508) {
-      notificationParam.message = 'Time Out';
-    }
+    // if (error?.response?.status === 508) {
+    //   notificationParam.message = 'Time Out';
+    // }
 
-    if (notificationParam.message) onOpenToast(notificationParam);
+    // if (notificationParam.message) onOpenToast(notificationParam);
 
     return Promise.reject(error);
   },

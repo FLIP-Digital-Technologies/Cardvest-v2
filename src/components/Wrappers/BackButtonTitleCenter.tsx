@@ -11,7 +11,8 @@ const BackButtonTitleCenter: FC<{
   children: React.ReactNode;
   title: string;
   backAction?: (() => void) | null;
-}> = ({ action, actionText, children, title, backAction }) => {
+  isDisabled?: boolean | null;
+}> = ({ action, actionText, children, title, backAction, isDisabled = false }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <CSafeAreaView>
@@ -36,6 +37,7 @@ const BackButtonTitleCenter: FC<{
             <VStack>
               <Button
                 onPress={action}
+                isDisabled={isDisabled}
                 my="3"
                 size="lg"
                 _text={{

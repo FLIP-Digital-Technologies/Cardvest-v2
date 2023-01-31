@@ -63,14 +63,18 @@ platform :ios do
   desc 'Set up certs and profiles for iOS.'
   lane :certificates do
     register_devices(
+      api_key: "<API_KEY>",
+      api_issuer: "<ISSUER_ID>",
       devices: {
         }
     )
     match(
-      app_identifier: 'org.app.cardvest',
+      app_identifier: 'org.app.cardvest'
       readonly: true, 
-      force_for_new_devices: true, 
-      )
+      force_for_new_devices: true,
+      api_key: "<API_KEY>",
+      api_issuer: "<ISSUER_ID>"
+    )
   end
 
   desc 'Build the staging release iOS application.'
@@ -105,7 +109,7 @@ platform :ios do
         notify_testers: ENV["NOTIFY_TESTERS"],
         destinations: ENV["DESTINATIONS"],
         release_notes: release_notes
-        )
+      )
   end
 
   desc 'Sign, build, deploy staging iOS.'

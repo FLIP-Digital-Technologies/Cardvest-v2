@@ -1,9 +1,13 @@
 import ApiClient from '@api';
 import env from '@env';
+import { cacheService } from '@utils/cache';
 
 export async function getReferredUsers() {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/referrals`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/referrals`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {

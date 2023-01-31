@@ -11,11 +11,13 @@ import {
   CreateSellOrderRequestPayload,
   CreateBuyOrderRequestPayload,
 } from '@api/transactions/types';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 
 function useGetAllTransactions(currency: string, page?: number) {
-  return useQuery([`transactions-${currency}`, { currency, page }], () => getAllTransactions(currency, page));
+  return useQuery([`transactions-${currency}`, currency, page], () => getAllTransactions(currency, page));
 }
 
 function useGetPayoutTransactions(currency: string, page?: number) {
@@ -50,12 +52,14 @@ function useUploadGiftcardImage() {
 }
 
 function useCreateSellOrder() {
+  const navigation = useNavigation<GenericNavigationProps>();
   return useMutation(
     ['sell-order'],
     ({ card_id, amount, images, to_bank, bank, comment }: CreateSellOrderRequestPayload) =>
-      createSellOrder({ card_id, amount, images, to_bank, bank, comment }),
+      createSellOrder({ card_id, amount, images: ['kjdkjdjkd'], to_bank, bank, comment }),
     {
       onSuccess: (/*data*/) => {
+        navigation.navigate('SellGiftCardTradeSummaryPage');
         onOpenToast({
           status: 'success',
           message: 'sell order created successfully',
@@ -72,14 +76,21 @@ function useCreateSellOrder() {
 }
 
 function useCreateBuyOrder() {
+  const navigation = useNavigation<GenericNavigationProps>();
   return useMutation(
     ['buy-order'],
-    ({ card_id, amount, comment }: CreateBuyOrderRequestPayload) => createBuyOrder({ card_id, amount, comment }),
+    ({ card_id, amount, comment, currency }: CreateBuyOrderRequestPayload) =>
+      createBuyOrder({ card_id, amount, comment, currency }),
     {
       onSuccess: (/*data*/) => {
         onOpenToast({
           status: 'success',
           message: 'buy order created successfully',
+        });
+        navigation.navigate('BuyGiftCardTradeSummaryPage', {
+          category: 'card_id',
+          giftCard: 'giftCard',
+          amountUSD: 'amount',
         });
       },
       onError: (/*data*/) => {

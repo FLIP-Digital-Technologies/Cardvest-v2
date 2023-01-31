@@ -31,7 +31,7 @@ const Verify: FC<{ route: any }> = ({ route }) => {
         <View mt="10" />
         <Center px="4">
           <Button
-            onPress={() => navigation.navigate('SetTransactionPin')}
+            onPress={() => navigation.navigate('Login')}
             my="3"
             width="95%"
             size="lg"
@@ -42,7 +42,7 @@ const Verify: FC<{ route: any }> = ({ route }) => {
             fontSize="md"
             backgroundColor="CARDVESTGREEN"
             color="white">
-            Continue
+            Login
           </Button>
         </Center>
       </ScrollView>

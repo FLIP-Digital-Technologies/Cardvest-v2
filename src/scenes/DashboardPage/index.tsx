@@ -21,15 +21,14 @@ import { CurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import * as dayjs from 'dayjs';
-import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button, FlatList } from 'native-base';
-import React, { FC, memo, SetStateAction, Dispatch, ReactElement, JSXElementConstructor } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
+import React, { FC, memo } from 'react';
 import { getWidth } from '../../App';
 
 export const Money = (amount: any, currency: string) =>
   new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency,
+    currency: currency || 'NGN',
 
     // These options are needed to round to whole numbers if that's what you want.
     //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)

@@ -1,16 +1,27 @@
+import { useGetReferredUsers } from '@api/hooks/useReferrals';
 import { Copy, ReferralHock } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { useQueryClient } from '@tanstack/react-query';
+import { onOpenToast } from '@utils/toast';
 import { View, Center, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
 import React, { FC, memo } from 'react';
 
 const ReferralPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const queryClient = useQueryClient();
+  const user: any = queryClient.getQueryData(['user']);
+  const data = useGetReferredUsers();
+  console.log(data);
   const copyToClipboard: (link: string) => void = link => {
     Clipboard.setString(link);
+    onOpenToast({
+      status: 'info',
+      message: 'Copied to clipboard',
+    });
   };
   return (
     <BackButtonTitleCenter title="Referrals">
@@ -32,10 +43,10 @@ const ReferralPage: FC = () => {
           <View marginTop="6">
             <Input
               label=""
-              value="https://app.cardvest.ng/register?fe8893la/a"
+              value={`https://app.cardvest.ng/register?ref=${user.username}`}
               InputRightElement={
                 <Pressable
-                  onPress={() => copyToClipboard('https://app.cardvest.ng/register?fe8893la/a')}
+                  onPress={() => copyToClipboard(`https://app.cardvest.ng/register?ref=${user.username}`)}
                   width="10"
                   h="5">
                   <Copy />

@@ -1,11 +1,18 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import { useGetAllCategories, useGetGiftcardsToSell } from '@api/hooks/useGiftcards';
+import { useCreateSellOrder } from '@api/hooks/useTransactions';
 import { Camera, Pic, RedTrash, Uploading } from '@assets/SVG';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { FormSelect } from '@scenes/CalculatorPage';
+import { Money } from '@scenes/DashboardPage';
+import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Box, HStack, Text, View, VStack, Divider, Button, Pressable, Modal, Image } from 'native-base';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useMemo, useState } from 'react';
 
 export const UploadPanel = ({ canDelete = true, showIcon = true }: { canDelete?: boolean; showIcon?: boolean }) => {
   return (
@@ -101,31 +108,73 @@ export const UploadButton = ({ label }: { label: string }) => {
   );
 };
 
-const SellGiftCardPage: FC = () => {
+const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
+  const { params = { tradeData: {} } } = route;
+  const { tradeData } = params;
+  console.log(tradeData);
   const navigation = useNavigation<GenericNavigationProps>();
+  const [category, setCategory] = useState<number>(tradeData?.category);
+  const [comment, setComment] = useState('');
+  const [promoCode, setPromoCode] = useState('');
+  const [giftCard, setGiftCard] = useState(tradeData?.giftCard);
+  const [amountUSD, setAmountUSD] = useState(tradeData?.amountUSD || 0);
+  const { data } = useGetAllCategories();
+  const { currency, handleSwitchCurrency } = useCurrency();
+  const { data: giftCardsData } = useGetGiftcardsToSell({ category_id: Number(category) });
+  const { mutate: sellGiftCard } = useCreateSellOrder();
+  const card = useMemo(() => {
+    if (!giftCard) return;
+    return giftCardsData?.data?.filter((card: any) => card.id === giftCard)?.[0];
+  }, [giftCard]);
+  const total = useMemo(() => {
+    if (!card) return;
+    const totalAmount = Number(card?.rates[currency]) * amountUSD;
+    return totalAmount;
+  }, [amountUSD, giftCardsData, currency]);
+  const handleDisabled = () => !amountUSD || !giftCardsData || !category;
+  const handleSubmit = async () => {
+    try {
+      await sellGiftCard({
+        card_id: Number(giftCard),
+        amount: Number(amountUSD),
+        comment,
+        currency,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <BackButtonTitleCenter
       title="Sell Giftcard"
       actionText="Sell Giftcard"
-      action={() => navigation.navigate('SellGiftCardTradeSummaryPage')}>
+      isDisabled={handleDisabled()}
+      action={() => handleSubmit()}
+      // action={() => navigation.navigate('SellGiftCardTradeSummaryPage')}
+    >
       <View my="7">
         <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Get the current value for your transaction
         </Text>
         <View p="3" />
-        <Input label="Select Category" />
+        <FormSelect label="Select Category" value={category} setValue={setCategory} data={data?.data} />
         <View p="3" />
-        <Input label="Select Giftcard" />
+        <FormSelect label="Select Giftcard" value={giftCard} setValue={setGiftCard} data={giftCardsData?.data} />
         <View p="3" />
-        <Input label="Amount in USD" />
+        <Input label="Amount in USD" value={amountUSD} onChangeText={setAmountUSD} />
         <View p="3" />
         <UploadButton label="Upload Giftcard Image" />
         <View p="3" />
-        <Input label="Payout Currency" />
+        <FormCurrencyPicker label="Payout Currency" setCurrency={handleSwitchCurrency} currency={currency} />
         <View p="3" />
         <HStack justifyContent="space-between" alignItems="flex-end">
           <View w="80%">
-            <Input label="Promo Code (Optional)" placeholder="Enter promo code" />
+            <Input
+              label="Promo Code (Optional)"
+              placeholder="Enter promo code"
+              value={promoCode}
+              onChangeText={setPromoCode}
+            />
           </View>
           <View pb="2">
             <Button py="3" backgroundColor="CARDVESTGREEN" onPress={() => console.log('hello world')}>
@@ -137,16 +186,20 @@ const SellGiftCardPage: FC = () => {
         <VStack backgroundColor="#F7F9FB" px="3" py="4" borderRadius="lg">
           <HStack my="3" justifyContent="space-between">
             <Text color="CARDVESTGREY.100">Current Rate:</Text>
-            <Text color="CARDVESTGREY.100">NGN 400</Text>
+            <Text color="CARDVESTGREY.100">
+              {currency} {Money(Number(card?.rates[currency]) || 0, currency)}
+            </Text>
           </HStack>
           <Divider />
           <HStack my="3" justifyContent="space-between">
             <Text color="CARDVESTGREY.100">Total</Text>
-            <Text color="black">NGN 400,000</Text>
+            <Text color="black">
+              {currency} {Money(total || 0, currency)}
+            </Text>
           </HStack>
         </VStack>
         <View p="3" />
-        <TextArea label="Comment (Optional)" />
+        <TextArea label="Comment (Optional)" value={comment} onChangeText={setComment} />
       </View>
     </BackButtonTitleCenter>
   );

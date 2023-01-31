@@ -1,16 +1,18 @@
 export type CreateSellOrderRequestPayload = {
   card_id: number;
   amount: number;
-  images: string;
-  to_bank: string;
-  bank: number;
-  comment: string;
+  images?: any;
+  to_bank?: string;
+  bank?: number;
+  currency: string;
+  comment?: string;
 };
 
 export type CreateBuyOrderRequestPayload = {
   card_id: number;
   amount: number;
   comment: string;
+  currency: string;
 };
 
 export type TransactionRequestPayload = {
