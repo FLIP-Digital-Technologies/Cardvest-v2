@@ -111,9 +111,9 @@ const StepOne = (props: any) => {
   const handleDisabled = () => !email || !password || !username || validateEmail(email);
   return (
     <View p="3" my="6">
-      <Input label="Username" onChangeText={setUsername} />
-      <Input label="Email Address" onChangeText={setEmail} />
-      <Input type="password" label="Password" onChangeText={setPassword} />
+      <Input label="Username" value={username} onChangeText={setUsername} />
+      <Input label="Email Address" value={email} onChangeText={setEmail} />
+      <Input type="password" label="Password" value={password} onChangeText={setPassword} />
       <Button
         onPress={() => setCount(count + 1)}
         isDisabled={handleDisabled()}
@@ -142,7 +142,7 @@ const StepTwo = (props: any) => {
   return (
     <View flex={3} p="3" my="6">
       <CountrySelect label="Country" value={country} setValue={setCountry} />
-      <Input label="Phone Number" onChangeText={setPhoneNumber} />
+      <Input label="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} />
       <Button
         onPress={() => setCount(count + 1)}
         isDisabled={handleDisabled()}
@@ -212,6 +212,21 @@ const SignUp: FC = () => {
       console.error(error);
     }
   };
+  const handleDisabled = useCallback(() => {
+    switch (count) {
+      case 2:
+        return !email || !password || !username || validateEmail(email);
+      case 3:
+        return (
+          !phoneNumber ||
+          !country ||
+          (country === 'Nigeria' && phoneNumber.length !== 11) ||
+          (country === 'Ghana' && phoneNumber.length !== 10)
+        );
+      default:
+        return false;
+    }
+  }, [count, country, phoneNumber, email, password, username]);
   return (
     <CSafeAreaView>
       <ScrollView
@@ -228,7 +243,7 @@ const SignUp: FC = () => {
             Enter your details to get started
           </Text>
           <Center>
-            <ProgressStepperIndicator isDisabled count={count} setCount={setCount} />
+            <ProgressStepperIndicator isDisabled={handleDisabled()} count={count} setCount={setCount} />
           </Center>
         </Center>
         {count === 1 && (

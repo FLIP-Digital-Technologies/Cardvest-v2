@@ -8,7 +8,7 @@ export const useCurrency = () => {
   useEffect(() => {
     const fetchDefaultCurrency = async () => {
       const response = await cacheService.get('defaultCurrency');
-      return setCurrency(response);
+      return setCurrency(response || 'NGN');
     };
 
     fetchDefaultCurrency();

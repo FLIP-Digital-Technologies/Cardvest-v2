@@ -83,7 +83,7 @@ const ThirdRoute = () => {
   return (
     <View w="90%" my="8">
       <FlatList
-        data={[]}
+        data={getTrancationData?.data}
         renderItem={({ item }) => <TransactionPanel data={item} currency={'NGN'} />}
         keyExtractor={(item: any) => item.id}
         onRefresh={() => queryClient.invalidateQueries([`transactions-${currency}`])}

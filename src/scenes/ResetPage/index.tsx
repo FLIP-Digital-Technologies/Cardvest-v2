@@ -5,7 +5,9 @@ import { GenericNavigationProps } from '@routes/types';
 import { View, Text, Center, Button, Box, ScrollView } from 'native-base';
 import React, { FC, memo } from 'react';
 
-const ResetPinFeedbackPage: FC = () => {
+const ResetPinFeedbackPage: FC<{ route: any }> = ({ route }) => {
+  const { params = { email: '' } } = route;
+  const { email } = params;
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <CSafeAreaView>
@@ -23,7 +25,7 @@ const ResetPinFeedbackPage: FC = () => {
             Reset Password
           </Text>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
-            A password reset link has been sent to k**********l@gmail.com
+            A password reset link has been sent to {email}
           </Text>
         </Center>
         <View mt="10" />

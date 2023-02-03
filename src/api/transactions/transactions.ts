@@ -74,16 +74,25 @@ export async function createSellOrder({
   to_bank,
   bank,
   comment,
+  currency,
 }: CreateSellOrderRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/sell`, {
-      card_id,
-      amount,
-      images,
-      to_bank,
-      bank,
-      comment,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/sell`,
+      {
+        card_id,
+        amount,
+        images,
+        to_bank,
+        bank,
+        comment,
+        currency,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -117,7 +126,10 @@ export async function createBuyOrder({ card_id, amount, comment, currency }: Cre
 
 export async function getTransaction({ transaction_reference }: TransactionRequestPayload) {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/transactions/${transaction_reference}`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/${transaction_reference}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {

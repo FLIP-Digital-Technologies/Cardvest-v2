@@ -55,8 +55,8 @@ function useCreateSellOrder() {
   const navigation = useNavigation<GenericNavigationProps>();
   return useMutation(
     ['sell-order'],
-    ({ card_id, amount, images, to_bank, bank, comment }: CreateSellOrderRequestPayload) =>
-      createSellOrder({ card_id, amount, images: ['kjdkjdjkd'], to_bank, bank, comment }),
+    ({ card_id, amount, images, to_bank, bank, comment, currency }: CreateSellOrderRequestPayload) =>
+      createSellOrder({ card_id, amount, images: ['kjdkjdjkd'], to_bank, bank, comment, currency }),
     {
       onSuccess: (/*data*/) => {
         navigation.navigate('SellGiftCardTradeSummaryPage');

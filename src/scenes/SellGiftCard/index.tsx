@@ -14,19 +14,19 @@ import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Box, HStack, Text, View, VStack, Divider, Button, Pressable, Modal, Image } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
-export const UploadPanel = ({ canDelete = true, showIcon = true }: { canDelete?: boolean; showIcon?: boolean }) => {
+export const UploadPanel = ({
+  canDelete = true,
+  showIcon = true,
+  source,
+}: {
+  canDelete?: boolean;
+  showIcon?: boolean;
+  source?: any;
+}) => {
   return (
     <HStack my="3" alignItems="center" justifyContent="space-between">
       <HStack alignItems="center">
-        <Image
-          source={{
-            uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-          }}
-          alt="image"
-          borderRadius="lg"
-          minH="12"
-          w="12"
-        />
+        <Image source={source} alt="image" borderRadius="lg" minH="12" w="12" />
         <Text underline> Cardimg.jpg</Text>
       </HStack>
       {showIcon && (
@@ -111,8 +111,6 @@ export const UploadButton = ({ label }: { label: string }) => {
 const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
   const { params = { tradeData: {} } } = route;
   const { tradeData } = params;
-  console.log(tradeData);
-  const navigation = useNavigation<GenericNavigationProps>();
   const [category, setCategory] = useState<number>(tradeData?.category);
   const [comment, setComment] = useState('');
   const [promoCode, setPromoCode] = useState('');

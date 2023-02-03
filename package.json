@@ -8,7 +8,7 @@
     "test": "jest",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
     "lint:staged": "pretty-quick --staged && lint-staged",
-    "clean:android": "cd android && ./gradlew cleanBuildCache && ./gradlew clean && cd ..",
+    "clean:android": "cd android && ./gradlew clean && cd ..",
     "clean:ios": "rm -rf ios/build",
     "clean": "run-p clean:*",
     "assets": "npx react-native link",

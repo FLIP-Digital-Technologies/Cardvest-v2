@@ -177,27 +177,27 @@ export const EmptyPanel = () => (
   </VStack>
 );
 
+export const TransDate: (created_at: any) => string = created_at => {
+  // yesterday: you check if someDate is current date - 1 day
+  const isYesterday = dayjs.default(created_at).isSame(dayjs.default().subtract(1, 'day'));
+
+  // today: just check if some date is equal to current date
+  const isToday = dayjs.default(created_at).isSame(dayjs.default()); // dayjs() return current date
+
+  // want to get back to plain old JS date
+  const plainOldJsDate = dayjs.default(created_at).toDate().toDateString();
+  if (isYesterday) {
+    return 'Yesterday';
+  } else if (isToday) {
+    return 'Today';
+  } else {
+    return plainOldJsDate;
+  }
+};
+
 export const TransactionPanel = ({ data, currency }: { data: any; currency: string }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   // console.log(JSON.parse(data?.images)?.[0]);
-
-  const TransDate: () => string = () => {
-    // yesterday: you check if someDate is current date - 1 day
-    const isYesterday = dayjs.default(data?.created_at).isSame(dayjs.default().subtract(1, 'day'));
-
-    // today: just check if some date is equal to current date
-    const isToday = dayjs.default(data?.created_at).isSame(dayjs.default()); // dayjs() return current date
-
-    // want to get back to plain old JS date
-    const plainOldJsDate = dayjs.default(data?.created_at).toDate().toDateString();
-    if (isYesterday) {
-      return 'Yesterday';
-    } else if (isToday) {
-      return 'Today';
-    } else {
-      return plainOldJsDate;
-    }
-  };
   return (
     <Pressable
       onPress={() =>
@@ -229,7 +229,7 @@ export const TransactionPanel = ({ data, currency }: { data: any; currency: stri
               {data?.card && 'Gift Card'} {data?.type}
             </Text>
             <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
-              {TransDate()}, {dayjs.default(data?.created_at).format('hh:mmA')}
+              {TransDate(data?.created_at)}, {dayjs.default(data?.created_at).format('hh:mmA')}
             </Text>
           </VStack>
         </HStack>

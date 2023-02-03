@@ -13,6 +13,7 @@ export async function loginUser({ email, password }: LoginUserRequestPayload) {
       device_name: deviceInfoModule.getDeviceId(),
     });
 
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error('loginUser - Error: ', error);

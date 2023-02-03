@@ -8,7 +8,7 @@ platform :android do
   desc 'Build the staging release APK.'
   private_lane :build_staging do
     gradle(task: 'clean', project_dir: 'android/')
-    sh("npm", "run", "android:assemble:debug")
+    sh("npm", "run", "build:dev:android")
   end
 
   desc 'Build the production release APK.'
@@ -62,18 +62,26 @@ platform :ios do
   # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
   desc 'Set up certs and profiles for iOS.'
   lane :certificates do
-    register_devices(
-      api_key: "<API_KEY>",
-      api_issuer: "<ISSUER_ID>",
-      devices: {
-        }
+    # register_devices(
+    #   # api_issuer: "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+    #   api_key_path: "fastlane/T965C74L4F.json",
+    #   team_id: "T965C74L4F",
+    #   # api_key: ENV["API_KEY"],
+    #   devices: {},
+    # )
+    app_store_connect_api_key(
+      key_id: "T965C74L4F",
+      issuer_id:  "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+      key_filepath: "fastlane/AuthKey_T965C74L4F.p8",
     )
     match(
-      app_identifier: 'org.app.cardvest'
+      app_identifier: 'org.app.cardvest',
       readonly: true, 
       force_for_new_devices: true,
-      api_key: "<API_KEY>",
-      api_issuer: "<ISSUER_ID>"
+      api_key_path: "fastlane/T965C74L4F.json",
+      # api_key: ENV["API_KEY"],
+      # key_id: "T965C74L4F",
+      # api_issuer: "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
     )
   end
 
