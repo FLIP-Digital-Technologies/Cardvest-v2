@@ -13,14 +13,14 @@ const SettingsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const queryClient = useQueryClient();
   async function handleLogout() {
-    await logoutUser();
     await cacheService.del('login-user');
     await cacheService.del('user');
+    await navigation.navigate('Auth');
     await queryClient.setQueriesData(['user'], null);
     await queryClient.setQueriesData(['login-user'], null);
     await queryClient.invalidateQueries({ queryKey: ['login-user'] });
     await queryClient.invalidateQueries({ queryKey: ['user'] });
-    await navigation.navigate('Auth');
+    await logoutUser();
   }
   return (
     <BackButtonTitleCenter title="Settings">
@@ -31,11 +31,11 @@ const SettingsPage: FC = () => {
             link: 'Profile',
             icon: <Profile />,
           },
-          {
-            name: 'KYC',
-            link: 'KYC',
-            icon: <Suggestion />,
-          },
+          // {
+          //   name: 'KYC',
+          //   link: 'KYC',
+          //   icon: <Suggestion />,
+          // },
           {
             name: 'Security',
             link: 'Security',
@@ -52,7 +52,7 @@ const SettingsPage: FC = () => {
             icon: <Logout />,
           },
         ].map((item, index) => (
-          <Pressable key={index} onPress={() => (index === 4 ? handleLogout() : navigation.navigate(item.link))}>
+          <Pressable key={index} onPress={() => (index === 3 ? handleLogout() : navigation.navigate(item.link))}>
             <HStack py="4" justifyContent="space-between" alignItems="center">
               <HStack justifyContent="space-between" alignItems="center">
                 <View width="5" h="8">

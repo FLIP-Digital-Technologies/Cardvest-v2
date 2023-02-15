@@ -22,7 +22,6 @@ const BuyGiftCardPage: FC = () => {
   const { data } = useGetAllCategories();
   const { currency, handleSwitchCurrency } = useCurrency();
   const { data: giftCardsData } = useGetGiftcardsToBuy({ category_id: Number(category) });
-  const { mutate: buyGiftCard } = useCreateBuyOrder();
   const card = useMemo(() => {
     if (!giftCard) return;
     return giftCardsData?.data?.filter((card: any) => card.id === giftCard)?.[0];
@@ -34,16 +33,18 @@ const BuyGiftCardPage: FC = () => {
   }, [amountUSD, giftCardsData, currency]);
   const handleDisabled = () => !amountUSD || !giftCardsData || !category;
   const handleSubmit = async () => {
-    try {
-      await buyGiftCard({
-        card_id: Number(giftCard),
-        amount: Number(amountUSD),
-        comment,
+    navigation.navigate('BuyGiftCardTradeSummaryPage', {
+      buyGiftCard: {
+        card,
+        category,
+        giftCard,
+        amountUSD,
         currency,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+        rate: `${currency} ${Money(Number(card?.rates[currency]) || 0, currency)}`,
+        total: `${currency} ${Money(total || 0, currency)}`,
+        comment,
+      },
+    });
   };
   return (
     <BackButtonTitleCenter

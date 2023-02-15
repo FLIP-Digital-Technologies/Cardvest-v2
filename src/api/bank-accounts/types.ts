@@ -1,13 +1,15 @@
 export type VerifyBankAccountRequestPayload = {
-  banknumber: number;
+  banknumber: string;
   bankname: string;
+  currency: string;
 };
 
 export type CreateBankAccountRequestPayload = {
-  banknumber: number;
+  banknumber: string | number;
   bankname: string;
   code: string;
   accountname: string;
+  currency: string;
 };
 
 export type DeleteBankAccountRequestPayload = {

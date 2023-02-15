@@ -463,6 +463,63 @@ const MasterCardIcon = `
 
 export const MasterCard = () => <SvgXml xml={MasterCardIcon} width="100%" height="100%" />;
 
+const BankCircleIcon = `
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="18" cy="18" r="18" fill="white"/>
+<path d="M18.2775 10.6124L25.0275 13.3124C25.29 13.4174 25.5 13.7324 25.5 14.0099V16.4999C25.5 16.9124 25.1625 17.2499 24.75 17.2499H11.25C10.8375 17.2499 10.5 16.9124 10.5 16.4999V14.0099C10.5 13.7324 10.71 13.4174 10.9725 13.3124L17.7225 10.6124C17.8725 10.5524 18.1275 10.5524 18.2775 10.6124Z" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M25.5 25.5H10.5V23.25C10.5 22.8375 10.8375 22.5 11.25 22.5H24.75C25.1625 22.5 25.5 22.8375 25.5 23.25V25.5Z" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 22.5V17.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 22.5V17.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18 22.5V17.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21 22.5V17.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24 22.5V17.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.75 25.5H26.25" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18 15.375C18.6213 15.375 19.125 14.8713 19.125 14.25C19.125 13.6287 18.6213 13.125 18 13.125C17.3787 13.125 16.875 13.6287 16.875 14.25C16.875 14.8713 17.3787 15.375 18 15.375Z" stroke="#235643" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const BankCircle = () => <SvgXml xml={BankCircleIcon} width="100%" height="100%" />;
+
+const WalletCircleIcon = `
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="18" cy="18" r="18" fill="white"/>
+<path opacity="0.4" d="M23.1074 13.6874H24.1274C23.9849 13.4849 23.8349 13.2974 23.6774 13.1099L23.1074 13.6874Z" fill="#235643"/>
+<path opacity="0.4" d="M22.89 12.3152C22.7025 12.1577 22.515 12.0077 22.3125 11.8652V12.8852L22.89 12.3152Z" fill="#235643"/>
+<path opacity="0.4" d="M21.75 14.8125C21.675 14.8125 21.6075 14.7975 21.5325 14.7675C21.3975 14.7075 21.285 14.6025 21.225 14.46C21.195 14.3925 21.18 14.3175 21.18 14.2425V11.2425C21.18 11.235 21.1875 11.2275 21.1875 11.2125C20.22 10.7625 19.14 10.5 18 10.5C13.86 10.5 10.5 13.86 10.5 18C10.5 22.14 13.86 25.5 18 25.5C22.14 25.5 25.5 22.14 25.5 18C25.5 16.86 25.2375 15.78 24.78 14.805C24.7725 14.805 24.765 14.8125 24.75 14.8125H21.75Z" fill="#235643"/>
+<path d="M23.6849 13.1101L25.8974 10.8976C26.1149 10.6801 26.1149 10.3201 25.8974 10.1026C25.6799 9.88508 25.3199 9.88508 25.1024 10.1026L22.8899 12.3151C23.1749 12.5626 23.4374 12.8326 23.6849 13.1101Z" fill="#235643"/>
+<path d="M22.3126 11.25C22.3126 10.9425 22.0576 10.6875 21.7501 10.6875C21.4501 10.6875 21.2101 10.9275 21.1951 11.22C21.5851 11.4075 21.9601 11.6175 22.3126 11.865V11.25Z" fill="#235643"/>
+<path d="M25.3124 14.25C25.3124 13.9425 25.0574 13.6875 24.7499 13.6875H24.1274C24.3749 14.04 24.5924 14.415 24.7724 14.805C25.0724 14.79 25.3124 14.55 25.3124 14.25Z" fill="#235643"/>
+<path d="M19.3125 17.865L18.5625 17.6025V15.9375H18.6225C19.005 15.9375 19.3125 16.275 19.3125 16.6875C19.3125 16.995 19.5675 17.25 19.875 17.25C20.1825 17.25 20.4375 16.995 20.4375 16.6875C20.4375 15.6525 19.6275 14.8125 18.6225 14.8125H18.5625V14.625C18.5625 14.3175 18.3075 14.0625 18 14.0625C17.6925 14.0625 17.4375 14.3175 17.4375 14.625V14.8125H17.2125C16.305 14.8125 15.5625 15.5775 15.5625 16.5225C15.5625 17.6175 16.2 17.97 16.6875 18.1425L17.4375 18.405V20.07H17.3775C16.995 20.07 16.6875 19.7325 16.6875 19.32C16.6875 19.0125 16.4325 18.7575 16.125 18.7575C15.8175 18.7575 15.5625 19.0125 15.5625 19.32C15.5625 20.355 16.3725 21.195 17.3775 21.195H17.4375V21.3825C17.4375 21.69 17.6925 21.945 18 21.945C18.3075 21.945 18.5625 21.69 18.5625 21.3825V21.195H18.7875C19.695 21.195 20.4375 20.43 20.4375 19.485C20.4375 18.3825 19.8 18.03 19.3125 17.865ZM17.055 17.07C16.8 16.98 16.6875 16.9275 16.6875 16.515C16.6875 16.1925 16.9275 15.93 17.2125 15.93H17.4375V17.1975L17.055 17.07ZM18.7875 20.0625H18.5625V18.795L18.945 18.93C19.2 19.02 19.3125 19.0725 19.3125 19.485C19.3125 19.8 19.0725 20.0625 18.7875 20.0625Z" fill="#235643"/>
+</svg>
+
+`;
+
+export const WalletCircle = () => <SvgXml xml={WalletCircleIcon} width="100%" height="100%" />;
+
+const CardsCircleIcon = `
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="18" cy="18" r="18" fill="white"/>
+<path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M25.5 19.6875C25.8107 19.6875 26.0625 19.9393 26.0625 20.25C26.0625 23.4632 23.4632 26.0625 20.25 26.0625C20.0473 26.0625 19.8604 25.9535 19.7605 25.7771C19.6607 25.6008 19.6634 25.3844 19.7677 25.2106L20.5551 23.8981C20.715 23.6317 21.0605 23.5453 21.3269 23.7052C21.5933 23.865 21.6797 24.2105 21.5198 24.4769L21.3163 24.816C23.3932 24.3342 24.9375 22.4749 24.9375 20.25C24.9375 19.9393 25.1893 19.6875 25.5 19.6875Z" fill="#235643"/>
+<path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M14.6837 11.184C12.6068 11.6658 11.0625 13.5251 11.0625 15.75C11.0625 16.0607 10.8107 16.3125 10.5 16.3125C10.1893 16.3125 9.9375 16.0607 9.9375 15.75C9.9375 12.5368 12.5368 9.9375 15.75 9.9375C15.9527 9.9375 16.1396 10.0465 16.2395 10.2229C16.3393 10.3992 16.3366 10.6156 16.2323 10.7894L15.4449 12.1019C15.285 12.3683 14.9395 12.4547 14.6731 12.2948C14.4067 12.135 14.3203 11.7895 14.4802 11.5231L14.6837 11.184Z" fill="#235643"/>
+<path opacity="0.4" d="M18 20.775V21.2325H10.5V20.775C10.5 19.455 10.83 19.125 12.165 19.125H16.335C17.67 19.125 18 19.455 18 20.775Z" fill="#235643"/>
+<path d="M10.5 21.2324V22.3574V23.8499C10.5 25.1699 10.83 25.4999 12.165 25.4999H16.335C17.67 25.4999 18 25.1699 18 23.8499V22.3574V21.2324H10.5Z" fill="#235643"/>
+<path opacity="0.4" d="M25.5 12.15V12.6075H18V12.15C18 10.83 18.33 10.5 19.665 10.5H23.835C25.17 10.5 25.5 10.83 25.5 12.15Z" fill="#235643"/>
+<path d="M18 12.6074V13.7324V15.2249C18 16.5449 18.33 16.8749 19.665 16.8749H23.835C25.17 16.8749 25.5 16.5449 25.5 15.2249V13.7324V12.6074H18Z" fill="#235643"/>
+</svg>
+`;
+
+export const CardsCircle = () => <SvgXml xml={CardsCircleIcon} width="100%" height="100%" />;
+
+const UtilitiesCircleIcon = `
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="18" cy="18" r="18" fill="white"/>
+<path opacity="0.4" d="M12.1275 20.4749L15.525 23.8724C16.92 25.2674 19.185 25.2674 20.5875 23.8724L23.88 20.5799C25.275 19.1849 25.275 16.9199 23.88 15.5174L20.475 12.1274C19.7625 11.4149 18.78 11.0324 17.775 11.0849L14.025 11.2649C12.525 11.3324 11.3325 12.5249 11.2575 14.0174L11.0775 17.7674C11.0325 18.7799 11.415 19.7624 12.1275 20.4749Z" fill="#235643"/>
+<path d="M16.1251 18.2848C17.318 18.2848 18.2851 17.3178 18.2851 16.1248C18.2851 14.9319 17.318 13.9648 16.1251 13.9648C14.9322 13.9648 13.9651 14.9319 13.9651 16.1248C13.9651 17.3178 14.9322 18.2848 16.1251 18.2848Z" fill="#235643"/>
+</svg>
+`;
+
+export const UtilitiesCircle = () => <SvgXml xml={UtilitiesCircleIcon} width="100%" height="100%" />;
+
 const VisaIcon = `
 <svg width="76" height="47" viewBox="0 0 76 47" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_448_4634)">
@@ -781,3 +838,119 @@ const RedTrashIcon = `
 `;
 
 export const RedTrash = () => <SvgXml xml={RedTrashIcon} width="100%" height="100%" />;
+
+const SellGiftCardMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.8335 7.7915H13.2918" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.5 15.125H7.33333" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.625 15.125H13.2917" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.1668 12.861V14.7677C20.1668 17.9852 19.351 18.7918 16.0968 18.7918H5.9035C2.64933 18.7918 1.8335 17.9852 1.8335 14.7677V7.23266C1.8335 4.01516 2.64933 3.2085 5.9035 3.2085H13.2918" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3335 8.7085V3.2085L20.1668 5.04183" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3333 3.2085L16.5 5.04183" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const SellGiftCardMore = () => <SvgXml xml={SellGiftCardMoreIcon} width="100%" height="100%" />;
+
+const BuyGiftCardMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.8335 7.7915H13.2918" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.5 15.125H7.33333" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.625 15.125H13.2917" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.1668 12.861V14.7677C20.1668 17.9852 19.351 18.7918 16.0968 18.7918H5.9035C2.64933 18.7918 1.8335 17.9852 1.8335 14.7677V7.23266C1.8335 4.01516 2.64933 3.2085 5.9035 3.2085H13.2918" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3335 3.2085V8.7085L20.1668 6.87516" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3333 8.70833L16.5 6.875" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const BuyGiftCardMore = () => <SvgXml xml={BuyGiftCardMoreIcon} width="100%" height="100%" />;
+
+const DataMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.0002 20.1668C16.0628 20.1668 20.1668 16.0628 20.1668 11.0002C20.1668 5.93755 16.0628 1.8335 11.0002 1.8335C5.93755 1.8335 1.8335 5.93755 1.8335 11.0002C1.8335 16.0628 5.93755 20.1668 11.0002 20.1668Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33314 2.75H8.2498C6.4623 8.10333 6.4623 13.8967 8.2498 19.25H7.33314" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.75 2.75C15.5375 8.10333 15.5375 13.8967 13.75 19.25" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.75 14.6667V13.75C8.10333 15.5375 13.8967 15.5375 19.25 13.75V14.6667" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.75 8.2498C8.10333 6.4623 13.8967 6.4623 19.25 8.2498" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const DataMore = () => <SvgXml xml={DataMoreIcon} width="100%" height="100%" />;
+
+const AirtimeMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.1393 16.8027C20.1393 17.1327 20.066 17.4718 19.9102 17.8018C19.7543 18.1318 19.5527 18.4435 19.2868 18.7368C18.8377 19.2318 18.3427 19.5893 17.7835 19.8185C17.2335 20.0477 16.6377 20.1668 15.996 20.1668C15.061 20.1668 14.0618 19.9468 13.0077 19.4977C11.9535 19.0485 10.8993 18.4435 9.85433 17.6827C8.80016 16.9127 7.801 16.0602 6.84766 15.116C5.9035 14.1627 5.051 13.1635 4.29016 12.1185C3.5385 11.0735 2.9335 10.0285 2.4935 8.99266C2.0535 7.94766 1.8335 6.9485 1.8335 5.99516C1.8335 5.37183 1.9435 4.776 2.1635 4.226C2.3835 3.66683 2.73183 3.1535 3.21766 2.69516C3.80433 2.11766 4.446 1.8335 5.12433 1.8335C5.381 1.8335 5.63766 1.8885 5.86683 1.9985C6.10516 2.1085 6.316 2.2735 6.481 2.51183L8.60766 5.50933C8.77266 5.7385 8.89183 5.94933 8.97433 6.151C9.05683 6.3435 9.10266 6.536 9.10266 6.71016C9.10266 6.93016 9.0385 7.15016 8.91016 7.361C8.791 7.57183 8.61683 7.79183 8.39683 8.01183L7.70016 8.736C7.59933 8.83683 7.5535 8.956 7.5535 9.10266C7.5535 9.176 7.56266 9.24016 7.581 9.3135C7.6085 9.38683 7.636 9.44183 7.65433 9.49683C7.81933 9.79933 8.1035 10.1935 8.50683 10.6702C8.91933 11.1468 9.35933 11.6327 9.836 12.1185C10.331 12.6043 10.8077 13.0535 11.2935 13.466C11.7702 13.8693 12.1643 14.1443 12.476 14.3093C12.5218 14.3277 12.5768 14.3552 12.641 14.3827C12.7143 14.4102 12.7877 14.4193 12.8702 14.4193C13.026 14.4193 13.1452 14.3643 13.246 14.2635L13.9427 13.576C14.1718 13.3468 14.3918 13.1727 14.6027 13.0627C14.8135 12.9343 15.0243 12.8702 15.2535 12.8702C15.4277 12.8702 15.611 12.9068 15.8127 12.9893C16.0143 13.0718 16.2252 13.191 16.4543 13.3468L19.4885 15.501C19.7268 15.666 19.8918 15.8585 19.9927 16.0877C20.0843 16.3168 20.1393 16.546 20.1393 16.8027Z" stroke="#212121" stroke-miterlimit="10"/>
+</svg>
+`;
+
+export const AirtimeMore = () => <SvgXml xml={AirtimeMoreIcon} width="100%" height="100%" />;
+
+const CableMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.9035 1.8335H16.0877C19.351 1.8335 20.1668 2.64933 20.1668 5.9035V11.706C20.1668 14.9693 19.351 15.776 16.0968 15.776H5.9035C2.64933 15.7852 1.8335 14.9693 1.8335 11.7152V5.9035C1.8335 2.64933 2.64933 1.8335 5.9035 1.8335Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11 15.7852V20.1668" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.8335 11.9165H20.1668" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.875 20.1665H15.125" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const CableMore = () => <SvgXml xml={CableMoreIcon} width="100%" height="100%" />;
+
+const WifiMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.50098 10.8533C8.44264 7.80997 13.5668 7.80997 17.5085 10.8533" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.8335 7.6633C7.3885 3.3733 14.6118 3.3733 20.1668 7.6633" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.22412 14.199C9.11162 11.9623 12.8791 11.9623 15.7666 14.199" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.6167 17.5541C10.065 16.4357 11.9442 16.4357 13.3925 17.5541" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const WifiMore = () => <SvgXml xml={WifiMoreIcon} width="100%" height="100%" />;
+
+const ElectricityMoreIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.62482 14.6668H12.3748C14.6665 14.6668 16.0415 13.0168 16.0415 11.0002V6.33433C16.0415 5.37183 15.2532 4.5835 14.2907 4.5835H7.71817C6.75567 4.5835 5.96733 5.37183 5.96733 6.33433V11.0002C5.95816 13.0168 7.33316 14.6668 9.62482 14.6668Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.7085 1.8335V4.5835" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.2915 1.8335V4.5835" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11 20.1665V14.6665" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const ElectricityMore = () => <SvgXml xml={ElectricityMoreIcon} width="100%" height="100%" />;
+
+const ShowPasswordIcon = `
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.685 8.99994C11.685 10.4849 10.485 11.6849 9 11.6849C7.515 11.6849 6.315 10.4849 6.315 8.99994C6.315 7.51494 7.515 6.31494 9 6.31494C10.485 6.31494 11.685 7.51494 11.685 8.99994Z" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 15.2025C11.6475 15.2025 14.115 13.6425 15.8325 10.9425C16.5075 9.88504 16.5075 8.10754 15.8325 7.05004C14.115 4.35004 11.6475 2.79004 9 2.79004C6.3525 2.79004 3.885 4.35004 2.1675 7.05004C1.4925 8.10754 1.4925 9.88504 2.1675 10.9425C3.885 13.6425 6.3525 15.2025 9 15.2025Z" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+const hidePasswordIcon = `
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.32045 10.7751C6.8892 10.3446 6.6267 9.7596 6.6267 9.10335C6.6267 7.7886 7.6857 6.72885 8.9997 6.72885C9.64995 6.72885 10.2485 6.9921 10.6722 7.4226" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.3286 9.52417C11.1546 10.4917 10.3926 11.2552 9.42585 11.4307" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.99095 13.1042C3.8007 12.1697 2.7927 10.8047 2.0622 9.10298C2.8002 7.39373 3.81495 6.02123 5.0127 5.07923C6.20295 4.13723 7.5762 3.62573 8.9997 3.62573C10.4315 3.62573 11.804 4.14473 13.0017 5.09348" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.5857 6.7431C15.1017 7.4286 15.5555 8.21985 15.9372 9.1026C14.462 12.5204 11.855 14.5791 8.9997 14.5791C8.35245 14.5791 7.7142 14.4741 7.1007 14.2694" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.9153 3.18719L3.08475 15.0177" stroke="#909090" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const ShowPassword = ({ show }) => (
+  <SvgXml xml={show ? ShowPasswordIcon : hidePasswordIcon} width="100%" height="100%" />
+);
+
+const BankIcon = `
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.3391 1.97102L19.5891 5.27099C19.9099 5.39933 20.1666 5.78432 20.1666 6.12349V9.16683C20.1666 9.67099 19.7541 10.0835 19.2499 10.0835H2.74992C2.24575 10.0835 1.83325 9.67099 1.83325 9.16683V6.12349C1.83325 5.78432 2.08992 5.39933 2.41076 5.27099L10.6608 1.97102C10.8441 1.89768 11.1557 1.89768 11.3391 1.97102Z" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.1666 20.1667H1.83325V17.4167C1.83325 16.9125 2.24575 16.5 2.74992 16.5H19.2499C19.7541 16.5 20.1666 16.9125 20.1666 17.4167V20.1667Z" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.66675 16.5002V10.0835" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.33325 16.5002V10.0835" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11 16.5002V10.0835" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.6667 16.5002V10.0835" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.3333 16.5002V10.0835" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0.916748 20.1665H21.0834" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11 7.7915C11.7594 7.7915 12.375 7.1759 12.375 6.4165C12.375 5.65711 11.7594 5.0415 11 5.0415C10.2406 5.0415 9.625 5.65711 9.625 6.4165C9.625 7.1759 10.2406 7.7915 11 7.7915Z" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const Bank = () => <SvgXml xml={BankIcon} width="100%" height="100%" />;

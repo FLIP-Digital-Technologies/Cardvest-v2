@@ -1,4 +1,5 @@
-import { Input as NBInput, Box, Text } from 'native-base';
+import { ShowPassword } from '@assets/SVG';
+import { Input as NBInput, Box, Text, Pressable } from 'native-base';
 import React from 'react';
 
 const Input = ({
@@ -10,6 +11,8 @@ const Input = ({
   value,
   type,
   onChangeText,
+  disabled = false,
+  maxLength = '',
 }: {
   label?: string;
   fontWeight?: string;
@@ -19,7 +22,10 @@ const Input = ({
   value?: any;
   onChangeText?: (value: any) => void;
   type?: 'text' | 'password' | undefined;
+  disabled?: boolean | undefined;
+  maxLength?: string | number | undefined;
 }) => {
+  const [show, setShow] = React.useState(false);
   return (
     <Box my="2">
       {label && (
@@ -27,19 +33,33 @@ const Input = ({
           {label}
         </Text>
       )}
-      <Box backgroundColor="#F7F9FB">
+      <Box backgroundColor="#F7F9FB" borderRadius={'8px'}>
         <NBInput
           color={color}
-          size="xl"
+          size="lg"
           fontWeight={fontWeight || 'light'}
           borderWidth={0}
-          py="3"
+          borderRadius={'8px'}
+          py="4"
           px="3"
+          maxLength={maxLength ? Number(maxLength) : undefined}
+          isDisabled={disabled}
           value={value}
           style={{ backgroundColor: '#F7F9FB' }}
           placeholder={placeholder}
-          InputRightElement={InputRightElement}
-          type={type}
+          _focus={{
+            backgroundColor: '#F7F9FB',
+          }}
+          InputRightElement={
+            type === 'password' ? (
+              <Pressable onPress={() => setShow(!show)} h="5" w="5" mr="4" ml="2" justifyContent="center">
+                <ShowPassword show={show} />
+              </Pressable>
+            ) : (
+              InputRightElement
+            )
+          }
+          type={type !== 'password' ? type : show ? 'text' : 'password'}
           onChangeText={onChangeText}
         />
       </Box>

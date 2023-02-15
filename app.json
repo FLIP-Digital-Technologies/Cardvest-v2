@@ -3,15 +3,15 @@
   "displayName": "Cardvest",
   "environments": {
     "development": {
-      "API_URL": "https://reqres.in/api",
+      "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "development"
     },
     "staging": {
-      "API_URL": "https://reqres.in/api",
+      "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "staging"
     },
     "production": {
-      "API_URL": "https://reqres.in/api",
+      "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "production"
     }
   }

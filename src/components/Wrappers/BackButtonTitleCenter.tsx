@@ -12,8 +12,27 @@ const BackButtonTitleCenter: FC<{
   title: string;
   backAction?: (() => void) | null;
   isDisabled?: boolean | null;
-}> = ({ action, actionText, children, title, backAction, isDisabled = false }) => {
+  isLoading?: boolean | null;
+  noScroll?: boolean | null;
+}> = ({ action, actionText, children, title, backAction, isDisabled = false, isLoading = false, noScroll = false }) => {
   const navigation = useNavigation<GenericNavigationProps>();
+  if (noScroll) {
+    return (
+      <CSafeAreaView>
+        <HStack w="100%" alignItems="center">
+          <Pressable h="10" w="10" onPress={backAction ? backAction : () => navigation.goBack()}>
+            <BackButton />
+          </Pressable>
+          <Text fontSize="lg" mx="auto" textAlign="center">
+            {title}
+          </Text>
+          <View w="10" />
+        </HStack>
+        <VStack pb="3" />
+        {children}
+      </CSafeAreaView>
+    );
+  }
   return (
     <CSafeAreaView>
       <HStack w="100%" alignItems="center">
@@ -38,6 +57,7 @@ const BackButtonTitleCenter: FC<{
               <Button
                 onPress={action}
                 isDisabled={isDisabled}
+                isLoading={isLoading}
                 my="3"
                 size="lg"
                 _text={{

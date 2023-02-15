@@ -11,6 +11,9 @@ import {
   More,
   Transaction,
   Deposit,
+  WalletCircle,
+  CardsCircle,
+  UtilitiesCircle,
 } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import CSafeAreaView from '@components/CSafeAreaView';
@@ -22,7 +25,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import * as dayjs from 'dayjs';
 import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { getWidth } from '../../App';
 
 export const Money = (amount: any, currency: string) =>
@@ -63,7 +66,7 @@ export const GreetingPanel = () => {
             borderWidth="1"
             size="12"
             source={{
-              uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+              uri: data?.image_url,
             }}>
             {data?.username?.toString()[0]}
           </Avatar>
@@ -85,7 +88,6 @@ export const GreetingPanel = () => {
 };
 
 export const BalancePanel = ({
-  defaultCurrency,
   withDeposit = false,
 }: {
   defaultCurrency: string;
@@ -93,7 +95,7 @@ export const BalancePanel = ({
   withDeposit?: boolean;
 }) => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const { currency, handleSwitchCurrency, currencyWallet } = useCurrency(defaultCurrency);
+  const { currency, handleSwitchCurrency, currencyWallet } = useCurrency();
   const balance = currencyWallet?.balance;
   return (
     <Box position="relative" justifyContent="flex-start" mb="10" mt="4">
@@ -111,6 +113,7 @@ export const BalancePanel = ({
           </Text>
           <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
         </HStack>
+        <View my="1.5" />
         {withDeposit ? (
           <Button.Group>
             <Pressable
@@ -147,12 +150,14 @@ export const BalancePanel = ({
             w="100%"
             onPress={() => navigation.navigate('Withdraw')}
             borderRadius="lg"
+            justifyContent="center"
+            mx="auto"
             backgroundColor={'#FAC915'}>
-            <HStack p="4" justifyContent="center" alignItems="center">
+            <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
               <View width="5" h="5">
                 <Withdrawal />
               </View>
-              <Text w="40%" px="1" color="black">
+              <Text w="45%" px="1" color="black">
                 Withdraw Funds
               </Text>
             </HStack>
@@ -163,16 +168,22 @@ export const BalancePanel = ({
   );
 };
 
-export const EmptyPanel = () => (
+export const EmptyPanel = ({
+  title = 'No Recent Transaction',
+  body = 'Trade now to get started',
+}: {
+  title?: string;
+  body?: string;
+}) => (
   <VStack alignItems="center">
     <View h="90" w="90" mx="10" mb="6" mt="2">
       <Transaction />
     </View>
     <Text fontSize="lg" color="CARDVESTBLACK.50">
-      No Recent Transaction
+      {title}
     </Text>
     <Text fontSize="sm" fontWeight="light" color="CARDVESTGREY.400">
-      Trade now to get started
+      {body}
     </Text>
   </VStack>
 );
@@ -185,7 +196,7 @@ export const TransDate: (created_at: any) => string = created_at => {
   const isToday = dayjs.default(created_at).isSame(dayjs.default()); // dayjs() return current date
 
   // want to get back to plain old JS date
-  const plainOldJsDate = dayjs.default(created_at).toDate().toDateString();
+  const plainOldJsDate = dayjs.default(created_at).format('dddd, DD MMMM, YYYY');
   if (isYesterday) {
     return 'Yesterday';
   } else if (isToday) {
@@ -195,7 +206,7 @@ export const TransDate: (created_at: any) => string = created_at => {
   }
 };
 
-export const TransactionPanel = ({ data, currency }: { data: any; currency: string }) => {
+export const TransactionPanel = ({ data, currency, type }: { data: any; currency: string; type?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   // console.log(JSON.parse(data?.images)?.[0]);
   return (
@@ -203,6 +214,8 @@ export const TransactionPanel = ({ data, currency }: { data: any; currency: stri
       onPress={() =>
         navigation.navigate('TradeDetail', {
           id: data?.reference,
+          transactionData: data,
+          type,
         })
       }>
       <HStack
@@ -214,22 +227,29 @@ export const TransactionPanel = ({ data, currency }: { data: any; currency: stri
         justifyContent="space-between"
         alignItems="center">
         <HStack alignItems="center">
-          {/* <Avatar
-            bg="cyan.500"
-            borderColor="white"
-            borderWidth="1"
-            size="12"
-            source={{
-              uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-            }}>
-            TE
-          </Avatar> */}
-          <VStack mx="4">
+          {type === 'withdrawals' && (
+            <View w="10" h="10">
+              <WalletCircle />
+            </View>
+          )}
+          {type === 'cards' && (
+            <View w="10" h="10">
+              <CardsCircle />
+            </View>
+          )}
+          {type === 'utilities' && (
+            <View w="10" h="10">
+              <UtilitiesCircle />
+            </View>
+          )}
+          <VStack mx="3">
             <Text color="CARDVESTBLACK.50" style={{ textTransform: 'capitalize' }} fontSize="md">
-              {data?.card && 'Gift Card'} {data?.type}
+              {data?.card?.category_name}
+              {type === 'withdrawals' && 'Withdrawals'}
+              {type === 'utilities' && data?.bill?.product}
             </Text>
             <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
-              {TransDate(data?.created_at)}, {dayjs.default(data?.created_at).format('hh:mmA')}
+              {dayjs.default(data?.created_at).format('hh:mmA')}
             </Text>
           </VStack>
         </HStack>
@@ -238,8 +258,11 @@ export const TransactionPanel = ({ data, currency }: { data: any; currency: stri
             {data?.type === 'sell' ? '+' : '-'}
             {currency} {Money(data?.amount, currency)}
           </Text>
-          <Text color="green.700" fontSize="xs">
-            {data?.status}
+          <Text
+            style={{ textTransform: 'capitalize' }}
+            color={data?.status === 'pending' ? '#FFCE31' : data?.status === 'succeed' ? 'green.700' : '#FF0000'}
+            fontSize="xs">
+            {data?.status === 'succeed' ? 'successful' : data?.status}
           </Text>
         </VStack>
       </HStack>
@@ -276,7 +299,7 @@ const img = require('../../assets/images/BalanceBG.png');
 const Dashboard: FC = () => {
   // const [t, i18n] = useTranslation();
   const navigation = useNavigation<GenericNavigationProps>();
-  const { currency, currencyLoading } = useCurrency();
+  const { currency } = useCurrency();
   const queryClient = useQueryClient();
   const { data: getTrancationData, isFetched } = useGetAllTransactions(currency);
   const { isFetching }: any = useQuery({
@@ -289,8 +312,16 @@ const Dashboard: FC = () => {
       return res?.data;
     },
   });
+  const a = useMemo(() => {
+    const b: any = {};
+    getTrancationData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getTrancationData]);
   if (isFetching || !isFetched) return <CLoader />;
-
   return (
     <CSafeAreaView>
       <ScrollView
@@ -330,7 +361,7 @@ const Dashboard: FC = () => {
             },
             {
               title: 'More',
-              action: () => navigation.navigate('sell'),
+              action: () => navigation.navigate('More'),
               icon: <More />,
             },
           ].map((item, index) => (
@@ -351,9 +382,18 @@ const Dashboard: FC = () => {
             {getTrancationData?.data?.length === 0 ? (
               <EmptyPanel />
             ) : (
-              getTrancationData?.data?.map((item: any, ind: number) => (
-                <TransactionPanel currency={currency} data={item} key={ind} />
-              ))
+              Object.keys(a).map((key, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <Text p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                      {TransDate(key)}
+                    </Text>
+                    {a[key].map((item: any, ind: number) => (
+                      <TransactionPanel type={'cards'} currency={currency} data={item} key={ind} />
+                    ))}
+                  </React.Fragment>
+                );
+              })
             )}
           </View>
         </VStack>

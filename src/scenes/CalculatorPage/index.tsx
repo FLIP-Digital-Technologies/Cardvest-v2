@@ -30,7 +30,7 @@ export const FormSelect = (props: any) => {
             bg: '#F7F2DD',
             endIcon: <CheckIcon size="5" />,
           }}
-          height="50px"
+          height="51.3px"
           fontSize="md"
           onValueChange={(itemValue: string) => setValue(itemValue)}>
           <Select.Item
@@ -72,10 +72,12 @@ const Calculator: FC = () => {
     const totalAmount = Number(card?.rates[currency]) * amountUSD;
     return totalAmount;
   }, [amountUSD, giftCardsData, currency]);
+  const handleDisabled = () => !amountUSD || !giftCardsData || !category;
   return (
     <BackButtonTitleCenter
       title="Calculator"
       actionText="Proceed to Trade"
+      isDisabled={handleDisabled()}
       action={() =>
         navigation.navigate('SellGiftCard', {
           tradeData: {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>213488163625-gtkhp3jbu0486v1ve8dqdcpsuq8ovq5g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.213488163625-gtkhp3jbu0486v1ve8dqdcpsuq8ovq5g</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>213488163625-5un67qa9c492dj6v9avdv5sk6dath2at.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB_tQTUsnp3fonGuFEStWa_ckBWvNIWc-A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>213488163625</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.app.Cardvest</string>
+	<key>PROJECT_ID</key>
+	<string>merchadoos</string>
+	<key>STORAGE_BUCKET</key>
+	<string>merchadoos.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:213488163625:ios:631cd9c558e02e60c43538</string>
+	<key>DATABASE_URL</key>
+	<string>https://merchadoos.firebaseio.com</string>
+</dict>
+</plist>

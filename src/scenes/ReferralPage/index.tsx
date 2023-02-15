@@ -43,6 +43,7 @@ const ReferralPage: FC = () => {
           <View marginTop="6">
             <Input
               label=""
+              disabled
               value={`https://app.cardvest.ng/register?ref=${user.username}`}
               InputRightElement={
                 <Pressable

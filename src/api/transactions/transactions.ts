@@ -2,6 +2,7 @@ import ApiClient from '@api';
 import env from '@env';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
+import { AnyNsRecord } from 'dns';
 import {
   CreateSellOrderRequestPayload,
   CreateBuyOrderRequestPayload,
@@ -21,6 +22,24 @@ import {
   RetryTokenPurchaseRequestPayload,
   VeriyPowerTokenPurchaseRequestPayload,
 } from './types';
+
+export async function getAllBillTransactions(currency: string, page = 1) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/bills?currency=${currency}`, {
+      params: { page, currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('getAllBillTransactions - Error: ', error);
+    onOpenToast({
+      status: 'error',
+      message: error?.response?.data?.message || 'An Error occurred',
+    });
+    throw error;
+  }
+}
 
 export async function getAllTransactions(currency: string, page = 1) {
   try {
@@ -124,12 +143,17 @@ export async function createBuyOrder({ card_id, amount, comment, currency }: Cre
   }
 }
 
-export async function getTransaction({ transaction_reference }: TransactionRequestPayload) {
+export async function getTransaction({ transaction_reference, type }: any) {
   try {
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/transactions/${transaction_reference}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await ApiClient.get(
+      type === 'withdrawals'
+        ? `${env.API_URL}/withdrawals/${transaction_reference}`
+        : `${env.API_URL}/transactions/${transaction_reference}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -140,7 +164,10 @@ export async function getTransaction({ transaction_reference }: TransactionReque
 
 export async function cancelTransaction({ transaction_reference }: CancelTransactionRequestPayload) {
   try {
-    const response = await ApiClient.delete(`${env.API_URL}/transactions/${transaction_reference}`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.delete(`${env.API_URL}/transactions/${transaction_reference}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -151,12 +178,19 @@ export async function cancelTransaction({ transaction_reference }: CancelTransac
 
 export async function purchaseAirtime({ currency, phone_no, product, amount }: PurchaseAirtimeRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/airtime`, {
-      currency,
-      phone_no,
-      product,
-      amount,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/airtime`,
+      {
+        currency,
+        phone_no,
+        product,
+        amount,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -167,7 +201,10 @@ export async function purchaseAirtime({ currency, phone_no, product, amount }: P
 
 export async function getAllBillTransaction() {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/transactions/airtime/all`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/airtime/all`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -178,7 +215,10 @@ export async function getAllBillTransaction() {
 
 export async function getAllAirtimeNetworks() {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/transactions/airtime/networks`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/airtime/networks`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -187,9 +227,166 @@ export async function getAllAirtimeNetworks() {
   }
 }
 
-export async function getAllDataPlans({ product }: DataPlansRequestPayload) {
+export async function getAllElectricityPlansProviders() {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/data/plans`, { product });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/electricity/providers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllElectricityPlansProviders - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllWifiPlansProviders() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/wifi/providers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllWifiPlansProviders - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllWifiPlans({ product }: DataPlansRequestPayload) {
+  if (!product) return;
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/wifi/plans`,
+      { product },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllWifiPlans - Error: ', error);
+    throw error;
+  }
+}
+
+export async function purchaseWifiPlans({
+  currency,
+  device_no,
+  product,
+  code,
+  amount,
+}: PurchaseWifiPlanslRequestPayload) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/wifi/purchase`,
+      {
+        currency,
+        device_no,
+        product,
+        code,
+        amount,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('purchaseWifiPlans - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllCablePlansProviders() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/cable/providers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllCablePlansProvider - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllCablePlans({ product }: DataPlansRequestPayload) {
+  if (!product) return;
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/cable/plans`,
+      { product },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllCablePlans - Error: ', error);
+    throw error;
+  }
+}
+
+export async function purchaseCablePlans({ currency, phone_no, product, code, amount, smart_card_no }: any) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/cable/purchase`,
+      {
+        currency,
+        phone_no,
+        product,
+        code,
+        amount,
+        smart_card_no,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('purchaseCablePlans - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllDataPlansProviders() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/data/providers`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllDataPlansProvider - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllDataPlans({ product }: DataPlansRequestPayload) {
+  if (!product) return;
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/data/plans`,
+      { product },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -206,13 +403,20 @@ export async function purchaseDataPlans({
   amount,
 }: PurchaseDataPlansRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/data/purchase`, {
-      currency,
-      phone_no,
-      product,
-      code,
-      amount,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/data/purchase`,
+      {
+        currency,
+        phone_no,
+        product,
+        code,
+        amount,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -239,40 +443,6 @@ export async function verifyDataPlanPurchase({ reference }: VerifyDataPlanPurcha
     return response.data;
   } catch (error) {
     console.error('verifyDataPlanPurchase - Error: ', error);
-    throw error;
-  }
-}
-
-export async function getWifiPlans() {
-  try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/wifi/plans`);
-
-    return response.data;
-  } catch (error) {
-    console.error('getWifiPlans - Error: ', error);
-    throw error;
-  }
-}
-
-export async function purchaseWifiPlans({
-  currency,
-  device_no,
-  product,
-  code,
-  amount,
-}: PurchaseWifiPlanslRequestPayload) {
-  try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/wifi/purchase`, {
-      currency,
-      device_no,
-      product,
-      code,
-      amount,
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error('purchaseWifiPlans - Error: ', error);
     throw error;
   }
 }
@@ -323,15 +493,22 @@ export async function purchaseElectricityToken({
   amount,
 }: PurchaseElectricityTokenRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/transactions/electricity/purchase/token`, {
-      product,
-      meter_no,
-      customer_name,
-      meter_type,
-      phone_no,
-      currency,
-      amount,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/transactions/electricity/purchase/token`,
+      {
+        product,
+        meter_no,
+        customer_name,
+        meter_type,
+        phone_no,
+        currency,
+        amount,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {

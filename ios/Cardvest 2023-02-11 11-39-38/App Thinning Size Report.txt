@@ -1,0 +1,246 @@
+
+App Thinning Size Report for All Variants of Cardvest
+
+Variant: Cardvest-067E27A4-601C-44CE-AE22-06F123407B7C.ipa
+Supported variant descriptors: [device: iPad6,3, os-version: 11.0], [device: iPad7,4, os-version: 11.0], [device: iPad6,4, os-version: 11.0], [device: iPad7,2, os-version: 11.0], [device: iPad7,3, os-version: 11.0], and [device: iPad7,1, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-0B8EA2CA-C497-4FFE-B6C7-CB7F84936F73.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 12.0] and [device: iPhone7,1, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-0CAF99FE-DE12-4404-8756-BE35DEB1211D.ipa
+Supported variant descriptors: [device: iPad5,4, os-version: 11.0], [device: iPad6,12, os-version: 11.0], [device: iPad6,8, os-version: 11.0], [device: iPad4,3, os-version: 11.0], [device: iPad6,11, os-version: 11.0], [device: iPad7,5, os-version: 11.0], [device: iPad7,6, os-version: 11.0], [device: iPad4,6, os-version: 11.0], [device: iPad5,3, os-version: 11.0], [device: iPad4,9, os-version: 11.0], [device: iPad5,1, os-version: 11.0], [device: iPad6,7, os-version: 11.0], [device: iPad4,8, os-version: 11.0], [device: iPad4,1, os-version: 11.0], [device: iPad4,5, os-version: 11.0], [device: iPad4,7, os-version: 11.0], [device: iPad5,2, os-version: 11.0], [device: iPad4,4, os-version: 11.0], and [device: iPad4,2, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-1AE2C416-1E6F-48D3-8734-D7962ACA3BFC.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 12.2] and [device: iPhone7,1, os-version: 12.2]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-2EF3E6C7-CD6A-4D59-AFE7-6326B55B72E2.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.2]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-3C72E9A5-A0B3-4007-9434-EAB8D5D4FFB2.ipa
+Supported variant descriptors: [device: iPad4,3, os-version: 12.2], [device: iPad5,1, os-version: 12.2], [device: iPad7,6, os-version: 12.2], [device: iPad6,8, os-version: 12.2], [device: iPad4,1, os-version: 12.2], [device: iPad6,12, os-version: 12.2], [device: iPad4,2, os-version: 12.2], [device: iPad4,9, os-version: 12.2], [device: iPad4,5, os-version: 12.2], [device: iPad4,8, os-version: 12.2], [device: iPad5,3, os-version: 12.2], [device: iPad5,2, os-version: 12.2], [device: iPad7,5, os-version: 12.2], [device: iPad6,7, os-version: 12.2], [device: iPad4,6, os-version: 12.2], [device: iPad5,4, os-version: 12.2], [device: iPad6,11, os-version: 12.2], [device: iPad4,4, os-version: 12.2], and [device: iPad4,7, os-version: 12.2]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-474365B5-40D9-465D-80F3-3307FEDFF26E.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 14.0] and [device: iPhone8,2, os-version: 13.0]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-48ECCA25-6822-4F6D-8D50-3B3B00E8530B.ipa
+Supported variant descriptors: [device: iPhone12,8, os-version: 15.0], [device: iPhone10,1, os-version: 16.0], [device: iPhone10,4, os-version: 16.0], [device: iPhone9,1, os-version: 15.0], [device: iPhone9,3, os-version: 15.0], [device: iPhone12,8, os-version: 16.0], [device: iPhone14,6, os-version: 16.0], [device: iPhone10,1, os-version: 15.0], [device: iPhone14,6, os-version: 15.0], and [device: iPhone10,4, os-version: 15.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-52AA6982-E6E5-4E4D-A9A0-C6BCBB733811.ipa
+Supported variant descriptors: [device: iPhone9,2, os-version: 12.2], [device: iPhone10,5, os-version: 12.2], [device: iPhone10,3, os-version: 12.2], [device: iPhone10,6, os-version: 12.2], [device: iPhone9,4, os-version: 12.2], [device: iPhone10,2, os-version: 12.2], [device: iPhone11,6, os-version: 12.2], [device: iPhone11,2, os-version: 12.2], and [device: iPhone11,4, os-version: 12.2]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-729FFA4E-E953-47C7-92B2-566E4811BFD4.ipa
+Supported variant descriptors: [device: iPhone8,1, os-version: 14.0], [device: iPhone8,4, os-version: 13.0], [device: iPhone8,1, os-version: 13.0], [device: iPod9,1, os-version: 13.0], [device: iPhone8,4, os-version: 14.0], and [device: iPod9,1, os-version: 14.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-748EDF96-C144-4196-A194-8811BFB415E8.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 12.0], [device: iPhone10,1, os-version: 12.0], [device: iPhone9,1, os-version: 12.0], and [device: iPhone10,4, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-768D7735-B551-43C8-AF86-2E670D858AF3.ipa
+Supported variant descriptors: [device: iPhone11,4, os-version: 12.0], [device: iPhone11,6, os-version: 12.0], [device: iPhone10,2, os-version: 12.0], [device: iPhone10,3, os-version: 12.0], [device: iPhone11,2, os-version: 12.0], [device: iPhone9,4, os-version: 12.0], [device: iPhone9,2, os-version: 12.0], [device: iPhone10,6, os-version: 12.0], and [device: iPhone10,5, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-7B8C5288-F5C6-4F2D-9047-D9695E84E40A.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 15.0], [device: iPhone12,1, os-version: 16.0], [device: iPhone11,8, os-version: 16.0], and [device: iPhone12,1, os-version: 15.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-83C19AA1-704A-42F0-A2E3-922F3B0E8EBD.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 12.0], [device: iPhone6,1, os-version: 12.0], [device: iPhone8,1, os-version: 12.0], [device: iPhone6,2, os-version: 12.0], [device: iPhone7,2, os-version: 12.0], and [device: iPod7,1, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-8AFE88A3-416B-4B59-B0B5-0F195208946B.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-90ECC141-7ACF-42EA-B376-02DE03BE3B50.ipa
+Supported variant descriptors: [device: iPad7,3, os-version: 12.2], [device: iPad6,4, os-version: 12.2], [device: iPad8,2, os-version: 12.2], [device: iPad11,1, os-version: 12.2], [device: iPad11,2, os-version: 12.2], [device: iPad8,4, os-version: 12.2], [device: iPad11,4, os-version: 12.2], [device: iPad11,3, os-version: 12.2], [device: iPad8,5, os-version: 12.2], [device: iPad8,6, os-version: 12.2], [device: iPad8,3, os-version: 12.2], [device: iPad8,7, os-version: 12.2], [device: iPad6,3, os-version: 12.2], [device: iPad7,4, os-version: 12.2], [device: iPad8,1, os-version: 12.2], [device: iPad8,8, os-version: 12.2], [device: iPad7,1, os-version: 12.2], and [device: iPad7,2, os-version: 12.2]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-964DBB79-8FF1-4815-B88C-A086685D4736.ipa
+Supported variant descriptors: [device: iPhone10,1, os-version: 14.0], [device: iPhone10,4, os-version: 13.0], [device: iPhone9,1, os-version: 13.0], [device: iPhone9,3, os-version: 14.0], [device: iPhone10,1, os-version: 13.0], [device: iPhone12,8, os-version: 13.0], [device: iPhone10,4, os-version: 14.0], [device: iPhone9,1, os-version: 14.0], [device: iPhone12,8, os-version: 14.0], and [device: iPhone9,3, os-version: 13.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-97D5C279-BF4F-4878-8C20-825B0EA3A101.ipa
+Supported variant descriptors: [device: iPad7,4, os-version: 12.0], [device: iPad8,5, os-version: 12.0], [device: iPad8,7, os-version: 12.0], [device: iPad8,2, os-version: 12.0], [device: iPad8,6, os-version: 12.0], [device: iPad8,1, os-version: 12.0], [device: iPad8,3, os-version: 12.0], [device: iPad8,4, os-version: 12.0], [device: iPad6,3, os-version: 12.0], [device: iPad7,2, os-version: 12.0], [device: iPad7,3, os-version: 12.0], [device: iPad8,8, os-version: 12.0], [device: iPad6,4, os-version: 12.0], and [device: iPad7,1, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-9A6812D3-EBC7-494A-8367-AF7E7AEEDAA8.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 15.0]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-9EA337AB-0E0F-4DDC-8396-B035FEDE179A.ipa
+Supported variant descriptors: [device: iPhone13,2, os-version: 15.0], [device: iPhone15,2, os-version: 16.0], [device: iPhone13,1, os-version: 16.0], [device: iPhone11,6, os-version: 15.0], [device: iPhone11,2, os-version: 16.0], [device: iPhone14,4, os-version: 16.0], [device: iPhone10,3, os-version: 16.0], [device: iPhone12,3, os-version: 16.0], [device: iPhone14,4, os-version: 15.0], [device: iPhone10,5, os-version: 15.0], [device: iPhone14,2, os-version: 16.0], [device: iPhone14,2, os-version: 15.0], [device: iPhone11,4, os-version: 16.0], [device: iPhone13,4, os-version: 15.0], [device: iPhone11,4, os-version: 15.0], [device: iPhone14,3, os-version: 15.0], [device: iPhone10,2, os-version: 15.0], [device: iPhone14,5, os-version: 16.0], [device: iPhone13,3, os-version: 16.0], [device: iPhone10,5, os-version: 16.0], [device: iPhone10,3, os-version: 15.0], [device: iPhone9,2, os-version: 15.0], [device: iPhone12,5, os-version: 15.0], [device: iPhone13,1, os-version: 15.0], [device: iPhone10,6, os-version: 15.0], [device: iPhone12,5, os-version: 16.0], [device: iPhone13,3, os-version: 15.0], [device: iPhone9,4, os-version: 15.0], [device: iPhone10,2, os-version: 16.0], [device: iPhone14,7, os-version: 16.0], [device: iPhone14,3, os-version: 16.0], [device: iPhone14,8, os-version: 16.0], [device: iPhone15,3, os-version: 16.0], [device: iPhone12,3, os-version: 15.0], [device: iPhone14,5, os-version: 15.0], [device: iPhone10,6, os-version: 16.0], [device: iPhone13,4, os-version: 16.0], [device: iPhone13,2, os-version: 16.0], [device: iPhone11,2, os-version: 15.0], and [device: iPhone11,6, os-version: 16.0]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-A1097865-316A-4335-A0CD-C0DFAB094266.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 11.0], [device: iPhone9,1, os-version: 11.0], [device: iPhone10,1, os-version: 11.0], and [device: iPhone10,4, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-A47A736D-42EA-4AB2-8994-547E8DE2E221.ipa
+Supported variant descriptors: [device: iPad4,9, os-version: 12.0], [device: iPad4,6, os-version: 12.0], [device: iPad7,6, os-version: 12.0], [device: iPad4,3, os-version: 12.0], [device: iPad4,8, os-version: 12.0], [device: iPad6,8, os-version: 12.0], [device: iPad5,2, os-version: 12.0], [device: iPad4,1, os-version: 12.0], [device: iPad5,1, os-version: 12.0], [device: iPad4,5, os-version: 12.0], [device: iPad6,7, os-version: 12.0], [device: iPad6,12, os-version: 12.0], [device: iPad6,11, os-version: 12.0], [device: iPad5,4, os-version: 12.0], [device: iPad4,2, os-version: 12.0], [device: iPad4,7, os-version: 12.0], [device: iPad4,4, os-version: 12.0], [device: iPad7,5, os-version: 12.0], and [device: iPad5,3, os-version: 12.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-A4A28E69-C5C9-4218-93F7-3742A36E2BD1.ipa
+Supported variant descriptors: [device: iPhone10,3, os-version: 11.0], [device: iPhone10,6, os-version: 11.0], [device: iPhone9,2, os-version: 11.0], [device: iPhone10,5, os-version: 11.0], [device: iPhone9,4, os-version: 11.0], and [device: iPhone10,2, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.3 MB uncompressed
+App size: 7.5 MB compressed, 20.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-A60BBB84-3C38-4B7B-BC21-B7A5A32049BC.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 15.0], [device: iPod9,1, os-version: 15.0], and [device: iPhone8,1, os-version: 15.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-AAD4B1A7-0838-4D39-AF50-447DFA76DB96.ipa
+Supported variant descriptors: [device: iPhone7,2, os-version: 12.2], [device: iPhone8,1, os-version: 12.2], [device: iPod9,1, os-version: 12.2], [device: iPhone8,4, os-version: 12.2], [device: iPod7,1, os-version: 12.2], [device: iPhone6,2, os-version: 12.2], and [device: iPhone6,1, os-version: 12.2]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-AB8029B1-BBD9-4BC9-A763-CCAEC4881537.ipa
+Supported variant descriptors: [device: iPad7,6, os-version: 13.0], [device: iPad11,6, os-version: 14.0], [device: iPad5,1, os-version: 14.0], [device: iPad6,8, os-version: 14.0], [device: iPad6,7, os-version: 13.0], [device: iPad6,11, os-version: 13.0], [device: iPad6,11, os-version: 14.0], [device: iPad6,12, os-version: 14.0], [device: iPad7,11, os-version: 14.0], [device: iPad7,11, os-version: 13.0], [device: iPad5,4, os-version: 13.0], [device: iPad5,4, os-version: 14.0], [device: iPad5,2, os-version: 13.0], [device: iPad5,3, os-version: 13.0], [device: iPad7,12, os-version: 14.0], [device: iPad5,2, os-version: 14.0], [device: iPad7,5, os-version: 14.0], [device: iPad5,3, os-version: 14.0], [device: iPad7,12, os-version: 13.0], [device: iPad11,7, os-version: 14.0], [device: iPad7,5, os-version: 13.0], [device: iPad6,8, os-version: 13.0], [device: iPad5,1, os-version: 13.0], [device: iPad6,7, os-version: 14.0], [device: iPad6,12, os-version: 13.0], and [device: iPad7,6, os-version: 14.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-B211B6F1-5EBD-4288-AD96-60599DE35E16.ipa
+Supported variant descriptors: [device: iPad13,10, os-version: 15.0], [device: iPad8,6, os-version: 15.0], [device: iPad7,2, os-version: 15.0], [device: iPad7,3, os-version: 15.0], [device: iPad13,11, os-version: 15.0], [device: iPad13,9, os-version: 16.0], [device: iPad14,5-B, os-version: 16.0], [device: iPad13,5, os-version: 16.0], [device: iPad14,4-B, os-version: 16.0], [device: iPad13,16, os-version: 16.0], [device: iPad13,10, os-version: 16.0], [device: iPad7,1, os-version: 16.0], [device: iPad13,16, os-version: 15.0], [device: iPad8,5, os-version: 16.0], [device: iPad11,1, os-version: 15.0], [device: iPad8,8, os-version: 15.0], [device: iPad14,3-A, os-version: 16.0], [device: iPad14,4-A, os-version: 16.0], [device: iPad13,11, os-version: 16.0], [device: MacFamily20,1, os-version: 15.0], [device: iPad14,3-B, os-version: 16.0], [device: iPad13,6, os-version: 15.0], [device: iPad6,4, os-version: 15.0], [device: iPad14,1, os-version: 15.0], [device: iPad6,3, os-version: 16.0], [device: iPad11,2, os-version: 15.0], [device: iPad13,1, os-version: 15.0], [device: iPad11,3, os-version: 16.0], [device: iPad8,12, os-version: 16.0], [device: iPad13,9, os-version: 15.0], [device: iPad13,8, os-version: 15.0], [device: iPad7,3, os-version: 16.0], [device: iPad8,3, os-version: 15.0], [device: iPad13,2, os-version: 15.0], [device: iPad6,3, os-version: 15.0], [device: iPad11,3, os-version: 15.0], [device: iPad7,2, os-version: 16.0], [device: iPad8,5, os-version: 15.0], [device: iPad8,2, os-version: 16.0], [device: iPad8,3, os-version: 16.0], [device: iPad8,4, os-version: 16.0], [device: iPad8,8, os-version: 16.0], [device: iPad13,2, os-version: 16.0], [device: iPad14,6-A, os-version: 16.0], [device: iPad11,4, os-version: 15.0], [device: iPad13,7, os-version: 15.0], [device: iPad11,1, os-version: 16.0], [device: iPad8,2, os-version: 15.0], [device: iPad8,11, os-version: 15.0], [device: iPad8,4, os-version: 15.0], [device: iPad7,1, os-version: 15.0], [device: iPad13,17, os-version: 15.0], [device: iPad8,10, os-version: 15.0], [device: iPad14,6-B, os-version: 16.0], [device: iPad13,4, os-version: 16.0], [device: iPad13,7, os-version: 16.0], [device: iPad11,4, os-version: 16.0], [device: iPad8,10, os-version: 16.0], [device: iPad8,11, os-version: 16.0], [device: iPad13,5, os-version: 15.0], [device: iPad8,1, os-version: 16.0], [device: iPad8,1, os-version: 15.0], [device: iPad7,4, os-version: 15.0], [device: iPad8,7, os-version: 16.0], [device: iPad14,2, os-version: 16.0], [device: iPad11,2, os-version: 16.0], [device: iPad8,9, os-version: 16.0], [device: iPad14,2, os-version: 15.0], [device: iPad13,6, os-version: 16.0], [device: iPad14,5-A, os-version: 16.0], [device: iPad6,4, os-version: 16.0], [device: iPad8,6, os-version: 16.0], [device: iPad8,7, os-version: 15.0], [device: iPad8,9, os-version: 15.0], [device: MacFamily20,1, os-version: 16.0], [device: iPad13,1, os-version: 16.0], [device: iPad13,17, os-version: 16.0], [device: iPad13,8, os-version: 16.0], [device: iPad14,1, os-version: 16.0], [device: iPad13,4, os-version: 15.0], [device: iPad7,4, os-version: 16.0], and [device: iPad8,12, os-version: 15.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-B90BA4E4-5D1D-4EC2-9D7B-EEAF31DE51E9.ipa
+Supported variant descriptors: [device: iPad8,1, os-version: 14.0], [device: iPad8,2, os-version: 14.0], [device: iPad7,3, os-version: 14.0], [device: iPad8,12, os-version: 14.0], [device: iPad13,4, os-version: 14.0], [device: iPad8,2, os-version: 13.0], [device: iPad7,1, os-version: 14.0], [device: iPad7,1, os-version: 13.0], [device: iPad8,5, os-version: 13.0], [device: iPad8,7, os-version: 14.0], [device: MacFamily20,1, os-version: 14.0], [device: iPad8,12, os-version: 13.0], [device: iPad8,5, os-version: 14.0], [device: iPad11,1, os-version: 14.0], [device: iPad13,5, os-version: 14.0], [device: iPad7,2, os-version: 14.0], [device: iPad7,4, os-version: 13.0], [device: iPad8,10, os-version: 13.0], [device: iPad6,3, os-version: 13.0], [device: iPad8,3, os-version: 13.0], [device: iPad11,3, os-version: 13.0], [device: iPad8,11, os-version: 13.0], [device: iPad11,2, os-version: 14.0], [device: iPad8,10, os-version: 14.0], [device: iPad8,6, os-version: 14.0], [device: iPad6,4, os-version: 14.0], [device: iPad6,3, os-version: 14.0], [device: iPad11,4, os-version: 14.0], [device: iPad13,6, os-version: 14.0], [device: iPad6,4, os-version: 13.0], [device: iPad11,1, os-version: 13.0], [device: iPad8,3, os-version: 14.0], [device: iPad13,9, os-version: 14.0], [device: iPad8,6, os-version: 13.0], [device: iPad7,2, os-version: 13.0], [device: iPad11,4, os-version: 13.0], [device: iPad13,1, os-version: 14.0], [device: iPad8,7, os-version: 13.0], [device: iPad7,3, os-version: 13.0], [device: iPad13,8, os-version: 14.0], [device: iPad8,4, os-version: 13.0], [device: iPad8,8, os-version: 14.0], [device: iPad8,1, os-version: 13.0], [device: iPad8,9, os-version: 13.0], [device: iPad8,11, os-version: 14.0], [device: iPad11,2, os-version: 13.0], [device: iPad8,8, os-version: 13.0], [device: iPad11,3, os-version: 14.0], [device: iPad8,9, os-version: 14.0], [device: iPad13,7, os-version: 14.0], [device: iPad13,2, os-version: 14.0], [device: iPad8,4, os-version: 14.0], [device: iPad13,10, os-version: 14.0], [device: iPad13,11, os-version: 14.0], and [device: iPad7,4, os-version: 14.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-C125E1A0-F4EF-4AC2-B57A-CA0CF83201E4.ipa
+Supported variant descriptors: [device: iPhone12,5, os-version: 13.0], [device: iPhone13,1, os-version: 14.0], [device: iPhone10,3, os-version: 14.0], [device: iPhone13,2, os-version: 14.0], [device: iPhone10,5, os-version: 14.0], [device: iPhone13,4, os-version: 14.0], [device: iPhone9,2, os-version: 14.0], [device: iPhone10,2, os-version: 14.0], [device: iPhone10,6, os-version: 14.0], [device: iPhone11,2, os-version: 14.0], [device: iPhone11,4, os-version: 14.0], [device: iPhone11,6, os-version: 14.0], [device: iPhone11,6, os-version: 13.0], [device: iPhone10,6, os-version: 13.0], [device: iPhone10,5, os-version: 13.0], [device: iPhone12,5, os-version: 14.0], [device: iPhone10,3, os-version: 13.0], [device: iPhone12,3, os-version: 14.0], [device: iPhone13,3, os-version: 14.0], [device: iPhone12,3, os-version: 13.0], [device: iPhone10,2, os-version: 13.0], [device: iPhone11,2, os-version: 13.0], [device: iPhone11,4, os-version: 13.0], [device: iPhone9,4, os-version: 14.0], [device: iPhone9,4, os-version: 13.0], and [device: iPhone9,2, os-version: 13.0]
+App + On Demand Resources size: 5.1 MB compressed, 12.8 MB uncompressed
+App size: 5.1 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-D1631769-E3BF-4668-97DC-4A01C6A4084F.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 11.0] and [device: iPhone7,1, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.3 MB uncompressed
+App size: 7.5 MB compressed, 20.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-DFEBFDEA-3C29-401F-864B-19589F8481C2.ipa
+Supported variant descriptors: [device: iPad6,11, os-version: 15.0], [device: iPad12,2, os-version: 15.0], [device: iPad6,12, os-version: 16.0], [device: iPad7,12, os-version: 16.0], [device: iPad7,12, os-version: 15.0], [device: iPad11,7, os-version: 16.0], [device: iPad7,5, os-version: 15.0], [device: iPad6,7, os-version: 16.0], [device: iPad11,6, os-version: 16.0], [device: iPad6,12, os-version: 15.0], [device: iPad6,8, os-version: 16.0], [device: iPad6,11, os-version: 16.0], [device: iPad5,3, os-version: 15.0], [device: iPad12,1, os-version: 16.0], [device: iPad7,6, os-version: 16.0], [device: iPad7,11, os-version: 16.0], [device: iPad12,2, os-version: 16.0], [device: iPad7,6, os-version: 15.0], [device: iPad6,7, os-version: 15.0], [device: iPad11,7, os-version: 15.0], [device: iPad13,19, os-version: 16.0], [device: iPad11,6, os-version: 15.0], [device: iPad7,11, os-version: 15.0], [device: iPad7,5, os-version: 16.0], [device: iPad13,18, os-version: 16.0], [device: iPad5,4, os-version: 15.0], [device: iPad12,1, os-version: 15.0], [device: iPad5,2, os-version: 15.0], [device: iPad6,8, os-version: 15.0], and [device: iPad5,1, os-version: 15.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-F6946519-91BE-4C30-94C1-66B8635E4CAA.ipa
+Supported variant descriptors: [device: iPhone12,1, os-version: 13.0], [device: iPhone11,8, os-version: 13.0], [device: iPhone11,8, os-version: 14.0], and [device: iPhone12,1, os-version: 14.0]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-FA3371A1-8F08-4CBA-9249-29487A024311.ipa
+Supported variant descriptors: [device: iPhone10,4, os-version: 12.2], [device: iPhone10,1, os-version: 12.2], [device: iPhone9,1, os-version: 12.2], and [device: iPhone9,3, os-version: 12.2]
+App + On Demand Resources size: 5 MB compressed, 12.8 MB uncompressed
+App size: 5 MB compressed, 12.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest-FE1BE86B-E32A-4705-AEBE-97E42D3EFAB7.ipa
+Supported variant descriptors: [device: iPhone7,2, os-version: 11.0], [device: iPhone6,1, os-version: 11.0], [device: iPhone8,1, os-version: 11.0], [device: iPod7,1, os-version: 11.0], [device: iPhone6,2, os-version: 11.0], and [device: iPhone8,4, os-version: 11.0]
+App + On Demand Resources size: 7.5 MB compressed, 20.2 MB uncompressed
+App size: 7.5 MB compressed, 20.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Cardvest.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 15 MB compressed, 42.9 MB uncompressed
+App size: 15 MB compressed, 42.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

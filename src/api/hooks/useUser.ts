@@ -32,8 +32,8 @@ function useModifyUser() {
   const queryClient = useQueryClient();
   return useMutation(
     ['modify-user'],
-    ({ userId, email, username, phonenumber }: ModifyUserRequestPayload) =>
-      modifyUser({ userId, email, username, phonenumber }),
+    ({ userId, email, username, phonenumber, lastname, firstname }: ModifyUserRequestPayload) =>
+      modifyUser({ userId, email, username, phonenumber, lastname, firstname }),
     {
       onSuccess: (/*data*/) => {
         queryClient.invalidateQueries({ queryKey: ['user'] });

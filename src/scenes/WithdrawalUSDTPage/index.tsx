@@ -1,7 +1,10 @@
+import { useInitializeWithdrawal } from '@api/hooks/useWallet';
 import { Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
 import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
+// import { FormSelect } from '@scenes/CalculatorPage';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
 import React, { FC, memo } from 'react';
 
@@ -162,11 +165,37 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
 );
 
 const WithdrawalUSDT: FC = () => {
-  const [currency, setCurrency] = React.useState('NGN');
+  const rate = 10;
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [amount, setAmount] = React.useState<number>();
+  const [account, setAccount] = React.useState('');
+  const [amountUSD, setAmountUSD] = React.useState<number>();
+  // const [network, setNetwork] = React.useState('');
+  const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
+  const { currency, handleSwitchCurrency } = useCurrency();
+  const handleSubmit = async () => {
+    try {
+      await withdrawFunds({
+        amount,
+        currency,
+        type: 'crypto',
+        wallet_address: account,
+        // network,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleDisabled = () => !account || !amount;
+
   return (
-    <BackButtonTitleCenter title="Withdraw USDT" actionText="Proceed" action={() => setModalVisible(true)}>
-      <TransactionPinModal {...{ modalVisible, closeModalVisible: () => setModalVisible(false) }} />
+    <BackButtonTitleCenter
+      isLoading={isLoading}
+      isDisabled={handleDisabled()}
+      title="Withdraw USDT"
+      actionText="Proceed"
+      action={() => setModalVisible(true)}>
+      <TransactionPinModal {...{ handleSubmit, modalVisible, closeModalVisible: () => setModalVisible(false) }} />
       <View my="7">
         <Box position="relative" backgroundColor="#F7F9FB" borderRadius="md" justifyContent="flex-start" mb="10" mt="4">
           <VStack py="8" px="3" w="100%">
@@ -176,8 +205,20 @@ const WithdrawalUSDT: FC = () => {
               </Text>
             </View>
             <HStack pb="3" justifyContent={'space-between'}>
-              <NInput w="70%" h="60" color="black" fontSize="3xl" value={'1,650,009.89'} variant="unstyled" />
-              <CurrencyPicker {...{ currency, setCurrency }} />
+              <NInput
+                w="70%"
+                h="60"
+                color="black"
+                fontSize="3xl"
+                value={amount?.toString()}
+                onChangeText={val => {
+                  setAmount(Number(val));
+                  setAmountUSD(Number(val) * rate);
+                }}
+                keyboardType="numeric"
+                variant="unstyled"
+              />
+              <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
             </HStack>
             <View position="relative">
               <Divider my="40px" backgroundColor="#909090" />
@@ -194,13 +235,24 @@ const WithdrawalUSDT: FC = () => {
               <Text color="black" fontSize="3xl">
                 $
               </Text>
-              <NInput w="100%" h="60" color="black" fontSize="3xl" value={'1,650,009.89'} variant="unstyled" />
+              <NInput
+                w="100%"
+                h="60"
+                color="black"
+                fontSize="3xl"
+                onChangeText={val => {
+                  setAmountUSD(Number(val));
+                  setAmount(Number(val) / rate);
+                }}
+                value={amountUSD?.toString()}
+                variant="unstyled"
+              />
             </HStack>
           </VStack>
         </Box>
-        <Input label="USDT Wallet Address" />
+        <Input label="USDT Wallet Address" value={account} onChangeText={setAccount} />
         <View p="3" />
-        <Input label="Network" />
+        {/* <FormSelect label="Network" /> */}
       </View>
     </BackButtonTitleCenter>
   );

@@ -61,7 +61,14 @@ export async function createUser({ name, job }: CreateUserRequestPayload) {
   }
 }
 
-export async function modifyUser({ userId, username, phonenumber, email }: ModifyUserRequestPayload) {
+export async function modifyUser({
+  userId,
+  username,
+  phonenumber,
+  email,
+  lastname,
+  firstname,
+}: ModifyUserRequestPayload) {
   try {
     // You can use also patch
     const token = await cacheService.get('login-user');
@@ -71,6 +78,8 @@ export async function modifyUser({ userId, username, phonenumber, email }: Modif
         username,
         phonenumber,
         email,
+        lastname,
+        firstname,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -120,6 +129,48 @@ export async function deleteUser({ userId }: DeleteUserRequestPayload) {
     return response.data;
   } catch (error) {
     console.error('deleteUser - Error: ', error);
+    throw error;
+  }
+}
+
+export async function setUpUserPin({ pin }: any) {
+  try {
+    // You can use also patch
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.put(
+      `${env.API_URL}/security/pin/setup`,
+      {
+        pin,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('setUpUserPin - Error: ', error);
+    throw error;
+  }
+}
+
+export async function confirmUserPin({ pin }: any) {
+  try {
+    // You can use also patch
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.put(
+      `${env.API_URL}/security/pin/confirm`,
+      {
+        pin,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('confirmUserPin - Error: ', error);
     throw error;
   }
 }

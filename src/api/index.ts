@@ -1,6 +1,5 @@
 import env from '@env';
 import { cacheService } from '@utils/cache';
-import { onOpenToast } from '@utils/toast';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const ApiClient = axios.create({
@@ -36,7 +35,7 @@ ApiClient.interceptors.request.use(
 // API respone interceptor
 ApiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
-  (error: any) => {
+  async (error: any) => {
     // const notificationParam: any = {
     //   status: 'error',
     //   message: error?.response?.data?.errors
@@ -44,10 +43,15 @@ ApiClient.interceptors.response.use(
     //     : error?.response?.data?.message || '',
     // };
 
-    // if (error?.response?.status === 403) {
-    //   notificationParam.message = 'Request Unauthentication';
-    //   // notificationParam.description += 'Please contact support.';
-    // }
+    if (
+      (error?.response?.status === 403 || error?.response?.status === 401) &&
+      error?.response?.data?.message.includes('Unauthenticated')
+    ) {
+      await cacheService.del('login-user');
+      await cacheService.del('user');
+      // await logoutUser();
+      // notificationParam.description += 'Please contact support.';
+    }
 
     // if (error?.response?.status === 404) {
     //   notificationParam.message = 'Not Found';

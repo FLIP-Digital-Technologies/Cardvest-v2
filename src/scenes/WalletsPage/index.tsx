@@ -4,18 +4,24 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { BalancePanel, EmptyPanel, TransactionPanel } from '@scenes/DashboardPage';
-import { useQuery } from '@tanstack/react-query';
-import { cacheService } from '@utils/cache';
+import { BalancePanel, EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
 import { HStack, Pressable, Text, View, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 
 const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency } = useCurrency();
-  const { data: getWalletData, isFetched } = useGetPayoutTransactions(currency);
-  console.log(getWalletData, 'waller');
-  if (!isFetched) return <CLoader />;
+  const { data: getWalletData, isFetching } = useGetPayoutTransactions(currency);
+  const a = useMemo(() => {
+    const b: any = {};
+    getWalletData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getWalletData]);
+  if (isFetching) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Wallets">
       <View mt="4">
@@ -35,9 +41,18 @@ const WalletsPage: FC = () => {
             {getWalletData?.data?.length === 0 ? (
               <EmptyPanel />
             ) : (
-              getWalletData?.data?.map((item: any, index: any) => (
-                <TransactionPanel data={item} key={index} currency={currency} />
-              ))
+              Object.keys(a).map((key, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <Text p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                      {TransDate(key)}
+                    </Text>
+                    {a[key].map((item: any, ind: number) => (
+                      <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
+                    ))}
+                  </React.Fragment>
+                );
+              })
             )}
           </View>
         </VStack>

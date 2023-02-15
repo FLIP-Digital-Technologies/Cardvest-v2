@@ -1,23 +1,72 @@
+import { useCreateBankAccount, useGetBankList, useVerifyBankAccount } from '@api/hooks/useBankAccounts';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
+import { useCurrency } from '@hooks/useCurrency';
+import { FormSelect } from '@scenes/CalculatorPage';
 import { View } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 
 const AddAccountPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const [accBank, setAccBank] = useState('');
+  const [accNumber, setAccNumber] = useState('');
+  const { currency } = useCurrency();
+  const { data } = useGetBankList(currency);
+  const { mutate: createBankAccount, isLoading } = useCreateBankAccount();
+  const { mutate: verifyBankAccount, data: bankAccount, isLoading: isVerifying } = useVerifyBankAccount();
+
+  useEffect(() => {
+    async function verAcc() {
+      try {
+        await verifyBankAccount({ banknumber: accNumber, bankname: accBank, currency });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (accNumber.length > 9 && accNumber.length < 11 && accBank) {
+      verAcc();
+    }
+  }, [accNumber, accBank]);
+  const handleDisabled = () =>
+    !(accNumber.length > 9 && accNumber.length < 11 && accBank) ||
+    !accNumber ||
+    !accBank ||
+    !bankAccount?.data?.account_name;
+  const handleSubmit = async () => {
+    try {
+      await createBankAccount({
+        banknumber: accNumber,
+        bankname: bankAccount?.data?.bank_name,
+        currency,
+        code: accBank,
+        accountname: bankAccount?.data?.account_name,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(data);
   return (
     <BackButtonTitleCenter
       title="Add Account"
       actionText="Continue"
-      action={() => navigation.navigate('AddAccountFeedback')}>
+      isLoading={isLoading || isVerifying}
+      isDisabled={handleDisabled()}
+      action={() => handleSubmit()}>
       <View my="7">
-        <Input label="Account Number" />
+        <Input label="Account Number" value={accNumber} onChangeText={setAccNumber} />
         <View p="3" />
-        <Input label="Select Bank" />
+        <FormSelect
+          label="Select Bank"
+          value={accBank}
+          setValue={setAccBank}
+          data={data?.data?.map((item: any) => ({
+            name: item.name,
+            id: item?.code,
+            ...item,
+          }))}
+        />
         <View p="3" />
-        <Input label="Account Name" />
+        <Input label="Account Name" value={bankAccount?.data?.account_name} disabled />
       </View>
     </BackButtonTitleCenter>
   );

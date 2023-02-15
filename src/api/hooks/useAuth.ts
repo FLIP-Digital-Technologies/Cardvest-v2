@@ -40,15 +40,21 @@ function useLoginUser() {
   const queryClient = useQueryClient();
   return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
     onSuccess: async data => {
+      if (data?.data?.user?.email_verified)
+        // TODO: reverb
+        return onOpenToast({
+          status: 'error',
+          message: 'Please kindly verify your email.',
+        });
       const user = await getUserData(data?.data?.token);
       await queryClient.setQueryData(['login-user'], data?.data?.token);
       await queryClient.setQueryData([`user`], user?.data);
       await cacheService.put('user', user?.data);
       await cacheService.put('login-user', data?.data?.token);
-      await navigation.navigate('Dashboard');
+      await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
       onOpenToast({
         status: 'success',
-        message: 'User Login successfully',
+        message: 'Login successful',
       });
     },
     onError: (data: AxiosError) => {

@@ -1,15 +1,21 @@
 import ApiClient from '@api';
 import env from '@env';
+import { cacheService } from '@utils/cache';
 import {
   VerifyBankAccountRequestPayload,
   CreateBankAccountRequestPayload,
   DeleteBankAccountRequestPayload,
 } from './types';
 
-export async function getBankAccount() {
+export async function getBankAccount(currency: string) {
+  console.log(currency);
   try {
-    const response = await ApiClient.get(`${env.API_URL}/bank-accounts`);
-
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/bank-accounts`, {
+      headers: { Authorization: `Bearer ${token}` },
+      params: { currency },
+    });
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error('getBankAccount - Error: ', error);
@@ -17,9 +23,13 @@ export async function getBankAccount() {
   }
 }
 
-export async function getAllBankAccounts() {
+export async function getAllBankAccounts(currency: string) {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/bank-accounts/banks`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/bank-accounts/banks`, {
+      params: { currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -28,12 +38,20 @@ export async function getAllBankAccounts() {
   }
 }
 
-export async function verifyBankAccount({ banknumber, bankname }: VerifyBankAccountRequestPayload) {
+export async function verifyBankAccount({ banknumber, bankname, currency }: VerifyBankAccountRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/bank-accounts/verify`, {
-      banknumber,
-      bankname,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/bank-accounts/verify`,
+      {
+        banknumber,
+        bankname,
+        currency,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -42,14 +60,28 @@ export async function verifyBankAccount({ banknumber, bankname }: VerifyBankAcco
   }
 }
 
-export async function createBankAccount({ banknumber, bankname, code, accountname }: CreateBankAccountRequestPayload) {
+export async function createBankAccount({
+  banknumber,
+  bankname,
+  code,
+  accountname,
+  currency,
+}: CreateBankAccountRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/bank-accounts`, {
-      banknumber,
-      bankname,
-      code,
-      accountname,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/bank-accounts`,
+      {
+        banknumber,
+        bankname,
+        code,
+        accountname,
+        currency,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {
@@ -60,7 +92,10 @@ export async function createBankAccount({ banknumber, bankname, code, accountnam
 
 export async function deleteBankAccount({ bank_id }: DeleteBankAccountRequestPayload) {
   try {
-    const response = await ApiClient.delete(`${env.API_URL}/bank-accounts//${bank_id}`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.delete(`${env.API_URL}/bank-accounts/${bank_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {

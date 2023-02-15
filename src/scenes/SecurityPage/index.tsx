@@ -19,7 +19,7 @@ const SecurityPage: FC = () => {
           },
           {
             name: 'Transaction PIN',
-            link: 'SetTransactionPin',
+            link: 'Pin',
             icon: <Key />,
           },
         ].map((item, index) => (

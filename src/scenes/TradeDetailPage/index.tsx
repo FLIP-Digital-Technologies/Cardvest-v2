@@ -126,15 +126,15 @@ export const TradeDetailPanel = ({ title, children }: { children: React.ReactNod
 };
 
 const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
-  const { params = { id: '' } } = route;
-  const { id: transaction_reference } = params;
-  const { data, isFetched } = useGetTransaction({ transaction_reference });
+  const { params = { id: '', transactionData: {}, type: '' } } = route;
+  const { id: transaction_reference, transactionData, type } = params;
+  const { data, isFetched } = useGetTransaction({ transaction_reference, type });
   const { currency } = useCurrency();
-  console.log(data);
+  console.log(data, transactionData, type);
   if (!isFetched) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Transaction Details">
-      <View mt="9" mb="20">
+      <View mt="5" mb="20">
         <TradeDetailPanel>
           <ItemText title="Reference" body={data?.data?.reference} />
           <ItemText
@@ -143,17 +143,32 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
               .default(data?.data?.created_at)
               .format('HH:mm:ss')}`}
           />
-          <ItemButton
-            title="Status"
-            body={data?.data?.payment_status?.toUpperCase()}
-            color={
-              data?.data?.payment_status === 'pending'
-                ? '#FFCE31'
-                : data?.data?.payment_status === 'success'
-                ? '#39A307'
-                : '#FF0000'
-            }
-          />
+          {data?.data?.status && (
+            <ItemButton
+              title="Status"
+              body={data?.data?.status === 'succeed' ? 'successful' : data?.data?.status?.toUpperCase()}
+              color={
+                data?.data?.status === 'pending'
+                  ? '#FFCE31'
+                  : data?.data?.status.includes('succe')
+                  ? '#39A307'
+                  : '#FF0000'
+              }
+            />
+          )}
+          {data?.data?.payment_status && data?.data?.type.toLowerCase() !== 'sell' && (
+            <ItemButton
+              title="Payment Status"
+              body={data?.data?.payment_status === 'succeed' ? 'successful' : data?.data?.payment_status?.toUpperCase()}
+              color={
+                data?.data?.payment_status === 'pending'
+                  ? '#FFCE31'
+                  : data?.data?.payment_status.includes('succe')
+                  ? '#39A307'
+                  : '#FF0000'
+              }
+            />
+          )}
           <ItemText
             title="Last Updated"
             body={`${dayjs.default(data?.data?.updated_at).format('DD/MM/YYYY')} | ${dayjs
@@ -163,22 +178,38 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
         </TradeDetailPanel>
         <TradeDetailPanel title="TRANSACTION INFO">
           <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
-          <ItemText
-            title="Gift Card"
-            body={`${data?.data?.card?.category_name?.toUpperCase()} / ${data?.data?.card?.name?.toUpperCase()}`}
-          />
-          <ItemText title="Rate" body={`${data?.data?.card?.rates?.[currency]}/$`} />
-          <ItemText title="Unit" body={data?.data?.unit} />
+          {data?.data?.card && (
+            <>
+              <ItemText
+                title="Gift Card"
+                body={`${data?.data?.card?.category_name?.toUpperCase()} / ${data?.data?.card?.name?.toUpperCase()}`}
+              />
+              <ItemText title="Rate" body={`${data?.data?.card?.rates?.[currency]}/$`} />
+            </>
+          )}
+          {data?.data?.unit >= 0 && <ItemText title="Unit" body={data?.data?.unit?.toString() || 'N/A'} />}
+
+          {data?.data?.bank && (
+            <>
+              <ItemText title="Account Name" body={`${data?.data?.bank?.accountname}`} />
+              <ItemText
+                title="Bank Details"
+                body={`${data?.data?.bank?.bankname?.toUpperCase()} - ${data?.data?.bank?.banknumber?.toUpperCase()}`}
+              />
+            </>
+          )}
           <ItemText title="Total Amount" body={`${currency} ${Money(data?.data?.amount, currency)}`} />
           <ItemText title="User’s Comment" body={data?.data?.comment || 'N/A'} />
         </TradeDetailPanel>
-        <TradeDetailPanel title="UPLOADED IMAGES">
-          {data?.data?.images?.length === 0 ? (
-            <ItemText title="Images" body="N/A" />
-          ) : (
-            <UploadedItems images={data?.data?.images} />
-          )}
-        </TradeDetailPanel>
+        {data?.data?.images?.length > 0 && (
+          <TradeDetailPanel title="UPLOADED IMAGES">
+            {data?.data?.images?.length === 0 ? (
+              <ItemText title="Images" body="N/A" />
+            ) : (
+              <UploadedItems images={data?.data?.images} />
+            )}
+          </TradeDetailPanel>
+        )}
         <TradeDetailPanel title="TRANSACTION FEEDBACK">
           <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
         </TradeDetailPanel>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="window.FreshworksWidget('open')">
+    <script>
+      window.fwSettings = {
+        widget_id: 150000002267,
+      };
+      !(function () {
+        if ('function' != typeof window.FreshworksWidget) {
+          var n = function () {
+            n.q.push(arguments);
+          };
+          (n.q = []), (window.FreshworksWidget = n);
+        }
+        console.log('benbd');
+        var yourscript = document.createElement('script');
+        yourscript.type = 'text/javascript';
+        yourscript.async = true;
+        yourscript.defer = true;
+        yourscript.src = 'https://widget.freshworks.com/widgets/150000002267.js';
+        // document.getElementsByTagName('style')[0].appendCh ild(yourscript);
+        var s = document.getElementsByTagName('body')[0];
+        s.parentNode.insertBefore(yourscript, s);
+        window.FreshworksWidget('open');
+      })();
+    </script>
+    <!-- <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000002267.js' async defer></script> -->
+    <style>
+      iframe#launcher-frame {
+        right: 0 !important;
+        top: 100px !important;
+        border: none !important;
+        position: fixed !important;
+        min-width: 104px !important;
+        max-width: 156px !important;
+        height: 56px !important;
+        z-index: 2147483000 !important;
+        visibility: visible !important;
+        left: 0 !important;
+        margin: auto !important;
+      }
+    </style>
+  </body>
+</html>

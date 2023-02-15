@@ -51,6 +51,8 @@ export type ModifyUserRequestPayload = {
   username: string;
   phonenumber: string;
   email: string;
+  lastname: string;
+  firstname: string;
 };
 
 export type ModifyUserSuccessPayload = {

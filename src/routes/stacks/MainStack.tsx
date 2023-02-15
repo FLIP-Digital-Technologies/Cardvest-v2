@@ -8,25 +8,28 @@ import {
   RightAngle,
   Support,
   TransactionHistory,
-  Card,
+  Bank,
   Logout,
   Home,
   Wallet,
   Calculator,
   Settings,
+  BuyGiftCardMore,
 } from '@assets/SVG';
-import CLoader from '@components/CLoader';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import AddAccountFeedbackPage from '@scenes/AddAccountFeedbackPage';
 import AddAccountPage from '@scenes/AddAccountPage';
+import BanksPage from '@scenes/BanksPage';
 import BuyAirtimePage from '@scenes/BuyAirtimePage';
 import BuyCablePage from '@scenes/BuyCablePage';
 import BuyDatePage from '@scenes/BuyDatePage';
+import BuyElectricityPage from '@scenes/BuyElectricityPage';
 import BuyGiftCardPage from '@scenes/BuyGiftCardPage';
 import BuyGiftCardTradeFeedbackPage from '@scenes/BuyGiftCardTradeFeedbackPage';
 import BuyGiftCardTradeSummaryPage from '@scenes/BuyGiftCardTradeSummaryPage';
+import BuyWifiPage from '@scenes/BuyWifiPage';
 import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
 import ChangePinPage from '@scenes/ChangePinPage';
@@ -35,7 +38,9 @@ import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
 import KYCPage from '@scenes/KYCPage';
+import LifeChat from '@scenes/LifeChat';
 import LovePage from '@scenes/LovePage';
+import MorePage from '@scenes/MorePage';
 import NotificationsPage from '@scenes/NotificationsPage';
 import PasswordPage from '@scenes/PasswordPage';
 import ProfilePage from '@scenes/ProfilePage';
@@ -55,6 +60,7 @@ import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
 import WithdrawalFeedbackPage from '@scenes/WithdrawalFeedbackPage';
 import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
+import WithdrawalsPage from '@scenes/WithdrawalsPage';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
@@ -64,85 +70,7 @@ import * as React from 'react';
 const MainStack = createStackNavigator();
 const DashboardDrawer = createDrawerNavigator();
 const WalletStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const SettingsStackScreen: FC = () => {
-  return (
-    <SettingsStack.Navigator initialRouteName="Settings">
-      <SettingsStack.Screen
-        name="Settings"
-        component={SettingPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="Profile"
-        component={ProfilePage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="Security"
-        component={SecurityPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="Password"
-        component={PasswordPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="Pin"
-        component={SecurityPinPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="ChangePin"
-        component={ChangePinPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="ResetPin"
-        component={ForgotPinPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="ResetPinFeedback"
-        component={ResetPinFeedbackPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="Referrals"
-        component={ReferralPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SettingsStack.Screen
-        name="KYC"
-        component={KYCPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </SettingsStack.Navigator>
-  );
-};
 
 const WalletStackScreen: FC = () => {
   return (
@@ -160,12 +88,16 @@ const WalletStackScreen: FC = () => {
 
 const DashboardBottomTabStack: FC = () => {
   return (
-    <Tab.Navigator initialRouteName="Dashboard">
+    <Tab.Navigator initialRouteName="HomeTab">
       <Tab.Screen
         options={{
           header: () => null,
           tabBarLabel: 'Home',
+          tabBarIconStyle: {
+            marginBottom: -18,
+          },
           tabBarLabelStyle: {
+            marginTop: 10,
             color: 'black',
           },
           tabBarIcon: ({ focused }) => (
@@ -176,14 +108,18 @@ const DashboardBottomTabStack: FC = () => {
             </React.Fragment>
           ),
         }}
-        name="Dashboard"
+        name="HomeTab"
         component={DashboardPage}
       />
       <Tab.Screen
         options={{
           header: () => null,
           tabBarLabel: 'Wallets',
+          tabBarIconStyle: {
+            marginBottom: -18,
+          },
           tabBarLabelStyle: {
+            marginTop: 10,
             color: 'black',
           },
           tabBarIcon: ({ focused }) => (
@@ -194,14 +130,18 @@ const DashboardBottomTabStack: FC = () => {
             </React.Fragment>
           ),
         }}
-        name="Wallets"
+        name="WalletsTab"
         component={WalletStackScreen}
       />
       <Tab.Screen
         options={{
           header: () => null,
           tabBarLabel: 'Calculator',
+          tabBarIconStyle: {
+            marginBottom: -18,
+          },
           tabBarLabelStyle: {
+            marginTop: 10,
             color: 'black',
           },
           tabBarIcon: ({ focused }) => (
@@ -219,7 +159,11 @@ const DashboardBottomTabStack: FC = () => {
         options={{
           header: () => null,
           tabBarLabel: 'Settings',
+          tabBarIconStyle: {
+            marginBottom: -18,
+          },
           tabBarLabelStyle: {
+            marginTop: 10,
             color: 'black',
           },
           tabBarIcon: ({ focused }) => (
@@ -231,7 +175,7 @@ const DashboardBottomTabStack: FC = () => {
           ),
         }}
         name="Settings"
-        component={SettingsStackScreen}
+        component={SettingPage}
       />
     </Tab.Navigator>
   );
@@ -249,7 +193,6 @@ function CustomDrawerContent(props: any) {
   const queryClient = useQueryClient();
 
   async function handleLogout() {
-    await logoutUser();
     await cacheService.del('login-user');
     await cacheService.del('user');
     await queryClient.setQueriesData(['user'], null);
@@ -257,6 +200,7 @@ function CustomDrawerContent(props: any) {
     await queryClient.invalidateQueries({ queryKey: ['login-user'] });
     await queryClient.invalidateQueries({ queryKey: ['user'] });
     await navigation.navigate('Auth');
+    await logoutUser();
   }
 
   return (
@@ -271,7 +215,7 @@ function CustomDrawerContent(props: any) {
               borderWidth="1"
               size="9"
               source={{
-                uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                uri: data?.image_url,
               }}>
               {data?.username?.[0]}
             </Avatar>
@@ -297,9 +241,14 @@ function CustomDrawerContent(props: any) {
               icon: <TransactionHistory />,
             },
             {
-              name: 'Cards',
-              link: 'Cards',
-              icon: <Card />,
+              name: 'Withdrawal',
+              link: 'Withdrawals',
+              icon: <BuyGiftCardMore />,
+            },
+            {
+              name: 'Accounts',
+              link: 'Banks',
+              icon: <Bank />,
             },
             {
               name: 'Notifications',
@@ -356,7 +305,7 @@ const DashboardDrawerStack: FC = () => {
   return (
     <DashboardDrawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
       <DashboardDrawer.Screen
-        name="Dashboard"
+        name="DashboardDrawer"
         component={DashboardBottomTabStack}
         options={{
           headerShown: false,
@@ -368,9 +317,9 @@ const DashboardDrawerStack: FC = () => {
 
 export const MainStackScreen: FC = () => {
   return (
-    <MainStack.Navigator>
+    <MainStack.Navigator initialRouteName="Home">
       <MainStack.Screen
-        name="Dashboard"
+        name="Home"
         component={DashboardDrawerStack}
         options={{
           headerShown: false,
@@ -510,6 +459,20 @@ export const MainStackScreen: FC = () => {
         }}
       />
       <MainStack.Screen
+        name="BuyElectricity"
+        component={BuyElectricityPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="BuyWifi"
+        component={BuyWifiPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
         name="BuyGiftCard"
         component={BuyGiftCardPage}
         options={{
@@ -533,6 +496,105 @@ export const MainStackScreen: FC = () => {
       <MainStack.Screen
         name="FundAccountFeedback"
         component={FundAccountFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="More"
+        component={MorePage}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <MainStack.Screen
+        name="Settings"
+        component={SettingPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Profile"
+        component={ProfilePage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Security"
+        component={SecurityPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Password"
+        component={PasswordPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Pin"
+        component={SecurityPinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="ChangePin"
+        component={ChangePinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="ResetPin"
+        component={ForgotPinPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="ResetPinFeedback"
+        component={ResetPinFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Referrals"
+        component={ReferralPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Banks"
+        component={BanksPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="Withdrawals"
+        component={WithdrawalsPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="KYC"
+        component={KYCPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="LiveChat"
+        component={LifeChat}
         options={{
           headerShown: false,
         }}

@@ -32,13 +32,33 @@ export async function getCurrencyWallet(currency: string) {
 }
 
 export async function switchDefaultWallet({ currency }: SwitchDefaultWalletRequestPayload) {
-  console.log('switchDefaultWallet', currency);
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.post(
       `${env.API_URL}/wallets/default`,
       {
         currency,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('initiateWithdrawal - Error: ', error);
+    throw error;
+  }
+}
+
+export async function fundWallet({ currency, amount }: any) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/wallets/fund`,
+      {
+        currency,
+        amount,
       },
       {
         headers: { Authorization: `Bearer ${token}` },

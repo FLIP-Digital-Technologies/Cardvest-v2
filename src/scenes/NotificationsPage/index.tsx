@@ -32,7 +32,9 @@ const NotificationsPage: FC = () => {
   const arr: string[] = ['', '', '', '', '', '', ''];
   return (
     <BackButtonTitleCenter title="Notifications">
-      <VStack my="7">{arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <Card />)}</VStack>
+      <VStack my="7">
+        {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any, index: any) => <Card key={index} />)}
+      </VStack>
     </BackButtonTitleCenter>
   );
 };

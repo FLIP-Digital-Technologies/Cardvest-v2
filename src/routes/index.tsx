@@ -1,5 +1,7 @@
 import CLoader from '@components/CLoader';
+import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { GenericNavigationProps } from '@routes/types';
 import ForgetPasswordEnterEmailPage from '@scenes/ForgetPasswordEnterEmailPage';
 import IntroPage from '@scenes/IntroPage';
 import LoginPage from '@scenes/LoginPage';
@@ -11,41 +13,12 @@ import Step3 from '@scenes/SignUpPage/Step3';
 import VerifyPage from '@scenes/VerifyPage';
 import { useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
 
 const RootStack = createStackNavigator();
 const AuthStack = createStackNavigator();
-const SignUpStack = createStackNavigator();
-
-export const SignUpStackScreen: FC = () => {
-  return (
-    <SignUpStack.Navigator initialRouteName="SignUp">
-      <SignUpStack.Screen
-        name="SignUp"
-        component={SignUpPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SignUpStack.Screen
-        name="SignUpStep2"
-        component={Step2}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <SignUpStack.Screen
-        name="SignUpStep3"
-        component={Step3}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </SignUpStack.Navigator>
-  );
-};
 
 export const AuthStackScreen: FC = () => {
   return (
@@ -59,7 +32,21 @@ export const AuthStackScreen: FC = () => {
       />
       <AuthStack.Screen
         name="SignUp"
-        component={SignUpStackScreen}
+        component={SignUpPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name="SignUpStep2"
+        component={Step2}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name="SignUpStep3"
+        component={Step3}
         options={{
           headerShown: false,
         }}
@@ -90,14 +77,18 @@ export const AuthStackScreen: FC = () => {
 };
 
 export const RootStackScreen: FC = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const { data, isFetching } = useQuery({
     queryKey: ['login-user'],
     queryFn: async () => cacheService.get('login-user'),
   });
+  useEffect(() => {
+    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Intro');
+  }, [data]);
   if (isFetching) return <CLoader />;
   return (
     <RootStack.Navigator initialRouteName={data ? 'Dashboard' : 'Intro'}>
-      {typeof data === 'string' ? (
+      {typeof data === 'string' && data.length > 3 ? (
         <RootStack.Screen
           name="Dashboard"
           component={MainStackScreen}

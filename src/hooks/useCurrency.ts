@@ -13,13 +13,11 @@ export const useCurrency = () => {
 
     fetchDefaultCurrency();
   });
-  const { mutate: switchCurrency } = useSwitchDefaultWallet();
   const { data, isFetching } = useGetUserCurrencyWallet(currency);
   const queryClient = useQueryClient();
   const handleSwitchCurrency = useCallback(
     async (newCurrency: string) => {
       try {
-        await switchCurrency(newCurrency);
         await cacheService.put('defaultCurrency', newCurrency);
         await setCurrency(newCurrency);
         await queryClient.invalidateQueries([`user-${currency}-wallet`]);

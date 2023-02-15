@@ -1,15 +1,19 @@
 import { useModifyUser } from '@api/hooks/useUser';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useUpload } from '@hooks/useUpload';
 import { validateEmail } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
 import { View, Text, Center, Button, Box, Pressable, ScrollView, Avatar } from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
 
 const ProfilePage: FC = () => {
+  const { selectFile, uploadImage, imgs } = useUpload('profile');
   const { mutate: updateUser, isLoading } = useModifyUser();
   const queryClient = useQueryClient();
   const data: any = queryClient.getQueryData(['user']);
+  const [firstname, setFirstName] = useState(data?.firstname);
+  const [lastname, setLastName] = useState(data?.lastname);
   const [email, setEmail] = useState(data?.email);
   const [username, setUsername] = useState(data?.username);
   const [phoneNumber, setPhoneNumber] = useState(data?.phonenumber);
@@ -18,6 +22,8 @@ const ProfilePage: FC = () => {
       await updateUser({
         userId: data?.id,
         email,
+        firstname,
+        lastname,
         username,
         phonenumber: phoneNumber,
       });
@@ -36,6 +42,8 @@ const ProfilePage: FC = () => {
       !(phoneNumber.length <= 11)
     );
   }, [phoneNumber]);
+  console.log(data, imgs);
+
   return (
     <BackButtonTitleCenter title="My Profile">
       <ScrollView
@@ -52,20 +60,22 @@ const ProfilePage: FC = () => {
               borderWidth="1"
               size="2xl"
               source={{
-                uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                uri: data?.image_url,
               }}>
               {data?.username?.toString()[0]}
             </Avatar>
           </Box>
-          <Pressable mt="2" onPress={() => console.log('jeje')}>
+          <Pressable mt="2" onPress={() => selectFile()}>
             <Text color="CARDVESTGREEN" underline textAlign="center" fontSize="sm" fontWeight="light">
               Change Profile Pic
             </Text>
           </Pressable>
         </Center>
         <View my="6">
-          <Input label="Email Address" value={email} onChangeText={setEmail} />
-          <Input label="Username" value={username} onChangeText={setUsername} />
+          <Input label="First Name" value={firstname} onChangeText={setFirstName} />
+          <Input label="Last Name" value={lastname} onChangeText={setLastName} />
+          <Input label="Email Address" value={email} onChangeText={setEmail} disabled />
+          <Input label="Username" value={username} onChangeText={setUsername} disabled />
           <Input label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} />
         </View>
         <Center py="4">
