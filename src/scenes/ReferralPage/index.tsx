@@ -71,7 +71,7 @@ const ReferralPage: FC = () => {
               </Text>
             </VStack>
             <Button
-              onPress={() => copyToClipboard('https://app.cardvest.ng/register?fe8893la/a')}
+              onPress={() => copyToClipboard(`https://app.cardvest.ng/register?ref=${user.username}`)}
               my="3"
               width="100%"
               size="lg"

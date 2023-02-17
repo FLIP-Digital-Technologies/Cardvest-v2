@@ -1,9 +1,14 @@
+import { getNotification } from '@api/push-notification/push-notification';
 import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
 import { createUser, getUserDetails, modifyUser, modifyUserPassword } from '@api/users/users';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
+
+function useGetNotification() {
+  return useQuery([`user-notifications`], () => getNotification());
+}
 
 function useUser({ userId }: UserDetailsRequestPayload) {
   return useQuery([`user-${userId}`, { userId }], () => getUserDetails({ userId }), {
@@ -94,4 +99,4 @@ function useModifyUserPassword() {
 //   });
 // }
 
-export { useUser, useCreateUser, useModifyUser, useModifyUserPassword };
+export { useUser, useCreateUser, useModifyUser, useModifyUserPassword, useGetNotification };

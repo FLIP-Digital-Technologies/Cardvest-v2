@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useGetAllCategories, useGetGiftcardsToSell } from '@api/hooks/useGiftcards';
-import { useCreateSellOrder } from '@api/hooks/useTransactions';
 import { Camera, Pic, RedTrash, Uploading } from '@assets/SVG';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
@@ -109,6 +108,7 @@ export const UploadButton = ({ label }: { label: string }) => {
 };
 
 const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const { params = { tradeData: {} } } = route;
   const { tradeData } = params;
   const [category, setCategory] = useState<number>(tradeData?.category);
@@ -119,7 +119,6 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
   const { data } = useGetAllCategories();
   const { currency, handleSwitchCurrency } = useCurrency();
   const { data: giftCardsData } = useGetGiftcardsToSell({ category_id: Number(category) });
-  const { mutate: sellGiftCard } = useCreateSellOrder();
   const card = useMemo(() => {
     if (!giftCard) return;
     return giftCardsData?.data?.filter((card: any) => card.id === giftCard)?.[0];
@@ -132,11 +131,17 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
   const handleDisabled = () => !amountUSD || !giftCardsData || !category;
   const handleSubmit = async () => {
     try {
-      await sellGiftCard({
-        card_id: Number(giftCard),
-        amount: Number(amountUSD),
-        comment,
-        currency,
+      navigation.navigate('BuyGiftCardTradeSummaryPage', {
+        sellGiftCard: {
+          card,
+          category,
+          giftCard,
+          amountUSD,
+          currency,
+          rate: `${currency} ${Money(Number(card?.rates[currency]) || 0, currency)}`,
+          total: `${currency} ${Money(total || 0, currency)}`,
+          comment,
+        },
       });
     } catch (e) {
       console.log(e);
@@ -147,9 +152,7 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
       title="Sell Giftcard"
       actionText="Sell Giftcard"
       isDisabled={handleDisabled()}
-      action={() => handleSubmit()}
-      // action={() => navigation.navigate('SellGiftCardTradeSummaryPage')}
-    >
+      action={() => handleSubmit()}>
       <View my="7">
         <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Get the current value for your transaction

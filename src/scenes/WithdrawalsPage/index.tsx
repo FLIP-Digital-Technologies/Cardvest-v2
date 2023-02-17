@@ -58,7 +58,7 @@ const WithdrawalsPage: FC = () => {
           renderItem={({ item }) => {
             return (
               <React.Fragment>
-                <Text p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
                   {TransDate(item)}
                 </Text>
                 {a[item].map((item: any, ind: number) => (

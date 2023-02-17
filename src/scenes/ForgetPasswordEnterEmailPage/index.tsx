@@ -41,10 +41,10 @@ const ForgetPasswordEnterEmail: FC = () => {
             <Logo />
           </Box>
           <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg" fontWeight="bold">
-            Forget Password
+            Forgot Password
           </Text>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" w="85%" fontWeight="light">
-            Please Enter the email address of your account
+            Please enter the email address of your account
           </Text>
         </Center>
         <View p="3">
@@ -61,11 +61,11 @@ const ForgetPasswordEnterEmail: FC = () => {
             fontSize="md"
             backgroundColor="CARDVESTGREEN"
             color="white">
-            Reset Password
+            Submit
           </Button>
-          <Pressable mt="2" onPress={() => navigation.navigate('SignUp')}>
+          <Pressable mt="2" onPress={() => navigation.navigate('Login')}>
             <Text fontSize="md" color="CARDVESTGREEN">
-              Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
+              Remember password? <Text fontWeight={'bold'}>Login</Text>
             </Text>
           </Pressable>
         </Center>

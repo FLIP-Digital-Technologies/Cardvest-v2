@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { HStack, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
 import React, { FC, memo } from 'react';
+import { RefreshControl } from 'react-native';
 
 const BackButtonTitleCenter: FC<{
   action?: () => void;
@@ -14,7 +15,20 @@ const BackButtonTitleCenter: FC<{
   isDisabled?: boolean | null;
   isLoading?: boolean | null;
   noScroll?: boolean | null;
-}> = ({ action, actionText, children, title, backAction, isDisabled = false, isLoading = false, noScroll = false }) => {
+  onRefresh?: (() => void) | null;
+  refreshing?: boolean | null;
+}> = ({
+  onRefresh,
+  refreshing = false,
+  action,
+  actionText,
+  children,
+  title,
+  backAction,
+  isDisabled = false,
+  isLoading = false,
+  noScroll = false,
+}) => {
   const navigation = useNavigation<GenericNavigationProps>();
   if (noScroll) {
     return (
@@ -46,6 +60,8 @@ const BackButtonTitleCenter: FC<{
       </HStack>
       <ScrollView
         showsVerticalScrollIndicator={false}
+        // @ts-ignore
+        refreshControl={onRefresh && <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         _contentContainerStyle={{
           // flex: 1,
           flexGrow: 1,

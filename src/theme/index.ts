@@ -18,6 +18,27 @@ const customTheme = extendTheme({
 
     ...palette,
   },
+  components: {
+    Actionsheet: {
+      defaultProps: {
+        _backdrop: { opacity: 0.06 },
+      },
+    },
+    Select: {
+      defaultProps: {
+        _item: {
+          _pressed: {
+            backgroundColor: '#FAFAF0',
+          },
+        },
+      },
+    },
+    Text: {
+      defaultProps: {
+        // size: 12,
+      },
+    },
+  },
 
   ...typography,
 

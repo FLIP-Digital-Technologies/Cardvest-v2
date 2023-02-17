@@ -1,4 +1,5 @@
 import { useCreateUser } from '@api/hooks/useAuth';
+import { GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
@@ -7,13 +8,6 @@ import { ProgressStepperIndicator } from '@scenes/KYCPage';
 import { validateEmail } from '@scenes/LoginPage';
 import { View, Text, Center, Button, Pressable, ScrollView, HStack, CheckIcon, Select, Box } from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
-
-// export const validateEmail = (value: string) => {
-//   if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$/i.test(value)) {
-//     return true;
-//   }
-//   return false;
-// };
 
 const ReferralSelect = (props: any) => {
   const { value, setValue, label } = props;
@@ -46,16 +40,16 @@ const ReferralSelect = (props: any) => {
             startIcon={
               <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
                 <Text fontSize="md" color="CARDVESTGREEN">
-                  Select County
+                  How did you hear about us?
                 </Text>
               </HStack>
             }
           />
           <Select.Item label="Referral" value="Referral" />
           <Select.Item label="From a friend/colleague" value="From a friend/colleague" />
-          <Select.Item label="Sponsored Ads" value="Sponsored Ads" />
-          <Select.Item label="Instagram" value="Instagram" />
-          <Select.Item label="FaceBook" value="FaceBook" />
+          <Select.Item label="Social media" value="Social media" />
+          <Select.Item label="Search engine" value="Search engine" />
+          <Select.Item label="Others" value="Others" />
         </Select>
       </Box>
     </Box>
@@ -93,13 +87,53 @@ export const CountrySelect = (props: any) => {
             startIcon={
               <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
                 <Text fontSize="md" color="CARDVESTGREEN">
-                  Select County
+                  Select Country
                 </Text>
               </HStack>
             }
           />
-          <Select.Item label="Nigeria" value="Nigeria" />
-          <Select.Item label="Ghana" value="Ghana" />
+          <Select.Item
+            label="Nigeria"
+            value="Nigeria"
+            startIcon={
+              <HStack w="100%" justifyContent="space-between" alignItems="center">
+                <HStack w="12" mx="-3" h="7" alignItems="center">
+                  <NGN />
+                  <Text>Nigeria</Text>
+                </HStack>
+                {value === 'Nigeria' ? (
+                  <View w="6" h="5">
+                    <RadioChecked />
+                  </View>
+                ) : (
+                  <View w="6" h="5">
+                    <RadioUnChecked />
+                  </View>
+                )}
+              </HStack>
+            }
+          />
+          <Select.Item
+            label="Ghana"
+            value="Ghana"
+            startIcon={
+              <HStack w="100%" justifyContent="space-between" alignItems="center">
+                <HStack w="12" mx="-3" h="7" alignItems="center">
+                  <GHS />
+                  <Text> Ghana</Text>
+                </HStack>
+                {value === 'Ghana' ? (
+                  <View w="6" h="5">
+                    <RadioChecked />
+                  </View>
+                ) : (
+                  <View w="6" h="5">
+                    <RadioUnChecked />
+                  </View>
+                )}
+              </HStack>
+            }
+          />
         </Select>
       </Box>
     </Box>
@@ -140,7 +174,7 @@ const StepTwo = (props: any) => {
     );
   }, [country, phoneNumber]);
   return (
-    <View flex={3} p="3" my="6">
+    <View p="3" my="6">
       <CountrySelect label="Country" value={country} setValue={setCountry} />
       <Input label="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} />
       <Button
@@ -161,7 +195,7 @@ const StepTwo = (props: any) => {
 const StepThree = (props: any) => {
   const { referrer, setReferrer, how, setHow, handleSubmit, isLoading } = props;
   return (
-    <View flex={3} p="3" my="8">
+    <View p="3" my="8">
       <Input label="Referral Code (Optional)" onChangeText={setReferrer} value={referrer} />
       <ReferralSelect label="How did you hear about us?" setValue={setHow} value={how} />
       <Button
@@ -221,7 +255,7 @@ const SignUp: FC = () => {
           !phoneNumber ||
           !country ||
           (country === 'Nigeria' && phoneNumber.length !== 11) ||
-          (country === 'Ghana' && phoneNumber.length !== 10)
+          (country === 'Ghana' && phoneNumber.length !== 9)
         );
       default:
         return false;
@@ -235,7 +269,7 @@ const SignUp: FC = () => {
           justifyContent: 'center',
         }}
         showsVerticalScrollIndicator={false}>
-        <Center mt="20">
+        <Center mt="-24">
           <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
             Create Account
           </Text>
@@ -251,7 +285,7 @@ const SignUp: FC = () => {
         )}
         {count === 2 && <StepTwo {...{ count, setCount, country, setCountry, phoneNumber, setPhoneNumber }} />}
         {count === 3 && <StepThree {...{ referrer, setReferrer, how, setHow, handleSubmit, isLoading }} />}
-        <Center flex={1} px="4" justifyContent="space-between">
+        <Center px="2">
           <Pressable mt="2" w="100%" onPress={() => navigation.navigate('Login')}>
             <Text fontSize="md" textAlign="center" color="CARDVESTGREEN">
               Already have an account? <Text fontWeight={'bold'}>Login</Text>

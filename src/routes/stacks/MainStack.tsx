@@ -241,7 +241,7 @@ function CustomDrawerContent(props: any) {
               icon: <TransactionHistory />,
             },
             {
-              name: 'Withdrawal',
+              name: 'Withdrawals',
               link: 'Withdrawals',
               icon: <BuyGiftCardMore />,
             },

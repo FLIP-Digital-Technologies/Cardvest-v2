@@ -27,9 +27,17 @@ export const useCurrency = () => {
     },
     [currency],
   );
+  const handleRefreshCurrency = useCallback(async () => {
+    try {
+      await queryClient.invalidateQueries([`user-${currency}-wallet`]);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [currency]);
 
   return {
     handleSwitchCurrency,
+    handleRefreshCurrency,
     currency,
     currencyLoading: isFetching,
     currencyWallet: data?.data,

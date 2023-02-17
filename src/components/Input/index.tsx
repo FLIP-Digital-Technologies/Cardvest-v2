@@ -2,6 +2,22 @@ import { ShowPassword } from '@assets/SVG';
 import { Input as NBInput, Box, Text, Pressable } from 'native-base';
 import React from 'react';
 
+export const getKeyboardType = (label: string) => {
+  switch (label) {
+    case 'Mobile Number':
+    case 'Phone Number':
+    case 'Meter Number':
+      return 'phone-pad';
+    case 'Amount':
+    case 'Amount in USD':
+      return 'decimal-pad';
+    case 'Email Address':
+      return 'email-address';
+    default:
+      return 'default';
+  }
+};
+
 const Input = ({
   label = '',
   placeholder = '',
@@ -50,6 +66,7 @@ const Input = ({
           _focus={{
             backgroundColor: '#F7F9FB',
           }}
+          keyboardType={getKeyboardType(label)}
           InputRightElement={
             type === 'password' ? (
               <Pressable onPress={() => setShow(!show)} h="5" w="5" mr="4" ml="2" justifyContent="center">

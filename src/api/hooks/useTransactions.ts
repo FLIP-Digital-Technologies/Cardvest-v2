@@ -228,6 +228,11 @@ function useCreateSellOrder() {
           status: 'success',
           message: 'sell order created successfully',
         });
+        navigation.navigate('SellGiftCardTradeFeedbackPage', {
+          category: 'card_id',
+          giftCard: 'giftCard',
+          amountUSD: 'amount',
+        });
       },
       onError: (/*data*/) => {
         onOpenToast({

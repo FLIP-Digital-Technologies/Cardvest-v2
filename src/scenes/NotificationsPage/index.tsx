@@ -1,3 +1,4 @@
+import { useGetNotification } from '@api/hooks/useUser';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
@@ -29,6 +30,8 @@ const Card = () => {
 
 const NotificationsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const data = useGetNotification();
+  console.log(data);
   const arr: string[] = ['', '', '', '', '', '', ''];
   return (
     <BackButtonTitleCenter title="Notifications">

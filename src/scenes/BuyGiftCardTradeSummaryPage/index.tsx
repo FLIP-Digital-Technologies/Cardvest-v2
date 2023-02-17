@@ -1,7 +1,5 @@
 import { useCreateBuyOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import * as dayjs from 'dayjs';
 import { View, Text, VStack, HStack } from 'native-base';
 import React, { FC, memo } from 'react';
@@ -36,7 +34,6 @@ export const SummaryPanel = ({
 };
 
 const BuyGiftCardTradeSummaryPage: FC = (props: any) => {
-  const navigation = useNavigation<GenericNavigationProps>();
   const { route } = props;
   const { params = { buyGiftCard: {} } } = route;
   const { buyGiftCard } = params;

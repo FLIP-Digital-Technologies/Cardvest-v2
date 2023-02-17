@@ -10,8 +10,19 @@ import React, { FC, memo, useMemo } from 'react';
 
 const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const { currency } = useCurrency();
+  const { currency, handleRefreshCurrency } = useCurrency();
   const { data: getWalletData, isFetching } = useGetPayoutTransactions(currency);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    try {
+      setRefreshing(true);
+      await handleRefreshCurrency();
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   const a = useMemo(() => {
     const b: any = {};
     getWalletData?.data?.map((i: any) => {
@@ -23,7 +34,7 @@ const WalletsPage: FC = () => {
   }, [getWalletData]);
   if (isFetching) return <CLoader />;
   return (
-    <BackButtonTitleCenter title="Wallets">
+    <BackButtonTitleCenter onRefresh={onRefresh} title="Wallets">
       <View mt="4">
         <BalancePanel defaultCurrency={currency} withDeposit={true} />
 
@@ -44,7 +55,7 @@ const WalletsPage: FC = () => {
               Object.keys(a).map((key, index) => {
                 return (
                   <React.Fragment key={index}>
-                    <Text p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                    <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
                       {TransDate(key)}
                     </Text>
                     {a[key].map((item: any, ind: number) => (

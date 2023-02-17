@@ -1,11 +1,14 @@
+/* eslint-disable prettier/prettier */
 import { useGetTransaction } from '@api/hooks/useTransactions';
+import { ReportAccount } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { Money } from '@scenes/DashboardPage';
 import { UploadPanel } from '@scenes/SellGiftCard';
+import { useQueryClient } from '@tanstack/react-query';
 import * as dayjs from 'dayjs';
-import { View, Text, VStack, Button, Pressable, Modal, HStack, Image } from 'native-base';
+import { View, Text, VStack, Button, Pressable, Modal, HStack, Image, Link } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
 export const UploadedItems = ({ images }: { images?: Array<string> }) => {
@@ -128,13 +131,38 @@ export const TradeDetailPanel = ({ title, children }: { children: React.ReactNod
 const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const { params = { id: '', transactionData: {}, type: '' } } = route;
   const { id: transaction_reference, transactionData, type } = params;
+  const queryClient = useQueryClient();
+  const userData: any = queryClient.getQueryData(['user']);
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
   const { currency } = useCurrency();
   console.log(data, transactionData, type);
   if (!isFetched) return <CLoader />;
+  const body = `
+Name: ${userData?.firstname} ${userData?.lastname}
+
+Username: ${userData?.username}
+
+Phone Number: ${data?.data?.bill?.phone_no}
+
+To: ${data?.data?.bill?.product}
+
+Paid On: ${dayjs.default(data?.data?.created_at).format('DD/MM/YYYY')} | ${dayjs
+    .default(data?.data?.created_at)
+    .format('HH:mm:ss')}
+
+Transaction Amount: ${currency} ${Money(transactionData?.amount, currency)}
+
+Payment Method: Bills - NGN
+
+Fees: ₦0.00
+
+Description: ${data?.data?.bill?.product} - ${data?.data?.bill?.note} Purchase
+
+Transaction Reference: ${data?.data?.reference}
+`;
   return (
     <BackButtonTitleCenter title="Transaction Details">
-      <View mt="5" mb="20">
+      <View mt="5" mb="3">
         <TradeDetailPanel>
           <ItemText title="Reference" body={data?.data?.reference} />
           <ItemText
@@ -146,7 +174,7 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
           {data?.data?.status && (
             <ItemButton
               title="Status"
-              body={data?.data?.status === 'succeed' ? 'successful' : data?.data?.status?.toUpperCase()}
+              body={data?.data?.status === 'succeed' ? 'SUCCESSFUL' : data?.data?.status?.toUpperCase()}
               color={
                 data?.data?.status === 'pending'
                   ? '#FFCE31'
@@ -156,19 +184,23 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
               }
             />
           )}
-          {data?.data?.payment_status && data?.data?.type.toLowerCase() !== 'sell' && (
-            <ItemButton
-              title="Payment Status"
-              body={data?.data?.payment_status === 'succeed' ? 'successful' : data?.data?.payment_status?.toUpperCase()}
-              color={
-                data?.data?.payment_status === 'pending'
-                  ? '#FFCE31'
-                  : data?.data?.payment_status.includes('succe')
-                  ? '#39A307'
-                  : '#FF0000'
-              }
-            />
-          )}
+          {data?.data?.payment_status &&
+            data?.data?.type.toLowerCase() !== 'sell' &&
+            data?.data?.type.toLowerCase() !== 'bill' && (
+              <ItemButton
+                title="Payment Status"
+                body={
+                  data?.data?.payment_status === 'succeed' ? 'SUCCESSFUL' : data?.data?.payment_status?.toUpperCase()
+                }
+                color={
+                  data?.data?.payment_status === 'pending'
+                    ? '#FFCE31'
+                    : data?.data?.payment_status.includes('succe')
+                    ? '#39A307'
+                    : '#FF0000'
+                }
+              />
+            )}
           <ItemText
             title="Last Updated"
             body={`${dayjs.default(data?.data?.updated_at).format('DD/MM/YYYY')} | ${dayjs
@@ -177,29 +209,39 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
           />
         </TradeDetailPanel>
         <TradeDetailPanel title="TRANSACTION INFO">
-          <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
-          {data?.data?.card && (
+          {data?.data?.type.toLowerCase() !== 'bill' ? (
             <>
-              <ItemText
-                title="Gift Card"
-                body={`${data?.data?.card?.category_name?.toUpperCase()} / ${data?.data?.card?.name?.toUpperCase()}`}
-              />
-              <ItemText title="Rate" body={`${data?.data?.card?.rates?.[currency]}/$`} />
-            </>
-          )}
-          {data?.data?.unit >= 0 && <ItemText title="Unit" body={data?.data?.unit?.toString() || 'N/A'} />}
+              <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
+              {data?.data?.card && (
+                <>
+                  <ItemText
+                    title="Gift Card"
+                    body={`${data?.data?.card?.category_name?.toUpperCase()} / ${data?.data?.card?.name?.toUpperCase()}`}
+                  />
+                  <ItemText title="Rate" body={`${data?.data?.card?.rates?.[currency]}/$`} />
+                </>
+              )}
+              {data?.data?.unit >= 0 && <ItemText title="Unit" body={data?.data?.unit?.toString() || 'N/A'} />}
 
-          {data?.data?.bank && (
+              {data?.data?.bank && (
+                <>
+                  <ItemText title="Account Name" body={`${data?.data?.bank?.accountname}`} />
+                  <ItemText
+                    title="Bank Details"
+                    body={`${data?.data?.bank?.bankname?.toUpperCase()} - ${data?.data?.bank?.banknumber?.toUpperCase()}`}
+                  />
+                </>
+              )}
+              <ItemText title="Total Amount" body={`${currency} ${Money(data?.data?.amount, currency)}`} />
+              <ItemText title="User’s Comment" body={data?.data?.comment || 'N/A'} />
+            </>
+          ) : (
             <>
-              <ItemText title="Account Name" body={`${data?.data?.bank?.accountname}`} />
-              <ItemText
-                title="Bank Details"
-                body={`${data?.data?.bank?.bankname?.toUpperCase()} - ${data?.data?.bank?.banknumber?.toUpperCase()}`}
-              />
+              <ItemText title="Category" body="Bills & Utilities" />
+              <ItemText title="Type" body={`${data?.data?.bill?.product} - ${data?.data?.bill?.note}` || 'N/A'} />
+              <ItemText title="Amount" body={`${currency} ${Money(transactionData?.amount, currency)}`} />
             </>
           )}
-          <ItemText title="Total Amount" body={`${currency} ${Money(data?.data?.amount, currency)}`} />
-          <ItemText title="User’s Comment" body={data?.data?.comment || 'N/A'} />
         </TradeDetailPanel>
         {data?.data?.images?.length > 0 && (
           <TradeDetailPanel title="UPLOADED IMAGES">
@@ -210,9 +252,27 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
             )}
           </TradeDetailPanel>
         )}
-        <TradeDetailPanel title="TRANSACTION FEEDBACK">
-          <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
-        </TradeDetailPanel>
+        {data?.data?.type.toLowerCase() !== 'bill' ? (
+          <TradeDetailPanel title="TRANSACTION FEEDBACK">
+            <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
+          </TradeDetailPanel>
+        ) : (
+          <Link href={`mailto:support@cardvest.ng?subject=I+have+a+complaint+about+this+transaction!\n&body=${body}`}>
+            <VStack px="0">
+              <HStack>
+                <View w="5" h="5">
+                  <ReportAccount />
+                </View>
+                <Text mx="1" fontWeight="600" color="#DC0000">
+                  Report Transaction
+                </Text>
+              </HStack>
+              <Text size="xs" fontWeight="200" color="#909090">
+                Report an issue with this transaction
+              </Text>
+            </VStack>
+          </Link>
+        )}
       </View>
     </BackButtonTitleCenter>
   );

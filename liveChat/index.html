@@ -8,27 +8,50 @@
   </head>
   <body onload="window.FreshworksWidget('open')">
     <script>
-      window.fwSettings = {
-        widget_id: 150000002267,
-      };
-      !(function () {
-        if ('function' != typeof window.FreshworksWidget) {
-          var n = function () {
-            n.q.push(arguments);
-          };
-          (n.q = []), (window.FreshworksWidget = n);
-        }
-        console.log('benbd');
-        var yourscript = document.createElement('script');
-        yourscript.type = 'text/javascript';
-        yourscript.async = true;
-        yourscript.defer = true;
-        yourscript.src = 'https://widget.freshworks.com/widgets/150000002267.js';
-        // document.getElementsByTagName('style')[0].appendCh ild(yourscript);
-        var s = document.getElementsByTagName('body')[0];
-        s.parentNode.insertBefore(yourscript, s);
-        window.FreshworksWidget('open');
-      })();
+      // window.fwSettings = {
+      //   widget_id: 150000002267,
+      // };
+      // !(function () {
+      //   if ('function' != typeof window.FreshworksWidget) {
+      //     var n = function () {
+      //       n.q.push(arguments);
+      //     };
+      //     (n.q = []), (window.FreshworksWidget = n);
+      //   }
+      //   console.log('benbd');
+      //   var yourscript = document.createElement('script');
+      //   yourscript.type = 'text/javascript';
+      //   yourscript.async = true;
+      //   yourscript.defer = true;
+      //   yourscript.src = 'https://widget.freshworks.com/widgets/150000002267.js';
+      //   // document.getElementsByTagName('style')[0].appendCh ild(yourscript);
+      //   var s = document.getElementsByTagName('body')[0];
+      //   s.parentNode.insertBefore(yourscript, s);
+      if (window.FreshworksWidget) window.FreshworksWidget('open');
+      function initFreshChat() {
+        window.fcWidget.init({
+          token: '23aa0928-52ac-4709-a98a-719d344f9c03',
+          host: 'https://fliplabs-help.freshchat.com',
+        });
+      }
+      function initialize(i, t) {
+        var e;
+        i.getElementById(t)
+          ? initFreshChat()
+          : (((e = i.createElement('script')).id = t),
+            (e.async = !0),
+            (e.src = 'https://fliplabs-help.freshchat.com/js/widget.js'),
+            (e.onload = initFreshChat),
+            i.head.appendChild(e));
+      }
+      function initiateCall() {
+        initialize(document, 'Freshchat-js-sdk');
+      }
+      window.addEventListener
+        ? window.addEventListener('load', initiateCall, !1)
+        : window.attachEvent('load', initiateCall, !1);
+      // window.FreshworksWidget('open');
+      // })();
     </script>
     <!-- <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000002267.js' async defer></script> -->
     <style>

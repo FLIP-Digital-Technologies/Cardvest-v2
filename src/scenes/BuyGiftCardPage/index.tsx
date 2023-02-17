@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useGetAllCategories, useGetGiftcardsToBuy } from '@api/hooks/useGiftcards';
-import { useCreateBuyOrder } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';

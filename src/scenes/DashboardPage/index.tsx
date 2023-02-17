@@ -24,8 +24,9 @@ import { CurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import * as dayjs from 'dayjs';
-import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
+import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button, Alert } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
+import { RefreshControl } from 'react-native';
 import { getWidth } from '../../App';
 
 export const Money = (amount: any, currency: string) =>
@@ -49,11 +50,11 @@ export const GreetingPanel = () => {
     const curHr = today.getHours();
 
     if (curHr < 12) {
-      return 'Good Morning';
+      return 'Good Morning ☀️';
     } else if (curHr < 18) {
-      return 'Good Afternoon';
+      return 'Good Afternoon ☀️';
     } else {
-      return 'Good Evening';
+      return 'Good Evening 🌑';
     }
   };
   return (
@@ -76,7 +77,9 @@ export const GreetingPanel = () => {
             {getGreating()}
           </Text>
           <Text fontSize="lg" color="CARDVESTBLACK.50">
-            {data?.username?.toString()}
+            {!data?.firstname && !data?.lastname && data?.username?.toString()}
+            {data?.firstname && data?.lastname && data?.firstname?.toString()}{' '}
+            {data?.firstname && data?.lastname && data?.lastname?.toString()}
           </Text>
         </VStack>
       </HStack>
@@ -299,7 +302,7 @@ const img = require('../../assets/images/BalanceBG.png');
 const Dashboard: FC = () => {
   // const [t, i18n] = useTranslation();
   const navigation = useNavigation<GenericNavigationProps>();
-  const { currency } = useCurrency();
+  const { currency, handleRefreshCurrency } = useCurrency();
   const queryClient = useQueryClient();
   const { data: getTrancationData, isFetched } = useGetAllTransactions(currency);
   const { isFetching }: any = useQuery({
@@ -312,6 +315,18 @@ const Dashboard: FC = () => {
       return res?.data;
     },
   });
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    try {
+      setRefreshing(true);
+      await handleRefreshCurrency();
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -326,6 +341,7 @@ const Dashboard: FC = () => {
     <CSafeAreaView>
       <ScrollView
         showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         _contentContainerStyle={{
           // flex: 1,
           flexGrow: 1,
@@ -385,7 +401,7 @@ const Dashboard: FC = () => {
               Object.keys(a).map((key, index) => {
                 return (
                   <React.Fragment key={index}>
-                    <Text p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                    <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
                       {TransDate(key)}
                     </Text>
                     {a[key].map((item: any, ind: number) => (
