@@ -50,7 +50,7 @@
     "@react-navigation/stack": "6.2.2",
     "@tanstack/react-query": "^4.2.1",
     "axios": "^0.27.2",
-    "i18next": "21.9.1",
+    "i18next": "22.4.10",
     "native-base": "3.4.13",
     "react": "18.2.0",
     "react-i18next": "11.18.4",
