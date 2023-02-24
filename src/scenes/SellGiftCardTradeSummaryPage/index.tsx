@@ -1,7 +1,5 @@
 import { useCreateSellOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import { UploadPanel } from '@scenes/SellGiftCard';
 import * as dayjs from 'dayjs';
 import { View, Text, VStack, HStack } from 'native-base';
@@ -48,6 +46,7 @@ const SellGiftCardTradeSummaryPage: FC = (props: any) => {
         amount: Number(sellGiftCard?.amountUSD),
         comment: sellGiftCard?.comment,
         currency: sellGiftCard?.currency,
+        images: sellGiftCard?.images,
       });
     } catch (e) {
       console.log(e);
@@ -85,9 +84,9 @@ const SellGiftCardTradeSummaryPage: FC = (props: any) => {
         <SummaryPanel titleOne="Comments" bodyOne={sellGiftCard?.comment} />
         <VStack mt="2">
           <Text color="CARDVESTGREY.50">Uploaded Images</Text>
-          <UploadPanel showIcon={false} />
-          <UploadPanel showIcon={false} />
-          <UploadPanel showIcon={false} />
+          {sellGiftCard?.images.map((image: string, index: number) => (
+            <UploadPanel key={index} source={image} showIcon={false} />
+          ))}
         </VStack>
       </View>
     </BackButtonTitleCenter>

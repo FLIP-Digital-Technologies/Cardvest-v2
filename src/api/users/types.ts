@@ -53,6 +53,7 @@ export type ModifyUserRequestPayload = {
   email: string;
   lastname: string;
   firstname: string;
+  image_url: string;
 };
 
 export type ModifyUserSuccessPayload = {

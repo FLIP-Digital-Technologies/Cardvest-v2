@@ -2,12 +2,29 @@ import { FingerScan, Key, Password, RightAngle } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { cacheService } from '@utils/cache';
 import { Divider, HStack, Switch, Text, View, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useLayoutEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 
 const SecurityPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const [isChecked, setIsChecked] = useState(false);
+  useLayoutEffect(() => {
+    async function fetchRes() {
+      try {
+        const res = await cacheService.get('@bio-login-user');
+        if (res.length > 0) {
+          setIsChecked(true);
+        } else {
+          setIsChecked(false);
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+    fetchRes();
+  });
   return (
     <BackButtonTitleCenter title="Security">
       <VStack my="7">
@@ -51,7 +68,20 @@ const SecurityPage: FC = () => {
               </Text>
             </HStack>
             <View h="8">
-              <Switch size="md" onThumbColor="CARDVESTGREEN" onTrackColor="#EFEFEF" />
+              <Switch
+                onToggle={async () => {
+                  if (!isChecked === true) {
+                    await cacheService.put('@bio-login-user', 'yes');
+                  } else {
+                    await cacheService.del('@bio-login-user');
+                  }
+                  setIsChecked(!isChecked);
+                }}
+                isChecked={isChecked}
+                size="md"
+                onThumbColor="CARDVESTGREEN"
+                onTrackColor="#EFEFEF"
+              />
             </View>
           </HStack>
         </Pressable>

@@ -6,14 +6,11 @@ import deviceInfoModule from 'react-native-device-info';
 
 export async function loginUser({ email, password }: LoginUserRequestPayload) {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.post(`/auth/login`, {
       email,
       password,
       device_name: deviceInfoModule.getDeviceId(),
     });
-
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error('loginUser - Error: ', error);
@@ -23,7 +20,6 @@ export async function loginUser({ email, password }: LoginUserRequestPayload) {
 
 export async function createUser({ email, password, username, phonenumber, terms, referrer, nationality }: any) {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.post(`/auth/register`, {
       username,
       phonenumber,
@@ -43,7 +39,6 @@ export async function createUser({ email, password, username, phonenumber, terms
 
 export async function forgotPassword({ email }: ForgotPasswordRequestPayload) {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.post(`/auth/forgot-password`, {
       email,
     });
@@ -56,7 +51,6 @@ export async function forgotPassword({ email }: ForgotPasswordRequestPayload) {
 
 export async function getUserData(token: string) {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.get(`/auth/user`, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -69,7 +63,6 @@ export async function getUserData(token: string) {
 
 export async function sendOTP({ token }: SendOTPRequestPayload) {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const response = await ApiClient.post(`/auth/token`, {
       token,
     });
@@ -82,7 +75,6 @@ export async function sendOTP({ token }: SendOTPRequestPayload) {
 
 export async function logoutUser() {
   try {
-    // const response = await ApiClient.post<TYPE>(`${env.API_URL}/users`, {
     const token = await cacheService.get('login-user');
     const data = await cacheService.get('user');
     const response = await ApiClient.post(

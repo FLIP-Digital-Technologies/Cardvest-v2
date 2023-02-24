@@ -1,5 +1,5 @@
 import { useDeleteBankAccount, useGetUserBank } from '@api/hooks/useBankAccounts';
-import { AddGreen, Delete, BankCircle, Success, RedTrash } from '@assets/SVG';
+import { AddGreen, Delete, BankCircle, Success, RedTrash, BanksEmpty } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import Input from '@components/Input';
 import { DelectAccountModal } from '@components/TransactionPinModal';
@@ -59,14 +59,15 @@ const BanksPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency } = useCurrency();
   const { data, isFetching } = useGetUserBank(currency);
-  console.log(data, currency);
   if (isFetching) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Accounts">
-      <View mb="7">
-        <VStack>
+      <View mb="7" h="full">
+        <VStack w="100%">
           {data?.data?.length === 0 ? (
-            <EmptyPanel title="No Bank yet" body="Add bank account to withdrawal to." />
+            <View justifyContent="center" alignItems="center" mt="160">
+              <EmptyPanel Icon={BanksEmpty} title="" body="You have not added any bank account yet." />
+            </View>
           ) : (
             data?.data?.map((item: any, index: number) => {
               return <BankAccount data={item} key={index} />;

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useGetAllCategories, useGetGiftcardsToSell } from '@api/hooks/useGiftcards';
-import { Camera, Pic, RedTrash, Uploading } from '@assets/SVG';
+import { Camera, RedTrash, Uploading } from '@assets/SVG';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
+import MediaUploader from '@components/Upload/MediaUploader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
@@ -25,8 +26,8 @@ export const UploadPanel = ({
   return (
     <HStack my="3" alignItems="center" justifyContent="space-between">
       <HStack alignItems="center">
-        <Image source={source} alt="image" borderRadius="lg" minH="12" w="12" />
-        <Text underline> Cardimg.jpg</Text>
+        <Image src={source} alt="image" borderRadius="lg" h="12" w="12" mr="3" />
+        {source.length > 0 && <Text underline>{source?.split('gift-cards/')?.[1]}</Text>}
       </HStack>
       {showIcon && (
         <React.Fragment>
@@ -45,51 +46,16 @@ export const UploadPanel = ({
   );
 };
 
-export const UploadButton = ({ label }: { label: string }) => {
-  const [showModal, setShowModal] = useState(false);
+export const UploadButton = ({ label, onPress, imgs }: { label: string; onPress: any; imgs?: any }) => {
   return (
     <React.Fragment>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content maxWidth="500px">
-          <Modal.Body>
-            <Modal.CloseButton />
-            <VStack mt="8" px="2">
-              <Pressable mx="4" py="10" my="4" borderRadius="lg" borderWidth="1" borderStyle="dashed">
-                <VStack alignItems="center">
-                  <View w="7" h="7">
-                    <Pic />
-                  </View>
-                  <Text>Browse Images to upload</Text>
-                </VStack>
-              </Pressable>
-              <UploadPanel canDelete={true} />
-              <UploadPanel canDelete={true} />
-              <UploadPanel canDelete={true} />
-              <UploadPanel canDelete={false} />
-              <View mt="20" />
-              <VStack>
-                <Button
-                  onPress={() => setShowModal(false)}
-                  my="3"
-                  size="lg"
-                  p="4"
-                  fontSize="md"
-                  backgroundColor="CARDVESTGREEN"
-                  color="white">
-                  Continue
-                </Button>
-              </VStack>
-            </VStack>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
       <Box my="2">
-        {label && (
+        {(label || onPress) && (
           <Text mb="2" color="CARDVESTGREY.400">
-            {label}
+            {label || 'Upload Giftcard Image'}
           </Text>
         )}
-        <Pressable onPress={() => setShowModal(true)} py="4" px="1" backgroundColor="#F7F9FB">
+        <Pressable onPress={() => onPress()} py="4" px="1" backgroundColor="#F7F9FB">
           <HStack alignItems="center">
             <View w="10" h="4">
               <Camera />
@@ -111,6 +77,7 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { params = { tradeData: {} } } = route;
   const { tradeData } = params;
+  const [selectedImage, setSelectedImage] = useState<string[]>([]);
   const [category, setCategory] = useState<number>(tradeData?.category);
   const [comment, setComment] = useState('');
   const [promoCode, setPromoCode] = useState('');
@@ -125,19 +92,20 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
   }, [giftCard]);
   const total = useMemo(() => {
     if (!card) return;
-    const totalAmount = Number(card?.rates[currency]) * amountUSD;
+    const totalAmount = (Number(card?.rate) * amountUSD) / Number(card?.rates[currency]);
     return totalAmount;
   }, [amountUSD, giftCardsData, currency]);
-  const handleDisabled = () => !amountUSD || !giftCardsData || !category;
+  const handleDisabled = () => !amountUSD || !giftCardsData || !category || selectedImage.length <= 0;
   const handleSubmit = async () => {
     try {
-      navigation.navigate('BuyGiftCardTradeSummaryPage', {
+      navigation.navigate('SellGiftCardTradeSummaryPage', {
         sellGiftCard: {
           card,
           category,
           giftCard,
           amountUSD,
           currency,
+          images: selectedImage,
           rate: `${currency} ${Money(Number(card?.rates[currency]) || 0, currency)}`,
           total: `${currency} ${Money(total || 0, currency)}`,
           comment,
@@ -164,7 +132,21 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
         <View p="3" />
         <Input label="Amount in USD" value={amountUSD} onChangeText={setAmountUSD} />
         <View p="3" />
-        <UploadButton label="Upload Giftcard Image" />
+        <MediaUploader
+          formFiles={selectedImage}
+          // onInit={() => {}}
+          type="card"
+          onImageRemoved={filenames => {
+            setSelectedImage(filenames);
+          }}
+          onImageUploaded={filenames => {
+            setSelectedImage((prevFiles: any) => [...prevFiles, filenames[0]]);
+          }}
+          CustomButton={UploadButton}
+        />
+        {selectedImage.map((image: string, index) => (
+          <UploadPanel key={index} source={image} showIcon={false} />
+        ))}
         <View p="3" />
         <FormCurrencyPicker label="Payout Currency" setCurrency={handleSwitchCurrency} currency={currency} />
         <View p="3" />
@@ -178,7 +160,7 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
             />
           </View>
           <View pb="2">
-            <Button py="3" backgroundColor="CARDVESTGREEN" onPress={() => console.log('hello world')}>
+            <Button h="51.3px" backgroundColor="CARDVESTGREEN" onPress={() => console.log('hello world')}>
               Apply
             </Button>
           </View>

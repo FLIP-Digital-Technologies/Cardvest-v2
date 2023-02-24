@@ -1,88 +1,161 @@
 import env from '@env';
-import { cacheService } from '@utils/cache';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Alert, PermissionsAndroid } from 'react-native';
-import ReactNativeBlobUtil from 'react-native-blob-util';
-import DocumentPicker from 'react-native-document-picker';
-import * as ImagePicker from 'react-native-image-picker';
+import * as FileSystem from 'expo-file-system';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
+import { Platform } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 
-export const useUpload = type => {
-  const [imgs, setImgs] = useState(null);
-  const selectFile = async () => {
+const API_BASE = env.API_URL; // 192.168.1.1;
+
+export const useUpload = (type: string) => {
+  const [selectedImage, setSelectedImage] = useState([]);
+
+  const openImagePickerAsync = async () => {
+    console.log('pickerResult', ImagePicker);
+    //   const pickerResult = await ImagePicker.launchImageLibraryAsync({
+    //     quality: 1,
+    //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //   });
+    //   if (pickerResult.cancelled === true) return;
+    //   setSelectedImage(pickerResult);
+    //   console.log(pickerResult);
+    // };
+
+    // const onPressSelectMedia = async () => {
+    const response = await launchImageLibrary({
+      mediaType: 'photo',
+      selectionLimit: 0,
+    });
+    console.log(response);
+  };
+
+  const uploadImage = async () => {
+    if (!selectedImage) return;
+    if (!canUpload) {
+      alert('Cannot upload files larger than 2MB');
+      setSelectedImage(undefined);
+      return;
+    }
+    const uri = Platform.OS === 'android' ? selectedImage.uri : selectedImage.uri.replace('file://', '');
+    const filename = selectedImage.uri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename as string);
+    const ext = match?.[1];
+    const filetype = match ? `image/${match[1]}` : `image`;
+    const half = type === 'profile' ? `/users/upload` : `/transactions/image-upload`;
+    const formData = new FormData();
+    formData.append('image', {
+      uri,
+      name: `image.${ext}`,
+      type: filetype,
+    } as any);
     try {
-      const results = await ImagePicker.launchImageLibrary({});
-      console.log(results);
-      uploadImage(results?.assets);
-      return results;
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // User cancelled the picker, exit any dialogs or menus and move on
-      } else {
-        throw err;
+      const { data } = await axios.post(`${API_BASE}${half}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      if (!data.isSuccess) {
+        alert('Image upload failed!');
+        return;
       }
+      console.log(data);
+      alert('Image Uploaded');
+    } catch (err) {
+      console.log(err);
+      alert('Something went wrong');
+    } finally {
+      setSelectedImage(undefined);
     }
   };
-  async function uploadFile(file) {
-    const token = await cacheService.get('login-user');
-    const customAxiosInstance = axios.create({
-      baseURL: env.API_URL,
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
-      // onUploadProgress(progressEvent) {
-      //   const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-      //   setUploadProgress(percentCompleted);
-      // },
-      // signal: controller.signal,
-    });
-    const formData = new FormData();
-    if (file.uploaded) return;
-    // Get the images mimetype
-    formData.append('image', {
-      uri: file.uri,
-      type: file.type,
-      name: file.name,
-    });
-    const res = await customAxiosInstance.post(
-      type === 'profile' ? `/users/upload` : `/transactions/image-upload`,
-      formData,
-    );
-    return res;
-    // return ReactNativeBlobUtil.fetch(
-    //   'POST',
-    //   type === 'profile' ? `${env.API_URL}/users/upload` : `${env.API_URL}/transactions/image-upload`,
-    //   {
-    //     Authorization: `Bearer ${token}`,
-    //     'Content-Type': 'application/octet-stream',
-    //   },
-    //   ReactNativeBlobUtil.wrap(decodeURIComponent(cleanURi)),
-    // );
-  }
 
-  async function uploadImage(results) {
-    let data = [];
-    const requests = await results.map(file => {
-      //create a promise for each API call
-      return new Promise((resolve, reject) => {
-        uploadFile(file)
-          .then(res => resolve(res.data))
-          .catch(err => reject(err));
-      });
-    });
-    await Promise.all(requests)
-      .then(body => {
-        const b = body.map(i => JSON.parse(i));
-        data = b;
-      })
-      .catch(err => console.log(err, 'hjghfdg'));
-    console.log(data);
-    return data;
-  }
+  // const [imgs, setImgs] = useState(null);
+  // const selectFile = async () => {
+  //   try {
+  //     const results = await ImagePicker.launchImageLibrary({
+  //   mediaType: 'photo',
+  //   includeBase64: false,
+  // });
+  //     console.log(results);
+  //     uploadImage(results?.assets);
+  //     return results;
+  //   } catch (err) {
+  //     if (DocumentPicker.isCancel(err)) {
+  //       // User cancelled the picker, exit any dialogs or menus and move on
+  //     } else {
+  //       throw err;
+  //     }
+  //   }
+  // };
+  // async function uploadImage(file: any) {
+  //   const formData = new FormData();
+  //   console.log(file);
+  //   formData.append('file', file);
+  //   try {
+  //     const token = await cacheService.get('login-user');
+  //     const half = type === 'profile' ? `/users/upload` : `/transactions/image-upload`;
+  //     const res = await axios({
+  //       method: 'post',
+  //       url: `${env.API_URL}${half}`,
+  //       data: formData,
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     console.log(res);
+  //     if (res.status === 200) {
+  //       console.log('Image uploaded successfully!');
+  //       return res.data;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     // return custom error message from API if any
+  //     if (error?.response?.status === 400 || error?.response?.status === 422) {
+  //       console.error('Ooops!,an error occured while uploading trade!');
+  //     } else if (error?.response?.status === 401) {
+  //       // dispatch({ type: 'auth/Logout' });
+  //     } else {
+  //       return Promise.reject({ err: error.response });
+  //     }
+  //   }
+  // }
 
   return {
-    imgs,
+    openImagePickerAsync, // button click action
     uploadImage,
-    setImgs,
-    selectFile,
-    uploadFile,
+    // imgs,
+    // uploadImage,
+    // setImgs,
+    // selectFile,
+    // uploadFile,
   };
 };
+// async function Upload({ file }: { file: any }) {
+//   const formData = new FormData();
+//   formData.append('file', file);
+//   try {
+//     const res = await axios({
+//       method: 'post',
+//       url: `${apiUrl}transactions/image-upload`,
+//       data: formData,
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//         Authorization: `Bearer ${getToken()}`,
+//       },
+//     });
+//     if (res.status === 200) {
+//       cogoToast.success('Image uploaded successfully!', {
+//         position: 'bottom-right',
+//       });
+//       return res.data;
+//     }
+//   } catch (error) {
+//     // return custom error message from API if any
+//     if (error?.response?.status === 400 || error?.response?.status === 422) {
+//       console.error('Ooops!,an error occured while uploading trade!');
+//     } else if (error?.response?.status === 401) {
+//       // dispatch({ type: 'auth/Logout' });
+//     } else {
+//       return Promise.reject({ err: error.response });
+//     }
+//   }
+// }

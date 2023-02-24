@@ -33,9 +33,22 @@ const customTheme = extendTheme({
         },
       },
     },
-    Text: {
+    Pressable: {
       defaultProps: {
         // size: 12,
+        borderRadius: '4px',
+        width: 'auto',
+      },
+    },
+    Button: {
+      defaultProps: {
+        // size: 12,
+        borderRadius: '4px',
+      },
+    },
+    Text: {
+      defaultProps: {
+        fontFamily: 'Satoshi',
       },
     },
   },

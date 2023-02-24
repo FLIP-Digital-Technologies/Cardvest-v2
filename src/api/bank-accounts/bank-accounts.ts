@@ -15,7 +15,6 @@ export async function getBankAccount(currency: string) {
       headers: { Authorization: `Bearer ${token}` },
       params: { currency },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error('getBankAccount - Error: ', error);

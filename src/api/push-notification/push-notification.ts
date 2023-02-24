@@ -18,7 +18,10 @@ export async function getNotification() {
 
 export async function getNotificationHealth() {
   try {
-    const response = await ApiClient.get(`${env.API_URL}/push-notification/health`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/push-notification/health`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -29,12 +32,19 @@ export async function getNotificationHealth() {
 
 export async function registerDevice({ token, description, user_id, type }: RegisterDeviceRequestPayload) {
   try {
-    const response = await ApiClient.post(`${env.API_URL}/push-notification/register`, {
-      token,
-      description,
-      user_id,
-      type,
-    });
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/push-notification/register`,
+      {
+        token,
+        description,
+        user_id,
+        type,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
 
     return response.data;
   } catch (error) {

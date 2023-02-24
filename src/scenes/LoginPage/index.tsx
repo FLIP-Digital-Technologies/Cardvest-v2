@@ -2,6 +2,7 @@ import { useLoginUser } from '@api/hooks/useAuth';
 import { Bio, Logo } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
+import UseFingerprint from '@hooks/useFingerPrint';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
@@ -17,6 +18,7 @@ export const validateEmail = (value: string) => {
 const Login: FC = () => {
   const { mutate: loginUser, isLoading } = useLoginUser();
   const navigation = useNavigation<GenericNavigationProps>();
+  const { showAuthenticationDialog } = UseFingerprint();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
@@ -82,9 +84,9 @@ const Login: FC = () => {
               Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
             </Text>
           </Pressable>
-          <Box mt="10" p="4" width={20} height={20}>
+          <Pressable onPress={showAuthenticationDialog} mt="10" p="4" width={20} height={20}>
             <Bio />
-          </Box>
+          </Pressable>
         </Center>
       </ScrollView>
     </CSafeAreaView>

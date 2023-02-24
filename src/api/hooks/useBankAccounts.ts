@@ -33,10 +33,12 @@ function useCreateBankAccount() {
         });
         navigation.navigate('AddAccountFeedback');
       },
-      onError: (/*data*/) => {
+      onError: (data: any) => {
         onOpenToast({
           status: 'error',
-          message: 'Bank account not created',
+          message: data?.b
+            ? `${data?.response?.data?.message} ${data?.b}`
+            : data?.response?.data?.message || 'Bank account not created',
         });
       },
     },
@@ -55,10 +57,12 @@ function useVerifyBankAccount() {
           message: 'Bank verified successfully',
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'Bank account not verified',
+          message: data?.b
+            ? `${data?.response?.data?.message} ${data?.b}`
+            : data?.response?.data?.message || 'Bank account not verified',
         });
       },
     },
@@ -79,10 +83,12 @@ function useDeleteBankAccount() {
           message: 'Bank has been deleted successfully',
         });
       },
-      onError: (/*data*/) => {
+      onError: (data: any) => {
         onOpenToast({
           status: 'error',
-          message: 'Bank account not verified',
+          message: data?.b
+            ? `${data?.response?.data?.message} ${data?.b}`
+            : data?.response?.data?.message || 'Bank account not verified',
         });
       },
     },
@@ -94,7 +100,7 @@ function useGetUserBank(currency: string) {
 }
 
 function useGetBankList(currency: string) {
-  return useQuery([`bank-list`], () => getAllBankAccounts(currency));
+  return useQuery([`bank-list-${currency}`], () => getAllBankAccounts(currency));
 }
 
 export { useCreateBankAccount, useVerifyBankAccount, useGetBankList, useGetUserBank, useDeleteBankAccount };

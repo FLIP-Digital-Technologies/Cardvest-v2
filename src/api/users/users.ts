@@ -68,6 +68,7 @@ export async function modifyUser({
   email,
   lastname,
   firstname,
+  image_url,
 }: ModifyUserRequestPayload) {
   try {
     // You can use also patch
@@ -80,6 +81,7 @@ export async function modifyUser({
         email,
         lastname,
         firstname,
+        image_url,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -122,9 +124,15 @@ export async function modifyUserPassword({
   }
 }
 
-export async function deleteUser({ userId }: DeleteUserRequestPayload) {
+export async function deleteUser({ password }: any) {
   try {
-    const response = await ApiClient.delete(`${env.API_URL}/users/${userId}`);
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.delete(`${env.API_URL}/users/delete`, {
+      data: {
+        password,
+      },
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {
@@ -137,7 +145,7 @@ export async function setUpUserPin({ pin }: any) {
   try {
     // You can use also patch
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.put(
+    const response = await ApiClient.post(
       `${env.API_URL}/security/pin/setup`,
       {
         pin,
@@ -154,11 +162,76 @@ export async function setUpUserPin({ pin }: any) {
   }
 }
 
+export async function updateUserPin({ current_pin, pin }: any) {
+  try {
+    // You can use also patch
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/security/pin/update`,
+      {
+        current_pin,
+        pin,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('updateUserPin - Error: ', error);
+    throw error;
+  }
+}
+
+export async function resetUserWithTokenPin(data: any) {
+  try {
+    // You can use also patch
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/security/pin/token-reset`,
+      {
+        token: data.token,
+        pin: data.pin,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('updateUserPin - Error: ', error);
+    throw error;
+  }
+}
+
+export async function reSetUserPin({ password }: any) {
+  try {
+    // You can use also patch
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/security/pin/reset`,
+      {
+        password,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('reSetUserPin - Error: ', error);
+    throw error;
+  }
+}
+
 export async function confirmUserPin({ pin }: any) {
   try {
     // You can use also patch
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.put(
+    const response = await ApiClient.post(
       `${env.API_URL}/security/pin/confirm`,
       {
         pin,

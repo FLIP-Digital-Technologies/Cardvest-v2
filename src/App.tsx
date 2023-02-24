@@ -1,6 +1,6 @@
 import Splashscreen from '@components/Splashscreen';
 import '@i18n';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { RootStackScreen } from '@routes';
 import { isMountedRef, navigationRef } from '@routes/navigationUtils';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -19,7 +19,6 @@ enableScreens();
 const customTextProps = {
   allowFontScaling: false,
   style: {
-    fontFamily: 'Satoshi',
     width: Platform.OS === 'android' ? '100%' : 'auto',
   },
 };
@@ -36,6 +35,7 @@ const queryClient = new QueryClient({
       refetchOnReconnect: false,
       retry: 3,
       staleTime: 5 * 60 * 1000,
+      // refetchInterval: 60 * 1000,
     },
   },
 });
@@ -60,7 +60,6 @@ const App: FC = () => {
           <NativeBaseProvider theme={customTheme}>
             <QueryClientProvider client={queryClient}>
               <StatusBar barStyle="default" />
-
               <RootStackScreen />
             </QueryClientProvider>
           </NativeBaseProvider>

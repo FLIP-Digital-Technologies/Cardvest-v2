@@ -1,14 +1,17 @@
-import { useElectricityPlansProviders, usePurchaseElectricity } from '@api/hooks/useTransactions';
+import {
+  useElectricityPlansProviders,
+  usePurchaseElectricity,
+  useVerifyMeterElectricity,
+} from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { FormSelect } from '@scenes/CalculatorPage';
-import { View } from 'native-base';
-import React, { FC, memo, useState } from 'react';
+import { Text, View } from 'native-base';
+import React, { FC, memo, useEffect, useState } from 'react';
 
 const BuyElectricityPage: FC = () => {
   const [network, setNetwork] = useState('');
-  const [bundle, setBundle] = useState('');
   const [amount, setAmount] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [meter_type, setMeterType] = useState('');
@@ -16,6 +19,7 @@ const BuyElectricityPage: FC = () => {
   const { currency } = useCurrency();
   const { data: proviDate } = useElectricityPlansProviders();
   const { mutate: purchaseElectricity, isLoading } = usePurchaseElectricity();
+  const { mutate: verifyMeterNo, data: meter_name } = useVerifyMeterElectricity(meter_no);
   const handleSubmit = async () => {
     try {
       await purchaseElectricity({
@@ -23,15 +27,23 @@ const BuyElectricityPage: FC = () => {
         product: network,
         amount,
         phone_no: phoneNumber,
-        meter_no: '0010023456',
-        meter_type: 'PREPAID',
+        meter_no,
+        meter_type,
       });
     } catch (e: any) {
       console.log(e);
     }
   };
-  const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;
-  console.log(proviDate);
+  useEffect(() => {
+    if (meter_type && meter_no && network) {
+      verifyMeterNo({
+        product: network,
+        meter_no,
+        meter_type,
+      });
+    }
+  }, [meter_type, meter_no, network]);
+  const handleDisabled = () => !phoneNumber || !network || !amount;
   return (
     <BackButtonTitleCenter
       action={() => handleSubmit()}
@@ -44,12 +56,15 @@ const BuyElectricityPage: FC = () => {
           label="Select Provider"
           value={network}
           setValue={setNetwork}
-          data={proviDate?.data?.map((item: any) => ({ name: item?.name, id: item?.product.toLowerCase() }))}
+          data={proviDate?.data?.map((item: any) => ({ name: item?.name, id: item?.product }))}
         />
         <View p="3" />
         <Input label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} />
         <View p="3" />
         <Input label="Meter Number" value={meter_no} onChangeText={setMeterNo} />
+        {meter_name?.data && (
+          <Text>{`${meter_name?.data?.customer_name} - ${meter_name?.data?.customer_address}`}</Text>
+        )}
         <View p="3" />
         <FormSelect
           label="Select Meter Type"

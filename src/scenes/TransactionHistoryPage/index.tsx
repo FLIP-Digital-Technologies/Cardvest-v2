@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useGetAllTransactions, useGetPayoutTransactions, useGetAllBillTransactions } from '@api/hooks/useTransactions';
-import { BackButton } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
@@ -8,18 +7,23 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
 import { useQueryClient } from '@tanstack/react-query';
-import { Box, Center, useColorModeValue, Pressable, Text, View, ScrollView, HStack, FlatList } from 'native-base';
+import { Box, useColorModeValue, Pressable, Text, View, FlatList } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
-import { Animated, Dimensions, useWindowDimensions } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-
-const arr: string[] = ['', '', ''];
 
 const FirstRoute = () => {
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
-  const [page, setPage] = useState(1);
-  const { data: getTrancationData, isFetching, isLoading } = useGetAllTransactions(currency, page);
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -57,7 +61,7 @@ const FirstRoute = () => {
         refreshing={isFetching}
         onEndReached={
           getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => setPage(page + 1)
+            ? () => fetchNextPage()
             : () => null
         }
       />
@@ -68,8 +72,15 @@ const FirstRoute = () => {
 const SecondRoute = () => {
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
-  const [page, setPage] = useState(1);
-  const { data: getTrancationData, isFetching, isLoading } = useGetPayoutTransactions(currency, page);
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetPayoutTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -107,7 +118,7 @@ const SecondRoute = () => {
         refreshing={isFetching}
         onEndReached={
           getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => setPage(page + 1)
+            ? () => fetchNextPage()
             : () => null
         }
       />
@@ -118,8 +129,15 @@ const SecondRoute = () => {
 const ThirdRoute = () => {
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
-  const [page, setPage] = useState(1);
-  const { data: getTrancationData, isFetching, isLoading } = useGetAllBillTransactions(currency, page);
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllBillTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -129,7 +147,6 @@ const ThirdRoute = () => {
     });
     return b;
   }, [getTrancationData]);
-  console.log(getTrancationData, a);
   if (isLoading) return <CLoader />;
   if (getTrancationData?.data?.length === 0)
     return (
@@ -158,7 +175,7 @@ const ThirdRoute = () => {
         refreshing={isFetching}
         onEndReached={
           getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => setPage(page + 1)
+            ? () => fetchNextPage()
             : () => null
         }
       />

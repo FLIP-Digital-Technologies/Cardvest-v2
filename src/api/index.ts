@@ -1,5 +1,7 @@
 import env from '@env';
+import navigationService from '@utils/Nav';
 import { cacheService } from '@utils/cache';
+import { onOpenToast } from '@utils/toast';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const ApiClient = axios.create({
@@ -36,38 +38,34 @@ ApiClient.interceptors.request.use(
 ApiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: any) => {
-    // const notificationParam: any = {
-    //   status: 'error',
-    //   message: error?.response?.data?.errors
-    //     ? error?.response?.data?.errors.map((i: any) => i.message).join(' .')
-    //     : error?.response?.data?.message || '',
-    // };
-
+    let b;
+    const token = await cacheService.get('login-user');
     if (
       (error?.response?.status === 403 || error?.response?.status === 401) &&
-      error?.response?.data?.message.includes('Unauthenticated')
+      error?.response?.data?.message.includes('Unauthenticated') &&
+      token
     ) {
       await cacheService.del('login-user');
       await cacheService.del('user');
-      // await logoutUser();
-      // notificationParam.description += 'Please contact support.';
+      await navigationService.navigation.navigate('Auth');
+      return onOpenToast({
+        status: 'error',
+        message: 'Session expired, please login again on 401',
+      });
+    }
+    if (error?.response?.data?.message.includes('The given data was invalid') || error?.response?.status === 422) {
+      b =
+        Object.values(error?.response?.data?.errors).length > 0
+          ? Object.values(error?.response?.data?.errors).join(', ')
+          : null;
+      onOpenToast({
+        status: 'error',
+        message: b ? `${error?.response?.data?.message}: ${b}` : error?.response?.data?.message,
+      });
+      return Promise.reject({ c: error });
     }
 
-    // if (error?.response?.status === 404) {
-    //   notificationParam.message = 'Not Found';
-    // }
-
-    // if (error?.response?.status === 500) {
-    //   notificationParam.message = 'Internal Server Error';
-    // }
-
-    // if (error?.response?.status === 508) {
-    //   notificationParam.message = 'Time Out';
-    // }
-
-    // if (notificationParam.message) onOpenToast(notificationParam);
-
-    return Promise.reject(error);
+    return Promise.reject({ ...error, b });
   },
 );
 

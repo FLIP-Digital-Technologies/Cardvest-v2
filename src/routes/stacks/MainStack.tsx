@@ -22,6 +22,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AddAccountFeedbackPage from '@scenes/AddAccountFeedbackPage';
 import AddAccountPage from '@scenes/AddAccountPage';
 import BanksPage from '@scenes/BanksPage';
+import BillFeedbackPage from '@scenes/BillFeedbackPage';
 import BuyAirtimePage from '@scenes/BuyAirtimePage';
 import BuyCablePage from '@scenes/BuyCablePage';
 import BuyDatePage from '@scenes/BuyDatePage';
@@ -34,6 +35,8 @@ import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
 import ChangePinPage from '@scenes/ChangePinPage';
 import DashboardPage from '@scenes/DashboardPage';
+import DeleteAccountFeedbackPage from '@scenes/DeleteAccountFeedbackPage';
+import DeleteAccountPage from '@scenes/DeleteAccountPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
@@ -52,6 +55,7 @@ import SelectCardPage from '@scenes/SelectCardPage';
 import SellGiftCardPage from '@scenes/SellGiftCard';
 import SellGiftCardTradeFeedbackPage from '@scenes/SellGiftCardTradeFeedbackPage';
 import SellGiftCardTradeSummaryPage from '@scenes/SellGiftCardTradeSummaryPage';
+import SetNewPinPage from '@scenes/SetNewPinPage';
 import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
 import TradeDetailPage from '@scenes/TradeDetailPage';
@@ -195,12 +199,12 @@ function CustomDrawerContent(props: any) {
   async function handleLogout() {
     await cacheService.del('login-user');
     await cacheService.del('user');
+    await navigation.navigate('Auth');
     await queryClient.setQueriesData(['user'], null);
     await queryClient.setQueriesData(['login-user'], null);
     await queryClient.invalidateQueries({ queryKey: ['login-user'] });
     await queryClient.invalidateQueries({ queryKey: ['user'] });
-    await navigation.navigate('Auth');
-    await logoutUser();
+    await queryClient.clear();
   }
 
   return (
@@ -595,6 +599,34 @@ export const MainStackScreen: FC = () => {
       <MainStack.Screen
         name="LiveChat"
         component={LifeChat}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="DeleteAccount"
+        component={DeleteAccountPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="DeleteAccountFeedback"
+        component={DeleteAccountFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="BillFeedback"
+        component={BillFeedbackPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <MainStack.Screen
+        name="SetNewPinPage"
+        component={SetNewPinPage}
         options={{
           headerShown: false,
         }}

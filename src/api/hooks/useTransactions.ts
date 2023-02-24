@@ -18,36 +18,56 @@ import {
   getAllElectricityPlansProviders,
   purchaseElectricityToken,
   getAllBillTransactions,
+  verifyMeter,
+  purchaseAirtime,
 } from '@api/transactions/transactions';
-import {
-  TransactionRequestPayload,
-  CreateSellOrderRequestPayload,
-  CreateBuyOrderRequestPayload,
-} from '@api/transactions/types';
+import { CreateSellOrderRequestPayload, CreateBuyOrderRequestPayload } from '@api/transactions/types';
 import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 
 function useGetAllBillTransactions(currency: string, page?: number) {
-  return useQuery([`transactions-bill-${currency}`, currency, page], () => getAllBillTransactions(currency, page));
+  return useInfiniteQuery(
+    [`transactions-bill-${currency}`, currency, page],
+    pagination => getAllBillTransactions(currency, pagination),
+    {
+      getPreviousPageParam: firstPage =>
+        firstPage?.meta?.current_page === 1 ? undefined : firstPage?.meta?.current_page - 1,
+      getNextPageParam: lastPage =>
+        lastPage?.meta?.last_page <= lastPage?.meta?.current_page ? undefined : lastPage?.meta?.current_page + 1,
+    },
+  );
 }
 
 function useGetAllTransactions(currency: string, page?: number) {
-  return useQuery([`transactions-${currency}`, currency, page], () => getAllTransactions(currency, page));
+  return useInfiniteQuery(
+    [`transactions-${currency}`, currency, page],
+    pagination => getAllTransactions(currency, pagination),
+    {
+      getPreviousPageParam: firstPage =>
+        firstPage?.meta?.current_page === 1 ? undefined : firstPage?.meta?.current_page - 1,
+      getNextPageParam: lastPage =>
+        lastPage?.meta?.last_page <= lastPage?.meta?.current_page ? undefined : lastPage?.meta?.current_page + 1,
+    },
+  );
 }
 
 function useGetPayoutTransactions(currency: string, page?: number) {
-  return useQuery([`payout-transactions-${currency}`, currency, page], () => getPayoutTransactions(currency, page));
+  return useInfiniteQuery(
+    [`payout-transactions-${currency}`, currency, page],
+    pagination => getPayoutTransactions(currency, pagination),
+    {
+      getPreviousPageParam: firstPage =>
+        firstPage?.meta?.current_page === 1 ? undefined : firstPage?.meta?.current_page - 1,
+      getNextPageParam: lastPage =>
+        lastPage?.meta?.last_page <= lastPage?.meta?.current_page ? undefined : lastPage?.meta?.current_page + 1,
+    },
+  );
 }
 
 function useGetTransaction({ transaction_reference, type }: any) {
-  return useQuery(
-    [`transaction-${transaction_reference}`, { transaction_reference, type }],
-    () => getTransaction({ transaction_reference, type }),
-    {
-      enabled: !!transaction_reference,
-    },
+  return useQuery([`transaction-${transaction_reference}-details`, transaction_reference], () =>
+    getTransaction({ transaction_reference, type }),
   );
 }
 
@@ -83,9 +103,31 @@ function useGetDataPlans(product: string) {
   return useQuery([`data-plans-${product}`, product], () => getAllDataPlans({ product }));
 }
 
-function usePurchaseElectricity() {
+function useVerifyMeterElectricity(meter_no: string) {
   return useMutation(
-    [`purchase-data-plans`],
+    [`verify-meter-electricity-${meter_no}`],
+    ({ product, meter_no, meter_type }: any) =>
+      verifyMeter({
+        product,
+        meter_no,
+        meter_type,
+      }),
+    {
+      onError: (/*data*/) => {
+        onOpenToast({
+          status: 'error',
+          message: 'error fetching meter details',
+        });
+      },
+    },
+  );
+}
+
+function usePurchaseElectricity() {
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
+  return useMutation(
+    [`purchase-electricity-plans`],
     ({ product, meter_no, customer_name, meter_type, phone_no, currency, amount }: any) =>
       purchaseElectricityToken({
         product,
@@ -97,16 +139,24 @@ function usePurchaseElectricity() {
         amount,
       }),
     {
-      onSuccess: (/*data*/) => {
-        onOpenToast({
-          status: 'success',
-          message: 'giftcard image uploaded successfully',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'giftcard image not uploaded',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
         });
       },
     },
@@ -114,6 +164,8 @@ function usePurchaseElectricity() {
 }
 
 function usePurchaseWifi() {
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, device_no, product, code, amount }: any) =>
@@ -125,16 +177,24 @@ function usePurchaseWifi() {
         amount,
       }),
     {
-      onSuccess: (/*data*/) => {
-        onOpenToast({
-          status: 'success',
-          message: 'giftcard image uploaded successfully',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'giftcard image not uploaded',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
         });
       },
     },
@@ -142,6 +202,8 @@ function usePurchaseWifi() {
 }
 
 function usePurchaseCable() {
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, phone_no, product, code, amount, smart_card_no }: any) =>
@@ -154,16 +216,24 @@ function usePurchaseCable() {
         smart_card_no,
       }),
     {
-      onSuccess: (/*data*/) => {
-        onOpenToast({
-          status: 'success',
-          message: 'giftcard image uploaded successfully',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'giftcard image not uploaded',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
         });
       },
     },
@@ -171,6 +241,8 @@ function usePurchaseCable() {
 }
 
 function usePurchaseData() {
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, phone_no, product, code, amount }: any) =>
@@ -182,62 +254,115 @@ function usePurchaseData() {
         amount,
       }),
     {
-      onSuccess: (/*data*/) => {
-        onOpenToast({
-          status: 'success',
-          message: 'giftcard image uploaded successfully',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'giftcard image not uploaded',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
         });
       },
     },
   );
 }
 
-function useUploadGiftcardImage() {
-  return useMutation(['upload-giftImage'], () => uploadGiftcardImage(), {
-    onSuccess: (/*data*/) => {
-      onOpenToast({
-        status: 'success',
-        message: 'giftcard image uploaded successfully',
-      });
+function usePurchaseAirtime() {
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
+  return useMutation(
+    [`purchase-data-plans`],
+    ({ currency, phone_no, product, amount }: any) =>
+      purchaseAirtime({
+        currency,
+        phone_no,
+        product,
+        amount,
+      }),
+    {
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BillFeedback' }],
+        });
+      },
+      onError: data => {
+        onOpenToast({
+          status: 'error',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
+        });
+      },
     },
-    onError: (/*data*/) => {
-      onOpenToast({
-        status: 'error',
-        message: 'giftcard image not uploaded',
-      });
-    },
-  });
+  );
 }
+// function useUploadGiftcardImage() {
+//   return useMutation(['upload-giftImage'], () => uploadGiftcardImage(), {
+//     onSuccess: (/*data*/) => {
+//       onOpenToast({
+//         status: 'success',
+//         message: 'giftcard image uploaded successfully',
+//       });
+//     },
+//     onError: (/*data*/) => {
+//       onOpenToast({
+//         status: 'error',
+//         message: 'giftcard image not uploaded',
+//       });
+//     },
+//   });
+// }
 
 function useCreateSellOrder() {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
   return useMutation(
     ['sell-order'],
     ({ card_id, amount, images, to_bank, bank, comment, currency }: CreateSellOrderRequestPayload) =>
-      createSellOrder({ card_id, amount, images: ['kjdkjdjkd'], to_bank, bank, comment, currency }),
+      createSellOrder({ card_id, amount, images, to_bank, bank, comment, currency }),
     {
-      onSuccess: (/*data*/) => {
-        navigation.navigate('SellGiftCardTradeSummaryPage');
-        onOpenToast({
-          status: 'success',
-          message: 'sell order created successfully',
-        });
-        navigation.navigate('SellGiftCardTradeFeedbackPage', {
-          category: 'card_id',
-          giftCard: 'giftCard',
-          amountUSD: 'amount',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'SellGiftCardTradeFeedbackPage',
+              params: {
+                category: 'card_id',
+                giftCard: 'giftCard',
+                amountUSD: 'amount',
+              },
+            },
+          ],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'sell order not created',
+          message: data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -245,27 +370,40 @@ function useCreateSellOrder() {
 }
 
 function useCreateBuyOrder() {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const navigation = useNavigation();
+  const queryClient = useQueryClient();
   return useMutation(
     ['buy-order'],
     ({ card_id, amount, comment, currency }: CreateBuyOrderRequestPayload) =>
       createBuyOrder({ card_id, amount, comment, currency }),
     {
-      onSuccess: (/*data*/) => {
-        onOpenToast({
-          status: 'success',
-          message: 'buy order created successfully',
-        });
-        navigation.navigate('BuyGiftCardTradeFeedbackPage', {
-          category: 'card_id',
-          giftCard: 'giftCard',
-          amountUSD: 'amount',
+      onSuccess: async (data, variables) => {
+        await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'BuyGiftCardTradeFeedbackPage',
+              params: {
+                category: 'card_id',
+                giftCard: 'giftCard',
+                amountUSD: 'amount',
+              },
+            },
+          ],
         });
       },
-      onError: (/*data*/) => {
+      onError: data => {
         onOpenToast({
           status: 'error',
-          message: 'buy order not created',
+          message:
+            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
+            data?.response?.data?.message ||
+            'An error occurred',
         });
       },
     },
@@ -275,10 +413,11 @@ function useCreateBuyOrder() {
 export {
   useGetAllTransactions,
   useGetPayoutTransactions,
-  useUploadGiftcardImage,
+  // useUploadGiftcardImage,
   useGetTransaction,
   useCreateSellOrder,
   useCreateBuyOrder,
+  usePurchaseAirtime,
   useGetDataPlans,
   usePurchaseData,
   useGetDataPlansProviders,
@@ -292,4 +431,5 @@ export {
   useElectricityPlansProviders,
   usePurchaseElectricity,
   useGetAllBillTransactions,
+  useVerifyMeterElectricity,
 };

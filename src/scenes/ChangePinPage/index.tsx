@@ -19,9 +19,9 @@ const ChangePinPage: FC = () => {
     !codeCurrentState ||
     !codeState ||
     !codeConfirmState ||
-    codeCurrentState?.length === 4 ||
-    codeState?.length === 4 ||
-    codeConfirmState?.length === 4;
+    codeCurrentState?.length !== 4 ||
+    codeState?.length !== 4 ||
+    codeConfirmState?.length !== 4;
   return (
     <BackButtonTitleCenter title="Change PIN">
       <ScrollView

@@ -18,7 +18,7 @@ const BuyGiftCardTradeFeedbackPage: FC = () => {
           title="Order Placed"
           message="Your order has been placed successfully.
           You’ll be updated shortly."
-          action={() => navigation.navigate('Dashboard')}
+          action={() => navigation.navigate('Home')}
           actionText="Go to Dashboard"
         />
       </View>

@@ -21,6 +21,10 @@ export const useCurrency = () => {
         await cacheService.put('defaultCurrency', newCurrency);
         await setCurrency(newCurrency);
         await queryClient.invalidateQueries([`user-${currency}-wallet`]);
+        await queryClient.invalidateQueries([`transactions-bill-${currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${currency}`]);
+        await queryClient.invalidateQueries([`transactions-${currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${currency}`]);
       } catch (error) {
         console.error(error);
       }
@@ -30,6 +34,10 @@ export const useCurrency = () => {
   const handleRefreshCurrency = useCallback(async () => {
     try {
       await queryClient.invalidateQueries([`user-${currency}-wallet`]);
+      await queryClient.invalidateQueries([`transactions-bill-${currency}`]);
+      await queryClient.invalidateQueries([`payout-transactions-${currency}`]);
+      await queryClient.invalidateQueries([`transactions-${currency}`]);
+      await queryClient.invalidateQueries([`user-withdrals-${currency}`]);
     } catch (error) {
       console.error(error);
     }

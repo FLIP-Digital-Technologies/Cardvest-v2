@@ -11,7 +11,7 @@ import React, { FC, memo, useMemo } from 'react';
 const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleRefreshCurrency } = useCurrency();
-  const { data: getWalletData, isFetching } = useGetPayoutTransactions(currency);
+  const { data: opps, isFetching } = useGetPayoutTransactions(currency);
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(async () => {
@@ -23,6 +23,13 @@ const WalletsPage: FC = () => {
       console.error(error);
     }
   }, []);
+  const getWalletData = useMemo(
+    () => ({
+      ...opps?.pages[0],
+      data: opps?.pages?.flatMap((page, i) => page.data.map((data: any) => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     getWalletData?.data?.map((i: any) => {
@@ -36,7 +43,7 @@ const WalletsPage: FC = () => {
   return (
     <BackButtonTitleCenter onRefresh={onRefresh} title="Wallets">
       <View mt="4">
-        <BalancePanel defaultCurrency={currency} withDeposit={true} />
+        <BalancePanel defaultCurrency={currency} withDeposit={false} />
 
         <VStack my="5">
           <View>

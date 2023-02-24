@@ -14,7 +14,7 @@ const SuccessFeedback = ({
   actionText?: string;
 }) => {
   return (
-    <VStack p="10">
+    <VStack py="10" px="2">
       <View h="150" w="150" m="auto">
         <Success />
       </View>

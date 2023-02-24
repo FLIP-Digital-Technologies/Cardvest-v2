@@ -40,7 +40,6 @@ const BuyCablePage: FC = () => {
     }
   };
   const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;
-  console.log(proviDate, data);
   return (
     <BackButtonTitleCenter
       action={() => handleSubmit()}

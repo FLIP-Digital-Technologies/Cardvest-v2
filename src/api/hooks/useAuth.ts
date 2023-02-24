@@ -18,17 +18,18 @@ function useCreateUser() {
         await navigation.navigate('Verify', {
           email: data?.data?.email,
         });
+        await cacheService.put('firstTime', 'Yes');
         onOpenToast({
           status: 'success',
           message: 'User created successfully, Kindly login with your email and password.',
         });
       },
-      onError: (data: AxiosError) => {
-        navigation.navigate('Verify');
-        console.log(data?.response);
+      onError: async (data: AxiosError) => {
         onOpenToast({
           status: 'error',
-          message: data?.response?.data?.message || 'User not created',
+          message: data?.b
+            ? `${data?.response?.data?.message} ${data?.b}`
+            : data?.response?.data?.message || 'An error occurred whie creating your account',
         });
       },
     },
@@ -46,11 +47,12 @@ function useLoginUser() {
           status: 'error',
           message: 'Please kindly verify your email.',
         });
-      const user = await getUserData(data?.data?.token);
+      await cacheService.put('login-user', data?.data?.token);
       await queryClient.setQueryData(['login-user'], data?.data?.token);
+      const user = await getUserData(data?.data?.token);
       await queryClient.setQueryData([`user`], user?.data);
       await cacheService.put('user', user?.data);
-      await cacheService.put('login-user', data?.data?.token);
+      await cacheService.put('firstTime', 'Yes');
       await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
       onOpenToast({
         status: 'success',
@@ -58,9 +60,12 @@ function useLoginUser() {
       });
     },
     onError: (data: AxiosError) => {
+      console.log(data);
       onOpenToast({
         status: 'error',
-        message: data?.response?.data?.message || 'An error occurred',
+        message: data?.b
+          ? `${data?.response?.data?.message} ${data?.b}`
+          : data?.response?.data?.message || 'An error occurred',
       });
     },
   });

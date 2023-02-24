@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
 import { Alert, CloseIcon, HStack, IconButton, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
@@ -8,6 +10,11 @@ interface CToasterProps {
 }
 
 const CToaster: FC<CToasterProps> = ({ status, title, onClose }) => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  if (title === 'Session expired, please login again on 401') {
+    setTimeout(() => navigation.navigate('Auth'), 5000);
+  }
+  console.log(title);
   return (
     <Alert shadow={2} maxW="400" w="100%" status={status}>
       <VStack space={2} flexShrink={1} w="100%">

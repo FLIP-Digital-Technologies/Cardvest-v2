@@ -1,12 +1,9 @@
 import ApiClient from '@api';
 import env from '@env';
 import { cacheService } from '@utils/cache';
-import { onOpenToast } from '@utils/toast';
-import { AnyNsRecord } from 'dns';
 import {
   CreateSellOrderRequestPayload,
   CreateBuyOrderRequestPayload,
-  TransactionRequestPayload,
   CancelTransactionRequestPayload,
   PurchaseAirtimeRequestPayload,
   DataPlansRequestPayload,
@@ -23,48 +20,40 @@ import {
   VeriyPowerTokenPurchaseRequestPayload,
 } from './types';
 
-export async function getAllBillTransactions(currency: string, page = 1) {
+export async function getAllBillTransactions(currency: string, pagination: any) {
   try {
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/transactions/bills?currency=${currency}`, {
-      params: { page, currency },
+    const response = await ApiClient.get(`${env.API_URL}/transactions/bills`, {
+      params: { page: pagination?.pageParam, currency },
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   } catch (error: any) {
     console.error('getAllBillTransactions - Error: ', error);
-    onOpenToast({
-      status: 'error',
-      message: error?.response?.data?.message || 'An Error occurred',
-    });
     throw error;
   }
 }
 
-export async function getAllTransactions(currency: string, page = 1) {
+export async function getAllTransactions(currency: string, pagination: any) {
   try {
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/transactions?currency=${currency}`, {
-      params: { page, currency },
+    const response = await ApiClient.get(`${env.API_URL}/transactions`, {
+      params: { page: pagination?.pageParam, currency },
       headers: { Authorization: `Bearer ${token}` },
     });
 
     return response.data;
   } catch (error: any) {
     console.error('getAllTransactions - Error: ', error);
-    onOpenToast({
-      status: 'error',
-      message: error?.response?.data?.message || 'An Error occurred',
-    });
     throw error;
   }
 }
 
-export async function getPayoutTransactions(currency: string, page = 1) {
+export async function getPayoutTransactions(currency: string, pagination: any) {
   try {
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/transactions/payouts?currency=${currency}`, {
-      params: { page, currency },
+    const response = await ApiClient.get(`${env.API_URL}/transactions/payouts`, {
+      params: { page: pagination?.pageParam, currency },
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -155,6 +144,7 @@ export async function getTransaction({ transaction_reference, type }: any) {
       },
     );
 
+    console.log(response.data, 'fridge');
     return response.data;
   } catch (error) {
     console.error('getTransaction - Error: ', error);

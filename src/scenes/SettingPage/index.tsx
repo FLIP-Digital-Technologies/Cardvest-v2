@@ -20,7 +20,7 @@ const SettingsPage: FC = () => {
     await queryClient.setQueriesData(['login-user'], null);
     await queryClient.invalidateQueries({ queryKey: ['login-user'] });
     await queryClient.invalidateQueries({ queryKey: ['user'] });
-    await logoutUser();
+    await queryClient.clear();
   }
   return (
     <BackButtonTitleCenter title="Settings">

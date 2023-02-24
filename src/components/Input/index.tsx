@@ -29,6 +29,8 @@ const Input = ({
   onChangeText,
   disabled = false,
   maxLength = '',
+  keyboardType = '',
+  hint,
 }: {
   label?: string;
   fontWeight?: string;
@@ -40,6 +42,21 @@ const Input = ({
   type?: 'text' | 'password' | undefined;
   disabled?: boolean | undefined;
   maxLength?: string | number | undefined;
+  hint?: any;
+  keyboardType?:
+    | 'default'
+    | 'numeric'
+    | 'email-address'
+    | 'ascii-capable'
+    | 'numbers-and-punctuation'
+    | 'url'
+    | 'number-pad'
+    | 'phone-pad'
+    | 'name-phone-pad'
+    | 'decimal-pad'
+    | 'twitter'
+    | 'web-search'
+    | 'visible-password';
 }) => {
   const [show, setShow] = React.useState(false);
   return (
@@ -66,7 +83,7 @@ const Input = ({
           _focus={{
             backgroundColor: '#F7F9FB',
           }}
-          keyboardType={getKeyboardType(label)}
+          keyboardType={keyboardType || getKeyboardType(label)}
           InputRightElement={
             type === 'password' ? (
               <Pressable onPress={() => setShow(!show)} h="5" w="5" mr="4" ml="2" justifyContent="center">
@@ -80,6 +97,11 @@ const Input = ({
           onChangeText={onChangeText}
         />
       </Box>
+      {hint && (
+        <Text mt="2" fontWeight="light" color="#BABABA" fontSize="xs">
+          {hint}
+        </Text>
+      )}
     </Box>
   );
 };

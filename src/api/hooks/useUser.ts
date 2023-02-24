@@ -1,9 +1,10 @@
 import { getNotification } from '@api/push-notification/push-notification';
 import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
-import { createUser, getUserDetails, modifyUser, modifyUserPassword } from '@api/users/users';
+import { createUser, deleteUser, getUserDetails, modifyUser, modifyUserPassword } from '@api/users/users';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
 
 function useGetNotification() {
@@ -37,14 +38,14 @@ function useModifyUser() {
   const queryClient = useQueryClient();
   return useMutation(
     ['modify-user'],
-    ({ userId, email, username, phonenumber, lastname, firstname }: ModifyUserRequestPayload) =>
-      modifyUser({ userId, email, username, phonenumber, lastname, firstname }),
+    ({ userId, email, username, phonenumber, lastname, firstname, image_url }: ModifyUserRequestPayload) =>
+      modifyUser({ userId, email, username, phonenumber, lastname, firstname, image_url }),
     {
       onSuccess: (/*data*/) => {
         queryClient.invalidateQueries({ queryKey: ['user'] });
         onOpenToast({
           status: 'success',
-          message: 'User details Updated successfully',
+          message: 'User details updated successful',
         });
       },
       onError: (/*data*/) => {
@@ -82,21 +83,32 @@ function useModifyUserPassword() {
     },
   );
 }
-// function useDeleteUser() {
-//   return useMutation(['delete-user'], ({ userId }: DeleteUserRequestPayload) => deleteUser({ userId }), {
-//     onSuccess: (/*data*/) => {
-//       onOpenToast({
-//         status: 'success',
-//         message: 'User deleted successfully',
-//       });
-//     },
-//     onError: (/*data*/) => {
-//       onOpenToast({
-//         status: 'error',
-//         message: 'User not deleted',
-//       });
-//     },
-//   });
-// }
 
-export { useUser, useCreateUser, useModifyUser, useModifyUserPassword, useGetNotification };
+function useDeleteUser() {
+  const queryClient = useQueryClient();
+  const navigation = useNavigation<GenericNavigationProps>();
+  return useMutation(['delete-user'], ({ password }: any) => deleteUser({ password }), {
+    onSuccess: async (/*data*/) => {
+      onOpenToast({
+        status: 'success',
+        message: 'User deleted successfully',
+      });
+      await cacheService.del('login-user');
+      await cacheService.del('user');
+      await queryClient.setQueriesData(['user'], null);
+      await queryClient.setQueriesData(['login-user'], null);
+      await queryClient.invalidateQueries({ queryKey: ['login-user'] });
+      await queryClient.invalidateQueries({ queryKey: ['user'] });
+      await navigation.navigate('Auth');
+      await queryClient.clear();
+    },
+    onError: (/*data*/) => {
+      onOpenToast({
+        status: 'error',
+        message: 'User not deleted',
+      });
+    },
+  });
+}
+
+export { useDeleteUser, useUser, useCreateUser, useModifyUser, useModifyUserPassword, useGetNotification };

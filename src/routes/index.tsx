@@ -12,8 +12,9 @@ import Step2 from '@scenes/SignUpPage/Step2';
 import Step3 from '@scenes/SignUpPage/Step3';
 import VerifyPage from '@scenes/VerifyPage';
 import { useQuery } from '@tanstack/react-query';
+import navigationService from '@utils/Nav';
 import { cacheService } from '@utils/cache';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useLayoutEffect } from 'react';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
 
@@ -76,26 +77,66 @@ export const AuthStackScreen: FC = () => {
   );
 };
 
+const i = Date.now();
+
 export const RootStackScreen: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { data, isFetching } = useQuery({
-    queryKey: ['login-user'],
+    queryKey: [`login-user`],
     queryFn: async () => cacheService.get('login-user'),
   });
+  useLayoutEffect(() => {
+    async function fetchToks() {
+      try {
+        const toks = await cacheService.get('login-user');
+        if (toks.length > 0) {
+          navigation.navigate('Dashboard');
+        } else {
+          navigation.navigate('Auth');
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+    fetchToks();
+  });
   useEffect(() => {
-    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Intro');
+    navigationService.navigation = navigation;
+  }, [navigation]);
+  useEffect(() => {
+    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Auth');
   }, [data]);
-  if (isFetching) return <CLoader />;
+  useEffect(() => {
+    const fetchFirstTime = async () => {
+      const res = await cacheService.get('firstTime');
+      console.log(res);
+      if (res === 'Yes') {
+        await navigation.navigate(data ? 'Dashboard' : 'Auth');
+      } else {
+        await navigation.navigate('Intro');
+      }
+    };
+    fetchFirstTime();
+  });
   return (
-    <RootStack.Navigator initialRouteName={data ? 'Dashboard' : 'Intro'}>
+    <RootStack.Navigator>
       {typeof data === 'string' && data.length > 3 ? (
-        <RootStack.Screen
-          name="Dashboard"
-          component={MainStackScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <React.Fragment>
+          <RootStack.Screen
+            name="Dashboard"
+            component={MainStackScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="SetTransactionPin"
+            component={SetTransactionPin}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </React.Fragment>
       ) : (
         <React.Fragment>
           <RootStack.Screen
@@ -114,13 +155,6 @@ export const RootStackScreen: FC = () => {
           />
         </React.Fragment>
       )}
-      <RootStack.Screen
-        name="SetTransactionPin"
-        component={SetTransactionPin}
-        options={{
-          headerShown: false,
-        }}
-      />
     </RootStack.Navigator>
   );
 };

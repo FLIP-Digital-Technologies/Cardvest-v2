@@ -32,7 +32,6 @@ const BuyWifiPage: FC = () => {
     }
   };
   const handleDisabled = () => !device_no || !bundle || !network || !amount;
-  console.log(proviDate, data);
   return (
     <BackButtonTitleCenter
       action={() => handleSubmit()}

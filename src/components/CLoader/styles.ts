@@ -3,7 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   fullPageLoader: {
-    backgroundColor: customTheme.colors.BLACK_OPACITY_7,
+    backgroundColor: customTheme.colors.white,
     ...Platform.select({
       ios: {
         height: '100%',

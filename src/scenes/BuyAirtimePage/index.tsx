@@ -1,4 +1,4 @@
-import { useAirtimePlansProviders, useGetDataPlans, usePurchaseData } from '@api/hooks/useTransactions';
+import { useAirtimePlansProviders, usePurchaseAirtime } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
@@ -12,10 +12,10 @@ const BuyAirtimePage: FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const { currency } = useCurrency();
   const { data: proviDate } = useAirtimePlansProviders();
-  const { mutate: purchseDate, isLoading } = usePurchaseData();
+  const { mutate: purchaseAirtime, isLoading } = usePurchaseAirtime();
   const handleSubmit = async () => {
     try {
-      await purchseDate({
+      await purchaseAirtime({
         currency,
         phone_no: phoneNumber,
         product: network,
@@ -26,7 +26,6 @@ const BuyAirtimePage: FC = () => {
     }
   };
   const handleDisabled = () => !phoneNumber || !network || !amount;
-  console.log(proviDate);
   return (
     <BackButtonTitleCenter
       action={() => handleSubmit()}

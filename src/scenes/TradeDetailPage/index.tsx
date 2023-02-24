@@ -15,42 +15,36 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <React.Fragment>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content maxWidth="500px">
-          <Modal.Body>
-            <Modal.CloseButton />
-            <VStack mt="8" px="2">
-              {images?.splice(0, 4)?.map((uri: string) => {
-                return (
-                  <UploadPanel
-                    source={{
-                      uri,
-                    }}
-                    showIcon={false}
-                    key={uri}
-                  />
-                );
-              })}
-              <View mt="20" />
-              <VStack>
-                <Button
-                  onPress={() => setShowModal(false)}
-                  my="3"
-                  size="lg"
-                  p="4"
-                  fontSize="md"
-                  backgroundColor="CARDVESTGREEN"
-                  color="white">
-                  Close
-                </Button>
+      {showModal && (
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+          <Modal.Content maxWidth="500px">
+            <Modal.Body>
+              <Modal.CloseButton />
+              <VStack mt="8" px="2">
+                {images?.map((uri: string, index) => {
+                  return <UploadPanel source={uri} showIcon={false} key={index} />;
+                })}
+                <View mt="20" />
+                <VStack>
+                  <Button
+                    onPress={() => setShowModal(false)}
+                    my="3"
+                    size="lg"
+                    p="4"
+                    fontSize="md"
+                    backgroundColor="CARDVESTGREEN"
+                    color="white">
+                    Close
+                  </Button>
+                </VStack>
               </VStack>
-            </VStack>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
+            </Modal.Body>
+          </Modal.Content>
+        </Modal>
+      )}
       <HStack alignItems="center" mx="-4">
         <HStack alignItems="center">
-          {images?.splice(0, 4)?.map((uri: string) => {
+          {[images?.[0], images?.[1], images?.[2], images?.[3]]?.map((uri: string, index: number) => {
             return (
               <Image
                 source={{
@@ -58,7 +52,7 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
                 }}
                 alt="image"
                 borderRadius="lg"
-                key={uri}
+                key={index}
                 minH="12"
                 mx="2"
                 w="12"
@@ -66,13 +60,10 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
             );
           })}
         </HStack>
-        {/* @ts-ignore */}
-        {images?.length > 4 && (
-          <Pressable onPress={() => setShowModal(true)} backgroundColor="#F7F9FB">
-            {/* @ts-ignore */}
-            <Text underline>{images?.length - 4} more</Text>
-          </Pressable>
-        )}
+        <Pressable onPress={() => setShowModal(true)} backgroundColor="#F7F9FB">
+          {/* @ts-ignore */}
+          <Text underline> View {images?.length > 4 && `${images?.length - 4} more`}</Text>
+        </Pressable>
       </HStack>
     </React.Fragment>
   );
@@ -133,8 +124,8 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const { id: transaction_reference, transactionData, type } = params;
   const queryClient = useQueryClient();
   const userData: any = queryClient.getQueryData(['user']);
-  const { data, isFetched } = useGetTransaction({ transaction_reference, type });
   const { currency } = useCurrency();
+  const { data, isFetched } = useGetTransaction({ transaction_reference, type });
   console.log(data, transactionData, type);
   if (!isFetched) return <CLoader />;
   const body = `
@@ -160,6 +151,8 @@ Description: ${data?.data?.bill?.product} - ${data?.data?.bill?.note} Purchase
 
 Transaction Reference: ${data?.data?.reference}
 `;
+  const subject = `I have a complaint about this transaction!`;
+  console.log(data, transactionData);
   return (
     <BackButtonTitleCenter title="Transaction Details">
       <View mt="5" mb="3">
@@ -185,8 +178,10 @@ Transaction Reference: ${data?.data?.reference}
             />
           )}
           {data?.data?.payment_status &&
-            data?.data?.type.toLowerCase() !== 'sell' &&
-            data?.data?.type.toLowerCase() !== 'bill' && (
+            data?.data?.type.toLowerCase() !== 'bill' &&
+            data?.data?.type.toLowerCase() !== 'payout' &&
+            data?.data?.type.toLowerCase() !== 'fiat' &&
+            data?.data?.type.toLowerCase() !== 'crypto' && (
               <ItemButton
                 title="Payment Status"
                 body={
@@ -222,6 +217,9 @@ Transaction Reference: ${data?.data?.reference}
                 </>
               )}
               {data?.data?.unit >= 0 && <ItemText title="Unit" body={data?.data?.unit?.toString() || 'N/A'} />}
+              {data?.data?.wallet_address && (
+                <ItemText title="Wallet Address" body={data?.data?.wallet_address?.toString() || 'N/A'} />
+              )}
 
               {data?.data?.bank && (
                 <>
@@ -257,7 +255,7 @@ Transaction Reference: ${data?.data?.reference}
             <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
           </TradeDetailPanel>
         ) : (
-          <Link href={`mailto:support@cardvest.ng?subject=I+have+a+complaint+about+this+transaction!\n&body=${body}`}>
+          <Link mb="4" href={`mailto:support@cardvest.ng?subject=${subject}\n&body=${body}`}>
             <VStack px="0">
               <HStack>
                 <View w="5" h="5">
@@ -267,7 +265,7 @@ Transaction Reference: ${data?.data?.reference}
                   Report Transaction
                 </Text>
               </HStack>
-              <Text size="xs" fontWeight="200" color="#909090">
+              <Text size="xs" fontWeight="200" h="auto" color="#909090">
                 Report an issue with this transaction
               </Text>
             </VStack>

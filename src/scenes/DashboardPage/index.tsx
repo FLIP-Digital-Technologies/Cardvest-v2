@@ -60,7 +60,7 @@ export const GreetingPanel = () => {
   return (
     <HStack justifyContent="space-between" alignItems="center">
       <HStack>
-        <Pressable onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+        <Pressable w="10" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
           <Avatar
             bg="cyan.500"
             borderColor="white"
@@ -112,7 +112,7 @@ export const BalancePanel = ({
         <HStack pb="3" justifyContent={'space-between'} alignItems={'center'}>
           <Text color="white" fontSize="2xl" w="70%" numberOfLines={1}>
             {currency === 'NGN' ? '₦' : '₵'}
-            {Money(balance, currency)}
+            {Money(balance || 0, currency) || 0}
           </Text>
           <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
         </HStack>
@@ -174,18 +174,20 @@ export const BalancePanel = ({
 export const EmptyPanel = ({
   title = 'No Recent Transaction',
   body = 'Trade now to get started',
+  Icon,
 }: {
   title?: string;
   body?: string;
+  Icon?: any;
 }) => (
   <VStack alignItems="center">
     <View h="90" w="90" mx="10" mb="6" mt="2">
-      <Transaction />
+      {Icon ? <Icon /> : <Transaction />}
     </View>
-    <Text fontSize="lg" color="CARDVESTBLACK.50">
+    <Text fontSize="lg" textAlign="center" color="CARDVESTBLACK.50">
       {title}
     </Text>
-    <Text fontSize="sm" fontWeight="light" color="CARDVESTGREY.400">
+    <Text fontSize="sm" fontWeight="light" textAlign="center" color="CARDVESTGREY.400">
       {body}
     </Text>
   </VStack>
@@ -211,7 +213,7 @@ export const TransDate: (created_at: any) => string = created_at => {
 
 export const TransactionPanel = ({ data, currency, type }: { data: any; currency: string; type?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
-  // console.log(JSON.parse(data?.images)?.[0]);
+  console.log(data);
   return (
     <Pressable
       onPress={() =>
@@ -304,7 +306,7 @@ const Dashboard: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleRefreshCurrency } = useCurrency();
   const queryClient = useQueryClient();
-  const { data: getTrancationData, isFetched } = useGetAllTransactions(currency);
+  const { data: opps, isFetched } = useGetAllTransactions(currency);
   const { isFetching }: any = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
@@ -326,7 +328,13 @@ const Dashboard: FC = () => {
       console.error(error);
     }
   }, []);
-
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[0],
+      data: opps?.pages?.flatMap((page, i) => page.data.map((data: any) => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -394,7 +402,6 @@ const Dashboard: FC = () => {
                 </Text>
               </Pressable>
             </HStack>
-            {/* // TODO: make into a flatlist */}
             {getTrancationData?.data?.length === 0 ? (
               <EmptyPanel />
             ) : (

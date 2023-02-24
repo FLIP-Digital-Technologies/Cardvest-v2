@@ -3,13 +3,14 @@ import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { FormSelect } from '@scenes/CalculatorPage';
+import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { View } from 'native-base';
 import React, { FC, memo, useEffect, useState } from 'react';
 
 const AddAccountPage: FC = () => {
   const [accBank, setAccBank] = useState('');
   const [accNumber, setAccNumber] = useState('');
-  const { currency } = useCurrency();
+  const { currency, handleSwitchCurrency } = useCurrency();
   const { data } = useGetBankList(currency);
   const { mutate: createBankAccount, isLoading } = useCreateBankAccount();
   const { mutate: verifyBankAccount, data: bankAccount, isLoading: isVerifying } = useVerifyBankAccount();
@@ -44,7 +45,6 @@ const AddAccountPage: FC = () => {
       console.log(err);
     }
   };
-  console.log(data);
   return (
     <BackButtonTitleCenter
       title="Add Account"
@@ -53,6 +53,8 @@ const AddAccountPage: FC = () => {
       isDisabled={handleDisabled()}
       action={() => handleSubmit()}>
       <View my="7">
+        <FormCurrencyPicker label="Select Wallet" setCurrency={handleSwitchCurrency} currency={currency} />
+        <View p="3" />
         <Input label="Account Number" value={accNumber} onChangeText={setAccNumber} />
         <View p="3" />
         <FormSelect

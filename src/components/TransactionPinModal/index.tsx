@@ -1,9 +1,68 @@
+import { FBAccount, IGAccount, LinkedInAccount, TwitterAccount } from '@assets/SVG';
 import { usePin } from '@hooks/usePin';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
-import { Text, Modal, Button, Pressable, View } from 'native-base';
-import React, { useCallback, useRef, useState } from 'react';
+import { Text, Modal, Button, Pressable, View, Spacer, HStack, Link } from 'native-base';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import OtpInputs, { OtpInputsRef } from 'react-native-otp-inputs';
+
+export const ConnectWithUsModal = ({
+  closeModalVisible,
+  modalVisible,
+}: {
+  closeModalVisible: any;
+  modalVisible: boolean;
+}) => {
+  return (
+    <Modal isOpen={modalVisible} onClose={closeModalVisible} size={'lg'}>
+      <Modal.Content maxH="212" bg="white">
+        <Modal.Body>
+          <Text textAlign="center" fontSize="lg" mb="2">
+            Connect with Us
+          </Text>
+          <HStack mt="3">
+            <Link isExternal href="https://www.instagram.com/cardvestng/">
+              <View w="16" h="16">
+                <IGAccount />
+              </View>
+            </Link>
+            <Spacer />
+            <Link isExternal href="http://twitter.com/cardvest">
+              <View w="16" h="16">
+                <TwitterAccount />
+              </View>
+            </Link>
+            <Spacer />
+            <Link isExternal href="https://facebook.com/cardvest">
+              <View w="16" h="16">
+                <FBAccount />
+              </View>
+            </Link>
+            <Spacer />
+            <Link isExternal href="http://tiktok.com/@cardvest">
+              <View w="16" h="16">
+                <LinkedInAccount />
+              </View>
+            </Link>
+          </HStack>
+          <Pressable
+            onPress={() => {
+              closeModalVisible();
+            }}
+            my="3"
+            size="lg"
+            p="4"
+            fontSize="md"
+            w="100%"
+            textAlign="center"
+            color="back">
+            <Text textAlign="center" underline>
+              Go Back
+            </Text>
+          </Pressable>
+        </Modal.Body>
+      </Modal.Content>
+    </Modal>
+  );
+};
 
 const TransactionPinModal = ({
   closeModalVisible,
@@ -25,9 +84,9 @@ const TransactionPinModal = ({
   const handleSubmitPin = async () => {
     try {
       await handleConfirmPin(codeState);
+      await resetOTP();
       await closeModalVisible();
       await handleSubmit();
-      await resetOTP();
     } catch (err) {
       console.log(err);
     }
@@ -35,9 +94,9 @@ const TransactionPinModal = ({
 
   return (
     <Modal isOpen={modalVisible} onClose={closeModalVisible} size={'lg'}>
-      <Modal.Content maxH="212" bg="white">
+      <Modal.Content maxH="230" bg="white">
         <Modal.Body>
-          <Text textAlign="center" fontSize="lg" mb="2">
+          <Text textAlign="center" fontSize="lg" mb="6">
             Enter your transaction PIN
           </Text>
           <View>
@@ -45,16 +104,18 @@ const TransactionPinModal = ({
               handleChange={updateCode}
               numberOfInputs={4}
               inputStyles={{
-                backgroundColor: '#efebeb',
-                width: 40,
-                height: 40,
+                backgroundColor: '#F7F9FB',
+                width: 60,
+                height: 60,
                 textAlign: 'center',
                 fontSize: 20,
-                margin: 5,
+                margin: 2,
                 borderRadius: 4,
+                color: 'black',
               }}
+              secureTextEntry
               inputContainerStyles={{
-                width: '18%',
+                width: '20%',
               }}
               autofillFromClipboard
             />
@@ -65,7 +126,8 @@ const TransactionPinModal = ({
             }}
             isLoading={isLoading}
             isDisabled={!codeState || codeState?.length < 3}
-            my="3"
+            mb="4"
+            mt="6"
             size="lg"
             p="4"
             fontSize="md"
@@ -90,7 +152,6 @@ export const DelectAccountModal = ({
   modalVisible: boolean;
   isLoading?: boolean;
 }) => {
-  const navigation = useNavigation<GenericNavigationProps>();
   return (
     <Modal isOpen={modalVisible} onClose={closeModalVisible} size={'md'}>
       <Modal.Content maxH="212">

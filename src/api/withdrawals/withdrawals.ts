@@ -3,11 +3,40 @@ import { RetriveWithdrawalRequestPayload, InitiateWithdrawalRequestPayload } fro
 import env from '@env';
 import { cacheService } from '@utils/cache';
 
-export async function getAllWithdrawals(currency: any, page: any) {
+export async function getWithdrawalsUSDTRate({ currency }: { currency: string }) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/withdrawals/rate`, {
+      params: { currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getWithdrawalsUSDTRate - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getWithdrawalsUSDTNetwork() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/withdrawals/crytpo/networks`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getWithdrawalsUSDTNetwork - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getAllWithdrawals(currency: any, pagination: any) {
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.get(`${env.API_URL}/withdrawals`, {
-      params: { page, currency },
+      params: { page: pagination?.pageParam, currency },
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -32,7 +61,7 @@ export async function retriveWithdrawal({ withdrawal_reference }: RetriveWithdra
   }
 }
 
-export async function initiateWithdrawal({ amount, bank, currency, type, wallet_address }: any) {
+export async function initiateWithdrawal({ amount, bank, currency, type, wallet_address, network }: any) {
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.post(
@@ -43,6 +72,7 @@ export async function initiateWithdrawal({ amount, bank, currency, type, wallet_
         currency,
         type,
         wallet_address,
+        network,
       },
       {
         headers: { Authorization: `Bearer ${token}` },

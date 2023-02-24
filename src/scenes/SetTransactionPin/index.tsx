@@ -1,5 +1,5 @@
-import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { usePin } from '@hooks/usePin';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { onOpenToast } from '@utils/toast';
@@ -9,19 +9,26 @@ import OtpInputs from 'react-native-otp-inputs';
 
 const SetTransactionPin: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const [codeState, updateCode] = useState('');
-  const [codeConfirmState, updateCodeConfirm] = useState('');
+  const { handleSetUpTransactionPin, codeState, updateCode, codeConfirmState, updateCodeConfirm, isLoading } = usePin();
   const [confirm, setConfirm] = useState(false);
   const handleChange = (code: string) => {
     if (confirm) return updateCodeConfirm(code);
     return updateCode(code);
   };
-  const handleSubmit = () => {
-    if (codeState === codeConfirmState) return navigation.navigate('Login');
-    onOpenToast({
-      status: 'error',
-      message: 'Code are not the same',
-    });
+
+  const handleSubmit = async () => {
+    if (codeConfirmState !== codeState) {
+      return onOpenToast({
+        status: 'error',
+        message: 'Please check that your credentials are valid.',
+      });
+    }
+    try {
+      await handleSetUpTransactionPin();
+      navigation.navigate('Dashboard');
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <BackButtonTitleCenter backAction={confirm ? () => setConfirm(false) : null} title="Set Transaction PIN">
@@ -52,6 +59,7 @@ const SetTransactionPin: FC = () => {
           {/* <VStack> */}
           <Button
             onPress={() => handleSubmit()}
+            isLoading={isLoading}
             my="3"
             size="lg"
             _text={{

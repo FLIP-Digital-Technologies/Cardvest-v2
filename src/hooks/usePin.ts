@@ -1,11 +1,11 @@
-import { confirmUserPin, setUpUserPin } from '@api/users/users';
+import { confirmUserPin, reSetUserPin, resetUserWithTokenPin, setUpUserPin, updateUserPin } from '@api/users/users';
 import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import { onOpenToast } from '@utils/toast';
-import { useCallback, useEffect, useState } from 'react';
+import { AxiosError } from 'axios';
+import { useCallback, useState } from 'react';
 
 export const usePin = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const navigation = useNavigation();
   const [codeCurrentState, updateCodeCurrent] = useState('');
   const [codeState, updateCode] = useState('');
   const [codeConfirmState, updateCodeConfirm] = useState('');
@@ -20,45 +20,114 @@ export const usePin = () => {
     }
     setIsLoading(true);
     try {
-      await confirmUserPin({ pin: codeCurrentState });
-      await setUpUserPin({ pin: codeState });
-      await confirmUserPin({ pin: codeConfirmState });
+      const res = await updateUserPin({ pin: codeState, current_pin: codeCurrentState });
       setIsLoading(false);
+      onOpenToast({
+        status: 'success',
+        message: res.message || 'Update successful',
+      });
+      updateCodeConfirm('');
+      updateCode('');
+      updateCodeCurrent('');
       navigation.navigate('Pin');
-    } catch (e) {
+    } catch (e: AxiosError) {
       setIsLoading(false);
       console.log(e);
     }
   }, [codeCurrentState, codeState, codeConfirmState]);
 
   const handleSetUpTransactionPin = useCallback(async () => {
-    if (codeConfirmState !== codeState) {
-      return onOpenToast({
-        status: 'error',
-        message: 'Pin are not the same',
-      });
-    }
     setIsLoading(true);
     try {
-      await setUpUserPin({ pin: codeState });
+      const res = await setUpUserPin({ pin: codeState });
       await confirmUserPin({ pin: codeConfirmState });
+      onOpenToast({
+        status: 'success',
+        message: res.message || 'Pin setup successfully',
+      });
       setIsLoading(false);
-      navigation.navigate('Dashboard');
-    } catch (e) {
+      updateCodeConfirm('');
+      updateCode('');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Dashboard' }],
+      });
+    } catch (e: AxiosError) {
       setIsLoading(false);
       console.log(e);
+      onOpenToast({
+        status: 'error',
+        message: e?.b ? `${e?.response?.data?.message}: ${e?.b}` : e?.response?.data?.message || 'An error occurred',
+      });
+      throw e;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [codeCurrentState, codeState, codeConfirmState]);
+  }, [codeState, codeConfirmState]);
+  resetUserWithTokenPin;
 
-  const handleConfirmPin = useCallback(async (code: any) => {
+  const handleConfirmPin = async (code: any) => {
     setIsLoading(true);
     try {
       await confirmUserPin({ pin: code });
       setIsLoading(false);
-    } catch (e) {
+    } catch (error: AxiosError) {
+      setIsLoading(false);
+      console.log(error);
+      onOpenToast({
+        status: 'error',
+        message: error?.b
+          ? `${error?.response?.data?.message}: ${error?.b}`
+          : error?.response?.data?.message || 'An error occurred',
+      });
+      throw error;
+    }
+  };
+
+  const handleResetWithTokenPin = async (pin: any, token: any) => {
+    setIsLoading(true);
+    try {
+      const res = await resetUserWithTokenPin({ pin, token });
+      setIsLoading(false);
+      onOpenToast({
+        status: 'success',
+        message: res.message || 'Pin setup successfully',
+      });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
+    } catch (error: AxiosError) {
+      setIsLoading(false);
+      console.log(error);
+      onOpenToast({
+        status: 'error',
+        message: error?.b
+          ? `${error?.response?.data?.message}: ${error?.b}`
+          : error?.response?.data?.message || 'An error occurred',
+      });
+      throw error;
+    }
+  };
+
+  const handleResetPin = useCallback(async (password: string) => {
+    setIsLoading(true);
+    try {
+      await reSetUserPin({
+        password,
+      });
+      setIsLoading(false);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'ResetPinFeedback' }],
+      });
+    } catch (e: AxiosError) {
       setIsLoading(false);
       console.log(e);
+      onOpenToast({
+        status: 'error',
+        message: e?.b ? `${e?.response?.data?.message}: ${e?.b}` : e?.response?.data?.message || 'An error occurred',
+      });
+      throw e;
     }
   }, []);
 
@@ -73,5 +142,7 @@ export const usePin = () => {
     handleSetUpTransactionPin,
     isLoading,
     handleConfirmPin,
+    handleResetPin,
+    handleResetWithTokenPin,
   };
 };

@@ -39,7 +39,7 @@ const Intro: FC = () => {
         }}>
         <React.Fragment key="1">
           <Center my="8" flex={6}>
-            <Image source={IntroPng} alt="intro" />
+            <Image source={IntroPng} w="75%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">
@@ -55,7 +55,7 @@ const Intro: FC = () => {
         </React.Fragment>
         <React.Fragment key="2">
           <Center my="8" flex={6}>
-            <Image source={Intro2Png} alt="intro" />
+            <Image source={Intro2Png} w="75%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">
@@ -71,7 +71,7 @@ const Intro: FC = () => {
         </React.Fragment>
         <React.Fragment key="3">
           <Center my="8" flex={6}>
-            <Image source={Intro3Png} alt="intro" />
+            <Image source={Intro3Png} w="75%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">

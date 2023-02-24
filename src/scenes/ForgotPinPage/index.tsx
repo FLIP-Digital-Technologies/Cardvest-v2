@@ -1,14 +1,16 @@
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
+import { usePin } from '@hooks/usePin';
 import { View, Center, Button, ScrollView, Text, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 const ForgotPinPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const [password, setPassword] = useState('');
+  const { handleResetPin, isLoading } = usePin();
+  const handleDisabled = () => !password;
+
   return (
-    <BackButtonTitleCenter title="Change PIN">
+    <BackButtonTitleCenter title="Reset PIN">
       <ScrollView
         _contentContainerStyle={{
           flex: 1,
@@ -25,11 +27,13 @@ const ForgotPinPage: FC = () => {
             </Text>
           </Center>
           <View marginTop="6">
-            <Input label="" />
+            <Input type="password" label="Password" value={password} onChangeText={setPassword} />
           </View>
           <Center py="4">
             <Button
-              onPress={() => navigation.navigate('ResetPinFeedback')}
+              onPress={() => handleResetPin(password)}
+              isDisabled={handleDisabled()}
+              isLoading={isLoading}
               my="3"
               width="100%"
               size="lg"

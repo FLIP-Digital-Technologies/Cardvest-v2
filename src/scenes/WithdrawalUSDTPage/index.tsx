@@ -1,12 +1,12 @@
-import { useInitializeWithdrawal } from '@api/hooks/useWallet';
+import { useGetWithdrawalsUSDTNetwork, useGetWithdrawalsUSDTRate, useInitializeWithdrawal } from '@api/hooks/useWallet';
 import { Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
 import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
-// import { FormSelect } from '@scenes/CalculatorPage';
+import { FormSelect } from '@scenes/CalculatorPage';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 
 export const FormCurrencyPicker = (props: any) => {
   const { currency, setCurrency, label } = props;
@@ -165,14 +165,17 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
 );
 
 const WithdrawalUSDT: FC = () => {
-  const rate = 10;
+  const input = React.useRef(null);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [amount, setAmount] = React.useState<number>();
+  const [amount, setAmount] = React.useState<number>(0);
   const [account, setAccount] = React.useState('');
-  const [amountUSD, setAmountUSD] = React.useState<number>();
-  // const [network, setNetwork] = React.useState('');
+  const [amountUSD, setAmountUSD] = React.useState<number>(0);
+  const [network, setNetwork] = React.useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
   const { currency, handleSwitchCurrency } = useCurrency();
+  const { data: rates } = useGetWithdrawalsUSDTRate(currency);
+  const { data: networks } = useGetWithdrawalsUSDTNetwork();
+  const rate = rates?.data?.[currency];
   const handleSubmit = async () => {
     try {
       await withdrawFunds({
@@ -180,14 +183,16 @@ const WithdrawalUSDT: FC = () => {
         currency,
         type: 'crypto',
         wallet_address: account,
-        // network,
+        network,
       });
     } catch (err) {
       console.log(err);
     }
   };
-  const handleDisabled = () => !account || !amount;
-
+  const handleDisabled = () => !account || !amount || !network || account.length < 30;
+  useEffect(() => {
+    input?.current?.focus();
+  }, []);
   return (
     <BackButtonTitleCenter
       isLoading={isLoading}
@@ -210,12 +215,13 @@ const WithdrawalUSDT: FC = () => {
                 h="60"
                 color="black"
                 fontSize="3xl"
+                ref={input}
                 value={amount?.toString()}
                 onChangeText={val => {
                   setAmount(Number(val));
                   setAmountUSD(Number(val) * rate);
                 }}
-                keyboardType="numeric"
+                keyboardType="decimal-pad"
                 variant="unstyled"
               />
               <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
@@ -239,6 +245,7 @@ const WithdrawalUSDT: FC = () => {
                 w="100%"
                 h="60"
                 color="black"
+                keyboardType="numeric"
                 fontSize="3xl"
                 onChangeText={val => {
                   setAmountUSD(Number(val));
@@ -250,9 +257,19 @@ const WithdrawalUSDT: FC = () => {
             </HStack>
           </VStack>
         </Box>
-        <Input label="USDT Wallet Address" value={account} onChangeText={setAccount} />
+        <Input
+          label="USDT Wallet Address"
+          value={account}
+          onChangeText={setAccount}
+          hint="Wallet address must be 30 characters long."
+        />
         <View p="3" />
-        {/* <FormSelect label="Network" /> */}
+        <FormSelect
+          label="Network"
+          value={network}
+          setValue={setNetwork}
+          data={networks?.data?.map((item: string) => ({ name: item, id: item }))}
+        />
       </View>
     </BackButtonTitleCenter>
   );

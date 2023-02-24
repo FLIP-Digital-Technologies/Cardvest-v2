@@ -1,4 +1,5 @@
 import { useGetUserWithdrawals } from '@api/hooks/useWallet';
+import { WithdrawalEmpty } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
@@ -7,33 +8,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { FlatList, HStack, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
-const Card = () => {
-  return (
-    <HStack
-      borderRadius="sm"
-      py="3"
-      px="2"
-      my="2"
-      alignItems="center"
-      justifyContent="space-between"
-      backgroundColor={'CARDVESTGREY.500'}>
-      <HStack alignItems="center">
-        <VStack px="2">
-          <Text fontSize="md">Dec 25, 2022 | 3:45 PM</Text>
-          <Text fontSize="sm" color="CARDVESTGREY.100">
-            Your Giftcard sale trade has been processed successfully!
-          </Text>
-        </VStack>
-      </HStack>
-    </HStack>
-  );
-};
-
 const WithdrawalsPage: FC = () => {
   const queryClient = useQueryClient();
   const { currency } = useCurrency();
-  const [page, setPage] = useState(1);
-  const { data, isFetching, isLoading } = useGetUserWithdrawals(currency, page);
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetUserWithdrawals(currency, page);
+  const data = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
   const a = useMemo(() => {
     const b: any = {};
     data?.data?.map((i: any) => {
@@ -44,34 +30,38 @@ const WithdrawalsPage: FC = () => {
     return b;
   }, [data]);
   if (isLoading) return <CLoader />;
-  if (data?.data?.length === 0)
-    return (
-      <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel />
-      </View>
-    );
   return (
     <BackButtonTitleCenter noScroll title="Withdrawal">
       <View w="100%" mb="8" h="full">
-        <FlatList
-          data={Object.keys(a)}
-          renderItem={({ item }) => {
-            return (
-              <React.Fragment>
-                <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
-                  {TransDate(item)}
-                </Text>
-                {a[item].map((item: any, ind: number) => (
-                  <TransactionPanel currency={currency} data={item} type={'withdrawals'} key={ind} />
-                ))}
-              </React.Fragment>
-            );
-          }}
-          keyExtractor={(item: any) => item}
-          onRefresh={() => queryClient.invalidateQueries([`user-withdrals-${currency}`])}
-          refreshing={isFetching}
-          onEndReached={data?.meta?.current_page < data?.meta?.last_page ? () => setPage(page + 1) : () => null}
-        />
+        {data?.data?.length === 0 ? (
+          <View justifyContent="center" alignItems="center" h="60%">
+            <EmptyPanel
+              Icon={WithdrawalEmpty}
+              title=""
+              body="You haven not made any withdrawal. Trade now to earn instantly."
+            />
+          </View>
+        ) : (
+          <FlatList
+            data={Object.keys(a)}
+            renderItem={({ item }) => {
+              return (
+                <React.Fragment>
+                  <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+                    {TransDate(item)}
+                  </Text>
+                  {a[item].map((item: any, ind: number) => (
+                    <TransactionPanel currency={currency} data={item} type={'withdrawals'} key={ind} />
+                  ))}
+                </React.Fragment>
+              );
+            }}
+            keyExtractor={(item: any) => item}
+            onRefresh={() => queryClient.invalidateQueries([`user-withdrals-${currency}`])}
+            refreshing={isFetching}
+            onEndReached={data?.meta?.current_page < data?.meta?.last_page ? () => fetchNextPage() : () => null}
+          />
+        )}
       </View>
     </BackButtonTitleCenter>
   );

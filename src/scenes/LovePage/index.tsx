@@ -1,15 +1,18 @@
 import { Connect, Rate, Refer, RightAngle, Suggestion } from '@assets/SVG';
+import { ConnectWithUsModal } from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { Divider, HStack, Text, View, VStack, Link } from 'native-base';
-import React, { FC, memo } from 'react';
-import { Linking, Platform, Pressable } from 'react-native';
+import React, { FC, memo, useState } from 'react';
+import { Platform, Pressable } from 'react-native';
 
 const KYCPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <BackButtonTitleCenter title="Show some love">
+      <ConnectWithUsModal modalVisible={modalVisible} closeModalVisible={() => setModalVisible(false)} />
       <VStack my="7">
         <Link
           isExternal
@@ -60,7 +63,7 @@ const KYCPage: FC = () => {
           </HStack>
           <Divider bg="#F7F9FB" />
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('Referrals')}>
+        <Pressable onPress={() => setModalVisible(true)}>
           <HStack py="4" justifyContent="space-between" alignItems="center">
             <HStack justifyContent="space-between" alignItems="center">
               <View width="5" h="8">

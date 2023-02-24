@@ -288,6 +288,8 @@ PODS:
     - React-Core
   - react-native-document-picker (8.1.3):
     - React-Core
+  - react-native-fingerprint-scanner (6.0.0):
+    - React
   - react-native-flipper (0.159.0):
     - React-Core
   - react-native-image-picker (5.0.1):
@@ -419,6 +421,8 @@ PODS:
   - RNVectorIcons (9.2.0):
     - React-Core
   - SocketRocket (0.6.0)
+  - TouchID (4.4.1):
+    - React
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -469,6 +473,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
@@ -498,6 +503,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - TouchID (from `../node_modules/react-native-touch-id`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -561,6 +567,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-blob-util"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
+  react-native-fingerprint-scanner:
+    :path: "../node_modules/react-native-fingerprint-scanner"
   react-native-flipper:
     :path: "../node_modules/react-native-flipper"
   react-native-image-picker:
@@ -619,6 +627,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  TouchID:
+    :path: "../node_modules/react-native-touch-id"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -657,6 +667,7 @@ SPEC CHECKSUMS:
   React-logger: 1088859f145b8f6dd0d3ed051a647ef0e3e80fad
   react-native-blob-util: 4949dcc0dd5ee25fcb5abe0687f67fa3d5cdf05a
   react-native-document-picker: 958e2bc82e128be69055be261aeac8d872c8d34c
+  react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper: dc5290261fbeeb2faec1bdc57ae6dd8d562e1de4
   react-native-image-picker: 8cb4280e2c1efc3daeb2d9d597f9429a60472e40
   react-native-pager-view: 7abf89f9834d9a4021b2fb6a5ef2abff570b46fb
@@ -687,6 +698,7 @@ SPEC CHECKSUMS:
   RNSVG: 3a79c0c4992213e4f06c08e62730c5e7b9e4dc17
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  TouchID: ba4c656d849cceabc2e4eef722dea5e55959ecf4
   Yoga: ff994563b2fd98c982ca58e8cd9db2cdaf4dda74
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

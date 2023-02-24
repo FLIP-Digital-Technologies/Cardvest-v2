@@ -2,11 +2,14 @@ import { Mail } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { useQueryClient } from '@tanstack/react-query';
 import { View, Text, Center, Button, Box, ScrollView } from 'native-base';
 import React, { FC, memo } from 'react';
 
-const Reset: FC = () => {
+const ResetPinFeedbackPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const queryClient = useQueryClient();
+  const data: any = queryClient.getQueryData(['user']);
   return (
     <CSafeAreaView>
       <ScrollView
@@ -23,13 +26,13 @@ const Reset: FC = () => {
             Reset PIN
           </Text>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
-            A PIN reset link has been sent to k**********l@gmail.com
+            A PIN reset link has been sent to {data?.email}
           </Text>
         </Center>
         <View mt="10" />
         <Center>
           <Button
-            onPress={() => navigation.navigate('Pin')}
+            onPress={() => navigation.navigate('SetNewPinPage')}
             my="3"
             width="100%"
             size="lg"
@@ -45,4 +48,4 @@ const Reset: FC = () => {
   );
 };
 
-export default memo(Reset);
+export default memo(ResetPinFeedbackPage);

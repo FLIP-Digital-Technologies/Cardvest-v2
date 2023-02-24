@@ -69,7 +69,7 @@ const Calculator: FC = () => {
   }, [giftCard]);
   const total = useMemo(() => {
     if (!card) return;
-    const totalAmount = Number(card?.rates[currency]) * amountUSD;
+    const totalAmount = (Number(card?.rate) * amountUSD) / Number(card?.rates[currency]);
     return totalAmount;
   }, [amountUSD, giftCardsData, currency]);
   const handleDisabled = () => !amountUSD || !giftCardsData || !category;

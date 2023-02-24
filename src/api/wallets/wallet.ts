@@ -46,7 +46,7 @@ export async function switchDefaultWallet({ currency }: SwitchDefaultWalletReque
 
     return response.data;
   } catch (error) {
-    console.error('initiateWithdrawal - Error: ', error);
+    console.error('switchDefaultWallet - Error: ', error);
     throw error;
   }
 }
@@ -67,7 +67,7 @@ export async function fundWallet({ currency, amount }: any) {
 
     return response.data;
   } catch (error) {
-    console.error('initiateWithdrawal - Error: ', error);
+    console.error('fundWallet - Error: ', error);
     throw error;
   }
 }

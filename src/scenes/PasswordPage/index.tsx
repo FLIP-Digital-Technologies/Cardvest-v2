@@ -27,7 +27,7 @@ const PasswordPage: FC = () => {
     }
     onOpenToast({
       status: 'error',
-      message: 'Passwords are not the same.',
+      message: 'Please check that your credentials are valid.',
     });
   };
   const handleDisabled = () =>
