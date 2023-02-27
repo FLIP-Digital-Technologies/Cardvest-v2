@@ -34,6 +34,7 @@ function useCreateBankAccount() {
         navigation.navigate('AddAccountFeedback');
       },
       onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.b
@@ -58,6 +59,7 @@ function useVerifyBankAccount() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.b
@@ -84,6 +86,7 @@ function useDeleteBankAccount() {
         });
       },
       onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.b

@@ -57,6 +57,7 @@ function useInitializeWithdrawal() {
         navigation.navigate('WithdrawalFeedback');
       },
       onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -84,7 +85,8 @@ function useSwitchDefaultWallet() {
         message: 'Default Wallet switched successfully',
       });
     },
-    onError: (/*data*/) => {
+    onError: (data: any) => {
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
         message: 'An error has occurred when switching default wallet',
@@ -111,7 +113,8 @@ function useFundWallet() {
           message: 'Fund Wallet successfully',
         });
       },
-      onError: (/*data*/) => {
+      onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: 'An error has occurred when funding wallet',

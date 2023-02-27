@@ -8,6 +8,7 @@ import { View } from 'native-base';
 import React, { FC, memo, useEffect, useState } from 'react';
 
 const AddAccountPage: FC = () => {
+  const [accountname, setAccName] = useState('');
   const [accBank, setAccBank] = useState('');
   const [accNumber, setAccNumber] = useState('');
   const { currency, handleSwitchCurrency } = useCurrency();
@@ -31,7 +32,8 @@ const AddAccountPage: FC = () => {
     !(accNumber.length > 9 && accNumber.length < 11 && accBank) ||
     !accNumber ||
     !accBank ||
-    !bankAccount?.data?.account_name;
+    !(bankAccount?.data?.account_name && currency === 'NGN') ||
+    !(accountname && currency === 'GHS');
   const handleSubmit = async () => {
     try {
       await createBankAccount({
@@ -39,7 +41,7 @@ const AddAccountPage: FC = () => {
         bankname: bankAccount?.data?.bank_name,
         currency,
         code: accBank,
-        accountname: bankAccount?.data?.account_name,
+        accountname: currency === 'GHS' ? accountname : bankAccount?.data?.account_name,
       });
     } catch (err) {
       console.log(err);
@@ -68,7 +70,11 @@ const AddAccountPage: FC = () => {
           }))}
         />
         <View p="3" />
-        <Input label="Account Name" value={bankAccount?.data?.account_name} disabled />
+        {currency === 'NGN' ? (
+          <Input label="Account Name" value={bankAccount?.data?.account_name} disabled />
+        ) : (
+          <Input label="Account Name" value={accountname} onChangeText={setAccName} />
+        )}
       </View>
     </BackButtonTitleCenter>
   );

@@ -114,6 +114,7 @@ function useVerifyMeterElectricity(meter_no: string) {
       }),
     {
       onError: (/*data*/) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: 'error fetching meter details',
@@ -151,6 +152,7 @@ function usePurchaseElectricity() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -189,6 +191,7 @@ function usePurchaseWifi() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -228,6 +231,7 @@ function usePurchaseCable() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -266,6 +270,7 @@ function usePurchaseData() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -303,6 +308,7 @@ function usePurchaseAirtime() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:
@@ -360,6 +366,7 @@ function useCreateSellOrder() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.response?.data?.message || 'An error occurred',
@@ -398,6 +405,7 @@ function useCreateBuyOrder() {
         });
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message:

@@ -40,6 +40,7 @@ ApiClient.interceptors.response.use(
   async (error: any) => {
     let b;
     const token = await cacheService.get('login-user');
+    console.log(error?.respone);
     if (
       (error?.response?.status === 403 || error?.response?.status === 401) &&
       error?.response?.data?.message.includes('Unauthenticated') &&
@@ -53,14 +54,14 @@ ApiClient.interceptors.response.use(
         message: 'Session expired, please login again on 401',
       });
     }
-    if (error?.response?.data?.message.includes('The given data was invalid') || error?.response?.status === 422) {
+    if (error?.response?.data?.message?.includes('The given data was invalid') || error?.response?.status === 422) {
       b =
         Object.values(error?.response?.data?.errors).length > 0
           ? Object.values(error?.response?.data?.errors).join(', ')
           : null;
       onOpenToast({
         status: 'error',
-        message: b ? `${error?.response?.data?.message}: ${b}` : error?.response?.data?.message,
+        message: b?.length > 0 ? `${b}` : error?.response?.data?.message,
       });
       return Promise.reject({ c: error });
     }

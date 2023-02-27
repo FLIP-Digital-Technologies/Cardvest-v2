@@ -25,7 +25,8 @@ function useCreateUser() {
         message: 'User created successfully',
       });
     },
-    onError: (/*data*/) => {
+    onError: (data: any) => {
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
         message: 'User not created',
@@ -48,7 +49,8 @@ function useModifyUser() {
           message: 'User details updated successful',
         });
       },
-      onError: (/*data*/) => {
+      onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: 'User details fail to update',
@@ -75,6 +77,7 @@ function useModifyUserPassword() {
         navigation.navigate('Security');
       },
       onError: data => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.response?.data?.message || 'User Password failed to update',
@@ -102,7 +105,8 @@ function useDeleteUser() {
       await navigation.navigate('Auth');
       await queryClient.clear();
     },
-    onError: (/*data*/) => {
+    onError: (data: any) => {
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
         message: 'User not deleted',

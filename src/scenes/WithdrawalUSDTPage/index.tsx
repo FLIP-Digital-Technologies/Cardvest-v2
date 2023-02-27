@@ -20,7 +20,7 @@ export const FormCurrencyPicker = (props: any) => {
       <Box backgroundColor="#F7F9FB">
         <Select
           selectedValue={currency}
-          minWidth="200"
+          minWidth="230"
           accessibilityLabel={`${label}`}
           placeholder={`${label}`}
           borderColor="#F7F9FB"
@@ -95,7 +95,7 @@ export const FormCurrencyPicker = (props: any) => {
 export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; setCurrency: any }) => (
   <Select
     selectedValue={currency}
-    w="85px"
+    w="90px"
     accessibilityLabel="Choose Currency"
     placeholder=""
     backgroundColor="#F7F2DD"
@@ -219,7 +219,7 @@ const WithdrawalUSDT: FC = () => {
                 value={amount?.toString()}
                 onChangeText={val => {
                   setAmount(Number(val));
-                  setAmountUSD(Number(val) * rate);
+                  setAmountUSD(Number(val) / rate);
                 }}
                 keyboardType="decimal-pad"
                 variant="unstyled"
@@ -249,7 +249,7 @@ const WithdrawalUSDT: FC = () => {
                 fontSize="3xl"
                 onChangeText={val => {
                   setAmountUSD(Number(val));
-                  setAmount(Number(val) / rate);
+                  setAmount(Number(val) * rate);
                 }}
                 value={amountUSD?.toString()}
                 variant="unstyled"

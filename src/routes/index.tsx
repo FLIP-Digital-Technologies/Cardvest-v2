@@ -1,9 +1,9 @@
-import CLoader from '@components/CLoader';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GenericNavigationProps } from '@routes/types';
 import ForgetPasswordEnterEmailPage from '@scenes/ForgetPasswordEnterEmailPage';
 import IntroPage from '@scenes/IntroPage';
+import LoginBackPage from '@scenes/LoginBackPage';
 import LoginPage from '@scenes/LoginPage';
 import ResetPage from '@scenes/ResetPage';
 import SetTransactionPin from '@scenes/SetTransactionPin';
@@ -27,6 +27,13 @@ export const AuthStackScreen: FC = () => {
       <AuthStack.Screen
         name="Login"
         component={LoginPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name="LoginBack"
+        component={LoginBackPage}
         options={{
           headerShown: false,
         }}
@@ -90,7 +97,7 @@ export const RootStackScreen: FC = () => {
       try {
         const toks = await cacheService.get('login-user');
         if (toks.length > 0) {
-          navigation.navigate('Dashboard');
+          navigation.navigate('LoginBack');
         } else {
           navigation.navigate('Auth');
         }
@@ -111,7 +118,7 @@ export const RootStackScreen: FC = () => {
       const res = await cacheService.get('firstTime');
       console.log(res);
       if (res === 'Yes') {
-        await navigation.navigate(data ? 'Dashboard' : 'Auth');
+        await navigation.navigate('Auth');
       } else {
         await navigation.navigate('Intro');
       }
@@ -119,42 +126,42 @@ export const RootStackScreen: FC = () => {
     fetchFirstTime();
   });
   return (
-    <RootStack.Navigator>
-      {typeof data === 'string' && data.length > 3 ? (
-        <React.Fragment>
-          <RootStack.Screen
-            name="Dashboard"
-            component={MainStackScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <RootStack.Screen
-            name="SetTransactionPin"
-            component={SetTransactionPin}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <RootStack.Screen
-            name="Intro"
-            component={IntroPage}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <RootStack.Screen
-            name="Auth"
-            component={AuthStackScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </React.Fragment>
-      )}
+    <RootStack.Navigator initialRouteName="Auth">
+      {/* {typeof data === 'string' && data.length > 3 ? ( */}
+      <React.Fragment>
+        <RootStack.Screen
+          name="Dashboard"
+          component={MainStackScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <RootStack.Screen
+          name="SetTransactionPin"
+          component={SetTransactionPin}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </React.Fragment>
+      {/* ) : ( */}
+      <React.Fragment>
+        <RootStack.Screen
+          name="Intro"
+          component={IntroPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <RootStack.Screen
+          name="Auth"
+          component={AuthStackScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </React.Fragment>
+      {/* )} */}
     </RootStack.Navigator>
   );
 };

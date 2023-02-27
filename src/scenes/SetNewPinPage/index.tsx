@@ -11,7 +11,7 @@ const SetNewPinPage: FC = () => {
   const handleDisabled = () => !pin || !token || pin.length < 4;
 
   return (
-    <BackButtonTitleCenter title="Confirm New PIN">
+    <BackButtonTitleCenter title="Set New PIN">
       <ScrollView
         _contentContainerStyle={{
           flex: 1,

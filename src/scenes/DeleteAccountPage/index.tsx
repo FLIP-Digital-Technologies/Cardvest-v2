@@ -29,21 +29,25 @@ const DeleteAccountPage: FC = () => {
             onChange={nextValue => {
               setReason(nextValue);
             }}>
-            <Radio size="sm" value="I don't like the app" my={3}>
+            <Radio size="sm" value="I don't like your rates" my={3}>
               {' '}
-              I don't like the app
+              I don't like your rates
             </Radio>
-            <Radio size="sm" value="It doesn't do what I need it to do." my={3}>
+            <Radio size="sm" value="Your app is too stressful for me" my={3}>
               {' '}
-              It doesn't do what I need it to do.
+              Your app is too stressful for me
             </Radio>
-            <Radio size="sm" value="It doesn't support my country." my={3}>
+            <Radio size="sm" value="Your app is malfunctioning" my={3}>
               {' '}
-              It doesn't support my country.
+              Your app is malfunctioning
             </Radio>
-            <Radio size="sm" value="I no longer need the app." my={3}>
+            <Radio size="sm" value="You don't support the gift card I want to trade" my={3}>
               {' '}
-              I no longer need the app.
+              You don't support the gift card I want to trade
+            </Radio>
+            <Radio size="sm" value="Unresponsive customer support" my={3}>
+              {' '}
+              Unresponsive customer support
             </Radio>
             <Radio size="sm" value="other" my={3}>
               {' '}

@@ -13,6 +13,7 @@ import React, { FC, memo, useState } from 'react';
 
 export const UploadedItems = ({ images }: { images?: Array<string> }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showIndModal, setShowIndModal] = useState<any>(false);
   return (
     <React.Fragment>
       {showModal && (
@@ -42,21 +43,41 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
           </Modal.Content>
         </Modal>
       )}
+      {showIndModal && (
+        <Modal isOpen={showIndModal} onClose={() => setShowIndModal(false)}>
+          <Modal.Content maxWidth="500px">
+            <Modal.Body>
+              <Modal.CloseButton />
+              <VStack mt="8" px="2">
+                <Image source={showIndModal} alt="image" borderRadius="lg" minH="12" mx="2" w="100%" />
+                <View mt="20" />
+              </VStack>
+            </Modal.Body>
+          </Modal.Content>
+        </Modal>
+      )}
       <HStack alignItems="center" mx="-4">
         <HStack alignItems="center">
           {[images?.[0], images?.[1], images?.[2], images?.[3]]?.map((uri: string, index: number) => {
             return (
-              <Image
-                source={{
-                  uri,
-                }}
-                alt="image"
-                borderRadius="lg"
+              <Pressable
                 key={index}
-                minH="12"
-                mx="2"
-                w="12"
-              />
+                onPress={() =>
+                  setShowIndModal({
+                    uri,
+                  })
+                }>
+                <Image
+                  source={{
+                    uri,
+                  }}
+                  alt="image"
+                  borderRadius="lg"
+                  minH="12"
+                  mx="2"
+                  w="12"
+                />
+              </Pressable>
             );
           })}
         </HStack>

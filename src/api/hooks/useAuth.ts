@@ -25,6 +25,7 @@ function useCreateUser() {
         });
       },
       onError: async (data: AxiosError) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
           message: data?.b
@@ -42,7 +43,6 @@ function useLoginUser() {
   return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
     onSuccess: async data => {
       if (data?.data?.user?.email_verified)
-        // TODO: reverb
         return onOpenToast({
           status: 'error',
           message: 'Please kindly verify your email.',
@@ -61,6 +61,7 @@ function useLoginUser() {
     },
     onError: (data: AxiosError) => {
       console.log(data);
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
         message: data?.b
