@@ -1,4 +1,6 @@
 #import "AppDelegate.h"
+#import <Firebase.h>
+#import "RNFBMessagingModule.h"
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -46,6 +48,8 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
+  
   RCTAppSetupPrepareApp(application);
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   
@@ -74,6 +78,11 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [RNSplashScreen show];
   
   return YES;
+}
+
+- (void)application:(UIApplication *)application
+    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [FIRMessaging messaging].APNSToken = deviceToken;
 }
 
 /// This method controls whether the `concurrentRoot`feature of React18 is turned on or off.
