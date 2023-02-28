@@ -37,7 +37,10 @@ const AddAccountPage: FC = () => {
     try {
       await createBankAccount({
         banknumber: accNumber,
-        bankname: bankAccount?.data?.bank_name,
+        bankname:
+          currency === 'NGN'
+            ? bankAccount?.data?.bank_name
+            : data?.data?.filter(item => item?.code === accBank)?.[0]?.name,
         currency,
         code: accBank,
         accountname: currency === 'GHS' ? accountname : bankAccount?.data?.account_name,

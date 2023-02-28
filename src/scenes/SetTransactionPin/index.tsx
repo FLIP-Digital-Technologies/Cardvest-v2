@@ -63,7 +63,6 @@ const SetTransactionPin: FC = () => {
             my="3"
             size="lg"
             _text={{
-              width: '150%',
               textAlign: 'center',
             }}
             w="100%"
@@ -107,7 +106,6 @@ const SetTransactionPin: FC = () => {
             my="3"
             size="lg"
             _text={{
-              width: '150%',
               textAlign: 'center',
             }}
             w="100%"

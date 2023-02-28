@@ -5,6 +5,7 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { BoldText } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 import { View, Center, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
@@ -33,9 +34,9 @@ const ReferralPage: FC = () => {
         showsVerticalScrollIndicator={false}>
         <VStack mt="8">
           <View>
-            <Text mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg" fontWeight="bold">
+            <BoldText mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg">
               Refer & Earn
-            </Text>
+            </BoldText>
             <Text color="CARDVESTGREY.50" fontSize="md" fontWeight="light">
               Invite your friends & family and receive a bonus when they initiate their first trade.
             </Text>
@@ -56,9 +57,9 @@ const ReferralPage: FC = () => {
             />
           </View>
           <VStack pt="10" pb="4">
-            <Text mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg" fontWeight="bold">
+            <BoldText mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg">
               Your Referrals
-            </Text>
+            </BoldText>
             <VStack alignItems="center" my="5">
               <View h="90" w="90" mx="10" mb="6" mt="2">
                 <ReferralHock />

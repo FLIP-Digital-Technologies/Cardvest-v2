@@ -1,14 +1,81 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { useGetAllCategories, useGetGiftcardsToSell } from '@api/hooks/useGiftcards';
+import { RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { Money } from '@scenes/DashboardPage';
+import { BillAvatar, Money } from '@scenes/DashboardPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
+
+export const FormBilSelect = (props: any) => {
+  const { value, setValue, label, data } = props;
+  return (
+    <Box my="2">
+      {label && (
+        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+          {label}
+        </Text>
+      )}
+      <Box backgroundColor="#F7F9FB">
+        <Select
+          selectedValue={value}
+          minWidth="200"
+          accessibilityLabel={`${label}`}
+          placeholder={`${label}`}
+          borderColor="#F7F9FB"
+          _selectedItem={{
+            bg: '#F7F2DD',
+            endIcon: <CheckIcon size="5" />,
+          }}
+          height="51.3px"
+          fontSize="md"
+          onValueChange={(itemValue: string) => setValue(itemValue)}>
+          <Select.Item
+            isDisabled
+            label={`${label}`}
+            value="non"
+            _disabled={{ opacity: 1 }}
+            startIcon={
+              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
+                <Text fontSize="md" color="CARDVESTGREEN">
+                  {label}
+                </Text>
+              </HStack>
+            }
+          />
+          {data?.map((item: any) => (
+            <Select.Item
+              key={item?.id}
+              label={item?.name}
+              value={item?.id}
+              startIcon={
+                <HStack w="100%" justifyContent="space-between" alignItems="center">
+                  <HStack mx="-3" h="7" alignItems="center">
+                    <View w="12">{BillAvatar(item?.name)}</View>
+                    <Text>{item?.name}</Text>
+                  </HStack>
+                  {value === item?.id ? (
+                    <View w="6" h="5">
+                      <RadioChecked />
+                    </View>
+                  ) : (
+                    <View w="6" h="5">
+                      <RadioUnChecked />
+                    </View>
+                  )}
+                </HStack>
+              }
+            />
+          ))}
+        </Select>
+      </Box>
+    </Box>
+  );
+};
 
 export const FormSelect = (props: any) => {
   const { value, setValue, label, data } = props;

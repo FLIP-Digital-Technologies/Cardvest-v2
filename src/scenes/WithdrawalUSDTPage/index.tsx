@@ -1,12 +1,12 @@
 import { useGetWithdrawalsUSDTNetwork, useGetWithdrawalsUSDTRate, useInitializeWithdrawal } from '@api/hooks/useWallet';
-import { Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
+import { DropDown, Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
 import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { FormSelect } from '@scenes/CalculatorPage';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
-import React, { FC, memo, useEffect } from 'react';
+import React, { FC, memo, useEffect, useMemo } from 'react';
 
 export const FormCurrencyPicker = (props: any) => {
   const { currency, setCurrency, label } = props;
@@ -95,7 +95,9 @@ export const FormCurrencyPicker = (props: any) => {
 export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; setCurrency: any }) => (
   <Select
     selectedValue={currency}
-    w="93px"
+    w="73px"
+    px="2"
+    h="33px"
     accessibilityLabel="Choose Currency"
     placeholder=""
     backgroundColor="#F7F2DD"
@@ -104,6 +106,11 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
     _selectedItem={{
       bg: '#F7F2DD',
     }}
+    dropdownIcon={
+      <View w="6" h="6" pr="2">
+        <DropDown />
+      </View>
+    }
     mt={1}
     onValueChange={itemValue => setCurrency(itemValue)}>
     <Select.Item
@@ -167,9 +174,8 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
 const WithdrawalUSDT: FC = () => {
   const input = React.useRef(null);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [amount, setAmount] = React.useState<number>(0.0);
+  const [amount, setAmount] = React.useState<number>(0);
   const [account, setAccount] = React.useState('');
-  const [amountUSD, setAmountUSD] = React.useState<number>(0.0);
   const [network, setNetwork] = React.useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
   const { currency, handleSwitchCurrency } = useCurrency();
@@ -193,6 +199,9 @@ const WithdrawalUSDT: FC = () => {
   useEffect(() => {
     input?.current?.focus();
   }, []);
+  const usd = useMemo(() => {
+    return Number(amount) / rate;
+  }, [amount, rates]);
   return (
     <BackButtonTitleCenter
       isLoading={isLoading}
@@ -211,15 +220,18 @@ const WithdrawalUSDT: FC = () => {
             </View>
             <HStack pb="3" justifyContent={'space-between'}>
               <NInput
-                w="70%"
+                w="80%"
                 h="60"
                 color="black"
                 fontSize="3xl"
                 ref={input}
-                value={parseFloat(amount?.toString())?.toFixed(2)}
+                value={
+                  amount?.toString()?.split('.')?.[1]?.length > 6
+                    ? parseFloat(amount?.toString())?.toFixed(6)
+                    : parseFloat(amount?.toString())?.toString()
+                }
                 onChangeText={val => {
                   setAmount(parseFloat(val));
-                  setAmountUSD(parseFloat(val) / rate);
                 }}
                 keyboardType="decimal-pad"
                 variant="unstyled"
@@ -248,10 +260,9 @@ const WithdrawalUSDT: FC = () => {
                 keyboardType="numeric"
                 fontSize="3xl"
                 onChangeText={val => {
-                  setAmountUSD(parseFloat(val));
                   setAmount(parseFloat(val) * rate);
                 }}
-                value={parseFloat(amountUSD?.toString())?.toFixed(amountUSD === 0 ? 2 : 6)}
+                value={usd.toFixed(6)}
                 variant="unstyled"
               />
             </HStack>

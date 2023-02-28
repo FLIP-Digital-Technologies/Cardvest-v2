@@ -2,7 +2,7 @@ import { useGetDataPlans, usePurchaseData, useGetDataPlansProviders } from '@api
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
-import { FormSelect } from '@scenes/CalculatorPage';
+import { FormBilSelect, FormSelect } from '@scenes/CalculatorPage';
 import { View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
@@ -40,7 +40,7 @@ const BuyDatePage: FC = () => {
       isLoading={isLoading}
       action={() => handleSubmit()}>
       <View my="7">
-        <FormSelect
+        <FormBilSelect
           label="Select Network"
           value={network}
           setValue={setNetwork}

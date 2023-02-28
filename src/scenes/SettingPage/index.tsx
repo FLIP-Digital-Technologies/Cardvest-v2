@@ -1,26 +1,19 @@
-import { logoutUser } from '@api/Auth/auth';
+// import { logoutUser } from '@api/Auth/auth';
 import { Logout, Profile, Referral, RightAngle, Security, Suggestion } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { useQueryClient } from '@tanstack/react-query';
-import { cacheService } from '@utils/cache';
+// import { useQueryClient } from '@tanstack/react-query';
+// import { cacheService } from '@utils/cache';
 import { Divider, HStack, Text, View, VStack } from 'native-base';
 import React, { FC, memo } from 'react';
 import { Pressable } from 'react-native';
 
 const SettingsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   async function handleLogout() {
-    await cacheService.del('login-user');
-    await cacheService.del('user');
-    await navigation.navigate('Auth');
-    await queryClient.setQueriesData(['user'], null);
-    await queryClient.setQueriesData(['login-user'], null);
-    await queryClient.invalidateQueries({ queryKey: ['login-user'] });
-    await queryClient.invalidateQueries({ queryKey: ['user'] });
-    await queryClient.clear();
+    await navigation.navigate('LoginBack');
   }
   return (
     <BackButtonTitleCenter title="Settings">

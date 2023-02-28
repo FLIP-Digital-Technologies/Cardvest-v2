@@ -9,7 +9,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">#000000</item>
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
-        <item name="android:fontFamily">@font/satoshis</item>
+        <item name="android:fontFamily">@font/satoshi</item>
     </style>
 
 </resources>

@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
-import { Alert } from 'react-native';
 import { Asset, launchImageLibrary } from 'react-native-image-picker';
 
 export const rnd = (() => {

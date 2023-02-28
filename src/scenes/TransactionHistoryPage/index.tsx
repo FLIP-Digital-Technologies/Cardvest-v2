@@ -6,6 +6,7 @@ import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
+import { BoldText } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
 import { Box, useColorModeValue, Pressable, Text, View, FlatList } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
@@ -13,6 +14,7 @@ import { Animated, Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const FirstRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
   const [page] = useState(1);
@@ -37,7 +39,7 @@ const FirstRoute = () => {
   if (getTrancationData?.data?.length === 0)
     return (
       <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel />
+        <EmptyPanel action={() => navigation.navigate('SellGiftCard')} actionText="Trade Now" />
       </View>
     );
   return (
@@ -47,9 +49,9 @@ const FirstRoute = () => {
         renderItem={({ item }) => {
           return (
             <React.Fragment>
-              <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
                 {TransDate(item)}
-              </Text>
+              </BoldText>
               {a[item].map((item: any, ind: number) => (
                 <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
               ))}
@@ -70,6 +72,7 @@ const FirstRoute = () => {
 };
 
 const SecondRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
   const [page] = useState(1);
@@ -94,7 +97,7 @@ const SecondRoute = () => {
   if (getTrancationData?.data?.length === 0)
     return (
       <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel />
+        <EmptyPanel action={() => navigation.navigate('BuyGiftCard')} actionText="Trade Now" />
       </View>
     );
   return (
@@ -104,9 +107,9 @@ const SecondRoute = () => {
         renderItem={({ item }) => {
           return (
             <React.Fragment>
-              <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
                 {TransDate(item)}
-              </Text>
+              </BoldText>
               {a[item].map((item: any, ind: number) => (
                 <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
               ))}
@@ -127,6 +130,7 @@ const SecondRoute = () => {
 };
 
 const ThirdRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
   const [page] = useState(1);
@@ -151,7 +155,7 @@ const ThirdRoute = () => {
   if (getTrancationData?.data?.length === 0)
     return (
       <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel />
+        <EmptyPanel action={() => navigation.navigate('More')} actionText="Pay Bills" />
       </View>
     );
   return (
@@ -161,9 +165,9 @@ const ThirdRoute = () => {
         renderItem={({ item }) => {
           return (
             <React.Fragment>
-              <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
                 {TransDate(item)}
-              </Text>
+              </BoldText>
               {a[item].map((item: any, ind: number) => (
                 <TransactionPanel currency={currency} data={item} type={'utilities'} key={ind} />
               ))}
@@ -230,12 +234,12 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
                   console.log(i);
                   setIndex(i);
                 }}>
-                <Animated.Text
+                <Text
                   style={{
                     color,
                   }}>
                   {route.title}
-                </Animated.Text>
+                </Text>
               </Pressable>
             </Box>
           );

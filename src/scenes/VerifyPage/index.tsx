@@ -35,9 +35,6 @@ const Verify: FC<{ route: any }> = ({ route }) => {
             my="3"
             width="95%"
             size="lg"
-            _text={{
-              width: '150%',
-            }}
             p="4"
             fontSize="md"
             backgroundColor="CARDVESTGREEN"

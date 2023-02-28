@@ -5,7 +5,7 @@ import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { ProgressStepperIndicator } from '@scenes/KYCPage';
-import { validateEmail } from '@scenes/LoginPage';
+import { BoldText, validateEmail } from '@scenes/LoginPage';
 import { View, Text, Center, Button, Pressable, ScrollView, HStack, CheckIcon, Select, Box } from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
 
@@ -205,9 +205,6 @@ const StepThree = (props: any) => {
         my="3"
         size="lg"
         py="4"
-        _text={{
-          width: '150%',
-        }}
         fontSize="md"
         backgroundColor="CARDVESTGREEN"
         color="white">
@@ -270,9 +267,9 @@ const SignUp: FC = () => {
         }}
         showsVerticalScrollIndicator={false}>
         <Center mt="-24">
-          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
+          <BoldText mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl">
             Create Account
-          </Text>
+          </BoldText>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
             Enter your details to get started
           </Text>

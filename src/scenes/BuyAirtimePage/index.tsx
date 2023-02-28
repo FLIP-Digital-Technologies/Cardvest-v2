@@ -2,7 +2,7 @@ import { useAirtimePlansProviders, usePurchaseAirtime } from '@api/hooks/useTran
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
-import { FormSelect } from '@scenes/CalculatorPage';
+import { FormBilSelect } from '@scenes/CalculatorPage';
 import { View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
@@ -34,7 +34,7 @@ const BuyAirtimePage: FC = () => {
       title="Buy Airtime"
       actionText="Buy Airtime">
       <View my="7">
-        <FormSelect
+        <FormBilSelect
           label="Select Network"
           value={network}
           setValue={setNetwork}

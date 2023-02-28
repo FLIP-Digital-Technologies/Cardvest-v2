@@ -4,6 +4,7 @@ import IntroPng from '@assets/images/intro.png';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { BoldText } from '@scenes/LoginPage';
 import { View, Text, Center, Image, Button, HStack, Pressable } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 import PagerView from 'react-native-pager-view';
@@ -11,9 +12,9 @@ import Svg, { Circle } from 'react-native-svg';
 
 export const SlidePage = ({ title, body }: { title: string; body: string }) => (
   <Center flex={4}>
-    <Text color="CARDVESTGREEN" textAlign="center" width="80%" fontSize="3xl" py="2" fontWeight="bold">
+    <BoldText color="CARDVESTGREEN" textAlign="center" width="80%" fontSize="3xl" py="2">
       {title}
-    </Text>
+    </BoldText>
     <Text color="CARDVESTGREY.100" textAlign="center" width="80%" fontSize="md" fontWeight="light">
       {body}
     </Text>

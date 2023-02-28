@@ -2,7 +2,7 @@ import { useGetWifiPlans, usePurchaseWifi, useWifiPlansProviders } from '@api/ho
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
-import { FormSelect } from '@scenes/CalculatorPage';
+import { FormBilSelect, FormSelect } from '@scenes/CalculatorPage';
 import { View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
@@ -40,7 +40,7 @@ const BuyWifiPage: FC = () => {
       title="Buy Wifi"
       actionText="Buy Wifi">
       <View my="7">
-        <FormSelect
+        <FormBilSelect
           label="Select Provider"
           value={network}
           setValue={setNetwork}

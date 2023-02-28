@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { logoutUser } from '@api/Auth/auth';
 import {
   CloseBtn,
   DrawerTopBG,
@@ -199,17 +198,10 @@ function CustomDrawerContent(props: any) {
       return JSON.parse(res);
     },
   });
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   async function handleLogout() {
-    await cacheService.del('login-user');
-    await cacheService.del('user');
-    await navigation.navigate('Auth');
-    await queryClient.setQueriesData(['user'], null);
-    await queryClient.setQueriesData(['login-user'], null);
-    await queryClient.invalidateQueries({ queryKey: ['login-user'] });
-    await queryClient.invalidateQueries({ queryKey: ['user'] });
-    await queryClient.clear();
+    await navigation.navigate('LoginBack');
   }
 
   return (

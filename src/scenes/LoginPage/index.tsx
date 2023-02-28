@@ -1,12 +1,27 @@
 import { useLoginUser } from '@api/hooks/useAuth';
-import { Bio, Logo } from '@assets/SVG';
+import { Logo } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
-import UseFingerprint from '@hooks/useFingerPrint';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
+import { View, Text, Center, Button, Box, Pressable, ScrollView, Heading } from 'native-base';
 import React, { FC, memo, useState } from 'react';
+import { Platform } from 'react-native';
+
+export const BoldText = (props: any) => {
+  if (Platform.OS === 'ios') {
+    return (
+      <Text fontWeight={'700'} {...props}>
+        {props.children}
+      </Text>
+    );
+  }
+  return (
+    <Text fontFamily="Satoshi-Bold" {...props}>
+      {props.children}
+    </Text>
+  );
+};
 
 export const validateEmail = (value: string) => {
   if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]{2,})+$/i.test(value)) {
@@ -18,7 +33,6 @@ export const validateEmail = (value: string) => {
 const Login: FC = () => {
   const { mutate: loginUser, isLoading } = useLoginUser();
   const navigation = useNavigation<GenericNavigationProps>();
-  const { showAuthenticationDialog } = UseFingerprint();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
@@ -45,9 +59,9 @@ const Login: FC = () => {
           <Box p="4" width={20} height={20}>
             <Logo />
           </Box>
-          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
+          <BoldText mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl">
             Welcome
-          </Text>
+          </BoldText>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
             Enter your details to login
           </Text>
@@ -61,7 +75,7 @@ const Login: FC = () => {
             </Text>
           </Pressable>
         </View>
-        <Center px="2">
+        <Center mb="5" px="2">
           <Button
             onPress={() => handleSubmit()}
             isDisabled={handleDisabled()}
@@ -69,9 +83,6 @@ const Login: FC = () => {
             width="95%"
             size="lg"
             p="4"
-            _text={{
-              width: '150%',
-            }}
             isLoading={isLoading}
             isLoadingText="Logging in"
             fontSize="md"
@@ -79,13 +90,10 @@ const Login: FC = () => {
             color="white">
             Login
           </Button>
-          <Pressable w="100%" mt="2" onPress={() => navigation.navigate('SignUp')}>
+          <Pressable mt="2" onPress={() => navigation.navigate('SignUp')}>
             <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
               Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
             </Text>
-          </Pressable>
-          <Pressable onPress={showAuthenticationDialog} mt="10" p="4" width={20} height={20}>
-            <Bio />
           </Pressable>
         </Center>
       </ScrollView>

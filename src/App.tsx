@@ -19,12 +19,13 @@ enableScreens();
 const customTextProps = {
   allowFontScaling: false,
   style: {
-    width: Platform.OS === 'android' ? '100%' : 'auto',
+    fontFamily: 'Satoshi',
+    // width: Platform.OS === 'android' ? '100%' : 'auto',
   },
 };
 
-setCustomTextInput(customTextProps);
 setCustomText(customTextProps);
+setCustomTextInput(customTextProps);
 
 // Create a react-query client
 const queryClient = new QueryClient({

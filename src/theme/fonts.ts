@@ -39,7 +39,7 @@ const typography = {
       },
       700: {
         normal: 'Satoshi-Bold',
-        italic: 'Satoshi-Bold',
+        italic: 'Satoshi-BoldItalic',
       },
       900: {
         normal: 'Satoshi-Black',
@@ -50,9 +50,9 @@ const typography = {
 
   // Make sure values below matches any of the keys in `fontConfig`
   fonts: {
-    heading: 'Satoshi',
-    body: 'Satoshi',
-    mono: 'Satoshi',
+    heading: 'Satoshi-Bold',
+    body: 'Satoshi-Regular',
+    mono: 'Satoshi-Light',
   },
 
   fontSizes: {

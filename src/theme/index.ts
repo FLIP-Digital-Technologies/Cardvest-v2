@@ -1,4 +1,5 @@
 import { extendTheme } from 'native-base';
+import { Platform } from 'react-native';
 import palette from './colors';
 import typography from './fonts';
 
@@ -47,9 +48,12 @@ const customTheme = extendTheme({
       },
     },
     Text: {
-      defaultProps: {
-        fontFamily: 'Satoshi',
-      },
+      defaultProps:
+        Platform.OS === 'ios'
+          ? {
+              fontFamily: 'Satoshi',
+            }
+          : {},
     },
   },
 

@@ -23,7 +23,7 @@ const AuthStack = createStackNavigator();
 
 export const AuthStackScreen: FC = () => {
   return (
-    <AuthStack.Navigator initialRouteName="Login">
+    <AuthStack.Navigator>
       <AuthStack.Screen
         name="Login"
         component={LoginPage}
@@ -84,8 +84,6 @@ export const AuthStackScreen: FC = () => {
   );
 };
 
-const i = Date.now();
-
 export const RootStackScreen: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { data, isFetching } = useQuery({
@@ -97,14 +95,14 @@ export const RootStackScreen: FC = () => {
       try {
         const toks = await cacheService.get('login-user');
         const res = await cacheService.get('firstTime');
-        if (res === 'Yes' && toks.length === 0) {
-          await navigation.navigate('Auth');
+        if (res !== 'Yes') {
+          await navigation.navigate('Intro');
           return;
-        }
-        if (toks.length > 0) {
+        } else if (res === 'Yes' && toks.length === 0) {
+          await navigation.navigate('Login');
+          return;
+        } else if (res === 'Yes' && toks.length > 0) {
           navigation.navigate('LoginBack');
-        } else {
-          navigation.navigate('Auth');
         }
       } catch (error) {
         return false;
@@ -112,18 +110,6 @@ export const RootStackScreen: FC = () => {
     }
     fetchToks();
   });
-
-  useEffect(() => {
-    const fetchFirstTime = async () => {
-      const res = await cacheService.get('firstTime');
-      if (res === 'Yes') {
-        await navigation.navigate('Auth');
-      } else {
-        await navigation.navigate('Intro');
-      }
-    };
-    fetchFirstTime();
-  }, []);
   useEffect(() => {
     navigationService.navigation = navigation;
   }, [navigation]);
@@ -136,15 +122,15 @@ export const RootStackScreen: FC = () => {
       {/* ) : ( */}
       <React.Fragment>
         <RootStack.Screen
-          name="Intro"
-          component={IntroPage}
+          name="Auth"
+          component={AuthStackScreen}
           options={{
             headerShown: false,
           }}
         />
         <RootStack.Screen
-          name="Auth"
-          component={AuthStackScreen}
+          name="Intro"
+          component={IntroPage}
           options={{
             headerShown: false,
           }}

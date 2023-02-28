@@ -69,16 +69,6 @@ const DeleteAccountPage: FC = () => {
             />
           </View>
         )}
-        {/* <FormSelect
-          label="Select Network"
-          value={network}
-          setValue={setNetwork}
-          data={proviDate?.data?.map((item: any) => ({ name: item?.name, id: item?.product }))}
-        />
-        <View p="3" />
-        <Input label="Amount" value={amount?.toString()} onChangeText={setAmount} />
-        <View p="3" />
-        <Input label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} /> */}
       </View>
     </BackButtonTitleCenter>
   );

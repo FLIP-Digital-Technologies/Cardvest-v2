@@ -5,8 +5,8 @@ import Input from '@components/Input';
 import UseFingerprint from '@hooks/useFingerPrint';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { validateEmail } from '@scenes/LoginPage';
-// import { useQueryClient } from '@tanstack/react-query';
+import { BoldText, validateEmail } from '@scenes/LoginPage';
+import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
 import React, { FC, memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
@@ -15,7 +15,7 @@ const LoginBack: FC = () => {
   const { mutate: loginUser, isLoading } = useLoginUser();
   const [data, setData] = useState();
   const navigation = useNavigation<GenericNavigationProps>();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const { showAuthenticationDialog } = UseFingerprint();
   useLayoutEffect(() => {
     async function fetchData() {
@@ -42,6 +42,16 @@ const LoginBack: FC = () => {
       console.error(error);
     }
   };
+  async function handleLogout() {
+    await cacheService.del('login-user');
+    await cacheService.del('user');
+    await queryClient.setQueriesData(['user'], null);
+    await queryClient.setQueriesData(['login-user'], null);
+    await queryClient.invalidateQueries({ queryKey: ['login-user'] });
+    await queryClient.invalidateQueries({ queryKey: ['user'] });
+    await queryClient.clear();
+    await navigation.navigate('Login');
+  }
   const handleDisabled = () => !data?.email || !password || isLoading || validateEmail(data?.email);
   return (
     <CSafeAreaView>
@@ -55,21 +65,16 @@ const LoginBack: FC = () => {
           <Box p="4" width={20} height={20}>
             <Logo />
           </Box>
-          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
+          <BoldText mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="xl">
             Welcome Back, {!data?.firstname && !data?.lastname && data?.username?.toString()}
             {data?.firstname && data?.lastname && data?.firstname?.toString()}
-          </Text>
+          </BoldText>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
             Enter your password to continue
           </Text>
         </Center>
         <View p="3">
           <Input type="password" label="Password" onChangeText={setPassword} />
-          <Pressable mt="2" onPress={() => navigation.navigate('ForgetPassword')}>
-            <Text textAlign="right" fontSize="md" color="CARDVESTGREEN">
-              Forgot Password?
-            </Text>
-          </Pressable>
         </View>
         <Center px="2">
           <Button
@@ -79,9 +84,6 @@ const LoginBack: FC = () => {
             width="95%"
             size="lg"
             p="4"
-            _text={{
-              width: '150%',
-            }}
             isLoading={isLoading}
             isLoadingText="Logging in"
             fontSize="md"
@@ -89,9 +91,9 @@ const LoginBack: FC = () => {
             color="white">
             Login
           </Button>
-          <Pressable w="100%" mt="2" onPress={() => navigation.navigate('SignUp')}>
+          <Pressable w="100%" mt="2" onPress={() => handleLogout()}>
             <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
-              Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
+              <Text fontWeight={'bold'}>Sign Out</Text>
             </Text>
           </Pressable>
           <Pressable onPress={showAuthenticationDialog} mt="10" p="4" width={20} height={20}>

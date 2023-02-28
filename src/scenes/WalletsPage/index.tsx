@@ -5,6 +5,7 @@ import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { BalancePanel, EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
+import { BoldText } from '@scenes/LoginPage';
 import { HStack, Pressable, Text, View, VStack } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 
@@ -43,7 +44,7 @@ const WalletsPage: FC = () => {
   return (
     <BackButtonTitleCenter onRefresh={onRefresh} title="Wallets">
       <View mt="4">
-        <BalancePanel defaultCurrency={currency} withDeposit={false} />
+        <BalancePanel defaultCurrency={currency} withDeposit={true} />
 
         <VStack my="5">
           <View>
@@ -57,14 +58,14 @@ const WalletsPage: FC = () => {
             </HStack>
             {/* // TODO: make into a flatlist */}
             {getWalletData?.data?.length === 0 ? (
-              <EmptyPanel />
+              <EmptyPanel action={() => navigation.navigate('SellGiftCard')} actionText="Trade Now" />
             ) : (
               Object.keys(a).map((key, index) => {
                 return (
                   <React.Fragment key={index}>
-                    <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+                    <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
                       {TransDate(key)}
-                    </Text>
+                    </BoldText>
                     {a[key].map((item: any, ind: number) => (
                       <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
                     ))}

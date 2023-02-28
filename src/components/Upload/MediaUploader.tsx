@@ -1,4 +1,5 @@
 import { Pic } from '@assets/SVG';
+import { BoldText } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
@@ -178,7 +179,7 @@ export default function MediaUploader({
               height: '100%',
             }}>
             <View style={{ flex: 1, width: '100%' }}>
-              <Text style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>Upload Images</Text>
+              <BoldText style={{ marginBottom: 8, textAlign: 'center' }}>Upload Images</BoldText>
               <Pressable style={styles.upload_area} onPress={() => selectImage()}>
                 <View w="7" h="7">
                   <Pic />

@@ -1,6 +1,7 @@
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { usePin } from '@hooks/usePin';
+import { BoldText } from '@scenes/LoginPage';
 import { View, Center, Button, ScrollView, Text, VStack } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
@@ -19,9 +20,9 @@ const ForgotPinPage: FC = () => {
         showsVerticalScrollIndicator={false}>
         <VStack mt="16">
           <Center mt="16">
-            <Text mt="4" mb="2" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg" fontWeight="bold">
+            <BoldText mt="4" mb="2" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg">
               Confirm Password
-            </Text>
+            </BoldText>
             <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" w="85%" fontWeight="light">
               Enter your account password to continue
             </Text>

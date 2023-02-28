@@ -1,4 +1,5 @@
 import { useGetNotification } from '@api/hooks/useUser';
+import { NotificationBigBell } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { EmptyPanel } from '@scenes/DashboardPage';
@@ -41,11 +42,7 @@ const NotificationsPage: FC = () => {
   return (
     <BackButtonTitleCenter title="Notifications">
       <VStack my="7">
-        {data?.data?.length === 0 ? (
-          <View w="100%" h="full" justifyContent={'center'}>
-            <EmptyPanel title="No Notifications" body="New updates will appear here." />
-          </View>
-        ) : (
+        {data?.data?.length > 0 ? (
           <FlatList
             data={data?.data}
             renderItem={({ item }) => <Card data={item} />}
@@ -54,6 +51,10 @@ const NotificationsPage: FC = () => {
             refreshing={isFetching}
             onEndReached={data?.meta?.current_page < data?.meta?.last_page ? () => setPage(page + 1) : () => null}
           />
+        ) : (
+          <View w="100%" h="full" justifyContent={'center'}>
+            <EmptyPanel Icon={NotificationBigBell} title="No Notifications" body="New updates will appear here." />
+          </View>
         )}
       </VStack>
     </BackButtonTitleCenter>

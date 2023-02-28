@@ -3,12 +3,16 @@ import { WithdrawalEmpty } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
+import { BoldText } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
 import { FlatList, HStack, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
 const WithdrawalsPage: FC = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
   const queryClient = useQueryClient();
   const { currency } = useCurrency();
   const [page] = useState(1);
@@ -39,6 +43,8 @@ const WithdrawalsPage: FC = () => {
               Icon={WithdrawalEmpty}
               title=""
               body="You haven not made any withdrawal. Trade now to earn instantly."
+              action={() => navigation.navigate('Withdraw')}
+              actionText="Withdraw Funds"
             />
           </View>
         ) : (
@@ -47,9 +53,9 @@ const WithdrawalsPage: FC = () => {
             renderItem={({ item }) => {
               return (
                 <React.Fragment>
-                  <Text p="2" w="100%" bg="#F9F9F9" my="3" fontWeight="700" textAlign="center">
+                  <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
                     {TransDate(item)}
-                  </Text>
+                  </BoldText>
                   {a[item].map((item: any, ind: number) => (
                     <TransactionPanel currency={currency} data={item} type={'withdrawals'} key={ind} />
                   ))}

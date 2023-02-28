@@ -4,7 +4,7 @@ import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { validateEmail } from '@scenes/LoginPage';
+import { BoldText, validateEmail } from '@scenes/LoginPage';
 import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
@@ -40,9 +40,9 @@ const ForgetPasswordEnterEmail: FC = () => {
           <Box p="4" width={20} height={20}>
             <Logo />
           </Box>
-          <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg" fontWeight="bold">
+          <BoldText mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="lg">
             Forgot Password
-          </Text>
+          </BoldText>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" w="85%" fontWeight="light">
             Please enter the email address of your account
           </Text>
