@@ -14,6 +14,14 @@ import {
   WalletCircle,
   CardsCircle,
   UtilitiesCircle,
+  MTN,
+  Airtel,
+  NMobile,
+  Glo,
+  Smile,
+  Spectranet,
+  Dstv,
+  Gotv,
 } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import CSafeAreaView from '@components/CSafeAreaView';
@@ -28,6 +36,29 @@ import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, 
 import React, { FC, memo, useMemo } from 'react';
 import { RefreshControl } from 'react-native';
 import { getWidth } from '../../App';
+
+function BillAvatar(type: string) {
+  switch (type?.toLowerCase()) {
+    case 'mtn':
+      return <MTN />;
+    case 'airtel':
+      return <Airtel />;
+    case '9mobile':
+      return <NMobile />;
+    case 'glo':
+      return <Glo />;
+    case 'smile':
+      return <Smile />;
+    case 'spectranet':
+      return <Spectranet />;
+    case 'dstv':
+      return <Dstv />;
+    case 'gotv':
+      return <Gotv />;
+    default:
+      return <UtilitiesCircle />;
+  }
+}
 
 export const Money = (amount: any, currency: string) =>
   new Intl.NumberFormat('en-US', {
@@ -103,18 +134,18 @@ export const BalancePanel = ({
   return (
     <Box position="relative" justifyContent="flex-start" mb="10" mt="4">
       <Image source={img} alt="image" borderRadius="lg" minH="195" w="100%" />
-      <VStack py="8" px="5" position="absolute" w="100%">
-        <View>
+      <VStack pt="4" pb="8" px="5" position="absolute" w="100%">
+        <HStack justifyContent={'space-between'} alignItems={'center'}>
           <Text color="white" fontSize="md">
             Wallet Balance
           </Text>
-        </View>
-        <HStack pb="3" justifyContent={'space-between'} alignItems={'center'}>
+          <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
+        </HStack>
+        <HStack pb="3">
           <Text color="white" fontSize="2xl" w="70%" numberOfLines={1}>
             {currency === 'NGN' ? '₦' : '₵'}
             {Money(balance || 0, currency) || 0}
           </Text>
-          <CurrencyPicker {...{ currency, setCurrency: handleSwitchCurrency }} />
         </HStack>
         <View my="1.5" />
         {withDeposit ? (
@@ -244,7 +275,7 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
           )}
           {type === 'utilities' && (
             <View w="10" h="10">
-              <UtilitiesCircle />
+              {BillAvatar(data?.bill?.product)}
             </View>
           )}
           <VStack mx="3">

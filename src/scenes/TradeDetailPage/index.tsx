@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useGetTransaction } from '@api/hooks/useTransactions';
 import { ReportAccount } from '@assets/SVG';
 import CLoader from '@components/CLoader';
@@ -23,7 +22,17 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
               <Modal.CloseButton />
               <VStack mt="8" px="2">
                 {images?.map((uri: string, index) => {
-                  return <UploadPanel source={uri} showIcon={false} key={index} />;
+                  return (
+                    <Pressable
+                      key={index}
+                      onPress={() =>
+                        setShowIndModal({
+                          uri,
+                        })
+                      }>
+                      <UploadPanel source={uri} showIcon={false} />
+                    </Pressable>
+                  );
                 })}
                 <View mt="20" />
                 <VStack>
@@ -45,11 +54,11 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
       )}
       {showIndModal && (
         <Modal isOpen={showIndModal} onClose={() => setShowIndModal(false)}>
-          <Modal.Content maxWidth="500px">
+          <Modal.Content maxWidth="500px" h="400px">
             <Modal.Body>
               <Modal.CloseButton />
               <VStack mt="8" px="2">
-                <Image source={showIndModal} alt="image" borderRadius="lg" minH="12" mx="2" w="100%" />
+                <Image source={showIndModal} alt="image" borderRadius="lg" minH="12" mx="2" h="300px" />
                 <View mt="20" />
               </VStack>
             </Modal.Body>

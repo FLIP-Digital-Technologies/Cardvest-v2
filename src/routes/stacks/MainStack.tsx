@@ -16,6 +16,8 @@ import {
   Settings,
   BuyGiftCardMore,
 } from '@assets/SVG';
+import env from '@env';
+import messaging from '@react-native-firebase/messaging';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -67,9 +69,12 @@ import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
 import WithdrawalsPage from '@scenes/WithdrawalsPage';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
+import axios from 'axios';
 import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
 import { FC } from 'react';
 import * as React from 'react';
+import deviceInfoModule from 'react-native-device-info';
+import { notificationManager } from '../../NotificationManager';
 
 const MainStack = createStackNavigator();
 const DashboardDrawer = createDrawerNavigator();
@@ -320,6 +325,71 @@ const DashboardDrawerStack: FC = () => {
 };
 
 export const MainStackScreen: FC = () => {
+  const [data, setData] = React.useState();
+  React.useLayoutEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await cacheService.get('user');
+        setData(JSON.parse(res || {}));
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      sendFcmToken();
+      console.log('Authorization status:', authStatus);
+    }
+  }
+
+  React.useEffect(() => {
+    requestUserPermission();
+  }, []);
+
+  const sendFcmToken = async () => {
+    console.log('Your Firebase Token is:', 'deviceToken');
+    try {
+      await messaging().registerDeviceForRemoteMessages();
+      const deviceToken = await messaging().getToken();
+      console.log('Your Firebase Token is:', deviceToken);
+
+      const res = await axios.post(`${env.API_URL}/push-notification/register`, {
+        token: deviceToken,
+        description: deviceInfoModule.getDeviceId(),
+        user_id: data?.id,
+        type: 'register',
+      });
+      console.log('Your Firebase Token is:', deviceToken, 'res is', res);
+    } catch (err) {
+      //Do nothing
+      console.error(err);
+      return;
+    }
+  };
+
+  React.useEffect(() => {
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async (remoteMessage: any) => {
+      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      notificationManager.showNotification(
+        remoteMessage?.messageId,
+        remoteMessage?.notification?.title,
+        remoteMessage?.notification?.body,
+        remoteMessage?.data,
+        remoteMessage?.options,
+        remoteMessage?.date || new Date(),
+      );
+    });
+    return unsubscribe;
+  }, []);
   return (
     <MainStack.Navigator initialRouteName="Home">
       <MainStack.Screen

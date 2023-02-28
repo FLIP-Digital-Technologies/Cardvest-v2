@@ -1,4 +1,3 @@
-import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GenericNavigationProps } from '@routes/types';
@@ -15,9 +14,7 @@ import VerifyPage from '@scenes/VerifyPage';
 import { useQuery } from '@tanstack/react-query';
 import navigationService from '@utils/Nav';
 import { cacheService } from '@utils/cache';
-import axios from 'axios';
 import React, { FC, useEffect, useLayoutEffect } from 'react';
-import { notificationManager } from '../NotificationManager';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
 
@@ -115,24 +112,6 @@ export const RootStackScreen: FC = () => {
     }
     fetchToks();
   });
-  useEffect(() => {
-    navigationService.navigation = navigation;
-  }, [navigation]);
-  useEffect(() => {
-    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Auth');
-  }, [data]);
-
-  async function requestUserPermission() {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      sendFcmToken();
-      console.log('Authorization status:', authStatus);
-    }
-  }
 
   useEffect(() => {
     const fetchFirstTime = async () => {
@@ -144,40 +123,13 @@ export const RootStackScreen: FC = () => {
       }
     };
     fetchFirstTime();
-    requestUserPermission();
   }, []);
-
-  const sendFcmToken = async () => {
-    console.log('Your Firebase Token is:', 'deviceToken');
-    try {
-      await messaging().registerDeviceForRemoteMessages();
-      const deviceToken = await messaging().getToken();
-      console.log('Your Firebase Token is:', deviceToken);
-
-      const res = await axios.post('https://dart-africa.herokuapp.com/device/token', { deviceToken });
-      console.log('Your Firebase Token is:', deviceToken, 'res is', res);
-    } catch (err) {
-      //Do nothing
-      console.error(err);
-      return;
-    }
-  };
-
-  React.useEffect(() => {
-    requestUserPermission();
-    const unsubscribe = messaging().onMessage(async (remoteMessage: any) => {
-      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
-      notificationManager.showNotification(
-        remoteMessage?.messageId,
-        remoteMessage?.notification?.title,
-        remoteMessage?.notification?.body,
-        remoteMessage?.data,
-        remoteMessage?.options,
-        remoteMessage?.date || new Date(),
-      );
-    });
-    return unsubscribe;
-  }, []);
+  useEffect(() => {
+    navigationService.navigation = navigation;
+  }, [navigation]);
+  useEffect(() => {
+    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Auth');
+  }, [data]);
   return (
     <RootStack.Navigator>
       {/* {typeof data === 'string' && data.length > 3 ? ( */}

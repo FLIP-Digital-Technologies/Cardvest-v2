@@ -42,22 +42,25 @@ function useLoginUser() {
   const queryClient = useQueryClient();
   return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
     onSuccess: async data => {
-      if (data?.data?.user?.email_verified)
+      console.log(data?.data);
+      if (!data?.data?.user?.email_verified) {
         return onOpenToast({
           status: 'error',
           message: 'Please kindly verify your email.',
         });
-      await cacheService.put('login-user', data?.data?.token);
-      await queryClient.setQueryData(['login-user'], data?.data?.token);
-      const user = await getUserData(data?.data?.token);
-      await queryClient.setQueryData([`user`], user?.data);
-      await cacheService.put('user', user?.data);
-      await cacheService.put('firstTime', 'Yes');
-      await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
-      onOpenToast({
-        status: 'success',
-        message: 'Login successful',
-      });
+      } else {
+        await cacheService.put('login-user', data?.data?.token);
+        await queryClient.setQueryData(['login-user'], data?.data?.token);
+        const user = await getUserData(data?.data?.token);
+        await queryClient.setQueryData([`user`], user?.data);
+        await cacheService.put('user', user?.data);
+        await cacheService.put('firstTime', 'Yes');
+        await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
+        onOpenToast({
+          status: 'success',
+          message: 'Login successful',
+        });
+      }
     },
     onError: (data: AxiosError) => {
       console.log(data);

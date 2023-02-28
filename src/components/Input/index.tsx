@@ -7,6 +7,7 @@ export const getKeyboardType = (label: string) => {
     case 'Mobile Number':
     case 'Phone Number':
     case 'Meter Number':
+    case 'Account Number':
       return 'phone-pad';
     case 'Amount':
     case 'Amount in USD':

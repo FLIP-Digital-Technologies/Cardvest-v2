@@ -140,7 +140,7 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
             setSelectedImage(filenames);
           }}
           onImageUploaded={filenames => {
-            setSelectedImage((prevFiles: any) => [...prevFiles, filenames[0]]);
+            setSelectedImage(filenames);
           }}
           CustomButton={UploadButton}
         />

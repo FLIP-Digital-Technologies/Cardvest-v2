@@ -6,16 +6,30 @@ import UseFingerprint from '@hooks/useFingerPrint';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { validateEmail } from '@scenes/LoginPage';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
+import { cacheService } from '@utils/cache';
 import { View, Text, Center, Button, Box, Pressable, ScrollView } from 'native-base';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
 const LoginBack: FC = () => {
   const { mutate: loginUser, isLoading } = useLoginUser();
+  const [data, setData] = useState();
   const navigation = useNavigation<GenericNavigationProps>();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { showAuthenticationDialog } = UseFingerprint();
-  const data: any = queryClient.getQueryData(['user']);
+  useLayoutEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await cacheService.get('user');
+        setData(JSON.parse(res || {}));
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  console.log(data);
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
     try {

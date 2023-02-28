@@ -24,16 +24,15 @@ const AddAccountPage: FC = () => {
         console.log(err);
       }
     }
-    if (accNumber.length > 9 && accNumber.length < 11 && accBank) {
+    if (accNumber.length > 9 && accNumber.length < 11 && accBank && currency === 'NGN') {
       verAcc();
     }
   }, [accNumber, accBank]);
   const handleDisabled = () =>
-    !(accNumber.length > 9 && accNumber.length < 11 && accBank) ||
+    !(currency === 'GHS' ? true : accNumber.length > 9 && accNumber.length < 11 && accBank) ||
     !accNumber ||
     !accBank ||
-    !(bankAccount?.data?.account_name && currency === 'NGN') ||
-    !(accountname && currency === 'GHS');
+    !(currency === 'GHS' ? accountname : bankAccount?.data?.account_name);
   const handleSubmit = async () => {
     try {
       await createBankAccount({

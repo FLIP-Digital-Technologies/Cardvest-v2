@@ -95,7 +95,7 @@ export const FormCurrencyPicker = (props: any) => {
 export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; setCurrency: any }) => (
   <Select
     selectedValue={currency}
-    w="90px"
+    w="93px"
     accessibilityLabel="Choose Currency"
     placeholder=""
     backgroundColor="#F7F2DD"
@@ -167,9 +167,9 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
 const WithdrawalUSDT: FC = () => {
   const input = React.useRef(null);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [amount, setAmount] = React.useState<number>(0);
+  const [amount, setAmount] = React.useState<number>(0.0);
   const [account, setAccount] = React.useState('');
-  const [amountUSD, setAmountUSD] = React.useState<number>(0);
+  const [amountUSD, setAmountUSD] = React.useState<number>(0.0);
   const [network, setNetwork] = React.useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
   const { currency, handleSwitchCurrency } = useCurrency();
@@ -216,10 +216,10 @@ const WithdrawalUSDT: FC = () => {
                 color="black"
                 fontSize="3xl"
                 ref={input}
-                value={amount?.toString()}
+                value={parseFloat(amount?.toString())?.toFixed(2)}
                 onChangeText={val => {
-                  setAmount(Number(val));
-                  setAmountUSD(Number(val) / rate);
+                  setAmount(parseFloat(val));
+                  setAmountUSD(parseFloat(val) / rate);
                 }}
                 keyboardType="decimal-pad"
                 variant="unstyled"
@@ -248,10 +248,10 @@ const WithdrawalUSDT: FC = () => {
                 keyboardType="numeric"
                 fontSize="3xl"
                 onChangeText={val => {
-                  setAmountUSD(Number(val));
-                  setAmount(Number(val) * rate);
+                  setAmountUSD(parseFloat(val));
+                  setAmount(parseFloat(val) * rate);
                 }}
-                value={amountUSD?.toString()}
+                value={parseFloat(amountUSD?.toString())?.toFixed(amountUSD === 0 ? 2 : 6)}
                 variant="unstyled"
               />
             </HStack>
