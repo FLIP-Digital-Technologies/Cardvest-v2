@@ -39,8 +39,18 @@ const del = async (key: string) => {
   }
 };
 
+const clear = async () => {
+  try {
+    return await AsyncStorage.clear();
+  } catch (e) {
+    console.warn('CacheService: Failed to clear ');
+    __DEV__ && console.log(e);
+  }
+};
+
 export const cacheService = {
   put,
   get,
   del,
+  clear,
 };

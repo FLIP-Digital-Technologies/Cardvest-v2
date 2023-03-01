@@ -21,7 +21,7 @@
       android:usesCleartextTraffic="true"
       android:theme="@style/AppTheme"
     >
-      <!-- <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground" android:value="false"/>
+      <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground" android:value="false"/>
       <meta-data android:name="com.dieam.reactnativepushnotification.notification_color" android:resource="@color/white"/>
       <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" android:exported="true" />
       <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" android:exported="true" />
@@ -31,15 +31,15 @@
           <action android:name="android.intent.action.QUICKBOOT_POWERON" />
           <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
         </intent-filter>
-      </receiver> -->
-<!-- 
+      </receiver>
+
       <service
         android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
         android:exported="false">
         <intent-filter>
           <action android:name="com.google.firebase.MESSAGING_EVENT" />
         </intent-filter>
-      </service> -->
+      </service>
       <activity
         android:name=".SplashActivity"
         android:theme="@style/SplashTheme"

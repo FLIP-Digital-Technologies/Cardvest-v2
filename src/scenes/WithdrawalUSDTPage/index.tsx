@@ -175,6 +175,7 @@ const WithdrawalUSDT: FC = () => {
   const input = React.useRef(null);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [amount, setAmount] = React.useState<number>(0);
+  const [amountUSD, setAmountUSD] = React.useState<number>(0);
   const [account, setAccount] = React.useState('');
   const [network, setNetwork] = React.useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
@@ -182,6 +183,40 @@ const WithdrawalUSDT: FC = () => {
   const { data: rates } = useGetWithdrawalsUSDTRate(currency);
   const { data: networks } = useGetWithdrawalsUSDTNetwork();
   const rate = rates?.data?.[currency];
+  const handleAmount = (val: string) => {
+    console.log(val, 'ajsk', Number(val));
+    setAmount(parseFloat(val));
+    // check what fiat it is and multiply amount by the fiat rate
+    if (!val) {
+      setAmountUSD(0);
+    } else {
+      if (currency === 'NGN') {
+        const res = parseFloat(val) / (rates?.data ? rates?.data?.NGN : 0);
+        setAmountUSD(res);
+      }
+      if (currency === 'GHS') {
+        const res = parseFloat(val) / (rates?.data ? rates?.data?.GHS : 0);
+        setAmountUSD(res);
+      }
+    }
+  };
+  const handleUSDTAmount = (val: string) => {
+    console.log(val);
+    setAmountUSD(parseFloat(val));
+    // check what fiat it is and multiply amount by the fiat rate
+    if (!val) {
+      setAmount(0);
+    } else {
+      if (currency === 'NGN') {
+        const res = parseFloat(val) * (rates?.data ? rates?.data?.NGN : 0);
+        setAmount(res);
+      }
+      if (currency === 'GHS') {
+        const res = parseFloat(val) * (rates?.data ? rates?.data?.GHS : 0);
+        setAmount(res);
+      }
+    }
+  };
   const handleSubmit = async () => {
     try {
       await withdrawFunds({
@@ -200,10 +235,6 @@ const WithdrawalUSDT: FC = () => {
   useEffect(() => {
     input?.current?.focus();
   }, []);
-  const usd = useMemo(() => {
-    const ans = Number(amount) / rate || 0;
-    return ans.toString() === 'NaN' ? 0 : ans;
-  }, [amount, rates]);
   return (
     <BackButtonTitleCenter
       isLoading={isLoading}
@@ -227,16 +258,8 @@ const WithdrawalUSDT: FC = () => {
                 color="black"
                 fontSize="3xl"
                 ref={input}
-                value={
-                  amount?.toString() === 'NaN'
-                    ? '0'
-                    : amount?.toString()?.split('.')?.[1]?.length > 6
-                    ? parseFloat(amount?.toString())?.toFixed(6)
-                    : parseFloat(amount?.toString())?.toString()
-                }
-                onChangeText={val => {
-                  setAmount(parseFloat(val));
-                }}
+                value={amount?.toString() === 'NaN' ? '0' : amount?.toString()}
+                onChangeText={handleAmount}
                 keyboardType="decimal-pad"
                 variant="unstyled"
               />
@@ -263,10 +286,8 @@ const WithdrawalUSDT: FC = () => {
                 color="black"
                 keyboardType="numeric"
                 fontSize="3xl"
-                onChangeText={val => {
-                  setAmount(parseFloat(val) * rate);
-                }}
-                value={usd.toFixed(6)}
+                onChangeText={handleUSDTAmount}
+                value={amountUSD?.toString() === 'NaN' ? '0' : amountUSD?.toString()}
                 variant="unstyled"
               />
             </HStack>

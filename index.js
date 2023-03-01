@@ -1,7 +1,7 @@
 /**
  * @format
  */
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import React from 'react';
 import { AppRegistry, LogBox } from 'react-native';
 import { name as appName } from './app.json';
@@ -16,9 +16,9 @@ function HeadlessCheck({ isHeadless }) {
   return <App />;
 }
 // Register background handler
-// messaging().setBackgroundMessageHandler(async remoteMessage => {
-//   console.log('Message handled in the background!', remoteMessage);
-// });
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
 
 // Remove YellowBox on Debug application screen
 LogBox.ignoreAllLogs(true);

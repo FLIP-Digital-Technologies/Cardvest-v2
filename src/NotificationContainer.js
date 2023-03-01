@@ -1,12 +1,11 @@
 import env from '@env';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import axios from 'axios';
-import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
-import { View, Linking, Platform } from 'react-native';
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { Linking, Platform } from 'react-native';
 
 // import pushTokenApi from '../api/push-token';
 // import useAuth from '../auth/useAuth';
@@ -45,29 +44,30 @@ export default function NotificationContainer({ children }) {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-  const queryClient = useQueryClient();
-  const data: any = queryClient.getQueryData(['user']);
-  // const [data, setData] = useState();
-  // useLayoutEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const AppToken = await cacheService.get('login-user');
-  //       console.log(modelName, AppToken);
-  //       const res = await cacheService.get('user');
-  //       setData(JSON.parse(res || {}));
-  //       return res;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
+  // const queryClient = useQueryClient();
+  // const data: any = queryClient.getQueryData(['user']);
+  const [data, setData] = useState();
+  useLayoutEffect(() => {
+    async function fetchData() {
+      try {
+        const AppToken = await cacheService.get('login-user');
+        console.log(modelName, AppToken);
+        const res = await cacheService.get('user');
+        setData(JSON.parse(res || {}));
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
   const lastNotificationResponse = Notifications.useLastNotificationResponse();
 
   useEffect(() => {
     console.log(data, 'bird', modelName);
     if (data) {
       registerForPushNotificationsAsync().then(token => {
+        console.log(data, 'bird', modelName, 'aje', token);
         if (token) sendTokenToBackend(token);
       });
     }
@@ -92,6 +92,7 @@ export default function NotificationContainer({ children }) {
       let token;
       let deviceToken;
       if (Device.isDevice) {
+        console.log('jjekhjehkjehk', Device.isDevice);
         const { status: existingStatus } = await Notifications.getPermissionsAsync();
         let finalStatus = existingStatus;
         if (existingStatus !== 'granted') {
@@ -102,7 +103,7 @@ export default function NotificationContainer({ children }) {
           // console.log("Failed to get push token for push notification!");
           return;
         }
-        deviceToken = '(await Notifications.getDevicePushTokenAsync()).data';
+        deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
         token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@cardvest/cardvest' })).data;
         console.log(modelName, 'forco', deviceToken, token);
       } else {

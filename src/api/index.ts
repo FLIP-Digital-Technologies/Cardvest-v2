@@ -48,6 +48,7 @@ ApiClient.interceptors.response.use(
     ) {
       await cacheService.del('login-user');
       await cacheService.del('user');
+      await cacheService.clear();
       await navigationService.navigation.navigate('Login');
       return onOpenToast({
         status: 'error',
