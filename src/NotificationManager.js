@@ -63,7 +63,6 @@ class NotificationManager {
   };
 
   showNotification = (id, title, message, data = {}, options = {}, date) => {
-    console.log('kjghf');
     PushNotification.localNotificationSchedule({
       // //Android
       // ...this.buildAdroidNotification(id, title, message, data, options),

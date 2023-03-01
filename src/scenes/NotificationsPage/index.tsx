@@ -37,7 +37,6 @@ const NotificationsPage: FC = () => {
   const queryClient = useQueryClient();
   const { data, isFetching, isLoading } = useGetNotification();
   const [page, setPage] = useState(1);
-  console.log(data);
   if (isLoading) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Notifications">

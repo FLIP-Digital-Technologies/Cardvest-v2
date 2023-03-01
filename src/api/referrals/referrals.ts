@@ -15,3 +15,17 @@ export async function getReferredUsers() {
     throw error;
   }
 }
+
+export async function getReferralUserCode() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/referrals/code`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getReferralUserCode - Error: ', error);
+    throw error;
+  }
+}

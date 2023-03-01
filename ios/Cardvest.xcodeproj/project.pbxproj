@@ -44,8 +44,10 @@
 		B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5EAEC40EF5D42C988F42853 /* Satoshi-Black.ttf */; };
 		B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A378A42799C4B828204CFE3 /* Satoshi-BlackItalic.ttf */; };
 		BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */; };
+		C1BED7449B7E6E3A34FA2520 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E51CFE65363DD94E5538F5 /* ExpoModulesProvider.swift */; };
 		C76B35D81790484D83EEF8FC /* Satoshi-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0BFE70CFEA4176911E5AD0 /* Satoshi-Bold.ttf */; };
 		C8342581F70D47B98C3CEDB4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF4036C513F840B19AF034A2 /* Lato-Light.ttf */; };
+		C9A3A2AB4F4A78F1A703740B /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2737C8A4C19AF168ED8B6 /* ExpoModulesProvider.swift */; };
 		CDD74D4FBB0B749A675058A9 /* libPods-Cardvest-CardvestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA155FC0E3FC47A56CBDE614 /* libPods-Cardvest-CardvestTests.a */; };
 		DD565953DF7F4851AC7002AF /* Satoshi-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0079EA82CCF9484EAE66E1FD /* Satoshi-Variable.ttf */; };
 		DE491222477449B0893478F9 /* Satoshi-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A6E7BCE59664DD1BD389A3B /* Satoshi-ThinItalic.ttf */; };
@@ -93,6 +95,7 @@
 		3DEA598EFC5B4EF2B839E4D6 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		3E8C23CB15454F85A8EDD801 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		420D36B2635142179BFA04C6 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		43A2737C8A4C19AF168ED8B6 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Cardvest/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		4BE5321DCB604D30A34B98FE /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4D0BFE70CFEA4176911E5AD0 /* Satoshi-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Bold.ttf"; path = "../src/assets/fonts/Satoshi-Bold.ttf"; sourceTree = "<group>"; };
 		4FEC52FF7C5B47C68067D9F9 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Black.otf"; path = "../src/assets/fonts/Satoshi-Black.otf"; sourceTree = "<group>"; };
 		8866594A29ACFFB100A137FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Cardvest/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88E51CFE65363DD94E5538F5 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Cardvest-CardvestTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		93DF87D1A45954192A4C560D /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
 		992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-LightItalic.ttf"; path = "../src/assets/fonts/Satoshi-LightItalic.ttf"; sourceTree = "<group>"; };
 		9A24869C88D743A5A01D67B0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -214,6 +218,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		465BA0B7188AF37103A9C1DE /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				C9FB8B4ECD03310B7E7FA09B /* Cardvest */,
+				88588FD7C5F2D7E99943C08F /* CardvestTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +265,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A957892C321B4A5850B954E3 /* Pods */,
 				8548A2AD02F54A188E8BC948 /* Resources */,
+				465BA0B7188AF37103A9C1DE /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -314,6 +328,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		88588FD7C5F2D7E99943C08F /* CardvestTests */ = {
+			isa = PBXGroup;
+			children = (
+				88E51CFE65363DD94E5538F5 /* ExpoModulesProvider.swift */,
+			);
+			name = CardvestTests;
+			sourceTree = "<group>";
+		};
 		A957892C321B4A5850B954E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +347,14 @@
 				93DF87D1A45954192A4C560D /* Pods-Cardvest-CardvestTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C9FB8B4ECD03310B7E7FA09B /* Cardvest */ = {
+			isa = PBXGroup;
+			children = (
+				43A2737C8A4C19AF168ED8B6 /* ExpoModulesProvider.swift */,
+			);
+			name = Cardvest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* CardvestTests.m in Sources */,
+				C1BED7449B7E6E3A34FA2520 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +673,7 @@
 			files = (
 				3AE60BB7282A465A0009B11D /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				C9A3A2AB4F4A78F1A703740B /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +709,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
@@ -701,6 +734,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
@@ -713,10 +747,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -726,6 +761,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cardvest;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -740,9 +776,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				INFOPLIST_FILE = Cardvest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -752,6 +789,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cardvest;
 				SWIFT_VERSION = 5.0;

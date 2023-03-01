@@ -89,7 +89,7 @@ const Intro: FC = () => {
       </PagerView>
       <Center flex={3} px="4" pb="4">
         <Button
-          onPress={() => navigation.navigate('Auth')}
+          onPress={() => navigation.navigate('Login')}
           my="3"
           width="95%"
           size="lg"
@@ -99,7 +99,7 @@ const Intro: FC = () => {
           color="white">
           Get Started
         </Button>
-        <Pressable w="100%" onPress={() => navigation.navigate('Auth')}>
+        <Pressable w="100%" onPress={() => navigation.navigate('Login')}>
           <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
             Already have an account? <Text fontWeight={'bold'}>Login</Text>
           </Text>

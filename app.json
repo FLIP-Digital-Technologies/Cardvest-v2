@@ -14,5 +14,36 @@
       "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "production"
     }
+  },
+  "expo": {
+    "scheme": "cardvest",
+    "name": "cardvest",
+    "slug": "cardvest",
+    "orientation": "portrait",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.flipdigitals.cardvest"
+    },
+    "android": {
+      "package": "com.flipdigitals.cardvest"
+    },
+    "description": "Cardvest Mobile Application",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/notif_icon.png",
+          "color": "#ffffff",
+          "sounds": [],
+          "mode": "productison"
+        }
+      ]
+    ]
   }
 }

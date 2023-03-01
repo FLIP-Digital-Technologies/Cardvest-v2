@@ -1,5 +1,6 @@
-import { useGetReferredUsers } from '@api/hooks/useReferrals';
+import { useGetReferralUserCode, useGetReferredUsers } from '@api/hooks/useReferrals';
 import { Copy, ReferralHock } from '@assets/SVG';
+import CLoader from '@components/CLoader';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -15,8 +16,8 @@ const ReferralPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const queryClient = useQueryClient();
   const user: any = queryClient.getQueryData(['user']);
-  const data = useGetReferredUsers();
-  console.log(data);
+  const { data } = useGetReferredUsers();
+  const { data: ref, isFetching } = useGetReferralUserCode();
   const copyToClipboard: (link: string) => void = link => {
     Clipboard.setString(link);
     onOpenToast({
@@ -24,6 +25,8 @@ const ReferralPage: FC = () => {
       message: 'Copied to clipboard',
     });
   };
+  console.log(data.data, ref?.data);
+  if (isFetching) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Referrals">
       <ScrollView
@@ -45,12 +48,9 @@ const ReferralPage: FC = () => {
             <Input
               label=""
               disabled
-              value={`https://app.cardvest.ng/register?ref=${user.username}`}
+              value={ref?.data?.link}
               InputRightElement={
-                <Pressable
-                  onPress={() => copyToClipboard(`https://app.cardvest.ng/register?ref=${user.username}`)}
-                  width="10"
-                  h="5">
+                <Pressable onPress={() => copyToClipboard(ref?.data?.link)} width="10" h="5">
                   <Copy />
                 </Pressable>
               }
@@ -72,7 +72,7 @@ const ReferralPage: FC = () => {
               </Text>
             </VStack>
             <Button
-              onPress={() => copyToClipboard(`https://app.cardvest.ng/register?ref=${user.username}`)}
+              onPress={() => copyToClipboard(ref?.data?.link)}
               my="3"
               width="100%"
               size="lg"

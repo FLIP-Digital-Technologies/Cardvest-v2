@@ -15,7 +15,6 @@ const AddAccountPage: FC = () => {
   const { data } = useGetBankList(currency);
   const { mutate: createBankAccount, isLoading } = useCreateBankAccount();
   const { mutate: verifyBankAccount, data: bankAccount, isLoading: isVerifying } = useVerifyBankAccount();
-
   useEffect(() => {
     async function verAcc() {
       try {
@@ -29,7 +28,7 @@ const AddAccountPage: FC = () => {
     }
   }, [accNumber, accBank]);
   const handleDisabled = () =>
-    !(currency === 'GHS' ? true : accNumber.length > 9 && accNumber.length < 11 && accBank) ||
+    !(currency === 'GHS' ? accNumber.length === 10 : accNumber.length > 9 && accNumber.length < 11 && accBank) ||
     !accNumber ||
     !accBank ||
     !(currency === 'GHS' ? accountname : bankAccount?.data?.account_name);
@@ -40,9 +39,9 @@ const AddAccountPage: FC = () => {
         bankname:
           currency === 'NGN'
             ? bankAccount?.data?.bank_name
-            : data?.data?.filter(item => item?.code === accBank)?.[0]?.name,
+            : data?.data?.filter((item: any) => item?.id === accBank)?.[0]?.name,
         currency,
-        code: accBank,
+        code: accBank.toString(),
         accountname: currency === 'GHS' ? accountname : bankAccount?.data?.account_name,
       });
     } catch (err) {
@@ -67,7 +66,7 @@ const AddAccountPage: FC = () => {
           setValue={setAccBank}
           data={data?.data?.map((item: any) => ({
             name: item.name,
-            id: item?.code,
+            id: item?.[currency === 'NGN' ? 'code' : 'id'],
             ...item,
           }))}
         />

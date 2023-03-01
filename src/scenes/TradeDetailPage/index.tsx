@@ -156,7 +156,6 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const userData: any = queryClient.getQueryData(['user']);
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
-  console.log(data, transactionData, type);
   if (!isFetched) return <CLoader />;
   const body = `
 Name: ${userData?.firstname} ${userData?.lastname}
@@ -182,7 +181,6 @@ Description: ${data?.data?.bill?.product} - ${data?.data?.bill?.note} Purchase
 Transaction Reference: ${data?.data?.reference}
 `;
   const subject = `I have a complaint about this transaction!`;
-  console.log(data, transactionData);
   return (
     <BackButtonTitleCenter title="Transaction Details">
       <View mt="5" mb="3">

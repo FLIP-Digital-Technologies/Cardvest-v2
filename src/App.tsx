@@ -13,6 +13,7 @@ import { setCustomTextInput, setCustomText } from 'react-native-global-props';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import SplashScreen from 'react-native-splash-screen';
+import NotificationContainer from './NotificationContainer';
 
 enableScreens();
 
@@ -60,8 +61,10 @@ const App: FC = () => {
         <NavigationContainer ref={navigationRef}>
           <NativeBaseProvider theme={customTheme}>
             <QueryClientProvider client={queryClient}>
-              <StatusBar barStyle="default" />
-              <RootStackScreen />
+              <NotificationContainer>
+                <StatusBar barStyle="default" />
+                <RootStackScreen />
+              </NotificationContainer>
             </QueryClientProvider>
           </NativeBaseProvider>
         </NavigationContainer>

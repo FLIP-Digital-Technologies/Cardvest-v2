@@ -231,7 +231,6 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
             <Box borderBottomWidth="3" borderColor={borderColor} flex={1} alignItems="center" p="3" cursor="pointer">
               <Pressable
                 onPress={() => {
-                  console.log(i);
                   setIndex(i);
                 }}>
                 <Text

@@ -86,10 +86,6 @@ export const AuthStackScreen: FC = () => {
 
 export const RootStackScreen: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const { data, isFetching } = useQuery({
-    queryKey: [`login-user`],
-    queryFn: async () => cacheService.get('login-user'),
-  });
   useLayoutEffect(() => {
     async function fetchToks() {
       try {
@@ -109,13 +105,10 @@ export const RootStackScreen: FC = () => {
       }
     }
     fetchToks();
-  });
+  }, []);
   useEffect(() => {
     navigationService.navigation = navigation;
   }, [navigation]);
-  useEffect(() => {
-    if (!(typeof data === 'string' && data.length > 3) && !isFetching) navigation.navigate('Auth');
-  }, [data]);
   return (
     <RootStack.Navigator>
       {/* {typeof data === 'string' && data.length > 3 ? ( */}

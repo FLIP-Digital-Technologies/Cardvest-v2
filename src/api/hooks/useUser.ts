@@ -102,7 +102,7 @@ function useDeleteUser() {
       await queryClient.setQueriesData(['login-user'], null);
       await queryClient.invalidateQueries({ queryKey: ['login-user'] });
       await queryClient.invalidateQueries({ queryKey: ['user'] });
-      await navigation.navigate('Auth');
+      await navigation.navigate('Login');
       await queryClient.clear();
     },
     onError: (data: any) => {

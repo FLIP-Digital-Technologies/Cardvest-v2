@@ -29,7 +29,6 @@ const LoginBack: FC = () => {
     }
     fetchData();
   }, []);
-  console.log(data);
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
     try {

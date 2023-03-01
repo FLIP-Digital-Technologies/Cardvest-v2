@@ -42,20 +42,21 @@ function useLoginUser() {
   const queryClient = useQueryClient();
   return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
     onSuccess: async data => {
-      console.log(data?.data);
       if (!data?.data?.user?.email_verified) {
         return onOpenToast({
           status: 'error',
           message: 'Please kindly verify your email.',
         });
       } else {
+        const response = await cacheService.get('defaultCurrency');
         await cacheService.put('login-user', data?.data?.token);
         await queryClient.setQueryData(['login-user'], data?.data?.token);
+        await queryClient.setQueryData([`user-currency`], response || 'NGN');
+        await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
         const user = await getUserData(data?.data?.token);
         await queryClient.setQueryData([`user`], user?.data);
         await cacheService.put('user', user?.data);
         await cacheService.put('firstTime', 'Yes');
-        await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
         onOpenToast({
           status: 'success',
           message: 'Login successful',

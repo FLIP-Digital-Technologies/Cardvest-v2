@@ -48,7 +48,7 @@ ApiClient.interceptors.response.use(
     ) {
       await cacheService.del('login-user');
       await cacheService.del('user');
-      await navigationService.navigation.navigate('Auth');
+      await navigationService.navigation.navigate('Login');
       return onOpenToast({
         status: 'error',
         message: 'Session expired, please login again on 401',

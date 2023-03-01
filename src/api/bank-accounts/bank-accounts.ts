@@ -8,7 +8,6 @@ import {
 } from './types';
 
 export async function getBankAccount(currency: string) {
-  console.log(currency);
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.get(`${env.API_URL}/bank-accounts`, {

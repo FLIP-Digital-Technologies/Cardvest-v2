@@ -31,7 +31,6 @@ const UseFingerprint = () => {
       })
         .then(async () => {
           //you can write your logic here to what will happen on successful authentication
-          console.log('noy');
           try {
             const toks = await cacheService.get('login-user');
             if (toks.length > 0) {

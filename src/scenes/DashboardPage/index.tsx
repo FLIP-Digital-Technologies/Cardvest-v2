@@ -295,7 +295,6 @@ export const TransDate: (created_at: any) => string = created_at => {
 
 export const TransactionPanel = ({ data, currency, type }: { data: any; currency: string; type?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
-  console.log(data);
   return (
     <Pressable
       onPress={() =>

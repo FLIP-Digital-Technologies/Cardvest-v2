@@ -12,9 +12,8 @@ interface CToasterProps {
 const CToaster: FC<CToasterProps> = ({ status, title, onClose }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   if (title === 'Session expired, please login again on 401') {
-    setTimeout(() => navigation.navigate('Auth'), 1000);
+    setTimeout(() => navigation.navigate('Login'), 1000);
   }
-  console.log(title);
   return (
     <Alert shadow={2} maxW="400" w="100%" status={status}>
       <VStack space={2} flexShrink={1} w="100%">

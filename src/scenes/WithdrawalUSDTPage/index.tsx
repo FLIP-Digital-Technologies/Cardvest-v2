@@ -195,12 +195,14 @@ const WithdrawalUSDT: FC = () => {
       console.log(err);
     }
   };
-  const handleDisabled = () => !rate || !account || !amount || !network || account.length < 30;
+  const handleDisabled = () =>
+    amount.toString() === 'NaN' || !rate || !account || !amount || !network || account.length < 30;
   useEffect(() => {
     input?.current?.focus();
   }, []);
   const usd = useMemo(() => {
-    return Number(amount) / rate || 0;
+    const ans = Number(amount) / rate || 0;
+    return ans.toString() === 'NaN' ? 0 : ans;
   }, [amount, rates]);
   return (
     <BackButtonTitleCenter
@@ -226,7 +228,9 @@ const WithdrawalUSDT: FC = () => {
                 fontSize="3xl"
                 ref={input}
                 value={
-                  amount?.toString()?.split('.')?.[1]?.length > 6
+                  amount?.toString() === 'NaN'
+                    ? '0'
+                    : amount?.toString()?.split('.')?.[1]?.length > 6
                     ? parseFloat(amount?.toString())?.toFixed(6)
                     : parseFloat(amount?.toString())?.toString()
                 }
