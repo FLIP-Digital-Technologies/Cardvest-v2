@@ -184,7 +184,6 @@ const WithdrawalUSDT: FC = () => {
   const { data: networks } = useGetWithdrawalsUSDTNetwork();
   const rate = rates?.data?.[currency];
   const handleAmount = (val: string) => {
-    console.log(val, 'ajsk', Number(val));
     setAmount(parseFloat(val));
     // check what fiat it is and multiply amount by the fiat rate
     if (!val) {
@@ -201,7 +200,6 @@ const WithdrawalUSDT: FC = () => {
     }
   };
   const handleUSDTAmount = (val: string) => {
-    console.log(val);
     setAmountUSD(parseFloat(val));
     // check what fiat it is and multiply amount by the fiat rate
     if (!val) {
