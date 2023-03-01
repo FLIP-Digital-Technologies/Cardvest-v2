@@ -1,4 +1,4 @@
-package com.cardvest;
+package com.flipdigitals.cardvest;
 import expo.modules.ReactActivityDelegateWrapper;
 
 import android.os.Bundle;

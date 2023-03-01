@@ -102,7 +102,7 @@ export default function NotificationContainer({ children }) {
           // console.log("Failed to get push token for push notification!");
           return;
         }
-        deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
+        deviceToken = '(await Notifications.getDevicePushTokenAsync()).data';
         token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@cardvest/cardvest' })).data;
         console.log(modelName, 'forco', deviceToken, token);
       } else {

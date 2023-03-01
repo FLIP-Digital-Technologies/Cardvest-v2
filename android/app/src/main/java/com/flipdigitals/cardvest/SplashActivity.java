@@ -1,4 +1,4 @@
-package com.cardvest; // make sure this is your package name
+package com.flipdigitals.cardvest; // make sure this is your package name
 
 import android.content.Intent;
 import android.os.Bundle;

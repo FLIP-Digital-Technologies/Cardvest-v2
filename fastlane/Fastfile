@@ -75,7 +75,7 @@ platform :ios do
       key_filepath: "fastlane/AuthKey_T965C74L4F.p8",
     )
     match(
-      app_identifier: 'org.app.cardvest',
+      app_identifier: 'com.flipdigitals.cardvest',
       readonly: true, 
       force_for_new_devices: true,
       api_key_path: "fastlane/T965C74L4F.json",

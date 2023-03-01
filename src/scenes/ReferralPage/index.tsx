@@ -4,18 +4,12 @@ import CLoader from '@components/CLoader';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import { BoldText } from '@scenes/LoginPage';
-import { useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
-import { View, Center, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
+import { View, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
 import React, { FC, memo } from 'react';
 
 const ReferralPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
-  const queryClient = useQueryClient();
-  const user: any = queryClient.getQueryData(['user']);
   const { data } = useGetReferredUsers();
   const { data: ref, isFetching } = useGetReferralUserCode();
   const copyToClipboard: (link: string) => void = link => {
@@ -25,7 +19,7 @@ const ReferralPage: FC = () => {
       message: 'Copied to clipboard',
     });
   };
-  console.log(data.data, ref?.data);
+  console.log(data?.data, ref?.data);
   if (isFetching) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Referrals">

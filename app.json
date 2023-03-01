@@ -11,7 +11,7 @@
       "ENV": "staging"
     },
     "production": {
-      "API_URL": "https://staging.cardvest.ng/api/v2",
+      "API_URL": "https://app.cardvest.ng/api/v2",
       "ENV": "production"
     }
   },

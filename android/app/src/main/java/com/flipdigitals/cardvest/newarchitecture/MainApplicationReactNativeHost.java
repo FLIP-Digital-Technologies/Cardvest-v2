@@ -1,4 +1,4 @@
-package com.cardvest.newarchitecture; // make sure this is your package name
+package com.flipdigitals.cardvest.newarchitecture; // make sure this is your package name
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.cardvest.BuildConfig;
-import com.cardvest.newarchitecture.components.MainComponentsRegistry;
-import com.cardvest.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.flipdigitals.cardvest.BuildConfig;
+import com.flipdigitals.cardvest.newarchitecture.components.MainComponentsRegistry;
+import com.flipdigitals.cardvest.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

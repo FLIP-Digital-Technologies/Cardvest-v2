@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>213488163625-gtkhp3jbu0486v1ve8dqdcpsuq8ovq5g.apps.googleusercontent.com</string>
+	<string>607499492274-24s7bb02pat0nlb27pr253ojpd7fhhb8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.213488163625-gtkhp3jbu0486v1ve8dqdcpsuq8ovq5g</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>213488163625-5un67qa9c492dj6v9avdv5sk6dath2at.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.607499492274-24s7bb02pat0nlb27pr253ojpd7fhhb8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB_tQTUsnp3fonGuFEStWa_ckBWvNIWc-A</string>
+	<string>AIzaSyCvN8N_PT5kUHUgxl6T0ga26kVPuo0R_9s</string>
 	<key>GCM_SENDER_ID</key>
-	<string>213488163625</string>
+	<string>607499492274</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.app.Cardvest</string>
+	<string>com.flipdigitals.cardvest</string>
 	<key>PROJECT_ID</key>
-	<string>merchadoos</string>
+	<string>cardvest-ed2b7</string>
 	<key>STORAGE_BUCKET</key>
-	<string>merchadoos.appspot.com</string>
+	<string>cardvest-ed2b7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:213488163625:ios:631cd9c558e02e60c43538</string>
-	<key>DATABASE_URL</key>
-	<string>https://merchadoos.firebaseio.com</string>
+	<string>1:607499492274:ios:a19b7887253192e30ae2ab</string>
 </dict>
 </plist>

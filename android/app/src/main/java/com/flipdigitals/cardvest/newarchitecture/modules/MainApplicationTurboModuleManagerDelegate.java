@@ -1,4 +1,4 @@
-package com.cardvest.newarchitecture.modules; // make sure this is your package name
+package com.flipdigitals.cardvest.newarchitecture.modules; // make sure this is your package name
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

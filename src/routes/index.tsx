@@ -11,7 +11,6 @@ import SignUpPage from '@scenes/SignUpPage';
 import Step2 from '@scenes/SignUpPage/Step2';
 import Step3 from '@scenes/SignUpPage/Step3';
 import VerifyPage from '@scenes/VerifyPage';
-import { useQuery } from '@tanstack/react-query';
 import navigationService from '@utils/Nav';
 import { cacheService } from '@utils/cache';
 import React, { FC, useEffect, useLayoutEffect } from 'react';
