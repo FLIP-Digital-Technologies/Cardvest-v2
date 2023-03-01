@@ -195,12 +195,12 @@ const WithdrawalUSDT: FC = () => {
       console.log(err);
     }
   };
-  const handleDisabled = () => !account || !amount || !network || account.length < 30;
+  const handleDisabled = () => !rate || !account || !amount || !network || account.length < 30;
   useEffect(() => {
     input?.current?.focus();
   }, []);
   const usd = useMemo(() => {
-    return Number(amount) / rate;
+    return Number(amount) / rate || 0;
   }, [amount, rates]);
   return (
     <BackButtonTitleCenter
