@@ -71,7 +71,7 @@ const MorePage: FC = () => {
                 <RightAngle />
               </View>
             </HStack>
-            {index !== 3 && <Divider bg="#F7F9FB" />}
+            {index !== 6 && <Divider bg="#F7F9FB" />}
           </Pressable>
         ))}
       </VStack>

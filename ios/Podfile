@@ -5,11 +5,16 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '13.0'
 install! 'cocoapods', :deterministic_uuids => false
 
+# pod 'Firebase/Messaging'
+
 production = ENV["PRODUCTION"] == "1"
 
 target 'Cardvest' do
   use_expo_modules!
   config = use_native_modules!
+
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
 
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true

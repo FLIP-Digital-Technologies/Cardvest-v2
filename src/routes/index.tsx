@@ -98,7 +98,7 @@ export const RootStackScreen: FC = () => {
         setData(JSON.parse(res || {}));
         return res;
       } catch (error) {
-        console.log(error);
+        console.log('erarr', JSON.stringify(error));
       }
     }
     fetchData();
@@ -120,19 +120,20 @@ export const RootStackScreen: FC = () => {
   }, []);
 
   const sendFcmToken = async () => {
-    console.log('Your Firebase Token is:', 'deviceToken');
     try {
       await messaging().registerDeviceForRemoteMessages();
+      console.log('Your Firebase Token is:', 'deviceToken');
       const deviceToken = await messaging().getToken();
+      await cacheService.put('@DeviceToken', deviceToken);
       console.log('Your Firebase Token is:', deviceToken);
 
-      const res = await axios.post(`${env.API_URL}/push-notification/register`, {
-        token: deviceToken,
-        description: deviceInfoModule.getDeviceId(),
-        user_id: data?.id,
-        type: 'register',
-      });
-      console.log('Your Firebase Token is:', deviceToken, 'res is', res);
+      // const res = await axios.post(`${env.API_URL}/push-notification/register`, {
+      //   token: deviceToken,
+      //   description: deviceInfoModule.getDeviceId(),
+      //   user_id: data?.id,
+      //   type: 'register',
+      // });
+      console.log('Your Firebase Token is:', deviceToken, 'res');
     } catch (err) {
       //Do nothing
       console.error(err);
@@ -146,11 +147,12 @@ export const RootStackScreen: FC = () => {
       console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
       notificationManager.showNotification(
         remoteMessage?.messageId,
-        remoteMessage?.notification?.title,
-        remoteMessage?.notification?.body,
+        remoteMessage?.data?.title || remoteMessage?.notification?.title,
+        remoteMessage?.data?.message || remoteMessage?.notification?.body,
         remoteMessage?.data,
         remoteMessage?.options,
-        remoteMessage?.date || new Date(),
+        // remoteMessage?.date || new Date(),
+        new Date(Date.now() + 60000), // TODO: god abeg
       );
     });
     return unsubscribe;
@@ -181,8 +183,6 @@ export const RootStackScreen: FC = () => {
   }, [navigation]);
   return (
     <RootStack.Navigator>
-      {/* {typeof data === 'string' && data.length > 3 ? ( */}
-      {/* ) : ( */}
       <React.Fragment>
         <RootStack.Screen
           name="Auth"
@@ -215,7 +215,6 @@ export const RootStackScreen: FC = () => {
           }}
         />
       </React.Fragment>
-      {/* )} */}
     </RootStack.Navigator>
   );
 };

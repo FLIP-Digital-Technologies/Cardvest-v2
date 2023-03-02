@@ -39,8 +39,8 @@ const Intro: FC = () => {
           setPageIndex(e?.nativeEvent?.position);
         }}>
         <React.Fragment key="1">
-          <Center my="8" flex={6}>
-            <Image source={IntroPng} w="75%" h="100%" alt="intro" />
+          <Center my="8" flex={10}>
+            <Image source={IntroPng} w="100%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">
@@ -55,8 +55,8 @@ const Intro: FC = () => {
           />
         </React.Fragment>
         <React.Fragment key="2">
-          <Center my="8" flex={6}>
-            <Image source={Intro2Png} w="75%" h="100%" alt="intro" />
+          <Center my="8" flex={10}>
+            <Image source={Intro2Png} w="100%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">
@@ -71,8 +71,8 @@ const Intro: FC = () => {
           />
         </React.Fragment>
         <React.Fragment key="3">
-          <Center my="8" flex={6}>
-            <Image source={Intro3Png} w="75%" h="100%" alt="intro" />
+          <Center my="8" flex={10}>
+            <Image source={Intro3Png} w="100%" h="100%" alt="intro" />
           </Center>
           <Center>
             <HStack space="xs" my="2">

@@ -5,5 +5,5 @@
 
 export default {
   API_URL: 'https://staging.cardvest.ng/api/v2',
-  ENV: 'development',
+  ENV: 'production',
 };

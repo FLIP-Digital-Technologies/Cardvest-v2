@@ -12,6 +12,7 @@ class NotificationManager {
         console.log('NOTIFICATION:', notification);
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
+      senderID: '607499492274',
       permissions: {
         alert: true,
         badge: true,
@@ -33,8 +34,8 @@ class NotificationManager {
     return {
       id: id,
       autoCancel: true,
-      largeIcon: options.largeIcon || 'ic_launcher',
-      smallIcon: options.smallIcon || 'ic_launcher',
+      // largeIcon: options.largeIcon || 'ic_launcher',
+      // smallIcon: options.smallIcon || 'ic_launcher',
       bigText: message || '',
       subText: title || '',
       vibration: options.vibration || 300,
@@ -63,6 +64,7 @@ class NotificationManager {
   };
 
   showNotification = (id, title, message, data = {}, options = {}, date) => {
+    console.log(id, title, message, data, options, date);
     PushNotification.localNotificationSchedule({
       // //Android
       // ...this.buildAdroidNotification(id, title, message, data, options),

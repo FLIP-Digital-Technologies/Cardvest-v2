@@ -36,7 +36,8 @@
 		884CBE3729559CA8001DD801 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */; };
 		884CBE3829559CA8001DD801 /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */; };
 		884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */; };
-		8866594B29ACFFB100A137FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8866594A29ACFFB100A137FA /* GoogleService-Info.plist */; };
+		885144D829B0FF7600852F8C /* Cardvest.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 8847745929AFD7F900F810BE /* Cardvest.entitlements */; };
+		885144DA29B1025200852F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885144D929B1025200852F8C /* GoogleService-Info.plist */; };
 		8866594C29ACFFB100A137FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8866594A29ACFFB100A137FA /* GoogleService-Info.plist */; };
 		8FFDD27FE0E111D8E34219F6 /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */; };
 		90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68E5EF259E8E4558AB107594 /* Lato-Black.ttf */; };
@@ -108,6 +109,7 @@
 		71214528D2EC48BF83240B17 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7C386AADC3F00814E98BF636 /* libPods-Cardvest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80158D7EF8F8B6C4DAB7F7C7 /* Pods-CardvestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardvestTests.debug.xcconfig"; path = "Target Support Files/Pods-CardvestTests/Pods-CardvestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8847745929AFD7F900F810BE /* Cardvest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Cardvest.entitlements; path = Cardvest/Cardvest.entitlements; sourceTree = "<group>"; };
 		884CBE1C29559CA8001DD801 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
 		884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-LightItalic.otf"; path = "../src/assets/fonts/Satoshi-LightItalic.otf"; sourceTree = "<group>"; };
 		884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Bold.otf"; path = "../src/assets/fonts/Satoshi-Bold.otf"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		884CBE2D29559CA8001DD801 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Black.otf"; path = "../src/assets/fonts/Satoshi-Black.otf"; sourceTree = "<group>"; };
+		885144D929B1025200852F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "fastlane/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8866594A29ACFFB100A137FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Cardvest/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88E51CFE65363DD94E5538F5 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Cardvest-CardvestTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		93DF87D1A45954192A4C560D /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 		13B07FAE1A68108700A75B9A /* Cardvest */ = {
 			isa = PBXGroup;
 			children = (
+				885144D929B1025200852F8C /* GoogleService-Info.plist */,
+				8847745929AFD7F900F810BE /* Cardvest.entitlements */,
 				3AE60BB6282A46590009B11D /* AppDelegate.mm */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -453,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885144D829B0FF7600852F8C /* Cardvest.entitlements in Resources */,
 				BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */,
 				884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */,
 				884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */,
@@ -464,7 +470,6 @@
 				884CBE3429559CA8001DD801 /* Satoshi-BlackItalic.otf in Resources */,
 				2909319D33DD472694DDAF1F /* Lato-Thin.ttf in Resources */,
 				884CBE3529559CA8001DD801 /* Satoshi-Regular.otf in Resources */,
-				8866594B29ACFFB100A137FA /* GoogleService-Info.plist in Resources */,
 				90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */,
 				3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */,
 				884CBE3629559CA8001DD801 /* Satoshi-Light.otf in Resources */,
@@ -479,6 +484,7 @@
 				3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */,
 				B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */,
 				B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */,
+				885144DA29B1025200852F8C /* GoogleService-Info.plist in Resources */,
 				C76B35D81790484D83EEF8FC /* Satoshi-Bold.ttf in Resources */,
 				92B1E2B2945D4F878B87AA7E /* Satoshi-BoldItalic.ttf in Resources */,
 				064DD41E859E46BB8E4013F0 /* Satoshi-Italic.ttf in Resources */,
@@ -749,23 +755,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
 				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CardVest;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flipdigitals.$(PRODUCT_NAME:rfc1034identifier)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.flipdigitals.cardvest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipdigitals.cardvest;
 				PRODUCT_NAME = Cardvest;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -779,22 +788,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
 				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				INFOPLIST_FILE = Cardvest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CardVest;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flipdigitals.$(PRODUCT_NAME:rfc1034identifier)";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.flipdigitals.cardvest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipdigitals.cardvest;
 				PRODUCT_NAME = Cardvest;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

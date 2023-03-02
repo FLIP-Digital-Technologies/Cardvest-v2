@@ -7,13 +7,14 @@ import React, { FC, memo, useState } from 'react';
 
 const DeleteAccountPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const [reason, setReason] = useState('');
+  const [reason, setReason] = useState<string>('');
   const [otherReason, setOtherReason] = useState('');
+  const handleDisabled = () => (reason === 'other' ? !otherReason : !reason);
   return (
     <BackButtonTitleCenter
       action={() => navigation.navigate('DeleteAccountFeedback')}
       // isLoading={isLoading}
-      // isDisabled={handleDisabled()}
+      isDisabled={handleDisabled()}
       title="Delete Account"
       actionText="Continue">
       <View my="7">

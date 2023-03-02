@@ -4,6 +4,7 @@ import { cacheService } from '@utils/cache';
 import axios from 'axios';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import React from 'react';
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { Linking, Platform } from 'react-native';
 
@@ -25,7 +26,7 @@ const processNotification = response => {
   const notificationContent = response?.notification?.request?.content;
   let url = notificationContent.data?.url;
   const type = notificationContent.data?.type;
-
+  console.log(response, 'response');
   // CARDVEST Notification data structure
   // export interface Data {
   //   type: string; // "transactional | news"
@@ -38,36 +39,65 @@ const processNotification = response => {
 
   Linking.openURL(url);
 };
+async function sendPushNotification(expoPushToken) {
+  const message = {
+    to: expoPushToken,
+    sound: 'default',
+    title: 'Original Title',
+    body: 'And here is the body!',
+    data: { someData: 'goes here' },
+  };
+  console.log(message, 'kjdkd');
+
+  await fetch('https://exp.host/--/api/v2/push/send', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Accept-encoding': 'gzip, deflate',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message),
+  });
+}
 
 export default function NotificationContainer({ children }) {
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-  // const queryClient = useQueryClient();
-  // const data: any = queryClient.getQueryData(['user']);
   const [data, setData] = useState();
   useLayoutEffect(() => {
     async function fetchData() {
       try {
         const AppToken = await cacheService.get('login-user');
-        console.log(modelName, AppToken);
+        console.log(modelName, AppToken, 'first');
         const res = await cacheService.get('user');
-        setData(JSON.parse(res || {}));
+        if (JSON.parse(res || {})?.id !== data?.id) {
+          setData(JSON.parse(res || {}));
+          console.log('locked in ', modelName, AppToken);
+        }
         return res;
       } catch (error) {
-        console.log(error);
+        console.log('errr' - JSON.stringify(error));
       }
     }
     fetchData();
-  }, []);
+  });
+
   const lastNotificationResponse = Notifications.useLastNotificationResponse();
 
   useEffect(() => {
-    console.log(data, 'bird', modelName);
+    console.log('bird', modelName, lastNotificationResponse);
     if (data) {
+      console.log('bird', modelName, 'naje000');
       registerForPushNotificationsAsync().then(token => {
-        console.log(data, 'bird', modelName, 'aje', token);
+        console.log(
+          'data',
+          'we have made our promise and returning data for you to send to backend',
+          modelName,
+          'aje',
+          token,
+        );
         if (token) sendTokenToBackend(token);
       });
     }
@@ -81,9 +111,16 @@ export default function NotificationContainer({ children }) {
       processNotification(response);
     });
 
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log('kljkdkd', notification);
+      setNotification(notification);
+    });
+
     return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -91,9 +128,12 @@ export default function NotificationContainer({ children }) {
     try {
       let token;
       let deviceToken;
+      let devicePushToken = await cacheService.get('@DeviceToken');
+      console.log('hjehkjehk', Device.isDevice);
       if (Device.isDevice) {
-        console.log('jjekhjehkjehk', Device.isDevice);
+        console.log('Device is physical', Device.isDevice);
         const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        console.log(existingStatus, 'Permission does exist', Device.isDevice);
         let finalStatus = existingStatus;
         if (existingStatus !== 'granted') {
           const { status } = await Notifications.requestPermissionsAsync();
@@ -103,9 +143,11 @@ export default function NotificationContainer({ children }) {
           // console.log("Failed to get push token for push notification!");
           return;
         }
+        console.log('floak', token);
         deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
-        token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@cardvest/cardvest' })).data;
-        console.log(modelName, 'forco', deviceToken, token);
+        console.log(existingStatus, 'jjekhjehkjehk', Device.isDevice, deviceToken);
+        token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@flip_digitals/cardvest' })).data;
+        console.log(modelName, 'forco', deviceToken, token, 'flip_digitals');
       } else {
         // console.log("Must use a physical device for Push Notifications");
         return;
@@ -119,7 +161,6 @@ export default function NotificationContainer({ children }) {
           lightColor: '#FF231F7C',
         });
       }
-
       return { token, deviceToken };
     } catch (error) {
       console.log(error);
@@ -127,10 +168,11 @@ export default function NotificationContainer({ children }) {
   }
 
   const sendTokenToBackend = async ({ token, deviceToken }) => {
-    console.log(modelName, token);
+    // sendPushNotification(token);
+    console.log('phone', modelName, token, 'is the token and device token by my side', deviceToken);
     try {
       const AppToken = await cacheService.get('login-user');
-      console.log(modelName, token);
+      console.log(modelName, token, 'token is here and want to send push notification');
       const res = await axios.post(
         `${env.API_URL}/push-notification/register`,
         {
@@ -146,7 +188,7 @@ export default function NotificationContainer({ children }) {
       );
       console.log('Your Expo Token is:', token, 'res is', res);
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.log('posing err -', JSON.stringify(error));
     }
     // pushTokenApi.registerPushTokenMock(tokenData);
   };
