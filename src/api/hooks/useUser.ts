@@ -1,6 +1,13 @@
 import { getNotification } from '@api/push-notification/push-notification';
 import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
-import { createUser, deleteUser, getUserDetails, modifyUser, modifyUserPassword } from '@api/users/users';
+import {
+  createUser,
+  deleteUser,
+  getUserDetails,
+  modifyUser,
+  modifyUserPassword,
+  resendVerificationEmail,
+} from '@api/users/users';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -17,19 +24,19 @@ function useUser({ userId }: UserDetailsRequestPayload) {
   });
 }
 
-function useCreateUser() {
-  return useMutation(['new-user'], ({ name, job }: CreateUserRequestPayload) => createUser({ name, job }), {
+function useResendVerificationEmail() {
+  return useMutation(['resend-user'], () => resendVerificationEmail(), {
     onSuccess: (/*data*/) => {
       onOpenToast({
         status: 'success',
-        message: 'User created successfully',
+        message: 'Verification email sent successfully',
       });
     },
     onError: (data: any) => {
       if (data?.c) return;
       onOpenToast({
         status: 'error',
-        message: 'User not created',
+        message: 'Resend Verification Email Failed',
       });
     },
   });
@@ -115,4 +122,4 @@ function useDeleteUser() {
   });
 }
 
-export { useDeleteUser, useUser, useCreateUser, useModifyUser, useModifyUserPassword, useGetNotification };
+export { useDeleteUser, useUser, useModifyUser, useModifyUserPassword, useGetNotification, useResendVerificationEmail };

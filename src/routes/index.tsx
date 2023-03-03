@@ -1,4 +1,3 @@
-import env from '@env';
 import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,6 +6,7 @@ import ForgetPasswordEnterEmailPage from '@scenes/ForgetPasswordEnterEmailPage';
 import IntroPage from '@scenes/IntroPage';
 import LoginBackPage from '@scenes/LoginBackPage';
 import LoginPage from '@scenes/LoginPage';
+import ResendVerifyEmailPage from '@scenes/ResendVerifyEmailPage';
 import ResetPage from '@scenes/ResetPage';
 import SetTransactionPin from '@scenes/SetTransactionPin';
 import SignUpPage from '@scenes/SignUpPage';
@@ -16,9 +16,7 @@ import VerifyPage from '@scenes/VerifyPage';
 // import { useQueryClient, useQuery } from '@tanstack/react-query';
 import navigationService from '@utils/Nav';
 import { cacheService } from '@utils/cache';
-import axios from 'axios';
 import React, { FC, useEffect, useLayoutEffect } from 'react';
-import deviceInfoModule from 'react-native-device-info';
 import { notificationManager } from '../NotificationManager';
 // import { routeOverlayOption } from './routeOptions';
 import { MainStackScreen } from './stacks/MainStack';
@@ -67,6 +65,13 @@ export const AuthStackScreen: FC = () => {
       <AuthStack.Screen
         name="Verify"
         component={VerifyPage}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <AuthStack.Screen
+        name="ResendVerify"
+        component={ResendVerifyEmailPage}
         options={{
           headerShown: false,
         }}
@@ -151,8 +156,7 @@ export const RootStackScreen: FC = () => {
         remoteMessage?.data?.message || remoteMessage?.notification?.body,
         remoteMessage?.data,
         remoteMessage?.options,
-        // remoteMessage?.date || new Date(),
-        new Date(Date.now() + 60000), // TODO: god abeg
+        remoteMessage?.date || new Date(Date.now() + 30000), // TODO: god abeg
       );
     });
     return unsubscribe;

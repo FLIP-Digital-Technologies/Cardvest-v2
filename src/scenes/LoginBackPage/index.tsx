@@ -48,6 +48,7 @@ const LoginBack: FC = () => {
     await queryClient.setQueriesData(['login-user'], null);
     await queryClient.invalidateQueries({ queryKey: ['login-user'] });
     await queryClient.invalidateQueries({ queryKey: ['user'] });
+    await cacheService.clear();
     await queryClient.clear();
     await navigation.navigate('Login');
   }
@@ -73,7 +74,7 @@ const LoginBack: FC = () => {
           </Text>
         </Center>
         <View p="3">
-          <Input type="password" label="Password" onChangeText={setPassword} />
+          <Input type="password" label="Password" value={password} onChangeText={setPassword} />
         </View>
         <Center px="2">
           <Button

@@ -4,7 +4,6 @@ import { cacheService } from '@utils/cache';
 import {
   CreateUserRequestPayload,
   CreateUserSuccessPayload,
-  DeleteUserRequestPayload,
   ModifyUserRequestPayload,
   ModifyUserSuccessPayload,
   UserDetailsRequestPayload,
@@ -41,6 +40,24 @@ export async function getUserDetails({ userId }: UserDetailsRequestPayload) {
     return response.data;
   } catch (error) {
     console.error('getUserDetails - Error: ', error);
+    throw error;
+  }
+}
+
+export async function resendVerificationEmail() {
+  try {
+    const token = await cacheService.get('temp-login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/users/email-verification`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('resendVerificationEmail - Error: ', error);
     throw error;
   }
 }

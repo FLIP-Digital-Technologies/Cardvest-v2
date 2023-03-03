@@ -52,16 +52,13 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
           </Modal.Content>
         </Modal>
       )}
-      {showIndModal && (
-        <Modal isOpen={showIndModal} onClose={() => setShowIndModal(false)}>
-          <Modal.Content maxWidth="500px" h="400px">
-            <Modal.Body>
-              <Modal.CloseButton />
-              <VStack mt="8" px="2">
-                <Image source={showIndModal} alt="image" borderRadius="lg" minH="12" mx="2" h="300px" />
-                <View mt="20" />
-              </VStack>
-            </Modal.Body>
+      {!!showIndModal && (
+        <Modal isOpen={!!showIndModal} onClose={() => setShowIndModal(false)}>
+          <Modal.Content maxWidth="500px" minH="400px">
+            <Modal.CloseButton />
+            <VStack px="2" justifyContent="center" minH="400px" alignItems="center">
+              <Image source={showIndModal} alt="image" borderRadius="lg" minH="10" mx="2" w="100%" />
+            </VStack>
           </Modal.Content>
         </Modal>
       )}

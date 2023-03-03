@@ -43,10 +43,14 @@ function useLoginUser() {
   return useMutation(['login-user'], ({ email, password }: LoginUserRequestPayload) => loginUser({ email, password }), {
     onSuccess: async data => {
       if (!data?.data?.user?.email_verified) {
-        return onOpenToast({
-          status: 'error',
-          message: 'Please kindly verify your email.',
+        await cacheService.put('temp-login-user', data?.data?.token);
+        await navigation.navigate('ResendVerify', {
+          email: data?.data?.email,
         });
+        // return onOpenToast({
+        //   status: 'error',
+        //   message: 'Please kindly verify your email.',
+        // });
       } else {
         const response = await cacheService.get('defaultCurrency');
         await cacheService.put('login-user', data?.data?.token);
@@ -55,6 +59,7 @@ function useLoginUser() {
         await navigation.navigate(data?.data?.user?.pin_set ? 'Dashboard' : 'SetTransactionPin');
         const user = await getUserData(data?.data?.token);
         await queryClient.setQueryData([`user`], user?.data);
+        await cacheService.del('temp-login-user');
         await cacheService.put('user', user?.data);
         await cacheService.put('firstTime', 'Yes');
         onOpenToast({
