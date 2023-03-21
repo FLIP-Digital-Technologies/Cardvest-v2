@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useFundWallet } from '@api/hooks/useWallet';
 import { Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
@@ -13,15 +14,18 @@ const DepositPage: FC = () => {
   const [amount, setAmount] = React.useState('');
   const navigation = useNavigation<GenericNavigationProps>();
   const { mutate: fundWallet, isLoading } = useFundWallet();
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track(`Fund Wallet ${currency} Attempt`);
       await fundWallet({
         currency,
         amount,
       });
       navigation.navigate('FundAccountFeedback');
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handleDisabled = () => !currency || !amount;

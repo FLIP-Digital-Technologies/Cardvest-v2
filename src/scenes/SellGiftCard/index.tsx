@@ -112,7 +112,7 @@ const SellGiftCardPage: FC<{ route: any }> = ({ route }) => {
         },
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
   return (

@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import {
   useCablePlansProviders,
   useGetCablePlans,
@@ -21,12 +22,15 @@ const BuyCablePage: FC = () => {
   const { data: proviDate } = useCablePlansProviders();
   const { data } = useGetCablePlans(network);
   const { mutate: purchaseCable, isLoading } = usePurchaseCable();
+  const [mixpanel, user] = useMixpanel();
   const amount = useMemo(() => {
     if (!bundle) return 0;
     return data?.data?.categories?.filter((item: any) => item.code === bundle)?.[0]?.amount;
   }, [bundle]);
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Cable Plan Purchase Attempt');
       await purchaseCable({
         currency,
         phone_no: phoneNumber,
@@ -36,7 +40,7 @@ const BuyCablePage: FC = () => {
         smart_card_no,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;

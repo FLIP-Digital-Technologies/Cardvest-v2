@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import {
   createBankAccount,
   deleteBankAccount,
@@ -20,13 +21,18 @@ function useCreateBankAccount() {
   const queryClient = useQueryClient();
   const { currency } = useCurrency();
   const navigation = useNavigation<GenericNavigationProps>();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['new-bank-account'],
     ({ banknumber, bankname, code, accountname, currency }: CreateBankAccountRequestPayload) =>
       createBankAccount({ banknumber, bankname, code, accountname, currency }),
     {
-      onSuccess: async (data: any) => {
+      onSuccess: async (data: any, variables) => {
+        mixpanel.identify(user?.id?.toString());
         await queryClient.invalidateQueries([`user-bank-${currency}`]);
+        mixpanel.track('Add Bank Account', {
+          ...variables,
+        });
         onOpenToast({
           status: 'success',
           message: 'Bank account created successfully',
@@ -37,9 +43,7 @@ function useCreateBankAccount() {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message: data?.b
-            ? `${data?.response?.data?.message} ${data?.b}`
-            : data?.response?.data?.message || 'Bank account not created',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Bank account not created',
         });
       },
     },
@@ -62,9 +66,7 @@ function useVerifyBankAccount() {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message: data?.b
-            ? `${data?.response?.data?.message} ${data?.b}`
-            : data?.response?.data?.message || 'Bank account not verified',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Bank account not verified',
         });
       },
     },
@@ -74,12 +76,17 @@ function useVerifyBankAccount() {
 function useDeleteBankAccount() {
   const queryClient = useQueryClient();
   const { currency } = useCurrency();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['delete-bank-account'],
     ({ bank_id }: DeleteBankAccountRequestPayload) => deleteBankAccount({ bank_id }),
     {
-      onSuccess: async (/*data*/) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
         await queryClient.invalidateQueries([`user-bank-${currency}`]);
+        mixpanel.track('Remove Bank Account', {
+          ...variables,
+        });
         onOpenToast({
           status: 'success',
           message: 'Bank has been deleted successfully',
@@ -89,9 +96,7 @@ function useDeleteBankAccount() {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message: data?.b
-            ? `${data?.response?.data?.message} ${data?.b}`
-            : data?.response?.data?.message || 'Bank account not verified',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Bank account not verified',
         });
       },
     },

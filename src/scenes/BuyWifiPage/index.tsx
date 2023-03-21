@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useGetWifiPlans, usePurchaseWifi, useWifiPlansProviders } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -14,12 +15,15 @@ const BuyWifiPage: FC = () => {
   const { data: proviDate } = useWifiPlansProviders();
   const { data } = useGetWifiPlans(network);
   const { mutate: purchaseWifi, isLoading } = usePurchaseWifi();
+  const [mixpanel, user] = useMixpanel();
   const amount = useMemo(() => {
     if (!bundle) return 0;
     return data?.data?.categories?.filter((item: any) => item.code === bundle)?.[0]?.amount;
   }, [bundle]);
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Wifi Purchase Attempt');
       await purchaseWifi({
         currency,
         product: network,
@@ -28,7 +32,7 @@ const BuyWifiPage: FC = () => {
         device_no,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handleDisabled = () => !device_no || !bundle || !network || !amount;

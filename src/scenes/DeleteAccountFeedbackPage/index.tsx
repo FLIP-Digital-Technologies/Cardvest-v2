@@ -4,6 +4,7 @@ import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { cacheService } from '@utils/cache';
 import { Text, View, Button, Pressable, VStack, Center } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
@@ -14,11 +15,13 @@ const DeleteAccountFeedbackPage: FC = () => {
   const handleDisabled = () => !password;
   const handleSubmit = async () => {
     try {
+      const token = await cacheService.get('login-user');
       await deleteAccount({
         password,
+        token,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   return (

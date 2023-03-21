@@ -203,6 +203,12 @@ PODS:
   - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
   - libevent (2.1.12)
+  - Mixpanel-swift (4.0.5):
+    - Mixpanel-swift/Complete (= 4.0.5)
+  - Mixpanel-swift/Complete (4.0.5)
+  - MixpanelReactNative (2.2.0):
+    - Mixpanel-swift (= 4.0.5)
+    - React-Core
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -569,12 +575,22 @@ PODS:
   - RNScreens (3.16.0):
     - React-Core
     - React-RCTImage
+  - RNSentry (5.1.0):
+    - React-Core
+    - Sentry/HybridSDK (= 8.2.0)
   - RNSVG (13.6.0):
     - React-Core
+  - RNUxcam (5.4.5):
+    - React-Core
+    - UXCam (~> 3.5.3)
   - RNVectorIcons (9.2.0):
     - React-Core
+  - Sentry/HybridSDK (8.2.0):
+    - SentryPrivate (= 8.2.0)
+  - SentryPrivate (8.2.0)
   - SocketRocket (0.6.0)
   - UMAppLoader (4.1.1)
+  - UXCam (3.5.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -619,6 +635,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleUtilities
+  - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
   - OpenSSL-Universal (= 1.1.1100)
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec`)
   - Permission-FaceID (from `../node_modules/react-native-permissions/ios/FaceID/Permission-FaceID.podspec`)
@@ -673,7 +690,9 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNUxcam (from `../node_modules/react-native-ux-cam`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -702,10 +721,14 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - libevent
+    - Mixpanel-swift
     - nanopb
     - OpenSSL-Universal
     - PromisesObjC
+    - Sentry
+    - SentryPrivate
     - SocketRocket
+    - UXCam
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -739,6 +762,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  MixpanelReactNative:
+    :path: "../node_modules/mixpanel-react-native"
   Permission-Camera:
     :path: "../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec"
   Permission-FaceID:
@@ -841,8 +866,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNUxcam:
+    :path: "../node_modules/react-native-ux-cam"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   UMAppLoader:
@@ -888,6 +917,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  Mixpanel-swift: 8b73f0306c21ddd6e9918e379593bfe3383f6eaa
+  MixpanelReactNative: 1df98c3be8467f89c9a84710034195d5cc295bbd
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   Permission-Camera: db22e80aa0858a8b6d65979a97f2f481dd8a0ebd
@@ -942,13 +973,18 @@ SPEC CHECKSUMS:
   RNPermissions: 2fbbcb7244357507f958d626d58eb15fb0013d85
   RNReanimated: 1be5bb774849f21036e84abd372ff75f4470e94f
   RNScreens: ee31ecdf23fe81e93c74feaa086cf173d758ab58
+  RNSentry: bf01c99057573813a9b965d213801bac4c6a661b
   RNSVG: 3a79c0c4992213e4f06c08e62730c5e7b9e4dc17
+  RNUxcam: 12d2de9f0c6023b1f31abb19dea463a2c0e14d22
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  Sentry: cf1d35c866266da58964fe7b62526bda93ffcb38
+  SentryPrivate: 2909bcc7b19a827b49e9bde0e56116b08d40dfdf
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   UMAppLoader: 71aae6c6782cf2aef2356bb97f84321600b4b25c
+  UXCam: b4a5cc96965b2f783b8c2c3bc0465cb614972a34
   Yoga: ff994563b2fd98c982ca58e8cd9db2cdaf4dda74
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 4c25e8892f7a8c8aede7898fa039bcb168fae2ce
+PODFILE CHECKSUM: d998850e1d1cebf3ad581bd04abc2d7c6736e6ae
 
 COCOAPODS: 1.11.3

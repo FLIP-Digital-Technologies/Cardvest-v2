@@ -274,7 +274,7 @@ const SignUp: FC = () => {
             Enter your details to get started
           </Text>
           <Center>
-            <ProgressStepperIndicator isDisabled={handleDisabled()} count={count} setCount={setCount} />
+            <ProgressStepperIndicator count={count} setCount={setCount} />
           </Center>
         </Center>
         {count === 1 && (

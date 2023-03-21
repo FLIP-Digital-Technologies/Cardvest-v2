@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { fundWallet, getCurrencyWallet, getDefaultWallet, switchDefaultWallet } from '@api/wallets/wallet';
 import {
   getAllWithdrawals,
@@ -42,12 +43,17 @@ function useGetWithdrawalsUSDTRate(currency: string) {
 function useInitializeWithdrawal() {
   const queryClient = useQueryClient();
   const navigation = useNavigation<GenericNavigationProps>();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['init-withdrawal'],
     ({ amount, bank, currency, type, wallet_address, network }: any) =>
       initiateWithdrawal({ amount, bank, currency, type, wallet_address, network }),
     {
-      onSuccess: async (_data: any, variable) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track(`Withdraw to ${variables.type === 'fiat' ? 'Fiat' : 'Crypto'}`, {
+          ...variables,
+        });
         await queryClient.invalidateQueries({ queryKey: ['user-default-wallet'] });
         await queryClient.invalidateQueries({ queryKey: [`user-${variable?.currency}-wallet`] });
         await queryClient.invalidateQueries([`transactions-bill-${variable?.currency}`]);
@@ -60,10 +66,9 @@ function useInitializeWithdrawal() {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b}` ||
-            data?.response?.data?.message ||
-            'An error has occurred when withdrawing funds',
+          message: data?.b
+            ? `${data?.b}`
+            : data?.response?.data?.message || 'An error has occurred when withdrawing funds',
         });
       },
     },
@@ -97,11 +102,16 @@ function useSwitchDefaultWallet() {
 
 function useFundWallet() {
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['fund-wallet'],
     ({ currency, amount }: { currency: string; amount: any }) => fundWallet({ currency, amount }),
     {
-      onSuccess: async (_data: any, variable) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track(`Fund ${variables.currency} Wallet`, {
+          ...variables,
+        });
         await queryClient.invalidateQueries({ queryKey: ['user-default-wallet'] });
         await queryClient.invalidateQueries({ queryKey: [`user-${variable?.currency}-wallet`] });
         await queryClient.invalidateQueries([`transactions-bill-${variable}`]);

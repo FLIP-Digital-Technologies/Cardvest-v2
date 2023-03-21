@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import {
   useElectricityPlansProviders,
   usePurchaseElectricity,
@@ -20,8 +21,11 @@ const BuyElectricityPage: FC = () => {
   const { data: proviDate } = useElectricityPlansProviders();
   const { mutate: purchaseElectricity, isLoading } = usePurchaseElectricity();
   const { mutate: verifyMeterNo, data: meter_name } = useVerifyMeterElectricity(meter_no);
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Electricity Purchase Attempt');
       await purchaseElectricity({
         currency,
         product: network,
@@ -31,7 +35,7 @@ const BuyElectricityPage: FC = () => {
         meter_type,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   useEffect(() => {

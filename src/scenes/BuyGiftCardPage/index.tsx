@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { useGetAllCategories, useGetGiftcardsToBuy } from '@api/hooks/useGiftcards';
+import { useGetAllBuyCategories, useGetGiftcardsToBuy } from '@api/hooks/useGiftcards';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -16,27 +16,25 @@ const BuyGiftCardPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const [category, setCategory] = useState<number>();
   const [comment, setComment] = useState('');
-  const [giftCard, setGiftCard] = useState('');
   const [amountUSD, setAmountUSD] = useState(0);
-  const { data } = useGetAllCategories();
+  const { data } = useGetAllBuyCategories();
   const { currency, handleSwitchCurrency } = useCurrency();
-  const { data: giftCardsData } = useGetGiftcardsToBuy({ category_id: Number(category) });
   const card = useMemo(() => {
-    if (!giftCard) return;
-    return giftCardsData?.data?.filter((card: any) => card.id === giftCard)?.[0];
-  }, [giftCard]);
+    if (!category) return;
+    return data?.data?.filter((card: any) => card.id === category)?.[0];
+  }, [category]);
   const total = useMemo(() => {
     if (!card) return;
     const totalAmount = (Number(card?.rate) * amountUSD) / Number(card?.rates[currency]);
     return totalAmount;
-  }, [amountUSD, giftCardsData, currency]);
-  const handleDisabled = () => !amountUSD || !giftCardsData || !category;
+  }, [amountUSD, currency]);
+  const handleDisabled = () => !amountUSD || !card || !category;
   const handleSubmit = async () => {
     navigation.navigate('BuyGiftCardTradeSummaryPage', {
       buyGiftCard: {
         card,
         category,
-        giftCard,
+        giftCard: category,
         amountUSD,
         currency,
         rate: `${currency} ${Money(Number(card?.rates[currency]) || 0, currency)}`,
@@ -45,6 +43,7 @@ const BuyGiftCardPage: FC = () => {
       },
     });
   };
+
   return (
     <BackButtonTitleCenter
       isDisabled={handleDisabled()}
@@ -56,9 +55,7 @@ const BuyGiftCardPage: FC = () => {
           Get the current value for your transaction
         </Text>
         <View p="3" />
-        <FormSelect label="Select Category" value={category} setValue={setCategory} data={data?.data} />
-        <View p="3" />
-        <FormSelect label="Select Giftcard" value={giftCard} setValue={setGiftCard} data={giftCardsData?.data} />
+        <FormSelect label="Select Giftcard" value={category} setValue={setCategory} data={data?.data} />
         <View p="3" />
         <Input label="Amount in USD" value={amountUSD} onChangeText={setAmountUSD} />
         <View p="3" />

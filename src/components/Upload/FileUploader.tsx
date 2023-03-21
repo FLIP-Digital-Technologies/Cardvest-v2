@@ -101,7 +101,7 @@ export default function FileUploader({
       else {
         setFileState('failed');
         const _error = error as AxiosError;
-        console.log(_error);
+        console.error(_error);
         if (_error.response) {
           const response: any = _error.response.data;
 
@@ -217,9 +217,9 @@ export default function FileUploader({
         {fileState === 'cancelled' && (
           <View style={{ justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
             <AppText style={styles.error}>Cancelled</AppText>
-            <View w="5" h="7" style={{ marginLeft: 4 }}>
+            <Pressable onPress={deleteUpload} w="5" h="7" style={{ marginLeft: 4 }}>
               <RedTrash />
-            </View>
+            </Pressable>
           </View>
         )}
         {fileState === 'uploading' && <AppText style={styles.pending}>Uploading...</AppText>}

@@ -40,7 +40,7 @@ ApiClient.interceptors.response.use(
   async (error: any) => {
     let b;
     const token = await cacheService.get('login-user');
-    console.log(error?.respone);
+    console.error(error?.respone, 'pooj');
     if (
       (error?.response?.status === 403 || error?.response?.status === 401) &&
       error?.response?.data?.message.includes('Unauthenticated') &&

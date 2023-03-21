@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useCreateBankAccount, useGetBankList, useVerifyBankAccount } from '@api/hooks/useBankAccounts';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -12,6 +13,7 @@ const AddAccountPage: FC = () => {
   const [accBank, setAccBank] = useState('');
   const [accNumber, setAccNumber] = useState('');
   const { currency, handleSwitchCurrency } = useCurrency();
+  const [mixpanel, user] = useMixpanel();
   const { data } = useGetBankList(currency);
   const { mutate: createBankAccount, isLoading } = useCreateBankAccount();
   const { mutate: verifyBankAccount, data: bankAccount, isLoading: isVerifying } = useVerifyBankAccount();
@@ -20,7 +22,7 @@ const AddAccountPage: FC = () => {
       try {
         await verifyBankAccount({ banknumber: accNumber, bankname: accBank, currency });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     if (accNumber.length > 9 && accNumber.length < 11 && accBank && currency === 'NGN') {
@@ -34,6 +36,8 @@ const AddAccountPage: FC = () => {
     !(currency === 'GHS' ? accountname : bankAccount?.data?.account_name);
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Add Bank Account Attempt');
       await createBankAccount({
         banknumber: accNumber,
         bankname:
@@ -45,7 +49,7 @@ const AddAccountPage: FC = () => {
         accountname: currency === 'GHS' ? accountname : bankAccount?.data?.account_name,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

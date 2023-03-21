@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useCreateSellOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { UploadPanel } from '@scenes/SellGiftCard';
@@ -39,8 +40,11 @@ const SellGiftCardTradeSummaryPage: FC = (props: any) => {
   const { params = { sellGiftCard: {} } } = route;
   const { sellGiftCard } = params;
   const { mutate: sellGiftCardAction, isLoading } = useCreateSellOrder();
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Sell GiftCard Attempt');
       await sellGiftCardAction({
         card_id: Number(sellGiftCard?.giftCard),
         amount: Number(sellGiftCard?.amountUSD),
@@ -49,7 +53,7 @@ const SellGiftCardTradeSummaryPage: FC = (props: any) => {
         images: sellGiftCard?.images,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

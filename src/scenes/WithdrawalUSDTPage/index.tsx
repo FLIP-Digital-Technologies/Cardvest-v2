@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useGetWithdrawalsUSDTNetwork, useGetWithdrawalsUSDTRate, useInitializeWithdrawal } from '@api/hooks/useWallet';
 import { DropDown, Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
@@ -171,19 +172,28 @@ export const CurrencyPicker = ({ currency, setCurrency }: { currency: string; se
   </Select>
 );
 
+function round(value: string | number, decimals = 6) {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+}
+
 const WithdrawalUSDT: FC = () => {
   const input = React.useRef(null);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [amount, setAmount] = React.useState<number>(0);
-  const [amountUSD, setAmountUSD] = React.useState<number>(0);
+  const [amount, setAmount] = React.useState<number | string>(0);
+  const [amountUSD, setAmountUSD] = React.useState<number | string>(0);
   const [account, setAccount] = React.useState('');
   const [network, setNetwork] = React.useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
   const { currency, handleSwitchCurrency } = useCurrency();
   const { data: rates } = useGetWithdrawalsUSDTRate(currency);
   const { data: networks } = useGetWithdrawalsUSDTNetwork();
+  const [mixpanel, user] = useMixpanel();
   const rate = rates?.data?.[currency];
   const handleAmount = (val: string) => {
+    if (val?.[val.length - 1] === '.' || Number(val) === 0) {
+      setAmountUSD(0);
+      return setAmount(val);
+    }
     setAmount(parseFloat(val));
     // check what fiat it is and multiply amount by the fiat rate
     if (!val) {
@@ -191,15 +201,19 @@ const WithdrawalUSDT: FC = () => {
     } else {
       if (currency === 'NGN') {
         const res = parseFloat(val) / (rates?.data ? rates?.data?.NGN : 0);
-        setAmountUSD(res);
+        setAmountUSD(round(res, 6));
       }
       if (currency === 'GHS') {
         const res = parseFloat(val) / (rates?.data ? rates?.data?.GHS : 0);
-        setAmountUSD(res);
+        setAmountUSD(round(res, 6));
       }
     }
   };
   const handleUSDTAmount = (val: string) => {
+    if (val?.[val.length - 1] === '.' || Number(val) === 0) {
+      setAmount(0);
+      return setAmountUSD(val);
+    }
     setAmountUSD(parseFloat(val));
     // check what fiat it is and multiply amount by the fiat rate
     if (!val) {
@@ -217,6 +231,8 @@ const WithdrawalUSDT: FC = () => {
   };
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Withdraw to Crypto Attempt');
       await withdrawFunds({
         amount,
         currency,
@@ -225,7 +241,7 @@ const WithdrawalUSDT: FC = () => {
         network,
       });
     } catch (err) {
-      console.log(err);
+      console.error('withdrawal usd -', err);
     }
   };
   const handleDisabled = () =>
@@ -256,7 +272,7 @@ const WithdrawalUSDT: FC = () => {
                 color="black"
                 fontSize="3xl"
                 ref={input}
-                value={amount?.toString() === 'NaN' ? '0' : amount?.toString()}
+                value={amount?.toString() === 'NaN' ? '' : amount?.toString()}
                 onChangeText={handleAmount}
                 keyboardType="decimal-pad"
                 variant="unstyled"
@@ -285,7 +301,7 @@ const WithdrawalUSDT: FC = () => {
                 keyboardType="numeric"
                 fontSize="3xl"
                 onChangeText={handleUSDTAmount}
-                value={amountUSD?.toString() === 'NaN' ? '0' : amountUSD?.toString()}
+                value={amountUSD?.toString() === 'NaN' ? '' : amountUSD?.toString()}
                 variant="unstyled"
               />
             </HStack>

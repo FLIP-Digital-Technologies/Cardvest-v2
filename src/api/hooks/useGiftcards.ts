@@ -1,10 +1,20 @@
-import { getAllCategories, getGiftcard, getGiftcardsToBuy, getGiftcardsToSell } from '@api/giftcards/giftcards';
+import {
+  getAllBuyGiftCardCategories,
+  getAllCategories,
+  getGiftcard,
+  getGiftcardsToBuy,
+  getGiftcardsToSell,
+} from '@api/giftcards/giftcards';
 import {
   GiftCardsToBuyRequestPayload,
   GiftCardsToSellRequestPayload,
   GiftcardRequestPayload,
 } from '@api/giftcards/types';
 import { useQuery } from '@tanstack/react-query';
+
+function useGetAllBuyCategories() {
+  return useQuery([`giftcard-buy-categories`], () => getAllBuyGiftCardCategories());
+}
 
 function useGetAllCategories() {
   return useQuery([`giftcard-categories`], () => getAllCategories());
@@ -26,4 +36,10 @@ function useGetGiftcardDetails({ card_id }: any) {
   return useQuery([`giftcard-${card_id}`, { card_id }], () => getGiftcard({ card_id }));
 }
 
-export { useGetGiftcardDetails, useGetAllCategories, useGetGiftcardsToBuy, useGetGiftcardsToSell };
+export {
+  useGetGiftcardDetails,
+  useGetAllCategories,
+  useGetGiftcardsToBuy,
+  useGetGiftcardsToSell,
+  useGetAllBuyCategories,
+};

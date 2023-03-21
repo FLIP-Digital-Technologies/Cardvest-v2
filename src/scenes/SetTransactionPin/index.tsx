@@ -27,7 +27,7 @@ const SetTransactionPin: FC = () => {
       await handleSetUpTransactionPin();
       navigation.navigate('Dashboard');
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

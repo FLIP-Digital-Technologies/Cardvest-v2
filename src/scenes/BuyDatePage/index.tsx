@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useGetDataPlans, usePurchaseData, useGetDataPlansProviders } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -14,12 +15,16 @@ const BuyDatePage: FC = () => {
   const { data: proviDate } = useGetDataPlansProviders();
   const { data } = useGetDataPlans(network);
   const { mutate: purchseDate, isLoading } = usePurchaseData();
+  const [mixpanel, user] = useMixpanel();
   const amount = useMemo(() => {
     if (!bundle) return 0;
     return data?.data?.categories?.filter((item: any) => item.code === bundle)?.[0]?.amount;
   }, [bundle]);
   const handleSubmit = async () => {
     try {
+      console.log('res', user);
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Data Purchase Attempt');
       await purchseDate({
         currency,
         phone_no: phoneNumber,
@@ -28,7 +33,7 @@ const BuyDatePage: FC = () => {
         amount,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;

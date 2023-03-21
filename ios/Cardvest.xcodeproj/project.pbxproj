@@ -399,6 +399,7 @@
 				E215348639E673D645A499A8 /* [CP] Embed Pods Frameworks */,
 				DEF32AEAA345DD215FD7DE0B /* [CP] Copy Pods Resources */,
 				555BE6404F7FA34DFAD57E05 /* [CP-User] [RNFB] Core Configuration */,
+				1FBBAD36A5DE412E816242C1 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -515,7 +516,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=/Users/biguncleyemi/.nvm/versions/node/v14.20.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nset -e\n\nexport NODE_BINARY=/Users/biguncleyemi/.nvm/versions/node/v14.20.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n\n/bin/sh ../node_modules/@sentry/react-native/scripts/collect-modules.sh\n";
+		};
+		1FBBAD36A5DE412E816242C1 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nexport SENTRY_PROPERTIES=sentry.properties\n[[ $SENTRY_INCLUDE_NATIVE_SOURCES == \"true\" ]] && INCLUDE_SOURCES_FLAG=\"--include-sources\" || INCLUDE_SOURCES_FLAG=\"\"\n../node_modules/@sentry/cli/bin/sentry-cli debug-files upload \"$INCLUDE_SOURCES_FLAG\"\n";
 		};
 		4CEC92E26BC4954EDC617273 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -756,7 +771,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 81;
+				CURRENT_PROJECT_VERSION = 812220234;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
@@ -789,7 +804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 81;
+				CURRENT_PROJECT_VERSION = 812220234;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				INFOPLIST_FILE = Cardvest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CardVest;

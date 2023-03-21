@@ -103,6 +103,7 @@ const DashboardBottomTabStack: FC = () => {
           tabBarLabelStyle: {
             marginTop: 10,
             color: 'black',
+            width: '100%',
           },
           tabBarIcon: ({ focused }) => (
             <React.Fragment>
@@ -125,6 +126,7 @@ const DashboardBottomTabStack: FC = () => {
           tabBarLabelStyle: {
             marginTop: 10,
             color: 'black',
+            width: '100%',
           },
           tabBarIcon: ({ focused }) => (
             <React.Fragment>
@@ -147,6 +149,7 @@ const DashboardBottomTabStack: FC = () => {
           tabBarLabelStyle: {
             marginTop: 10,
             color: 'black',
+            width: '100%',
           },
           tabBarIcon: ({ focused }) => (
             <React.Fragment>
@@ -169,6 +172,7 @@ const DashboardBottomTabStack: FC = () => {
           tabBarLabelStyle: {
             marginTop: 10,
             color: 'black',
+            width: '100%',
           },
           tabBarIcon: ({ focused }) => (
             <React.Fragment>

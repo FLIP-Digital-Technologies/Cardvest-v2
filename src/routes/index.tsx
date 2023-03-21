@@ -156,7 +156,7 @@ export const RootStackScreen: FC = () => {
         remoteMessage?.data?.message || remoteMessage?.notification?.body,
         remoteMessage?.data,
         remoteMessage?.options,
-        remoteMessage?.date || new Date(Date.now() + 30000), // TODO: god abeg
+        remoteMessage?.date || new Date(Date.now() + 3000), // TODO: god abeg
       );
     });
     return unsubscribe;

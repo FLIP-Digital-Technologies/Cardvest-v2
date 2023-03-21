@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -21,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>81</string>
+	<string>812220234</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -42,7 +44,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(App_Name) requires FaceID access to allows you quick and secure access.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Allow $(PRODUCT_NAME) to access your location</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to access your microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -96,7 +98,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
-		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

@@ -141,9 +141,8 @@ export async function modifyUserPassword({
   }
 }
 
-export async function deleteUser({ password }: any) {
+export async function deleteUser({ password, token }: any) {
   try {
-    const token = await cacheService.get('login-user');
     const response = await ApiClient.delete(`${env.API_URL}/users/delete`, {
       data: {
         password,
@@ -151,7 +150,7 @@ export async function deleteUser({ password }: any) {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return response.data;
+    return response?.data;
   } catch (error) {
     console.error('deleteUser - Error: ', error);
     throw error;

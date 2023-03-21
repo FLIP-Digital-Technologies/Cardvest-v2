@@ -57,7 +57,7 @@ export const UploadedItems = ({ images }: { images?: Array<string> }) => {
           <Modal.Content maxWidth="500px" minH="400px">
             <Modal.CloseButton />
             <VStack px="2" justifyContent="center" minH="400px" alignItems="center">
-              <Image source={showIndModal} alt="image" borderRadius="lg" minH="10" mx="2" w="100%" />
+              <Image source={showIndModal} alt="image" borderRadius="lg" minH="300px" mx="2" w="100%" />
             </VStack>
           </Modal.Content>
         </Modal>
@@ -153,6 +153,7 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const userData: any = queryClient.getQueryData(['user']);
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
+  console.log({ data });
   if (!isFetched) return <CLoader />;
   const body = `
 Name: ${userData?.firstname} ${userData?.lastname}

@@ -88,7 +88,7 @@ const TransactionPinModal = ({
       await closeModalVisible();
       await handleSubmit();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -117,7 +117,7 @@ const TransactionPinModal = ({
               inputContainerStyles={{
                 width: '20%',
               }}
-              autofillFromClipboard
+              autofillFromClipboard={false}
             />
           </View>
           <Button

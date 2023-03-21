@@ -13,7 +13,7 @@ const ResendVerifyEmail: FC<{ route: any }> = ({ route }) => {
     try {
       await resendVerificationEmail();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

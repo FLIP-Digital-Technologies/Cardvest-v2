@@ -3,6 +3,8 @@ import '@i18n';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackScreen } from '@routes';
 import { isMountedRef, navigationRef } from '@routes/navigationUtils';
+import { CaptureConsole } from '@sentry/integrations';
+import * as Sentry from '@sentry/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import customTheme from '@theme';
 import { NativeBaseProvider, StatusBar } from 'native-base';
@@ -13,7 +15,26 @@ import { setCustomTextInput, setCustomText } from 'react-native-global-props';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import SplashScreen from 'react-native-splash-screen';
+import RNUxcam from 'react-native-ux-cam';
+import { UXCamOcclusionType } from 'react-native-ux-cam/UXCamOcclusion';
+import { MixpanelProvider } from './MixpanelAnalytics';
 import NotificationContainer from './NotificationContainer';
+
+Sentry.init({
+  dsn: 'https://1e1707ce69834cf180a71be12fbcf40e@o4504776356003840.ingest.sentry.io/4504776371077120',
+  integrations: [
+    new CaptureConsole({
+      levels: ['error'],
+    }),
+  ],
+  // This sets the sample rate to be 10%. You may want this to be 100% while
+  // in development and sample at a lower rate in production
+  // @ts-ignore
+  replaysSessionSampleRate: 0.3,
+  // If the entire session is not sampled, use the below sample rate to sample
+  // sessions when an error occurs.
+  replaysOnErrorSampleRate: 1.0,
+});
 
 enableScreens();
 
@@ -37,7 +58,7 @@ const queryClient = new QueryClient({
       refetchOnReconnect: false,
       retry: 3,
       staleTime: 5 * 60 * 1000,
-      // refetchInterval: 60 * 1000,
+      refetchInterval: 3 * 60 * 1000,
     },
   },
 });
@@ -55,16 +76,36 @@ const App: FC = () => {
     SplashScreen.hide();
   }, []);
 
+  RNUxcam.optIntoSchematicRecordings(); // Add this line to enable iOS screen recordings
+  const configuration = {
+    userAppKey: 'zufsj0ftpxzwy91',
+    enableAutomaticScreenNameTagging: false,
+    enableImprovedScreenCapture: true,
+  };
+  RNUxcam.startWithConfiguration(configuration);
+
+  // Overlay over screens
+  const overlay = {
+    type: UXCamOcclusionType.Overlay,
+    color: 0x39ca95,
+    hideGestures: true,
+    screens: ['LoginPage', 'SignUpPage', 'SetTransactionPin', 'LoginBackPage', 'WithdrawalPage', 'WithdrawalUSDT'],
+  };
+
+  RNUxcam.applyOcclusion(overlay);
+
   return (
     <Suspense fallback={<Splashscreen />}>
       <SafeAreaProvider>
         <NavigationContainer ref={navigationRef}>
           <NativeBaseProvider theme={customTheme}>
             <QueryClientProvider client={queryClient}>
-              <NotificationContainer>
-                <StatusBar barStyle="default" />
-                <RootStackScreen />
-              </NotificationContainer>
+              <MixpanelProvider>
+                <NotificationContainer>
+                  <StatusBar barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'} />
+                  <RootStackScreen />
+                </NotificationContainer>
+              </MixpanelProvider>
             </QueryClientProvider>
           </NativeBaseProvider>
         </NavigationContainer>

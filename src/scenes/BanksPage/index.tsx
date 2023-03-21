@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useDeleteBankAccount, useGetUserBank } from '@api/hooks/useBankAccounts';
 import { AddGreen, Delete, BankCircle, Success, RedTrash, BanksEmpty } from '@assets/SVG';
 import CLoader from '@components/CLoader';
@@ -14,13 +15,16 @@ import React, { FC, memo } from 'react';
 const BankAccount = ({ data }: { data: any }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const { mutate: deleteBankAccount, isLoading } = useDeleteBankAccount();
+  const [mixpanel, user] = useMixpanel();
   const handleDelete = async (bank_id: any) => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Remove Bank Account Attempt');
       await deleteBankAccount({
         bank_id,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

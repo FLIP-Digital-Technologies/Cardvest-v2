@@ -24,7 +24,7 @@ const LoginBack: FC = () => {
         setData(JSON.parse(res || {}));
         return res;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     fetchData();
@@ -36,6 +36,7 @@ const LoginBack: FC = () => {
         email: data?.email,
         password,
       });
+      await setPassword('');
       // await navigation.navigate('Dashboard');
     } catch (error) {
       console.error(error);

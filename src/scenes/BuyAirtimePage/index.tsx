@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useAirtimePlansProviders, usePurchaseAirtime } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -13,8 +14,11 @@ const BuyAirtimePage: FC = () => {
   const { currency } = useCurrency();
   const { data: proviDate } = useAirtimePlansProviders();
   const { mutate: purchaseAirtime, isLoading } = usePurchaseAirtime();
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Airtime Purchase Attempt');
       await purchaseAirtime({
         currency,
         phone_no: phoneNumber,
@@ -22,7 +26,7 @@ const BuyAirtimePage: FC = () => {
         amount,
       });
     } catch (e: any) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handleDisabled = () => !phoneNumber || !network || !amount;

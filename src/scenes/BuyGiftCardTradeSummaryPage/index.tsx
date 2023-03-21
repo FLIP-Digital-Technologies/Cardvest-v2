@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useCreateBuyOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import * as dayjs from 'dayjs';
@@ -38,8 +39,11 @@ const BuyGiftCardTradeSummaryPage: FC = (props: any) => {
   const { params = { buyGiftCard: {} } } = route;
   const { buyGiftCard } = params;
   const { mutate: buyGiftCardAction, isLoading } = useCreateBuyOrder();
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Buy GiftCard Attempt');
       await buyGiftCardAction({
         card_id: Number(buyGiftCard?.giftCard),
         amount: Number(buyGiftCard?.amountUSD),
@@ -47,7 +51,7 @@ const BuyGiftCardTradeSummaryPage: FC = (props: any) => {
         currency: buyGiftCard?.currency,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

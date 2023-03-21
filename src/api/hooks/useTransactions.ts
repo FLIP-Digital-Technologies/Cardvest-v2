@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import {
   getAllTransactions,
   getPayoutTransactions,
@@ -25,6 +26,38 @@ import { CreateSellOrderRequestPayload, CreateBuyOrderRequestPayload } from '@ap
 import { useNavigation } from '@react-navigation/native';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
+
+function useElectricityPlansProviders() {
+  return useQuery([`electricity-plans-providers`], () => getAllElectricityPlansProviders());
+}
+
+function useWifiPlansProviders() {
+  return useQuery([`wifi-plans-providers`], () => getAllWifiPlansProviders());
+}
+
+function useGetWifiPlans(product: string) {
+  return useQuery([`wifi-plans-${product}`, product], () => getAllWifiPlans({ product }));
+}
+
+function useAirtimePlansProviders() {
+  return useQuery([`airtime-plans-providers`], () => getAllAirtimeNetworks());
+}
+
+function useCablePlansProviders() {
+  return useQuery([`data-cable-providers`], () => getAllCablePlansProviders());
+}
+
+function useGetCablePlans(product: string) {
+  return useQuery([`cable-plans-${product}`, product], () => getAllCablePlans({ product }));
+}
+
+function useGetDataPlansProviders() {
+  return useQuery([`data-plans-providers`], () => getAllDataPlansProviders());
+}
+
+function useGetDataPlans(product: string) {
+  return useQuery([`data-plans-${product}`, product], () => getAllDataPlans({ product }));
+}
 
 function useGetAllBillTransactions(currency: string, page?: number) {
   return useInfiniteQuery(
@@ -66,41 +99,13 @@ function useGetPayoutTransactions(currency: string, page?: number) {
 }
 
 function useGetTransaction({ transaction_reference, type }: any) {
-  return useQuery([`transaction-${transaction_reference}-details`, transaction_reference], () =>
-    getTransaction({ transaction_reference, type }),
-  );
-}
-
-function useElectricityPlansProviders() {
-  return useQuery([`electricity-plans-providers`], () => getAllElectricityPlansProviders());
-}
-
-function useWifiPlansProviders() {
-  return useQuery([`wifi-plans-providers`], () => getAllWifiPlansProviders());
-}
-
-function useGetWifiPlans(product: string) {
-  return useQuery([`wifi-plans-${product}`, product], () => getAllWifiPlans({ product }));
-}
-
-function useAirtimePlansProviders() {
-  return useQuery([`airtime-plans-providers`], () => getAllAirtimeNetworks());
-}
-
-function useCablePlansProviders() {
-  return useQuery([`data-cable-providers`], () => getAllCablePlansProviders());
-}
-
-function useGetCablePlans(product: string) {
-  return useQuery([`cable-plans-${product}`, product], () => getAllCablePlans({ product }));
-}
-
-function useGetDataPlansProviders() {
-  return useQuery([`data-plans-providers`], () => getAllDataPlansProviders());
-}
-
-function useGetDataPlans(product: string) {
-  return useQuery([`data-plans-${product}`, product], () => getAllDataPlans({ product }));
+  return useQuery({
+    queryKey: [`transaction-${transaction_reference}-details`, transaction_reference],
+    queryFn: () => getTransaction({ transaction_reference, type }),
+    // Refetch the data every second
+    // Refetch the data every second
+    refetchInterval: 1000,
+  });
 }
 
 function useVerifyMeterElectricity(meter_no: string) {
@@ -113,7 +118,7 @@ function useVerifyMeterElectricity(meter_no: string) {
         meter_type,
       }),
     {
-      onError: (/*data*/) => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
@@ -127,6 +132,7 @@ function useVerifyMeterElectricity(meter_no: string) {
 function usePurchaseElectricity() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-electricity-plans`],
     ({ product, meter_no, customer_name, meter_type, phone_no, currency, amount }: any) =>
@@ -140,7 +146,11 @@ function usePurchaseElectricity() {
         amount,
       }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Electricity Purchase', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -151,14 +161,11 @@ function usePurchaseElectricity() {
           routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -168,6 +175,7 @@ function usePurchaseElectricity() {
 function usePurchaseWifi() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, device_no, product, code, amount }: any) =>
@@ -179,7 +187,11 @@ function usePurchaseWifi() {
         amount,
       }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Wifi Purchase', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -190,14 +202,11 @@ function usePurchaseWifi() {
           routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -207,6 +216,7 @@ function usePurchaseWifi() {
 function usePurchaseCable() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, phone_no, product, code, amount, smart_card_no }: any) =>
@@ -219,7 +229,11 @@ function usePurchaseCable() {
         smart_card_no,
       }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Cable Plan Purchase', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -230,14 +244,11 @@ function usePurchaseCable() {
           routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -247,6 +258,7 @@ function usePurchaseCable() {
 function usePurchaseData() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, phone_no, product, code, amount }: any) =>
@@ -258,7 +270,11 @@ function usePurchaseData() {
         amount,
       }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Data Purchase', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -269,14 +285,11 @@ function usePurchaseData() {
           routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -286,6 +299,7 @@ function usePurchaseData() {
 function usePurchaseAirtime() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-data-plans`],
     ({ currency, phone_no, product, amount }: any) =>
@@ -296,7 +310,11 @@ function usePurchaseAirtime() {
         amount,
       }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Airtime Purchase', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -307,14 +325,11 @@ function usePurchaseAirtime() {
           routes: [{ name: 'BillFeedback' }],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -340,12 +355,17 @@ function usePurchaseAirtime() {
 function useCreateSellOrder() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['sell-order'],
     ({ card_id, amount, images, to_bank, bank, comment, currency }: CreateSellOrderRequestPayload) =>
       createSellOrder({ card_id, amount, images, to_bank, bank, comment, currency }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Sell GiftCard', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -365,11 +385,11 @@ function useCreateSellOrder() {
           ],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message: data?.response?.data?.message || 'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },
@@ -379,12 +399,17 @@ function useCreateSellOrder() {
 function useCreateBuyOrder() {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+  const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['buy-order'],
     ({ card_id, amount, comment, currency }: CreateBuyOrderRequestPayload) =>
       createBuyOrder({ card_id, amount, comment, currency }),
     {
-      onSuccess: async (data, variables) => {
+      onSuccess: async (_data, variables) => {
+        mixpanel.identify(user?.id?.toString());
+        mixpanel.track('Buy GiftCard', {
+          ...variables,
+        });
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -404,14 +429,11 @@ function useCreateBuyOrder() {
           ],
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message:
-            `${data?.response?.data?.message} ${data?.b && data?.b}` ||
-            data?.response?.data?.message ||
-            'An error occurred',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'An error occurred',
         });
       },
     },

@@ -37,7 +37,7 @@ const processNotification = response => {
     url += `?title=${notificationContent.title}&body=${notificationContent.body}`;
   }
 
-  Linking.openURL(url);
+  if (url) Linking.openURL(url);
 };
 async function sendPushNotification(expoPushToken) {
   const message = {
@@ -74,11 +74,11 @@ export default function NotificationContainer({ children }) {
         const res = await cacheService.get('user');
         if (JSON.parse(res || {})?.id !== data?.id) {
           setData(JSON.parse(res || {}));
-          console.log('locked in ', modelName, AppToken);
+          console.log('locked in ', modelName, AppToken, res);
         }
         return res;
       } catch (error) {
-        console.log('errr' - JSON.stringify(error));
+        console.error('errr geting apptoken' - JSON.stringify(error));
       }
     }
     fetchData();
@@ -127,8 +127,7 @@ export default function NotificationContainer({ children }) {
   async function registerForPushNotificationsAsync() {
     try {
       let token;
-      let deviceToken;
-      let devicePushToken = await cacheService.get('@DeviceToken');
+      let deviceToken = await cacheService.get('@DeviceToken');
       console.log('hjehkjehk', Device.isDevice);
       if (Device.isDevice) {
         console.log('Device is physical', Device.isDevice);
@@ -143,11 +142,11 @@ export default function NotificationContainer({ children }) {
           // console.log("Failed to get push token for push notification!");
           return;
         }
-        console.log('floak', token);
-        deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
-        console.log(existingStatus, 'jjekhjehkjehk', Device.isDevice, deviceToken);
-        token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@flip_digitals/cardvest' })).data;
-        console.log(modelName, 'forco', deviceToken, token, 'flip_digitals');
+        console.log('floak', token, deviceToken);
+        // deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
+        // console.log(existingStatus, 'jjekhjehkjehk', Device.isDevice, deviceToken);
+        // token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@flip_digitals/cardvest' })).data;
+        // console.log(modelName, 'forco', deviceToken, token, 'flip_digitals');
       } else {
         // console.log("Must use a physical device for Push Notifications");
         return;
@@ -163,7 +162,7 @@ export default function NotificationContainer({ children }) {
       }
       return { token, deviceToken };
     } catch (error) {
-      console.log(error);
+      console.error('reg token error', error);
     }
   }
 
@@ -188,7 +187,7 @@ export default function NotificationContainer({ children }) {
       );
       console.log('Your Expo Token is:', token, 'res is', res);
     } catch (error) {
-      console.log('posing err -', JSON.stringify(error));
+      console.error('posing err -', JSON.stringify(error));
     }
     // pushTokenApi.registerPushTokenMock(tokenData);
   };

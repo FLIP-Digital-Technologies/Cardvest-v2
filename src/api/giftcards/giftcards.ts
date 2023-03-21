@@ -21,6 +21,20 @@ export async function getAllGiftcards() {
   }
 }
 
+export async function getAllBuyGiftCardCategories() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/giftcards/buy`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('getAllBuyGiftCardCategories - Error: ', error);
+    throw error;
+  }
+}
+
 export async function getAllCategories() {
   try {
     const token = await cacheService.get('login-user');

@@ -97,7 +97,7 @@ function useModifyUserPassword() {
 function useDeleteUser() {
   const queryClient = useQueryClient();
   const navigation = useNavigation<GenericNavigationProps>();
-  return useMutation(['delete-user'], ({ password }: any) => deleteUser({ password }), {
+  return useMutation(['delete-user'], ({ password, token }: any) => deleteUser({ password, token }), {
     onSuccess: async (/*data*/) => {
       onOpenToast({
         status: 'success',

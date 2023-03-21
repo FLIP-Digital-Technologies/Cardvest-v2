@@ -1,3 +1,4 @@
+import { useMixpanel } from '@MixpanelAnalytics';
 import { useGetUserBank } from '@api/hooks/useBankAccounts';
 import { useInitializeWithdrawal } from '@api/hooks/useWallet';
 import { AddGreen } from '@assets/SVG';
@@ -20,8 +21,11 @@ const WithdrawalPage: FC = () => {
   const [amount, setAmount] = useState(0);
   const [account, setAccount] = useState('');
   const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
+  const [mixpanel, user] = useMixpanel();
   const handleSubmit = async () => {
     try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Withdraw to Fiat Attempt');
       await withdrawFunds({
         amount,
         bank: account,
@@ -29,7 +33,7 @@ const WithdrawalPage: FC = () => {
         type: 'fiat',
       });
     } catch (err) {
-      console.log(err);
+      console.error('withdrwal fiat', err);
     }
   };
   const handleDisabled = () => !account || !amount;

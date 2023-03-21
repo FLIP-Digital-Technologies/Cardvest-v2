@@ -23,5 +23,5 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 // Remove YellowBox on Debug application screen
 LogBox.ignoreAllLogs(true);
 // AppRegistry.registerComponent(appName, () => App);
-// eslint-disable-next-line no-undef
+
 AppRegistry.registerComponent(appName, () => HeadlessCheck);
