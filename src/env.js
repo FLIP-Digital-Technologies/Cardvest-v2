@@ -4,7 +4,7 @@
 /***********************************************/
 
 export default {
-  API_URL: 'https://staging.cardvest.ng/api/v2',
-  ENV: 'development',
+  API_URL: 'https://api.cardvest.ng/api/v2',
+  ENV: 'production',
   MXP_PRO_TOKS: '406f69b81f42a113baade56967f62ec1',
 };

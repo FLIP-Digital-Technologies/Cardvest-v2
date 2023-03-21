@@ -1,6 +1,6 @@
 {
   "name": "Cardvest",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "prepare": "run-p assets:* debugger:install",
@@ -32,7 +32,7 @@
     "android:assemble:release": "cd android && ./gradlew assembleRelease",
     "ios:bundle:create": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
     "ios:assemble:debug": "xcodebuild -quiet -workspace ios/Cardvest.xcworkspace -scheme Cardvest -configuration Release -sdk iphonesimulator -destination platform='iOS Simulator',OS=13.0,name='iPhone 11 Pro Max' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO",
-    "build:dev:android": "run-s env:dev android:bundle:create android:assemble:debug",
+    "build:dev:android": "run-s env:prod android:bundle:create android:assemble:debug",
     "build:dev:ios": "run-s env:dev setup:ios ios:assemble:debug",
     "pre-commit": "yarn lint-staged && yarn dependencies:checkCircular && yarn dependencies:graph",
     "prettier-check:staged": "prettier --check \"./src/**/*.{js,jsx,ts,tsx}\"",

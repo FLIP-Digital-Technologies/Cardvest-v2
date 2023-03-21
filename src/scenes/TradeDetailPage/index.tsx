@@ -112,7 +112,7 @@ const ItemText = ({ body, title }: { body: string; title: string }) => {
       <Text my="1" color="CARDVESTGREY.50">
         {title}
       </Text>
-      <Text my="1" color="CARDVESTGREY.900">
+      <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
         {body}
       </Text>
     </VStack>
@@ -153,7 +153,6 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const userData: any = queryClient.getQueryData(['user']);
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
-  console.log({ data });
   if (!isFetched) return <CLoader />;
   const body = `
 Name: ${userData?.firstname} ${userData?.lastname}
@@ -263,6 +262,11 @@ Transaction Reference: ${data?.data?.reference}
             <>
               <ItemText title="Category" body="Bills & Utilities" />
               <ItemText title="Type" body={`${data?.data?.bill?.product} - ${data?.data?.bill?.note}` || 'N/A'} />
+              {data?.data?.bill?.device_no && (
+                <ItemText title="Meter" body={`${data?.data?.bill?.device_no} - ${data?.data?.bill?.code}` || 'N/A'} />
+              )}
+              {data?.data?.bill?.token && <ItemText title="Token" body={data?.data?.bill?.token || 'N/A'} />}
+              <ItemText title="Phone Number" body={data?.data?.bill?.phone_no || 'N/A'} />
               <ItemText title="Amount" body={`${currency} ${Money(transactionData?.amount, currency)}`} />
             </>
           )}
