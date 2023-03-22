@@ -1,0 +1,9 @@
+{
+  "team_id": "T965C74L4F",
+  "issuer_id": "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+  "api_issuer": "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+  "key": "-----BEGIN PRIVATE KEY-----MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgDZrB/lHFR7OVAsQqR6zoF9+tmKwL35ouk76143PY+UKgCgYIKoZIzj0DAQehRANCAATBKyVO5yxpIQ/zY171lHgNEwoJf+UZjHI4bNz1P8LCGu+IpaPJljOTg32y9r4YOyuXyKb2lkGpHEPkFe7Q8yAa-----END PRIVATE KEY-----",
+  "duration": 1200, 
+  "in_house": false,
+  "output_path": "./"
+}

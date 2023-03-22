@@ -1,17 +1,20 @@
+import Intro2Png from '@assets/images/intro2.png';
+import Intro3Png from '@assets/images/intro3.png';
 import IntroPng from '@assets/images/intro.png';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { BoldText } from '@scenes/LoginPage';
 import { View, Text, Center, Image, Button, HStack, Pressable } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 import PagerView from 'react-native-pager-view';
 import Svg, { Circle } from 'react-native-svg';
 
 export const SlidePage = ({ title, body }: { title: string; body: string }) => (
-  <Center flex={3}>
-    <Text color="CARDVESTGREEN" textAlign="center" width="80%" fontSize="3xl" fontWeight="bold">
+  <Center flex={4}>
+    <BoldText color="CARDVESTGREEN" textAlign="center" width="80%" fontSize="3xl" py="2">
       {title}
-    </Text>
+    </BoldText>
     <Text color="CARDVESTGREY.100" textAlign="center" width="80%" fontSize="md" fontWeight="light">
       {body}
     </Text>
@@ -29,44 +32,64 @@ const Intro: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   return (
     <CSafeAreaView>
-      <Center flex={6}>
-        <Image source={IntroPng} alt="intro" />
-      </Center>
-      <Center>
-        <HStack space="xs">
-          <IndicatorDot pageIndex={pageIndex} index={0} />
-          <IndicatorDot pageIndex={pageIndex} index={1} />
-          <IndicatorDot pageIndex={pageIndex} index={2} />
-        </HStack>
-      </Center>
       <PagerView
-        style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}
+        style={{ flex: 12, alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}
         initialPage={0}
         onPageSelected={e => {
           setPageIndex(e?.nativeEvent?.position);
         }}>
-        <View key="1">
+        <React.Fragment key="1">
+          <Center my="8" flex={10}>
+            <Image source={IntroPng} w="100%" h="100%" alt="intro" />
+          </Center>
+          <Center>
+            <HStack space="xs" my="2">
+              <IndicatorDot pageIndex={pageIndex} index={0} />
+              <IndicatorDot pageIndex={pageIndex} index={1} />
+              <IndicatorDot pageIndex={pageIndex} index={2} />
+            </HStack>
+          </Center>
           <SlidePage
-            title="Current Rates"
-            body="Our rates are auto-updated at par with Chinese rates. Always current rates is displayed on CardVest."
+            title="Real Time Rates"
+            body="The rates displayed on CardVest are constantly updated to align with current market rates."
           />
-        </View>
-        <View key="2">
+        </React.Fragment>
+        <React.Fragment key="2">
+          <Center my="8" flex={10}>
+            <Image source={Intro2Png} w="100%" h="100%" alt="intro" />
+          </Center>
+          <Center>
+            <HStack space="xs" my="2">
+              <IndicatorDot pageIndex={pageIndex} index={0} />
+              <IndicatorDot pageIndex={pageIndex} index={1} />
+              <IndicatorDot pageIndex={pageIndex} index={2} />
+            </HStack>
+          </Center>
           <SlidePage
             title="Customer Friendly"
-            body="CardVest is designed and simplified for beginners and experienced gift cards traders."
+            body="CardVest is made easy for both newbies and pro gift card traders."
           />
-        </View>
-        <View key="3">
+        </React.Fragment>
+        <React.Fragment key="3">
+          <Center my="8" flex={10}>
+            <Image source={Intro3Png} w="100%" h="100%" alt="intro" />
+          </Center>
+          <Center>
+            <HStack space="xs" my="2">
+              <IndicatorDot pageIndex={pageIndex} index={0} />
+              <IndicatorDot pageIndex={pageIndex} index={1} />
+              <IndicatorDot pageIndex={pageIndex} index={2} />
+            </HStack>
+          </Center>
           <SlidePage
-            title="Speedy Payment"
-            body="We don't joke with how fast you receive your payment. Once your card is verified, we pay out in minutes!"
+            title="Lightening fast Payment"
+            body="We don't joke with how fast you receive your payment. Once your card is verified, we settle payments within seconds!"
           />
-        </View>
+        </React.Fragment>
       </PagerView>
-      <Center flex={2} p="4">
+      <Center flex={3} px="4" pb="4">
         <Button
-          onPress={() => navigation.navigate('Auth')}
+          onPress={() => navigation.navigate('Login')}
           my="3"
           width="95%"
           size="lg"
@@ -76,8 +99,8 @@ const Intro: FC = () => {
           color="white">
           Get Started
         </Button>
-        <Pressable onPress={() => navigation.navigate('Auth')}>
-          <Text fontSize="md" color="CARDVESTGREEN">
+        <Pressable w="100%" onPress={() => navigation.navigate('Login')}>
+          <Text textAlign="center" fontSize="md" color="CARDVESTGREEN">
             Already have an account? <Text fontWeight={'bold'}>Login</Text>
           </Text>
         </Pressable>

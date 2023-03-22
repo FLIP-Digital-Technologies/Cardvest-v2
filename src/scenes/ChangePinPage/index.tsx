@@ -1,29 +1,57 @@
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-// import { useNavigation } from '@react-navigation/native';
-// import { GenericNavigationProps } from '@routes/types';
+import { usePin } from '@hooks/usePin';
 import { View, Center, Button, ScrollView } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 const ChangePinPage: FC = () => {
-  // const navigation = useNavigation<GenericNavigationProps>();
+  const {
+    codeCurrentState,
+    codeState,
+    codeConfirmState,
+    updateCodeCurrent,
+    updateCode,
+    updateCodeConfirm,
+    handleChangePin,
+    isLoading,
+  } = usePin();
+  const handleDisabled = () =>
+    !codeCurrentState ||
+    !codeState ||
+    !codeConfirmState ||
+    codeCurrentState?.length !== 4 ||
+    codeState?.length !== 4 ||
+    codeConfirmState?.length !== 4;
   return (
     <BackButtonTitleCenter title="Change PIN">
       <ScrollView
         _contentContainerStyle={{
-          padding: '0px 20px',
           flex: 1,
           justifyContent: 'center',
         }}
         showsVerticalScrollIndicator={false}>
         <View my="6">
-          <Input label="Current PIN" />
-          <Input label="New PIN" />
-          <Input label="Confirm PIN" />
+          <Input
+            label="Current PIN"
+            maxLength="4"
+            type="password"
+            onChangeText={updateCodeCurrent}
+            value={codeCurrentState}
+          />
+          <Input label="New PIN" maxLength="4" type="password" onChangeText={updateCode} value={codeState} />
+          <Input
+            label="Confirm PIN"
+            maxLength="4"
+            type="password"
+            onChangeText={updateCodeConfirm}
+            value={codeConfirmState}
+          />
         </View>
         <Center py="4">
           <Button
-            // onPress={() => {}}
+            onPress={() => handleChangePin()}
+            isDisabled={handleDisabled()}
+            isLoading={isLoading}
             my="3"
             width="100%"
             size="lg"
@@ -40,55 +68,3 @@ const ChangePinPage: FC = () => {
 };
 
 export default memo(ChangePinPage);
-/* <CSafeAreaView>
-<ScrollView
-  showsVerticalScrollIndicator={false}
-_contentContainerStyle={{
-    padding: '20px',
-    flex: 1,
-    justifyContent: 'center',
-  }}
-  showsVerticalScrollIndicator={false}>
-  <Center>
-    <Box p="4" width={20} height={20}>
-      <Logo />
-    </Box>
-    <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
-      Welcome
-    </Text>
-    <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
-      Enter your details to login
-    </Text>
-  </Center>
-  <View p="3" mx="3">
-    <Input label="Email Address" />
-    <Input label="Password" />
-    <Pressable mt="2" onPress={() => navigation.navigate('ForgetPassword')}>
-      <Text textAlign="right" fontSize="md" color="CARDVESTGREEN">
-        Forgot Password?
-      </Text>
-    </Pressable>
-  </View>
-  <Center px="4">
-    <Button
-      onPress={() => navigation.navigate('Dashboard')}
-      my="3"
-      width="95%"
-      size="lg"
-      p="4"
-      fontSize="md"
-      backgroundColor="CARDVESTGREEN"
-      color="white">
-      Login
-    </Button>
-    <Pressable mt="2" onPress={() => navigation.navigate('SignUp')}>
-      <Text fontSize="md" color="CARDVESTGREEN">
-        Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
-      </Text>
-    </Pressable>
-    <Box mt="10" p="4" width={20} height={20}>
-      <Bio />
-    </Box>
-  </Center>
-</ScrollView>
-</CSafeAreaView> */

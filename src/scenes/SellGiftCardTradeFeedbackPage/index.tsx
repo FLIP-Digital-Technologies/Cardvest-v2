@@ -18,7 +18,7 @@ const SellGiftCardTradeFeedbackPage: FC = () => {
           title="Transaction Processing"
           message="Your transaction has been submitted,
           and is being processed."
-          action={() => navigation.navigate('Dashboard')}
+          action={() => navigation.navigate('Home')}
           actionText="Go to Dashboard"
         />
       </View>

@@ -1,31 +1,39 @@
+import { useGetReferralUserCode, useGetReferredUsers } from '@api/hooks/useReferrals';
 import { Copy, ReferralHock } from '@assets/SVG';
+import CLoader from '@components/CLoader';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
-import { View, Center, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
+import { BoldText } from '@scenes/LoginPage';
+import { onOpenToast } from '@utils/toast';
+import { View, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
 import React, { FC, memo } from 'react';
 
 const ReferralPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
+  const { data } = useGetReferredUsers();
+  const { data: ref, isFetching } = useGetReferralUserCode();
   const copyToClipboard: (link: string) => void = link => {
     Clipboard.setString(link);
+    onOpenToast({
+      status: 'info',
+      message: 'Copied to clipboard',
+    });
   };
+  console.log(data?.data, ref?.data);
+  if (isFetching) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Referrals">
       <ScrollView
         _contentContainerStyle={{
-          padding: '0px 20px',
           flex: 1,
           justifyContent: 'center',
         }}
         showsVerticalScrollIndicator={false}>
         <VStack mt="8">
           <View>
-            <Text mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg" fontWeight="bold">
+            <BoldText mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg">
               Refer & Earn
-            </Text>
+            </BoldText>
             <Text color="CARDVESTGREY.50" fontSize="md" fontWeight="light">
               Invite your friends & family and receive a bonus when they initiate their first trade.
             </Text>
@@ -33,21 +41,19 @@ const ReferralPage: FC = () => {
           <View marginTop="6">
             <Input
               label=""
-              value="https://app.cardvest.ng/register?fe8893la/a"
+              disabled
+              value={ref?.data?.link}
               InputRightElement={
-                <Pressable
-                  onPress={() => copyToClipboard('https://app.cardvest.ng/register?fe8893la/a')}
-                  width="10"
-                  h="5">
+                <Pressable onPress={() => copyToClipboard(ref?.data?.link)} width="10" h="5">
                   <Copy />
                 </Pressable>
               }
             />
           </View>
           <VStack pt="10" pb="4">
-            <Text mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg" fontWeight="bold">
+            <BoldText mt="4" mb="2" color="CARDVESTBLACK.50" fontSize="lg">
               Your Referrals
-            </Text>
+            </BoldText>
             <VStack alignItems="center" my="5">
               <View h="90" w="90" mx="10" mb="6" mt="2">
                 <ReferralHock />
@@ -60,7 +66,7 @@ const ReferralPage: FC = () => {
               </Text>
             </VStack>
             <Button
-              onPress={() => copyToClipboard('https://app.cardvest.ng/register?fe8893la/a')}
+              onPress={() => copyToClipboard(ref?.data?.link)}
               my="3"
               width="100%"
               size="lg"

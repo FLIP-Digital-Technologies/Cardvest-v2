@@ -1,16 +1,41 @@
+import { useMixpanel } from '@MixpanelAnalytics';
+import { useFundWallet } from '@api/hooks/useWallet';
 import { Exchange, GHS, NGN, RadioChecked, RadioUnChecked } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
 import React, { FC, memo } from 'react';
 
 const DepositPage: FC = () => {
-  const [currency, setCurrency] = React.useState('ngn');
+  const { currency, handleSwitchCurrency } = useCurrency();
+  const [amount, setAmount] = React.useState('');
   const navigation = useNavigation<GenericNavigationProps>();
+  const { mutate: fundWallet, isLoading } = useFundWallet();
+  const [mixpanel, user] = useMixpanel();
+  const handleSubmit = async () => {
+    try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track(`Fund Wallet ${currency} Attempt`);
+      await fundWallet({
+        currency,
+        amount,
+      });
+      navigation.navigate('FundAccountFeedback');
+    } catch (e: any) {
+      console.error(e);
+    }
+  };
+  const handleDisabled = () => !currency || !amount;
   return (
-    <BackButtonTitleCenter title="Fund Wallet" actionText="Continue" action={() => navigation.navigate('SelectCard')}>
+    <BackButtonTitleCenter
+      title="Fund Wallet"
+      actionText="Continue"
+      isLoading={isLoading}
+      isDisabled={handleDisabled()}
+      action={() => handleSubmit()}>
       <View my="7">
         <View p="5" />
         <Text w="75%" mx="auto" textAlign="center" fontSize="md">
@@ -30,7 +55,7 @@ const DepositPage: FC = () => {
             bg: '#F7F2DD',
           }}
           mt={1}
-          onValueChange={itemValue => setCurrency(itemValue)}>
+          onValueChange={itemValue => handleSwitchCurrency(itemValue)}>
           <Select.Item
             isDisabled
             label="Select Wallet"
@@ -46,14 +71,14 @@ const DepositPage: FC = () => {
           />
           <Select.Item
             label="NGN"
-            value="ngn"
+            value="NGN"
             startIcon={
               <HStack w="100%" justifyContent="space-between" alignItems="center">
                 <HStack w="12" mx="-3" h="7" alignItems="center">
                   <NGN />
                   <Text> NGN</Text>
                 </HStack>
-                {currency === 'ngn' ? (
+                {currency === 'NGN' ? (
                   <View w="6" h="5">
                     <RadioChecked />
                   </View>
@@ -67,14 +92,14 @@ const DepositPage: FC = () => {
           />
           <Select.Item
             label="GHS"
-            value="ghs"
+            value="GHS"
             startIcon={
               <HStack w="100%" justifyContent="space-between" alignItems="center">
                 <HStack w="12" mx="-3" h="7" alignItems="center">
                   <GHS />
                   <Text> GHS</Text>
                 </HStack>
-                {currency === 'ghs' ? (
+                {currency === 'GHS' ? (
                   <View w="6" h="5">
                     <RadioChecked />
                   </View>
@@ -91,6 +116,8 @@ const DepositPage: FC = () => {
           placeholder="Enter Amount"
           fontWeight="md"
           color="black"
+          value={amount?.toString()}
+          onChangeText={setAmount}
           InputRightElement={
             <View h="50px" p="3" justifyContent="center" style={{ backgroundColor: '#F7F9FB' }}>
               <Text>{currency?.toUpperCase()}</Text>

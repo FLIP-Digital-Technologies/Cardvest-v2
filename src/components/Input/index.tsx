@@ -1,5 +1,23 @@
-import { Input as NBInput, Box, Text } from 'native-base';
+import { ShowPassword } from '@assets/SVG';
+import { Input as NBInput, Box, Text, Pressable } from 'native-base';
 import React from 'react';
+
+export const getKeyboardType = (label: string) => {
+  switch (label) {
+    case 'Mobile Number':
+    case 'Phone Number':
+    case 'Meter Number':
+    case 'Account Number':
+      return 'phone-pad';
+    case 'Amount':
+    case 'Amount in USD':
+      return 'decimal-pad';
+    case 'Email Address':
+      return 'email-address';
+    default:
+      return 'default';
+  }
+};
 
 const Input = ({
   label = '',
@@ -8,14 +26,40 @@ const Input = ({
   color = 'CARDVESTBLACK.50',
   InputRightElement,
   value,
+  type,
+  onChangeText,
+  disabled = false,
+  maxLength = '',
+  keyboardType = '',
+  hint,
 }: {
   label?: string;
   fontWeight?: string;
   placeholder?: string;
   color?: string;
   InputRightElement?: any;
-  value?: string;
+  value?: any;
+  onChangeText?: (value: any) => void;
+  type?: 'text' | 'password' | undefined;
+  disabled?: boolean | undefined;
+  maxLength?: string | number | undefined;
+  hint?: any;
+  keyboardType?:
+    | 'default'
+    | 'numeric'
+    | 'email-address'
+    | 'ascii-capable'
+    | 'numbers-and-punctuation'
+    | 'url'
+    | 'number-pad'
+    | 'phone-pad'
+    | 'name-phone-pad'
+    | 'decimal-pad'
+    | 'twitter'
+    | 'web-search'
+    | 'visible-password';
 }) => {
+  const [show, setShow] = React.useState(false);
   return (
     <Box my="2">
       {label && (
@@ -23,20 +67,42 @@ const Input = ({
           {label}
         </Text>
       )}
-      <Box backgroundColor="#F7F9FB">
+      <Box backgroundColor="#F7F9FB" borderRadius={'8px'}>
         <NBInput
           color={color}
-          size="xl"
+          size="lg"
           fontWeight={fontWeight || 'light'}
           borderWidth={0}
-          py="3"
+          borderRadius={'8px'}
+          py="4"
           px="3"
+          maxLength={maxLength ? Number(maxLength) : undefined}
+          isDisabled={disabled}
           value={value}
           style={{ backgroundColor: '#F7F9FB' }}
           placeholder={placeholder}
-          InputRightElement={InputRightElement}
+          _focus={{
+            backgroundColor: '#F7F9FB',
+          }}
+          keyboardType={keyboardType || getKeyboardType(label)}
+          InputRightElement={
+            type === 'password' ? (
+              <Pressable onPress={() => setShow(!show)} h="5" w="5" mr="4" ml="2" justifyContent="center">
+                <ShowPassword show={show} />
+              </Pressable>
+            ) : (
+              InputRightElement
+            )
+          }
+          type={type !== 'password' ? type : show ? 'text' : 'password'}
+          onChangeText={onChangeText}
         />
       </Box>
+      {hint && (
+        <Text mt="2" fontWeight="light" color="#BABABA" fontSize="xs">
+          {hint}
+        </Text>
+      )}
     </Box>
   );
 };

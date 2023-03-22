@@ -1,12 +1,22 @@
+import { getNotification } from '@api/push-notification/push-notification';
+import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
 import {
-  CreateUserRequestPayload,
-  DeleteUserRequestPayload,
-  ModifyUserRequestPayload,
-  UserDetailsRequestPayload,
-} from '@api/users/types';
-import { createUser, deleteUser, getUserDetails, modifyUser } from '@api/users/users';
-import { useMutation, useQuery } from '@tanstack/react-query';
+  createUser,
+  deleteUser,
+  getUserDetails,
+  modifyUser,
+  modifyUserPassword,
+  resendVerificationEmail,
+} from '@api/users/users';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
+
+function useGetNotification() {
+  return useQuery([`user-notifications`], () => getNotification());
+}
 
 function useUser({ userId }: UserDetailsRequestPayload) {
   return useQuery([`user-${userId}`, { userId }], () => getUserDetails({ userId }), {
@@ -14,38 +24,70 @@ function useUser({ userId }: UserDetailsRequestPayload) {
   });
 }
 
-function useCreateUser() {
-  return useMutation(['new-user'], ({ name, job }: CreateUserRequestPayload) => createUser({ name, job }), {
+function useResendVerificationEmail() {
+  return useMutation(['resend-user'], () => resendVerificationEmail(), {
     onSuccess: (/*data*/) => {
       onOpenToast({
         status: 'success',
-        message: 'User created successfully',
+        message: 'Verification email sent successfully',
       });
     },
-    onError: (/*data*/) => {
+    onError: (data: any) => {
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
-        message: 'User not created',
+        message: 'Resend Verification Email Failed',
       });
     },
   });
 }
 
 function useModifyUser() {
+  const queryClient = useQueryClient();
   return useMutation(
     ['modify-user'],
-    ({ userId, name, job }: ModifyUserRequestPayload) => modifyUser({ userId, name, job }),
+    ({ userId, email, username, phonenumber, lastname, firstname, image_url }: ModifyUserRequestPayload) =>
+      modifyUser({ userId, email, username, phonenumber, lastname, firstname, image_url }),
     {
       onSuccess: (/*data*/) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
         onOpenToast({
           status: 'success',
-          message: 'User modified successfully',
+          message: 'User details updated successful',
         });
       },
-      onError: (/*data*/) => {
+      onError: (data: any) => {
+        if (data?.c) return;
         onOpenToast({
           status: 'error',
-          message: 'User not modified',
+          message: 'User details fail to update',
+        });
+      },
+    },
+  );
+}
+
+function useModifyUserPassword() {
+  const queryClient = useQueryClient();
+  const navigation = useNavigation<GenericNavigationProps>();
+  return useMutation(
+    ['modify-user-password'],
+    ({ password_confirmation, current_password, password, userId }: any) =>
+      modifyUserPassword({ password_confirmation, current_password, password, userId }),
+    {
+      onSuccess: (/*data*/) => {
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+        onOpenToast({
+          status: 'success',
+          message: 'User Password Updated successfully',
+        });
+        navigation.navigate('Security');
+      },
+      onError: data => {
+        if (data?.c) return;
+        onOpenToast({
+          status: 'error',
+          message: data?.response?.data?.message || 'User Password failed to update',
         });
       },
     },
@@ -53,14 +95,25 @@ function useModifyUser() {
 }
 
 function useDeleteUser() {
-  return useMutation(['delete-user'], ({ userId }: DeleteUserRequestPayload) => deleteUser({ userId }), {
-    onSuccess: (/*data*/) => {
+  const queryClient = useQueryClient();
+  const navigation = useNavigation<GenericNavigationProps>();
+  return useMutation(['delete-user'], ({ password, token }: any) => deleteUser({ password, token }), {
+    onSuccess: async (/*data*/) => {
       onOpenToast({
         status: 'success',
         message: 'User deleted successfully',
       });
+      await cacheService.del('login-user');
+      await cacheService.del('user');
+      await queryClient.setQueriesData(['user'], null);
+      await queryClient.setQueriesData(['login-user'], null);
+      await queryClient.invalidateQueries({ queryKey: ['login-user'] });
+      await queryClient.invalidateQueries({ queryKey: ['user'] });
+      await navigation.navigate('Login');
+      await queryClient.clear();
     },
-    onError: (/*data*/) => {
+    onError: (data: any) => {
+      if (data?.c) return;
       onOpenToast({
         status: 'error',
         message: 'User not deleted',
@@ -69,4 +122,4 @@ function useDeleteUser() {
   });
 }
 
-export { useUser, useCreateUser, useModifyUser, useDeleteUser };
+export { useDeleteUser, useUser, useModifyUser, useModifyUserPassword, useGetNotification, useResendVerificationEmail };

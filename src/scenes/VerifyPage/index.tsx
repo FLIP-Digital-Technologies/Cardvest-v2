@@ -5,13 +5,14 @@ import { GenericNavigationProps } from '@routes/types';
 import { View, Text, Center, Button, Box, ScrollView } from 'native-base';
 import React, { FC, memo } from 'react';
 
-const Verify: FC = () => {
+const Verify: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
+  const { params = { email: '' } } = route;
+  const { email } = params;
   return (
     <CSafeAreaView>
       <ScrollView
         _contentContainerStyle={{
-          padding: '20px',
           flex: 1,
           justifyContent: 'center',
         }}
@@ -24,7 +25,7 @@ const Verify: FC = () => {
             Verify Your Email
           </Text>
           <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
-            A verification email has been sent to k**********l@gmail.com Check to verify your Cardvest Account.
+            A verification email has been sent to {email} Check to verify your Cardvest Account.
           </Text>
         </Center>
         <View mt="10" />
@@ -38,7 +39,7 @@ const Verify: FC = () => {
             fontSize="md"
             backgroundColor="CARDVESTGREEN"
             color="white">
-            Continue
+            Login
           </Button>
         </Center>
       </ScrollView>

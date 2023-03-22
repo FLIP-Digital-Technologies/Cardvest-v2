@@ -34,21 +34,25 @@ const typography = {
         italic: 'Satoshi-Italic',
       },
       600: {
-        normal: 'Satoshi-Black',
-        italic: 'Satoshi-BlackItalic',
+        normal: 'Satoshi-Medium',
+        italic: 'Satoshi-MediumItalic',
+      },
+      700: {
+        normal: 'Satoshi-Bold',
+        italic: 'Satoshi-BoldItalic',
       },
       900: {
-        normal: 'Satoshi-Bold',
-        italic: 'Satoshi-Bold',
+        normal: 'Satoshi-Black',
+        italic: 'Satoshi-BlackItalic',
       },
     },
   },
 
   // Make sure values below matches any of the keys in `fontConfig`
   fonts: {
-    heading: 'Satoshi',
-    body: 'Satoshi',
-    mono: 'Satoshi',
+    heading: 'Satoshi-Bold',
+    body: 'Satoshi-Regular',
+    mono: 'Satoshi-Light',
   },
 
   fontSizes: {

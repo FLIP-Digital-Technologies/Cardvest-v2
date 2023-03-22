@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.cardvest",
+    package = "com.flipdigitals.cardvest",
 )
 
 android_resource(
     name = "res",
-    package = "com.cardvest",
+    package = "com.flipdigitals.cardvest",
     res = "src/main/res",
 )
 

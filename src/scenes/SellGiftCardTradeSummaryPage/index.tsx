@@ -1,7 +1,8 @@
+import { useMixpanel } from '@MixpanelAnalytics';
+import { useCreateSellOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import { UploadPanel } from '@scenes/SellGiftCard';
+import * as dayjs from 'dayjs';
 import { View, Text, VStack, HStack } from 'native-base';
 import React, { FC, memo } from 'react';
 
@@ -12,9 +13,9 @@ export const SummaryPanel = ({
   bodyTwo,
 }: {
   titleOne: string;
-  titleTwo: string;
+  titleTwo?: string;
   bodyOne: string;
-  bodyTwo: string;
+  bodyTwo?: string;
 }) => {
   return (
     <React.Fragment>
@@ -34,13 +35,34 @@ export const SummaryPanel = ({
   );
 };
 
-const SellGiftCardTradeSummaryPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
+const SellGiftCardTradeSummaryPage: FC = (props: any) => {
+  const { route } = props;
+  const { params = { sellGiftCard: {} } } = route;
+  const { sellGiftCard } = params;
+  const { mutate: sellGiftCardAction, isLoading } = useCreateSellOrder();
+  const [mixpanel, user] = useMixpanel();
+  const handleSubmit = async () => {
+    try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Sell GiftCard Attempt');
+      await sellGiftCardAction({
+        card_id: Number(sellGiftCard?.giftCard),
+        amount: Number(sellGiftCard?.amountUSD),
+        comment: sellGiftCard?.comment,
+        currency: sellGiftCard?.currency,
+        images: sellGiftCard?.images,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <BackButtonTitleCenter
+      isLoading={isLoading}
       title="Trade Summary"
       actionText="Sell Giftcard"
-      action={() => navigation.navigate('SellGiftCardTradeFeedbackPage')}>
+      action={() => handleSubmit()}>
       <View mt="7" mb="10">
         <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Confirm the transaction details
@@ -48,16 +70,27 @@ const SellGiftCardTradeSummaryPage: FC = () => {
         <SummaryPanel
           titleOne="Date & Time"
           titleTwo="Giftcard Value"
-          bodyOne="October 22, 2022 | 3:45pm"
-          bodyTwo="400"
+          bodyOne={dayjs.default().format('MMMM DD, YYYY | hh:mmA')}
+          bodyTwo={sellGiftCard?.rate}
         />
-        <SummaryPanel titleOne="Amount" titleTwo="Payment Wallet" bodyOne="NGN 400,000.00" bodyTwo="NGN" />
-        <SummaryPanel titleOne="Giftcard Category" titleTwo="Giftcard Type" bodyOne="iTunes" bodyTwo="iTunes UK" />
+        <SummaryPanel
+          titleOne="Amount"
+          titleTwo="Payment Wallet"
+          bodyOne={sellGiftCard?.total}
+          bodyTwo={sellGiftCard?.currency}
+        />
+        <SummaryPanel
+          titleOne="Giftcard Category"
+          titleTwo="Giftcard Type"
+          bodyOne={sellGiftCard?.card?.category_name}
+          bodyTwo={sellGiftCard?.card?.name}
+        />
+        <SummaryPanel titleOne="Comments" bodyOne={sellGiftCard?.comment} />
         <VStack mt="2">
           <Text color="CARDVESTGREY.50">Uploaded Images</Text>
-          <UploadPanel showIcon={false} />
-          <UploadPanel showIcon={false} />
-          <UploadPanel showIcon={false} />
+          {sellGiftCard?.images.map((image: string, index: number) => (
+            <UploadPanel key={index} source={image} showIcon={false} />
+          ))}
         </VStack>
       </View>
     </BackButtonTitleCenter>

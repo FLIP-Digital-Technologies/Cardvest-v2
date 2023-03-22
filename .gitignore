@@ -1,6 +1,7 @@
 # OSX
 #
 .DS_Store
+.gitss
 
 # expo
 .expo/
@@ -98,3 +99,5 @@ ios/*/Images.xcassets/Splashscreen.imageset/*
 
 deps-graph.svg
 .eslintcache
+cardvest copy
+fastlane/*.p8

@@ -1,53 +1,195 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { BackButton } from '@assets/SVG';
+import { useGetAllTransactions, useGetPayoutTransactions, useGetAllBillTransactions } from '@api/hooks/useTransactions';
+import CLoader from '@components/CLoader';
+import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { EmptyPanel, TransactionPanel } from '@scenes/DashboardPage';
-import { Box, Center, useColorModeValue, Pressable, Text, View, ScrollView, HStack } from 'native-base';
-import React, { FC, memo } from 'react';
-import { Animated, useWindowDimensions } from 'react-native';
+import { EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
+import { BoldText } from '@scenes/LoginPage';
+import { useQueryClient } from '@tanstack/react-query';
+import { Box, useColorModeValue, Pressable, Text, View, FlatList } from 'native-base';
+import React, { FC, memo, useMemo, useState } from 'react';
+import { Animated, Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-const arr: string[] = ['', '', ''];
+const FirstRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
+  const a = useMemo(() => {
+    const b: any = {};
+    getTrancationData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getTrancationData]);
+  if (isLoading) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="100%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel action={() => navigation.navigate('SellGiftCard')} actionText="Trade Now" />
+      </View>
+    );
+  return (
+    <View w="100%" mb="8" h="full">
+      <FlatList
+        data={Object.keys(a)}
+        renderItem={({ item }) => {
+          return (
+            <React.Fragment>
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                {TransDate(item)}
+              </BoldText>
+              {a[item].map((item: any, ind: number) => (
+                <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
+              ))}
+            </React.Fragment>
+          );
+        }}
+        keyExtractor={(item: any) => item}
+        onRefresh={() => queryClient.invalidateQueries([`transactions-${currency}`])}
+        refreshing={isFetching}
+        onEndReached={
+          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
+            ? () => fetchNextPage()
+            : () => null
+        }
+      />
+    </View>
+  );
+};
 
-const FirstRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const SecondRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetPayoutTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
+  const a = useMemo(() => {
+    const b: any = {};
+    getTrancationData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getTrancationData]);
+  if (isLoading) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="100%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel action={() => navigation.navigate('BuyGiftCard')} actionText="Trade Now" />
+      </View>
+    );
+  return (
+    <View w="100%" mb="8" h="full">
+      <FlatList
+        data={Object.keys(a)}
+        renderItem={({ item }) => {
+          return (
+            <React.Fragment>
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                {TransDate(item)}
+              </BoldText>
+              {a[item].map((item: any, ind: number) => (
+                <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
+              ))}
+            </React.Fragment>
+          );
+        }}
+        keyExtractor={(item: any) => item}
+        onRefresh={() => queryClient.invalidateQueries([`payout-transactions-${currency}`])}
+        refreshing={isFetching}
+        onEndReached={
+          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
+            ? () => fetchNextPage()
+            : () => null
+        }
+      />
+    </View>
+  );
+};
 
-const SecondRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const ThirdRoute = () => {
+  const navigation = useNavigation<GenericNavigationProps>();
+  const { currency } = useCurrency();
+  const queryClient = useQueryClient();
+  const [page] = useState(1);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllBillTransactions(currency, page);
+  const getTrancationData = useMemo(
+    () => ({
+      ...opps?.pages[page - 1],
+      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+    }),
+    [opps],
+  );
+  const a = useMemo(() => {
+    const b: any = {};
+    getTrancationData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getTrancationData]);
+  if (isLoading) return <CLoader />;
+  if (getTrancationData?.data?.length === 0)
+    return (
+      <View w="100%" h="full" flex={1} justifyContent={'center'}>
+        <EmptyPanel action={() => navigation.navigate('More')} actionText="Pay Bills" />
+      </View>
+    );
+  return (
+    <View w="100%" mb="8" h="full">
+      <FlatList
+        data={Object.keys(a)}
+        renderItem={({ item }) => {
+          return (
+            <React.Fragment>
+              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                {TransDate(item)}
+              </BoldText>
+              {a[item].map((item: any, ind: number) => (
+                <TransactionPanel currency={currency} data={item} type={'utilities'} key={ind} />
+              ))}
+            </React.Fragment>
+          );
+        }}
+        keyExtractor={(item: any) => item}
+        onRefresh={() => queryClient.invalidateQueries([`transactions-bill-${currency}`])}
+        refreshing={isFetching}
+        onEndReached={
+          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
+            ? () => fetchNextPage()
+            : () => null
+        }
+      />
+    </View>
+  );
+};
 
-const ThirdRoute = () => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    _contentContainerStyle={{
-      flexGrow: 1,
-    }}
-    w="90%"
-    my="8">
-    {/* // TODO: make into a flatlist */}
-    {arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <TransactionPanel />)}
-  </ScrollView>
-);
+const initialLayout = {
+  width: Dimensions.get('window').width,
+};
 
 const renderScene = SceneMap({
   first: FirstRoute,
@@ -56,10 +198,10 @@ const renderScene = SceneMap({
 });
 
 const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
-  const { tab } = route.params;
+  const { params = { tab: 0 } } = route;
+  const { tab = 0 } = params;
   const navigation = useNavigation<GenericNavigationProps>();
-  const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(tab || 0);
+  const [index, setIndex] = React.useState(tab);
   const [routes] = React.useState([
     {
       key: 'first',
@@ -74,8 +216,7 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
       title: 'Utilities',
     },
   ]);
-
-  const renderTabBar = (props: any) => {
+  const renderdTabBar = (props: any) => {
     const inputRange = props.navigationState.routes.map((x: any, i: number) => i);
     return (
       <Box flexDirection="row">
@@ -87,18 +228,17 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
           const color = index === i ? useColorModeValue('#000', '#e5e5e5') : useColorModeValue('#1f2937', '#a1a1aa');
           const borderColor = index === i ? 'CARDVESTGREEN' : useColorModeValue('coolGray.200', 'gray.400');
           return (
-            <Box borderBottomWidth="3" borderColor={borderColor} flex={1} alignItems="center" p="3">
+            <Box borderBottomWidth="3" borderColor={borderColor} flex={1} alignItems="center" p="3" cursor="pointer">
               <Pressable
                 onPress={() => {
-                  console.log(i);
                   setIndex(i);
                 }}>
-                <Animated.Text
+                <Text
                   style={{
                     color,
                   }}>
                   {route.title}
-                </Animated.Text>
+                </Text>
               </Pressable>
             </Box>
           );
@@ -108,29 +248,22 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
   };
   return (
     <React.Fragment>
-      <HStack w="100%" alignItems="center" pt="20" px="4">
-        <Pressable h="10" w="10" onPress={() => navigation.navigate('Dashboard')}>
-          <BackButton />
-        </Pressable>
-        <Text fontSize="md" mx="auto" textAlign="center">
-          Transaction History
-        </Text>
-        <View w="10" />
-      </HStack>
-      <TabView
-        navigationState={{
-          index,
-          routes,
-        }}
-        renderScene={renderScene}
-        renderTabBar={renderTabBar}
-        onIndexChange={setIndex}
-        initialLayout={{ width: layout.width }}
-        style={{
-          marginTop: -20,
-          padding: '5%',
-        }}
-      />
+      <BackButtonTitleCenter noScroll title="Transaction History" backAction={() => navigation.goBack()}>
+        <TabView
+          navigationState={{
+            index,
+            routes,
+          }}
+          renderScene={renderScene}
+          renderTabBar={renderdTabBar}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+          style={{
+            marginTop: -20,
+            paddingTop: '5%',
+          }}
+        />
+      </BackButtonTitleCenter>
     </React.Fragment>
   );
 };

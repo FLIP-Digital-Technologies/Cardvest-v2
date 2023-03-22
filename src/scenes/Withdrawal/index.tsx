@@ -1,24 +1,59 @@
+import { useMixpanel } from '@MixpanelAnalytics';
+import { useGetUserBank } from '@api/hooks/useBankAccounts';
+import { useInitializeWithdrawal } from '@api/hooks/useWallet';
 import { AddGreen } from '@assets/SVG';
 import Input from '@components/Input';
 import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { FormSelect } from '@scenes/CalculatorPage';
+import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Button, Divider, HStack, Pressable, Text, View, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 const WithdrawalPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const { currency, handleSwitchCurrency } = useCurrency();
+  const { data } = useGetUserBank(currency);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [account, setAccount] = useState('');
+  const { mutate: withdrawFunds, isLoading } = useInitializeWithdrawal();
+  const [mixpanel, user] = useMixpanel();
+  const handleSubmit = async () => {
+    try {
+      mixpanel.identify(user?.id?.toString());
+      mixpanel.track('Withdraw to Fiat Attempt');
+      await withdrawFunds({
+        amount,
+        bank: account,
+        currency,
+        type: 'fiat',
+      });
+    } catch (err) {
+      console.error('withdrwal fiat', err);
+    }
+  };
+  const handleDisabled = () => !account || !amount;
   return (
     <BackButtonTitleCenter title="Withdraw Funds">
-      <TransactionPinModal {...{ modalVisible, closeModalVisible: () => setModalVisible(false) }} />
+      <TransactionPinModal {...{ handleSubmit, modalVisible, closeModalVisible: () => setModalVisible(false) }} />
       <View my="7">
-        <Input label="Select Wallet" />
+        <FormCurrencyPicker label="Select Wallet" setCurrency={handleSwitchCurrency} currency={currency} />
         <View p="3" />
-        <Input label="Amount" />
+        <Input label="Amount" value={amount} onChangeText={setAmount} />
         <View p="3" />
-        <Input label="Withdrawal Account" />
+        <FormSelect
+          label="Select Withdrawal Account"
+          value={account}
+          setValue={setAccount}
+          data={data?.data?.map((i: any) => ({
+            ...i,
+            name: `${i.accountname} - ${i.bankname} ${i.banknumber}`,
+          }))}
+        />
         <View p="3" />
         <Pressable onPress={() => navigation.navigate('AddAccount')}>
           <HStack alignItems="center" justifyContent="center">
@@ -34,6 +69,8 @@ const WithdrawalPage: FC = () => {
         <VStack>
           <Button
             onPress={() => setModalVisible(true)}
+            isDisabled={handleDisabled()}
+            isLoading={isLoading}
             my="3"
             size="lg"
             p="4"
@@ -44,7 +81,7 @@ const WithdrawalPage: FC = () => {
           </Button>
           <View position="relative">
             <Divider my="60px" backgroundColor="#909090" />
-            <View backgroundColor="#EFEFEF" w="6" zIndex={9} position="absolute" top="40%" left="45%" right="0%">
+            <View backgroundColor="#fff" w="6" zIndex={9} position="absolute" top="40%" left="45%" right="0%">
               <Text m="auto">OR</Text>
             </View>
           </View>

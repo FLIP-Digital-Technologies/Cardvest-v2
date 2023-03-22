@@ -8,13 +8,13 @@ platform :android do
   desc 'Build the staging release APK.'
   private_lane :build_staging do
     gradle(task: 'clean', project_dir: 'android/')
-    sh("npm", "run", "make-apk:stagingRelease")
+    sh("npm", "run", "build:dev:android")
   end
 
   desc 'Build the production release APK.'
   private_lane :build_production do
     gradle(task: 'clean', project_dir: 'android/')
-    sh("npm", "run", "make-apk:productionRelease")
+    sh("npm", "run", "android:assemble:release")
   end
 
   desc 'Upload the release APK to App Center.'
@@ -24,7 +24,7 @@ platform :android do
         api_token: ENV["APPCENTER_API_TOKEN"],
         owner_name: ENV["APPCENTER_OWNER_NAME"],
         app_name: ENV["APPCENTER_APP_NAME"],
-        apk: "./android/app/build/outputs/apk/release/app-release.apk",
+        apk: "./android/app/build/outputs/apk/debug/app-debug.apk",
         notify_testers: ENV["NOTIFY_TESTERS"],
         destinations: ENV["DESTINATIONS"],
         release_notes: release_notes
@@ -62,15 +62,27 @@ platform :ios do
   # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
   desc 'Set up certs and profiles for iOS.'
   lane :certificates do
-    register_devices(
-      devices: {
-        }
+    # register_devices(
+    #   # api_issuer: "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+    #   api_key_path: "fastlane/T965C74L4F.json",
+    #   team_id: "T965C74L4F",
+    #   # api_key: ENV["API_KEY"],
+    #   devices: {},
+    # )
+    app_store_connect_api_key(
+      key_id: "T965C74L4F",
+      issuer_id:  "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+      key_filepath: "fastlane/AuthKey_T965C74L4F.p8",
     )
     match(
-      app_identifier: 'com.app.bundle',
+      app_identifier: 'com.flipdigitals.cardvest',
       readonly: true, 
-      force_for_new_devices: true, 
-      )
+      force_for_new_devices: true,
+      api_key_path: "fastlane/T965C74L4F.json",
+      # api_key: ENV["API_KEY"],
+      # key_id: "T965C74L4F",
+      # api_issuer: "9fac4228-d77f-4ac1-9fcc-0c0ef467bcdf",
+    )
   end
 
   desc 'Build the staging release iOS application.'
@@ -89,7 +101,7 @@ platform :ios do
     gym(
       scheme: "PRODUCTION",
       workspace: './ios/' + package['name'] + '.xcworkspace', 
-      export_method: 'ad-hoc'
+      export_method: 'App Store Connect'
     )
   end
   
@@ -105,7 +117,7 @@ platform :ios do
         notify_testers: ENV["NOTIFY_TESTERS"],
         destinations: ENV["DESTINATIONS"],
         release_notes: release_notes
-        )
+      )
   end
 
   desc 'Sign, build, deploy staging iOS.'
@@ -175,15 +187,15 @@ end
   desc 'Android: Overwrite the current icon set with a badged version.'
   private_lane :make_badge_and do
     package = load_json(json_path: "./package.json")
-    add_badge(
-      shield: "DEV-" + package['version'] + "-orange", 
-      no_badge: true,
-      dark: true,
-      shield_scale: "0.55",
-      shield_gravity: "Center",
-      shield_geometry: "+0+30%",
-      glob: "/android/app/src/main/res/mipmap-*/ic_launcher*.png",
-    )
+    # add_badge(
+    #   shield: "DEV-" + package['version'] + "-orange",
+    #   no_badge: true,
+    #   dark: true,
+    #   shield_scale: "0.55",
+    #   shield_gravity: "Center",
+    #   shield_geometry: "+0+30%",
+    #   glob: "/android/app/src/main/res/mipmap-*/ic_launcher*.png",
+    # )
   end
 
   # To prepare the original icon set, you can use:
@@ -191,15 +203,15 @@ end
   desc 'iOS: Overwrite the current icon set with a badged version.'
   private_lane :make_badge_ios do
     package = load_json(json_path: "./package.json")
-    add_badge(
-      shield: "DEV-" + package['version'] + "-orange", 
-      no_badge: true,
-      dark: true,
-      shield_scale: "0.85",
-      shield_gravity: "South",
-      shield_geometry: "+0+5%",
-      glob: "/ios/" + package['name'] + "/Images.xcassets/AppIcon.appiconset/*.png",
-    )
+    # add_badge(
+    #   shield: "DEV-" + package['version'] + "-orange", 
+    #   no_badge: true,
+    #   dark: true,
+    #   shield_scale: "0.85",
+    #   shield_gravity: "South",
+    #   shield_geometry: "+0+5%",
+    #   glob: "/ios/" + package['name'] + "/Images.xcassets/AppIcon.appiconset/*.png",
+    # )
   end
 
   desc 'Make new versioned icon badges.'

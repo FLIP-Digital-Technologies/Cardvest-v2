@@ -1,19 +1,50 @@
-import Input from '@components/Input';
+import { useGetPayoutTransactions } from '@api/hooks/useTransactions';
+import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { BalancePanel, EmptyPanel, TransactionPanel } from '@scenes/DashboardPage';
+import { BalancePanel, EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
+import { BoldText } from '@scenes/LoginPage';
 import { HStack, Pressable, Text, View, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 
 const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const [currency, setCurrency] = React.useState('ngn');
-  const arr: string[] = ['', '', ''];
+  const { currency, handleRefreshCurrency } = useCurrency();
+  const { data: opps, isFetching } = useGetPayoutTransactions(currency);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    try {
+      setRefreshing(true);
+      await handleRefreshCurrency();
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+  const getWalletData = useMemo(
+    () => ({
+      ...opps?.pages[0],
+      data: opps?.pages?.flatMap((page, i) => page.data.map((data: any) => data)),
+    }),
+    [opps],
+  );
+  const a = useMemo(() => {
+    const b: any = {};
+    getWalletData?.data?.map((i: any) => {
+      // @ts-ignore
+      b[i?.created_at?.slice(0, 10)] =
+        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
+    });
+    return b;
+  }, [getWalletData]);
+  if (isFetching) return <CLoader />;
   return (
-    <BackButtonTitleCenter title="Wallets">
+    <BackButtonTitleCenter onRefresh={onRefresh} title="Wallets">
       <View mt="4">
-        <BalancePanel withDeposit={true} {...{ currency, setCurrency }} />
+        <BalancePanel defaultCurrency={currency} withDeposit={true} />
 
         <VStack my="5">
           <View>
@@ -26,7 +57,22 @@ const WalletsPage: FC = () => {
               </Pressable>
             </HStack>
             {/* // TODO: make into a flatlist */}
-            {arr.length === 0 ? <EmptyPanel /> : arr.map(item => <TransactionPanel />)}
+            {getWalletData?.data?.length === 0 ? (
+              <EmptyPanel action={() => navigation.navigate('SellGiftCard')} actionText="Trade Now" />
+            ) : (
+              Object.keys(a).map((key, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
+                      {TransDate(key)}
+                    </BoldText>
+                    {a[key].map((item: any, ind: number) => (
+                      <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
+                    ))}
+                  </React.Fragment>
+                );
+              })
+            )}
           </View>
         </VStack>
       </View>

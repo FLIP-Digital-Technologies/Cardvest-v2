@@ -1,13 +1,20 @@
+// import { logoutUser } from '@api/Auth/auth';
 import { Logout, Profile, Referral, RightAngle, Security, Suggestion } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+// import { useQueryClient } from '@tanstack/react-query';
+// import { cacheService } from '@utils/cache';
 import { Divider, HStack, Text, View, VStack } from 'native-base';
 import React, { FC, memo } from 'react';
 import { Pressable } from 'react-native';
 
 const SettingsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
+  // const queryClient = useQueryClient();
+  async function handleLogout() {
+    await navigation.navigate('LoginBack');
+  }
   return (
     <BackButtonTitleCenter title="Settings">
       <VStack my="7">
@@ -17,11 +24,11 @@ const SettingsPage: FC = () => {
             link: 'Profile',
             icon: <Profile />,
           },
-          {
-            name: 'KYC',
-            link: 'KYC',
-            icon: <Suggestion />,
-          },
+          // {
+          //   name: 'KYC',
+          //   link: 'KYC',
+          //   icon: <Suggestion />,
+          // },
           {
             name: 'Security',
             link: 'Security',
@@ -38,7 +45,7 @@ const SettingsPage: FC = () => {
             icon: <Logout />,
           },
         ].map((item, index) => (
-          <Pressable key={index} onPress={() => navigation.navigate(item.link)}>
+          <Pressable key={index} onPress={() => (index === 3 ? handleLogout() : navigation.navigate(item.link))}>
             <HStack py="4" justifyContent="space-between" alignItems="center">
               <HStack justifyContent="space-between" alignItems="center">
                 <View width="5" h="8">

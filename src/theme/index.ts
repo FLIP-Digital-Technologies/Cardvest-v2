@@ -1,4 +1,5 @@
 import { extendTheme } from 'native-base';
+import { Platform } from 'react-native';
 import palette from './colors';
 import typography from './fonts';
 
@@ -17,6 +18,43 @@ const customTheme = extendTheme({
     headerBackground: palette.WHITE,
 
     ...palette,
+  },
+  components: {
+    Actionsheet: {
+      defaultProps: {
+        _backdrop: { opacity: 0.06 },
+      },
+    },
+    Select: {
+      defaultProps: {
+        _item: {
+          _pressed: {
+            backgroundColor: '#FAFAF0',
+          },
+        },
+      },
+    },
+    Pressable: {
+      defaultProps: {
+        // size: 12,
+        borderRadius: '4px',
+        width: 'auto',
+      },
+    },
+    Button: {
+      defaultProps: {
+        // size: 12,
+        borderRadius: '4px',
+      },
+    },
+    Text: {
+      defaultProps:
+        Platform.OS === 'ios'
+          ? {
+              fontFamily: 'Satoshi',
+            }
+          : {},
+    },
   },
 
   ...typography,

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function initFreshChat() {
+        window.fcWidget.init({
+          token: '23aa0928-52ac-4709-a98a-719d344f9c03',
+          host: 'https://fliplabs-help.freshchat.com',
+        });
+      }
+      function initialize(i, t) {
+        var e;
+        i.getElementById(t)
+          ? initFreshChat()
+          : (((e = i.createElement('script')).id = t),
+            (e.async = !0),
+            (e.src = 'https://fliplabs-help.freshchat.com/js/widget.js'),
+            (e.onload = initFreshChat),
+            i.head.appendChild(e));
+      }
+      function initiateCall() {
+        initialize(document, 'Freshchat-js-sdk');
+      }
+      window.addEventListener
+        ? window.addEventListener('load', initiateCall, !1)
+        : window.attachEvent('load', initiateCall, !1);
+    </script>
+    <style>
+      div#fc_frame.fc-widget-normal {
+        left: 0 !important;
+        margin: auto !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        top: 0 !important;
+      }
+    </style>
+    <script>
+      window.setTimeout(() => {
+        window.fcWidget.open();
+      }, 5000);
+    </script>
+  </body>
+</html>

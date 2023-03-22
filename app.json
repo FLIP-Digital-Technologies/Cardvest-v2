@@ -3,16 +3,49 @@
   "displayName": "Cardvest",
   "environments": {
     "development": {
-      "API_URL": "https://reqres.in/api",
+      "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "development"
     },
     "staging": {
-      "API_URL": "https://reqres.in/api",
+      "API_URL": "https://staging.cardvest.ng/api/v2",
       "ENV": "staging"
     },
     "production": {
-      "API_URL": "https://reqres.in/api",
-      "ENV": "production"
+      "API_URL": "https://api.cardvest.ng/api/v2",
+      "ENV": "production",
+      "MXP_PRO_TOKS": "406f69b81f42a113baade56967f62ec1"
     }
+  },
+  "expo": {
+    "scheme": "cardvest",
+    "name": "cardvest",
+    "slug": "cardvest",
+    "orientation": "portrait",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.flipdigitals.cardvest"
+    },
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.flipdigitals.cardvest"
+    },
+    "description": "Cardvest Mobile Application",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/notif_icon.png",
+          "color": "#ffffff",
+          "sounds": [],
+          "mode": "production"
+        }
+      ]
+    ]
   }
 }

@@ -13,7 +13,7 @@ interface ICLoader {
   fullPage?: boolean;
 }
 
-const CLoader: FC<ICLoader> = ({ color = theme.colors.SUN_FLOWER, size = 40, style = {}, fullPage = false }) => {
+const CLoader: FC<ICLoader> = ({ color = theme.colors.CARDVESTGREEN, size = 40, style = {}, fullPage = false }) => {
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" style={[fullPage && styles.fullPageLoader, style]}>
       <MaterialIndicator color={color} size={size} />

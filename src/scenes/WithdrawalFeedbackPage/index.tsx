@@ -18,7 +18,7 @@ const WithdrawalFeedback: FC = () => {
           title="Withdrawal Initiated"
           message="Your withdrawal request is being processed.
           You’ll get an update shortly."
-          action={() => navigation.navigate('Dashboard')}
+          action={() => navigation.navigate('HomeTab')}
         />
       </View>
     </CSafeAreaView>

@@ -15,7 +15,7 @@ export const onOpenToast = ({
 }) => {
   Toast.show({
     render: () => <CToaster status={status} title={message} />,
-    placement: 'top',
+    placement: 'bottom',
     // onCloseComplete: () => noop,
     duration: 5000,
   });

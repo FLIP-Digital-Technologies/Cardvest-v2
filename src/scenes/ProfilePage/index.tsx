@@ -1,17 +1,70 @@
+import { useModifyUser } from '@api/hooks/useUser';
+import { RedTrashOutline } from '@assets/SVG';
 import Input from '@components/Input';
+import MediaUploader from '@components/Upload/MediaUploader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-// import { useNavigation } from '@react-navigation/native';
-// import { GenericNavigationProps } from '@routes/types';
-import { View, Text, Center, Button, Box, Pressable, ScrollView, VStack, Avatar } from 'native-base';
-import React, { FC, memo } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { GenericNavigationProps } from '@routes/types';
+import { validateEmail } from '@scenes/LoginPage';
+import { useQueryClient } from '@tanstack/react-query';
+import { View, Text, Center, Button, Box, Pressable, ScrollView, Avatar, HStack, VStack } from 'native-base';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
+
+const UploadButton = (props: any) => (
+  <Pressable mt="2" {...props}>
+    <Text color="CARDVESTGREEN" underline textAlign="center" fontSize="sm" fontWeight="light">
+      Change Profile Pic
+    </Text>
+  </Pressable>
+);
 
 const ProfilePage: FC = () => {
-  // const navigation = useNavigation<GenericNavigationProps>();
+  const navigation = useNavigation<GenericNavigationProps>();
+  const { mutate: updateUser, isLoading } = useModifyUser();
+  const queryClient = useQueryClient();
+  const data: any = queryClient.getQueryData(['user']);
+  const [img, setImg] = useState<string>(data?.image_url);
+  const [selectedImage, setSelectedImage] = useState<string[]>([]);
+  const [firstname, setFirstName] = useState(data?.firstname);
+  const [lastname, setLastName] = useState(data?.lastname);
+  const [email, setEmail] = useState(data?.email);
+  const [username, setUsername] = useState(data?.username);
+  const [phoneNumber, setPhoneNumber] = useState(data?.phonenumber);
+  const handleSubmit = async () => {
+    try {
+      await updateUser({
+        userId: data?.id,
+        image_url: selectedImage[0],
+        email,
+        firstname,
+        lastname,
+        username,
+        phonenumber: phoneNumber,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDisabled = useCallback(() => {
+    return (
+      !email ||
+      !username ||
+      validateEmail(email) ||
+      !phoneNumber ||
+      !(phoneNumber.length >= 10) ||
+      !(phoneNumber.length <= 11)
+    );
+  }, [phoneNumber]);
+
+  useEffect(() => {
+    if (selectedImage.length > 0) setImg(selectedImage[0]);
+  }, [selectedImage]);
+
   return (
     <BackButtonTitleCenter title="My Profile">
       <ScrollView
         _contentContainerStyle={{
-          padding: '0px 20px',
           flex: 1,
           justifyContent: 'center',
         }}
@@ -24,25 +77,38 @@ const ProfilePage: FC = () => {
               borderWidth="1"
               size="2xl"
               source={{
-                uri: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                uri: img,
               }}>
-              TE
+              {data?.username?.toString()[0]}
             </Avatar>
           </Box>
-          <Pressable mt="2" onPress={() => console.log('jeje')}>
-            <Text color="CARDVESTGREEN" underline textAlign="center" fontSize="sm" fontWeight="light">
-              Change Profile Pic
-            </Text>
-          </Pressable>
+          <MediaUploader
+            formFiles={selectedImage}
+            noModal
+            // onInit={() => {}}
+            onImageRemoved={filenames => {
+              setSelectedImage(filenames);
+            }}
+            onImageUploaded={filenames => {
+              setSelectedImage(filenames);
+            }}
+            type="profile"
+            CustomButton={UploadButton}
+          />
         </Center>
         <View my="6">
-          <Input label="Email Address" />
-          <Input label="Username" />
-          <Input label="Mobile Number" />
+          <Input label="First Name" value={firstname} onChangeText={setFirstName} />
+          <Input label="Last Name" value={lastname} onChangeText={setLastName} />
+          <Input label="Email Address" value={email} onChangeText={setEmail} disabled />
+          <Input label="Username" value={username} onChangeText={setUsername} disabled />
+          <Input label="Mobile Number" value={phoneNumber} onChangeText={setPhoneNumber} />
         </View>
         <Center py="4">
           <Button
-            onPress={() => console.log('jeje')}
+            onPress={() => handleSubmit()}
+            isDisabled={handleDisabled()}
+            isLoading={isLoading}
+            isLoadingText="Updating"
             my="3"
             width="100%"
             size="lg"
@@ -52,6 +118,21 @@ const ProfilePage: FC = () => {
             color="white">
             Update Profile
           </Button>
+          <Button
+            w="100%"
+            onPress={() => navigation.navigate('DeleteAccount')}
+            my="3"
+            background="white"
+            size="lg"
+            p="4"
+            fontSize="md">
+            <HStack alignItems="center" mx="auto">
+              <View w="7" h="7" mr="2">
+                <RedTrashOutline />
+              </View>
+              <Text color="#FF303C">Delete Account</Text>
+            </HStack>
+          </Button>
         </Center>
       </ScrollView>
     </BackButtonTitleCenter>
@@ -59,55 +140,3 @@ const ProfilePage: FC = () => {
 };
 
 export default memo(ProfilePage);
-/* <CSafeAreaView>
-<ScrollView
-  showsVerticalScrollIndicator={false}
-_contentContainerStyle={{
-    padding: '20px',
-    flex: 1,
-    justifyContent: 'center',
-  }}
-  showsVerticalScrollIndicator={false}>
-  <Center>
-    <Box p="4" width={20} height={20}>
-      <Logo />
-    </Box>
-    <Text mt="4" color="CARDVESTBLACK.50" textAlign="center" fontSize="3xl" fontWeight="bold">
-      Welcome
-    </Text>
-    <Text color="CARDVESTGREY.50" textAlign="center" fontSize="md" fontWeight="light">
-      Enter your details to login
-    </Text>
-  </Center>
-  <View p="3" mx="3">
-    <Input label="Email Address" />
-    <Input label="Password" />
-    <Pressable mt="2" onPress={() => navigation.navigate('ForgetPassword')}>
-      <Text textAlign="right" fontSize="md" color="CARDVESTGREEN">
-        Forgot Password?
-      </Text>
-    </Pressable>
-  </View>
-  <Center px="4">
-    <Button
-      onPress={() => navigation.navigate('Dashboard')}
-      my="3"
-      width="95%"
-      size="lg"
-      p="4"
-      fontSize="md"
-      backgroundColor="CARDVESTGREEN"
-      color="white">
-      Login
-    </Button>
-    <Pressable mt="2" onPress={() => navigation.navigate('SignUp')}>
-      <Text fontSize="md" color="CARDVESTGREEN">
-        Don’t have an account? <Text fontWeight={'bold'}>Create Account</Text>
-      </Text>
-    </Pressable>
-    <Box mt="10" p="4" width={20} height={20}>
-      <Bio />
-    </Box>
-  </Center>
-</ScrollView>
-</CSafeAreaView> */

@@ -2,6 +2,28 @@ PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
+  - EXApplication (4.2.2):
+    - ExpoModulesCore
+  - EXConstants (14.2.1):
+    - ExpoModulesCore
+  - EXDevice (4.3.0):
+    - ExpoModulesCore
+  - EXFileSystem (15.2.2):
+    - ExpoModulesCore
+  - EXFont (11.1.1):
+    - ExpoModulesCore
+  - EXNotifications (0.16.1):
+    - ExpoModulesCore
+  - Expo (48.0.4):
+    - ExpoModulesCore
+  - ExpoKeepAwake (12.0.1):
+    - ExpoModulesCore
+  - ExpoModulesCore (1.2.3):
+    - React-Core
+    - ReactCommon/turbomodule/core
+  - EXTaskManager (11.1.1):
+    - ExpoModulesCore
+    - UMAppLoader
   - FBLazyVector (0.69.4)
   - FBReactNativeSpec (0.69.4):
     - RCT-Folly (= 2021.06.28.00-v2)
@@ -10,6 +32,56 @@ PODS:
     - React-Core (= 0.69.4)
     - React-jsi (= 0.69.4)
     - ReactCommon/turbomodule/core (= 0.69.4)
+  - Firebase (10.5.0):
+    - Firebase/Core (= 10.5.0)
+  - Firebase/Core (10.5.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 10.5.0)
+  - Firebase/CoreOnly (10.5.0):
+    - FirebaseCore (= 10.5.0)
+  - Firebase/Messaging (10.5.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.5.0)
+  - FirebaseAnalytics (10.5.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.5.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.5.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleAppMeasurement (= 10.5.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCore (10.5.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Logger (~> 7.8)
+  - FirebaseCoreExtension (10.5.0):
+    - FirebaseCore (~> 10.0)
+  - FirebaseCoreInternal (10.6.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseInstallations (10.6.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.5.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - Flipper (0.125.0):
     - Flipper-Folly (~> 2.6)
     - Flipper-RSocket (~> 1.4)
@@ -73,8 +145,87 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
+  - GoogleAppMeasurement (10.5.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.5.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.5.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.5.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.5.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleDataTransport (9.2.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities (7.11.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 7.11.0)
+    - GoogleUtilities/Environment (= 7.11.0)
+    - GoogleUtilities/ISASwizzler (= 7.11.0)
+    - GoogleUtilities/Logger (= 7.11.0)
+    - GoogleUtilities/MethodSwizzler (= 7.11.0)
+    - GoogleUtilities/Network (= 7.11.0)
+    - "GoogleUtilities/NSData+zlib (= 7.11.0)"
+    - GoogleUtilities/Reachability (= 7.11.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 7.11.0)
+    - GoogleUtilities/UserDefaults (= 7.11.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.11.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/ISASwizzler (7.11.0)
+  - GoogleUtilities/Logger (7.11.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.11.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.11.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.11.0)"
+  - GoogleUtilities/Reachability (7.11.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/SwizzlerTestHelpers (7.11.0):
+    - GoogleUtilities/MethodSwizzler
+  - GoogleUtilities/UserDefaults (7.11.0):
+    - GoogleUtilities/Logger
   - libevent (2.1.12)
+  - Mixpanel-swift (4.0.5):
+    - Mixpanel-swift/Complete (= 4.0.5)
+  - Mixpanel-swift/Complete (4.0.5)
+  - MixpanelReactNative (2.2.0):
+    - Mixpanel-swift (= 4.0.5)
+    - React-Core
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
   - OpenSSL-Universal (1.1.1100)
+  - Permission-Camera (3.7.2):
+    - RNPermissions
+  - Permission-FaceID (3.7.2):
+    - RNPermissions
+  - Permission-MediaLibrary (3.7.2):
+    - RNPermissions
+  - Permission-Notifications (3.7.2):
+    - RNPermissions
+  - Permission-PhotoLibrary (3.7.2):
+    - RNPermissions
+  - PromisesObjC (2.2.0)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -284,7 +435,11 @@ PODS:
   - React-jsinspector (0.69.4)
   - React-logger (0.69.4):
     - glog
+  - react-native-fingerprint-scanner (6.0.0):
+    - React
   - react-native-flipper (0.159.0):
+    - React-Core
+  - react-native-image-picker (5.0.1):
     - React-Core
   - react-native-pager-view (6.1.0):
     - React-Core
@@ -298,6 +453,8 @@ PODS:
     - React-Core
   - react-native-version-number (0.3.6):
     - React
+  - react-native-webview (11.26.1):
+    - React-Core
   - React-perflogger (0.69.4)
   - React-RCTActionSheet (0.69.4):
     - React-Core/RCTActionSheetHeaders (= 0.69.4)
@@ -364,15 +521,29 @@ PODS:
     - React-jsi (= 0.69.4)
     - React-logger (= 0.69.4)
     - React-perflogger (= 0.69.4)
-  - RNCAsyncStorage (1.17.9):
+  - RNCAsyncStorage (1.12.1):
     - React-Core
   - RNCClipboard (1.11.1):
     - React-Core
   - RNCMaskedView (0.2.7):
     - React-Core
+  - RNCPushNotificationIOS (1.10.1):
+    - React-Core
+  - RNDeviceInfo (10.3.0):
+    - React-Core
+  - RNFBApp (17.3.1):
+    - Firebase/CoreOnly (= 10.5.0)
+    - React-Core
+  - RNFBMessaging (17.3.1):
+    - Firebase/Messaging (= 10.5.0)
+    - FirebaseCoreExtension (= 10.5.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (2.5.0):
     - React-Core
   - RNLocalize (2.2.3):
+    - React-Core
+  - RNPermissions (3.7.2):
     - React-Core
   - RNReanimated (3.0.0-rc.1):
     - DoubleConversion
@@ -404,11 +575,22 @@ PODS:
   - RNScreens (3.16.0):
     - React-Core
     - React-RCTImage
+  - RNSentry (5.1.0):
+    - React-Core
+    - Sentry/HybridSDK (= 8.2.0)
   - RNSVG (13.6.0):
     - React-Core
+  - RNUxcam (5.4.5):
+    - React-Core
+    - UXCam (~> 3.5.3)
   - RNVectorIcons (9.2.0):
     - React-Core
+  - Sentry/HybridSDK (8.2.0):
+    - SentryPrivate (= 8.2.0)
+  - SentryPrivate (8.2.0)
   - SocketRocket (0.6.0)
+  - UMAppLoader (4.1.1)
+  - UXCam (3.5.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -416,8 +598,20 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - EXApplication (from `../node_modules/expo-application/ios`)
+  - EXConstants (from `../node_modules/expo-constants/ios`)
+  - EXDevice (from `../node_modules/expo-device/ios`)
+  - EXFileSystem (from `../node_modules/expo-file-system/ios`)
+  - EXFont (from `../node_modules/expo-font/ios`)
+  - EXNotifications (from `../node_modules/expo-notifications/ios`)
+  - Expo (from `../node_modules/expo`)
+  - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - EXTaskManager (from `../node_modules/expo-task-manager/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
+  - Firebase
+  - FirebaseCore
   - Flipper (= 0.125.0)
   - Flipper-Boost-iOSX (= 1.76.0.1.11)
   - Flipper-DoubleConversion (= 3.2.0.1)
@@ -440,7 +634,14 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - GoogleUtilities
+  - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
   - OpenSSL-Universal (= 1.1.1100)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec`)
+  - Permission-FaceID (from `../node_modules/react-native-permissions/ios/FaceID/Permission-FaceID.podspec`)
+  - Permission-MediaLibrary (from `../node_modules/react-native-permissions/ios/MediaLibrary/Permission-MediaLibrary.podspec`)
+  - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications/Permission-Notifications.podspec`)
+  - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary/Permission-PhotoLibrary.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -457,11 +658,14 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-version-number (from `../node_modules/react-native-version-number`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -474,20 +678,35 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNUxcam (from `../node_modules/react-native-ux-cam`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - CocoaAsyncSocket
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
     - Flipper
     - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
@@ -498,9 +717,18 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleUtilities
     - libevent
+    - Mixpanel-swift
+    - nanopb
     - OpenSSL-Universal
+    - PromisesObjC
+    - Sentry
+    - SentryPrivate
     - SocketRocket
+    - UXCam
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -508,12 +736,44 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  EXApplication:
+    :path: "../node_modules/expo-application/ios"
+  EXConstants:
+    :path: "../node_modules/expo-constants/ios"
+  EXDevice:
+    :path: "../node_modules/expo-device/ios"
+  EXFileSystem:
+    :path: "../node_modules/expo-file-system/ios"
+  EXFont:
+    :path: "../node_modules/expo-font/ios"
+  EXNotifications:
+    :path: "../node_modules/expo-notifications/ios"
+  Expo:
+    :path: "../node_modules/expo"
+  ExpoKeepAwake:
+    :path: "../node_modules/expo-keep-awake/ios"
+  ExpoModulesCore:
+    :path: "../node_modules/expo-modules-core"
+  EXTaskManager:
+    :path: "../node_modules/expo-task-manager/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  MixpanelReactNative:
+    :path: "../node_modules/mixpanel-react-native"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec"
+  Permission-FaceID:
+    :path: "../node_modules/react-native-permissions/ios/FaceID/Permission-FaceID.podspec"
+  Permission-MediaLibrary:
+    :path: "../node_modules/react-native-permissions/ios/MediaLibrary/Permission-MediaLibrary.podspec"
+  Permission-Notifications:
+    :path: "../node_modules/react-native-permissions/ios/Notifications/Permission-Notifications.podspec"
+  Permission-PhotoLibrary:
+    :path: "../node_modules/react-native-permissions/ios/PhotoLibrary/Permission-PhotoLibrary.podspec"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -542,8 +802,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-fingerprint-scanner:
+    :path: "../node_modules/react-native-fingerprint-scanner"
   react-native-flipper:
     :path: "../node_modules/react-native-flipper"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
@@ -552,6 +816,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-splash-screen"
   react-native-version-number:
     :path: "../node_modules/react-native-version-number"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -577,23 +843,39 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
-    :path: "../node_modules/@react-native-async-storage/async-storage"
+    :path: "../node_modules/@react-native-community/async-storage"
   RNCClipboard:
     :path: "../node_modules/@react-native-clipboard/clipboard"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
+  RNFBApp:
+    :path: "../node_modules/@react-native-firebase/app"
+  RNFBMessaging:
+    :path: "../node_modules/@react-native-firebase/messaging"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNUxcam:
+    :path: "../node_modules/react-native-ux-cam"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  UMAppLoader:
+    :path: "../node_modules/unimodules-app-loader/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -601,8 +883,25 @@ SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
+  EXApplication: e418d737a036e788510f2c4ad6c10a7d54d18586
+  EXConstants: f348da07e21b23d2b085e270d7b74f282df1a7d9
+  EXDevice: 7647ca9b1fd8b269dfd896a7643d659343358054
+  EXFileSystem: 844e86ca9b5375486ecc4ef06d3838d5597d895d
+  EXFont: 6ea3800df746be7233208d80fe379b8ed74f4272
+  EXNotifications: 9a2aa201deb19dfe1dbe0e370eeb2922de0d2422
+  Expo: aae5eb5ed076ff163eb909a003b2be1b85f832dd
+  ExpoKeepAwake: 69f5f627670d62318410392d03e0b5db0f85759a
+  ExpoModulesCore: 02cecdc123c0b6c73adebf81833fa0b8db291393
+  EXTaskManager: f8257faa4c20acfc3f31e21ab82a62544d70db85
   FBLazyVector: c71b8c429a8af2aff1013934a7152e9d9d0c937d
   FBReactNativeSpec: cb0df4f0084281b394f76bb9b4d1d9540f35963f
+  Firebase: 3d6637234ab163e31852834617b4fe1df3b7af6d
+  FirebaseAnalytics: 6f7430030cb6b22fe1db2e3bed782e999b76dc00
+  FirebaseCore: 324b8d182d9ff7e3f6d1fa2f04b082d1c7a3e366
+  FirebaseCoreExtension: d9fa427f1ae1edccf2368ce5e8d567e4c1f0ebc8
+  FirebaseCoreInternal: c7cd505e2136811096b225ac388d6254a2622362
+  FirebaseInstallations: 13dde135fa0524e15bddb133ccc8465c53a1b3f3
+  FirebaseMessaging: 35ecbbc68ff547fca80f9326c9622e79288c7149
   Flipper: 26fc4b7382499f1281eb8cb921e5c3ad6de91fe0
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 2dc99b02f658daf147069aad9dbd29d8feb06d30
@@ -614,8 +913,20 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
+  GoogleAppMeasurement: 40c70a7d89013f0eca72006c4b9732163ea4cdae
+  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
+  GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  Mixpanel-swift: 8b73f0306c21ddd6e9918e379593bfe3383f6eaa
+  MixpanelReactNative: 1df98c3be8467f89c9a84710034195d5cc295bbd
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Permission-Camera: db22e80aa0858a8b6d65979a97f2f481dd8a0ebd
+  Permission-FaceID: 7ddd8a335ebd1599a00ff59c6355e6cfb828d5b2
+  Permission-MediaLibrary: d2e66f5b11eae797b3cf86853950e1592fdf6404
+  Permission-Notifications: dbc8cb572cdfbc3c2941feecce4c7900bbdccea1
+  Permission-PhotoLibrary: 7d80161682e08042fd8b0bf934ea97a8495e0e6a
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
   RCTRequired: bd9d2ab0fda10171fcbcf9ba61a7df4dc15a28f4
   RCTTypeSafety: e44e139bf6ec8042db396201834fc2372f6a21cd
@@ -630,11 +941,14 @@ SPEC CHECKSUMS:
   React-jsiexecutor: a27badbbdbc0ff781813370736a2d1c7261181d4
   React-jsinspector: 8a3d3f5dcd23a91e8c80b1bf0e96902cd1dca999
   React-logger: 1088859f145b8f6dd0d3ed051a647ef0e3e80fad
+  react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper: dc5290261fbeeb2faec1bdc57ae6dd8d562e1de4
+  react-native-image-picker: 8cb4280e2c1efc3daeb2d9d597f9429a60472e40
   react-native-pager-view: 7abf89f9834d9a4021b2fb6a5ef2abff570b46fb
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
+  react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-perflogger: cb386fd44c97ec7f8199c04c12b22066b0f2e1e0
   React-RCTActionSheet: f803a85e46cf5b4066c2ac5e122447f918e9c6e5
   React-RCTAnimation: 19c80fa950ccce7f4db76a2a7f2cf79baae07fc7
@@ -647,19 +961,30 @@ SPEC CHECKSUMS:
   React-RCTVibration: 9adb4a3cbb598d1bbd46a05256f445e4b8c70603
   React-runtimeexecutor: 61ee22a8cdf8b6bb2a7fb7b4ba2cc763e5285196
   ReactCommon: 8f67bd7e0a6afade0f20718f859dc8c2275f2e83
-  RNCAsyncStorage: b2489b49e38c85e10ed45a888d13a2a4c7b32ea1
+  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCClipboard: 2834e1c4af68697089cdd455ee4a4cdd198fa7dd
   RNCMaskedView: cb9670ea9239998340eaab21df13fa12a1f9de15
+  RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
+  RNDeviceInfo: 4701f0bf2a06b34654745053db0ce4cb0c53ada7
+  RNFBApp: 6210da3d32c005190647805e6ced236d9be5520f
+  RNFBMessaging: 97931c8e43df9382c3c8b5b2ea36d13d0eb59306
   RNGestureHandler: bad495418bcbd3ab47017a38d93d290ebd406f50
   RNLocalize: a64514b46a01375fdfae9349036b4dc7130333b5
+  RNPermissions: 2fbbcb7244357507f958d626d58eb15fb0013d85
   RNReanimated: 1be5bb774849f21036e84abd372ff75f4470e94f
   RNScreens: ee31ecdf23fe81e93c74feaa086cf173d758ab58
+  RNSentry: bf01c99057573813a9b965d213801bac4c6a661b
   RNSVG: 3a79c0c4992213e4f06c08e62730c5e7b9e4dc17
+  RNUxcam: 12d2de9f0c6023b1f31abb19dea463a2c0e14d22
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  Sentry: cf1d35c866266da58964fe7b62526bda93ffcb38
+  SentryPrivate: 2909bcc7b19a827b49e9bde0e56116b08d40dfdf
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  UMAppLoader: 71aae6c6782cf2aef2356bb97f84321600b4b25c
+  UXCam: b4a5cc96965b2f783b8c2c3bc0465cb614972a34
   Yoga: ff994563b2fd98c982ca58e8cd9db2cdaf4dda74
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 5c4be9a4d63bde56191c21580ef06979deaf6b29
+PODFILE CHECKSUM: d998850e1d1cebf3ad581bd04abc2d7c6736e6ae
 
 COCOAPODS: 1.11.3

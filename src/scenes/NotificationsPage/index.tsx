@@ -1,11 +1,14 @@
+import { useGetNotification } from '@api/hooks/useUser';
+import { NotificationBigBell } from '@assets/SVG';
+import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel } from '@scenes/DashboardPage';
-import { HStack, Text, VStack } from 'native-base';
-import React, { FC, memo } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import * as dayjs from 'dayjs';
+import { FlatList, HStack, Text, VStack, View } from 'native-base';
+import React, { FC, memo, useState } from 'react';
 
-const Card = () => {
+const Card = ({ data }: { data: any }) => {
   return (
     <HStack
       borderRadius="sm"
@@ -17,9 +20,12 @@ const Card = () => {
       backgroundColor={'CARDVESTGREY.500'}>
       <HStack alignItems="center">
         <VStack px="2">
-          <Text fontSize="md">Dec 25, 2022 | 3:45 PM</Text>
+          <Text fontSize="md">
+            {dayjs.default(data?.created_at).format('DD/MM/YYYY')} |{' '}
+            {dayjs.default(data?.created_at).format('HH:mm:ss')}
+          </Text>
           <Text fontSize="sm" color="CARDVESTGREY.100">
-            Your Giftcard sale trade has been processed successfully!
+            {data?.description}
           </Text>
         </VStack>
       </HStack>
@@ -28,11 +34,28 @@ const Card = () => {
 };
 
 const NotificationsPage: FC = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
-  const arr: string[] = ['', '', '', '', '', '', ''];
+  const queryClient = useQueryClient();
+  const { data, isFetching, isLoading } = useGetNotification();
+  const [page, setPage] = useState(1);
+  if (isLoading) return <CLoader />;
   return (
     <BackButtonTitleCenter title="Notifications">
-      <VStack my="7">{arr.length === 0 ? <EmptyPanel /> : arr.map((item: any) => <Card />)}</VStack>
+      <VStack my="7">
+        {data?.data?.length > 0 ? (
+          <FlatList
+            data={data?.data}
+            renderItem={({ item }) => <Card data={item} />}
+            keyExtractor={(item: any) => item?.id}
+            onRefresh={() => queryClient.invalidateQueries([`user-notifications`])}
+            refreshing={isFetching}
+            onEndReached={data?.meta?.current_page < data?.meta?.last_page ? () => setPage(page + 1) : () => null}
+          />
+        ) : (
+          <View w="100%" h="full" justifyContent={'center'}>
+            <EmptyPanel Icon={NotificationBigBell} title="No Notifications" body="New updates will appear here." />
+          </View>
+        )}
+      </VStack>
     </BackButtonTitleCenter>
   );
 };
