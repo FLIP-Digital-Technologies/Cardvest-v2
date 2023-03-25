@@ -1,6 +1,8 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import "RNFBMessagingModule.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <React/RCTLinkingManager.h> 
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -19,9 +21,22 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 #import <react/config/ReactNativeConfig.h>
 
+BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:app
+                                                              openURL:url
+                                                    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                           annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+                                                           
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+  if ([[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options]) {
+    return YES;
+  }
+
+  if ([RCTLinkingManager application:application openURL:url options:options]) {
+    return YES;
+  }
+
   return [RCTLinkingManager application:application openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
 }
@@ -49,6 +64,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
   
   RCTAppSetupPrepareApp(application);
   RCTBridge *bridge = [self.reactDelegate createBridgeWithDelegate:self launchOptions:launchOptions];

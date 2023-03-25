@@ -13,6 +13,8 @@ target 'Cardvest' do
   use_expo_modules!
   config = use_native_modules!
 
+  pod 'FBAudienceNetwork'
+
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
   pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
 

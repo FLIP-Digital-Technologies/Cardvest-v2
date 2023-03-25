@@ -26,6 +26,7 @@
 		461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06933F48076D471682E306AD /* Lato-LightItalic.ttf */; };
 		4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */; };
 		86659DF594B74ECF996681F4 /* Satoshi-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */; };
+		88329CB129CDDED500706034 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88329CB029CDDED500706034 /* FacebookCore */; };
 		884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */; };
 		884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */; };
 		884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */; };
@@ -171,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FFDD27FE0E111D8E34219F6 /* libPods-Cardvest.a in Frameworks */,
+				88329CB129CDDED500706034 /* FacebookCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +408,9 @@
 			dependencies = (
 			);
 			name = Cardvest;
+			packageProductDependencies = (
+				88329CB029CDDED500706034 /* FacebookCore */,
+			);
 			productName = Cardvest;
 			productReference = 13B07F961A680F5B00A75B9A /* Cardvest.app */;
 			productType = "com.apple.product-type.application";
@@ -436,6 +441,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -997,6 +1005,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		88329CB029CDDED500706034 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
