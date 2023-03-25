@@ -2,32 +2,6 @@ PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
-  - EXApplication (4.2.2):
-    - ExpoModulesCore
-  - EXConstants (14.2.1):
-    - ExpoModulesCore
-  - EXDevice (4.3.0):
-    - ExpoModulesCore
-  - EXFileSystem (15.2.2):
-    - ExpoModulesCore
-  - EXFont (11.1.1):
-    - ExpoModulesCore
-  - EXNotifications (0.16.1):
-    - ExpoModulesCore
-  - Expo (48.0.4):
-    - ExpoModulesCore
-  - ExpoAdapterFBSDKNext (11.1.0):
-    - ExpoModulesCore
-    - FBSDKCoreKit
-    - React-Core
-  - ExpoKeepAwake (12.0.1):
-    - ExpoModulesCore
-  - ExpoModulesCore (1.2.3):
-    - React-Core
-    - ReactCommon/turbomodule/core
-  - EXTaskManager (11.1.1):
-    - ExpoModulesCore
-    - UMAppLoader
   - FBAEMKit (15.0.0):
     - FBSDKCoreKit_Basics (= 15.0.0)
   - FBAudienceNetwork (6.12.0)
@@ -623,7 +597,6 @@ PODS:
     - SentryPrivate (= 8.2.0)
   - SentryPrivate (8.2.0)
   - SocketRocket (0.6.0)
-  - UMAppLoader (4.1.1)
   - UXCam (3.5.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -632,17 +605,6 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - EXApplication (from `../node_modules/expo-application/ios`)
-  - EXConstants (from `../node_modules/expo-constants/ios`)
-  - EXDevice (from `../node_modules/expo-device/ios`)
-  - EXFileSystem (from `../node_modules/expo-file-system/ios`)
-  - EXFont (from `../node_modules/expo-font/ios`)
-  - EXNotifications (from `../node_modules/expo-notifications/ios`)
-  - Expo (from `../node_modules/expo`)
-  - ExpoAdapterFBSDKNext (from `../node_modules/react-native-fbsdk-next/ios`)
-  - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
-  - ExpoModulesCore (from `../node_modules/expo-modules-core`)
-  - EXTaskManager (from `../node_modules/expo-task-manager/ios`)
   - FBAudienceNetwork
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -731,7 +693,6 @@ DEPENDENCIES:
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNUxcam (from `../node_modules/react-native-ux-cam`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
-  - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -780,28 +741,6 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
-  EXApplication:
-    :path: "../node_modules/expo-application/ios"
-  EXConstants:
-    :path: "../node_modules/expo-constants/ios"
-  EXDevice:
-    :path: "../node_modules/expo-device/ios"
-  EXFileSystem:
-    :path: "../node_modules/expo-file-system/ios"
-  EXFont:
-    :path: "../node_modules/expo-font/ios"
-  EXNotifications:
-    :path: "../node_modules/expo-notifications/ios"
-  Expo:
-    :path: "../node_modules/expo"
-  ExpoAdapterFBSDKNext:
-    :path: "../node_modules/react-native-fbsdk-next/ios"
-  ExpoKeepAwake:
-    :path: "../node_modules/expo-keep-awake/ios"
-  ExpoModulesCore:
-    :path: "../node_modules/expo-modules-core"
-  EXTaskManager:
-    :path: "../node_modules/expo-task-manager/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
@@ -922,8 +861,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ux-cam"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
-  UMAppLoader:
-    :path: "../node_modules/unimodules-app-loader/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -931,17 +868,6 @@ SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
-  EXApplication: e418d737a036e788510f2c4ad6c10a7d54d18586
-  EXConstants: f348da07e21b23d2b085e270d7b74f282df1a7d9
-  EXDevice: 7647ca9b1fd8b269dfd896a7643d659343358054
-  EXFileSystem: 844e86ca9b5375486ecc4ef06d3838d5597d895d
-  EXFont: 6ea3800df746be7233208d80fe379b8ed74f4272
-  EXNotifications: 9a2aa201deb19dfe1dbe0e370eeb2922de0d2422
-  Expo: aae5eb5ed076ff163eb909a003b2be1b85f832dd
-  ExpoAdapterFBSDKNext: cb13ee1823c70383d17a82e7e2385053fa917d01
-  ExpoKeepAwake: 69f5f627670d62318410392d03e0b5db0f85759a
-  ExpoModulesCore: 02cecdc123c0b6c73adebf81833fa0b8db291393
-  EXTaskManager: f8257faa4c20acfc3f31e21ab82a62544d70db85
   FBAEMKit: d8312d8451ead46282adc7f3565ffc4965e3a4a7
   FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6
   FBLazyVector: 6b7f5692909b4300d50e7359cdefbcd09dd30faa
@@ -1037,11 +963,10 @@ SPEC CHECKSUMS:
   Sentry: cf1d35c866266da58964fe7b62526bda93ffcb38
   SentryPrivate: 2909bcc7b19a827b49e9bde0e56116b08d40dfdf
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  UMAppLoader: 71aae6c6782cf2aef2356bb97f84321600b4b25c
   UXCam: b4a5cc96965b2f783b8c2c3bc0465cb614972a34
   Yoga: 0b84a956f7393ef1f37f3bb213c516184e4a689d
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 9e8089de76253a3baf6a6410f30270e4747b43fd
+PODFILE CHECKSUM: ec3b4f7e66931a9b368c62b0cb37710dbc7d80a8
 
 COCOAPODS: 1.11.3

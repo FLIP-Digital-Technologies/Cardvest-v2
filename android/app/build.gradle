@@ -141,7 +141,7 @@ android {
         applicationId "com.flipdigitals.cardvest"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 812220241
+        versionCode 812220242
         versionName "2.0.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
@@ -306,7 +306,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
 
-    implementation 'com.facebook.android:facebook-android-sdk::latest.release'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 
 
     // Add the dependencies for any other desired Firebase products

@@ -1,26 +1,26 @@
 import env from '@env';
+import messaging from '@react-native-firebase/messaging';
 // import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import axios from 'axios';
-import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
 import React from 'react';
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { Linking, Platform } from 'react-native';
+import deviceInfoModule, { useIsEmulator } from 'react-native-device-info';
 
 // import pushTokenApi from '../api/push-token';
 // import useAuth from '../auth/useAuth';
 
 // Push Notification implementation.
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
 
-const modelName = Device.modelName;
+const modelName = deviceInfoModule.getDeviceId();
 
 const processNotification = response => {
   const notificationContent = response?.notification?.request?.content;
@@ -39,6 +39,7 @@ const processNotification = response => {
 
   if (url) Linking.openURL(url);
 };
+
 async function sendPushNotification(expoPushToken) {
   const message = {
     to: expoPushToken,
@@ -66,6 +67,7 @@ export default function NotificationContainer({ children }) {
   const notificationListener = useRef();
   const responseListener = useRef();
   const [data, setData] = useState();
+  const { loading, result } = useIsEmulator();
   useLayoutEffect(() => {
     async function fetchData() {
       try {
@@ -84,10 +86,10 @@ export default function NotificationContainer({ children }) {
     fetchData();
   });
 
-  const lastNotificationResponse = Notifications.useLastNotificationResponse();
+  // const lastNotificationResponse = Notifications.useLastNotificationResponse();
 
   useEffect(() => {
-    console.log('bird', modelName, lastNotificationResponse);
+    console.log('bird', modelName);
     if (data) {
       console.log('bird', modelName, 'naje000');
       registerForPushNotificationsAsync().then(token => {
@@ -102,24 +104,24 @@ export default function NotificationContainer({ children }) {
       });
     }
 
-    if (lastNotificationResponse) {
-      processNotification(lastNotificationResponse);
-    }
+    // if (lastNotificationResponse) {
+    //   processNotification(lastNotificationResponse);
+    // }
 
-    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      processNotification(response);
-    });
+    // // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    // responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+    //   processNotification(response);
+    // });
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      console.log('kljkdkd', notification);
-      setNotification(notification);
-    });
+    // notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+    //   console.log('kljkdkd', notification);
+    //   setNotification(notification);
+    // });
 
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
+    // return () => {
+    //   Notifications.removeNotificationSubscription(notificationListener.current);
+    //   Notifications.removeNotificationSubscription(responseListener.current);
+    // };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -128,14 +130,11 @@ export default function NotificationContainer({ children }) {
     try {
       let token;
       let deviceToken = await cacheService.get('@DeviceToken');
-      console.log('hjehkjehk', Device.isDevice);
-      if (Device.isDevice) {
-        console.log('Device is physical', Device.isDevice);
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        console.log(existingStatus, 'Permission does exist', Device.isDevice);
+      if (!result) {
+        const existingStatus = await messaging.hasPermission();
         let finalStatus = existingStatus;
-        if (existingStatus !== 'granted') {
-          const { status } = await Notifications.requestPermissionsAsync();
+        if (existingStatus !== messaging.AuthorizationStatus.AUTHORIZED) {
+          const { status } = await messaging.requestPermission();
           finalStatus = status;
         }
         if (finalStatus !== 'granted') {
@@ -143,22 +142,9 @@ export default function NotificationContainer({ children }) {
           return;
         }
         console.log('floak', token, deviceToken);
-        // deviceToken = (await Notifications.getDevicePushTokenAsync()).data;
-        // console.log(existingStatus, 'jjekhjehkjehk', Device.isDevice, deviceToken);
-        // token = (await Notifications.getExpoPushTokenAsync({ experienceId: '@flip_digitals/cardvest' })).data;
-        // console.log(modelName, 'forco', deviceToken, token, 'flip_digitals');
       } else {
         // console.log("Must use a physical device for Push Notifications");
         return;
-      }
-
-      if (Platform.OS === 'android') {
-        Notifications.setNotificationChannelAsync('default', {
-          name: 'default',
-          importance: Notifications.AndroidImportance.MAX,
-          vibrationPattern: [0, 250, 250, 250],
-          lightColor: '#FF231F7C',
-        });
       }
       return { token, deviceToken };
     } catch (error) {

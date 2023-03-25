@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import "RNFBMessagingModule.h"
+#import "FBSDKApplicationDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <React/RCTLinkingManager.h> 
 
@@ -21,22 +22,29 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 #import <react/config/ReactNativeConfig.h>
 
-BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:app
-                                                              openURL:url
-                                                    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                                                           annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
-                                                           
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [FBSDKAppEvents activateApp];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
+  return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                         openURL:url
+                                               sourceApplication:sourceApplication
+                                                      annotation:annotation];
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  if ([[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options]) {
-    return YES;
-  }
-
-  if ([RCTLinkingManager application:application openURL:url options:options]) {
-    return YES;
-  }
-
   return [RCTLinkingManager application:application openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
 }
@@ -64,10 +72,10 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
-  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
+  // [FBSDKApplicationDelegate.sharedInstance initializeSDK];
   
   RCTAppSetupPrepareApp(application);
-  RCTBridge *bridge = [self.reactDelegate createBridgeWithDelegate:self launchOptions:launchOptions];
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   
   #if RCT_NEW_ARCH_ENABLED
   _contextContainer = std::make_shared<facebook::react::ContextContainer const>();
@@ -78,7 +86,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   #endif
   
   NSDictionary *initProps = [self prepareInitialProps];
-  UIView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"Cardvest" initialProperties:initProps];
+  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"Cardvest", initProps);
   
   if (@available(iOS 13.0, *)) {
     rootView.backgroundColor = [UIColor systemBackgroundColor];
@@ -87,13 +95,13 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   }
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  UIViewController *rootViewController = [self.reactDelegate createRootViewController];
+  UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
   
-  [super application:application didFinishLaunchingWithOptions:launchOptions];
+//  [super application:application didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
 
