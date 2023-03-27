@@ -72,7 +72,7 @@
     "react-native-flipper": "0.159.0",
     "react-native-gesture-handler": "2.5.0",
     "react-native-global-props": "^1.1.5",
-    "react-native-image-picker": "^5.0.1",
+    "react-native-image-picker": "^5.3.1",
     "react-native-indicators": "^0.17.0",
     "react-native-localize": "2.2.3",
     "react-native-otp-inputs": "^7.4.0",
