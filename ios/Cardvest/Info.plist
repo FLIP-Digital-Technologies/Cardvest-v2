@@ -23,9 +23,24 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>812220241</string>
+	<string>812220242</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb753238116214519</string>
+		</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>753238116214519</string>
+	<key>FacebookClientToken</key>
+	<string>02f9c9a83e391b4b744dd6a198644267</string>
+	<key>FacebookDisplayName</key>
+	<string>Cardvest</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>itms</string>

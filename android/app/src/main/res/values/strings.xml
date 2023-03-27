@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cardvest</string>
+    <string name="facebook_app_id">753238116214519</string>
+    <string name="facebook_client_token">02f9c9a83e391b4b744dd6a198644267</string>
 </resources>
