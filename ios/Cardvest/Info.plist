@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.1</string>
+	<string>2.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>812220242</string>
+	<string>812220243</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true/>
 	<key>CFBundleURLTypes</key>
@@ -58,6 +58,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to access your camera</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>$(App_Name) would like to access IDFA for tracking purpose</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(App_Name) requires FaceID access to allows you quick and secure access.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
