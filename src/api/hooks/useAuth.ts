@@ -1,12 +1,14 @@
 import { useMixpanel } from '@MixpanelAnalytics';
 import { createUser, getUserData, loginUser } from '@api/Auth/auth';
 import { LoginUserRequestPayload } from '@api/users/types';
+import env from '@env';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
 import { AxiosError } from 'axios';
+import { Adjust, AdjustEvent } from 'react-native-adjust';
 
 function useCreateUser() {
   const navigation = useNavigation<GenericNavigationProps>();
@@ -30,6 +32,10 @@ function useCreateUser() {
         mixpanel.getPeople().set('phone number', data?.data?.phonenumber);
         // Mixpanel User Login
         mixpanel.track('SignUp');
+
+        const adjustEvent = new AdjustEvent(env.ACC_CRT);
+        adjustEvent.setTransactionId(`${data?.data?.id}-${data?.data?.email}`);
+        Adjust.trackEvent(adjustEvent);
 
         onOpenToast({
           status: 'success',

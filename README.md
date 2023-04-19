@@ -44,6 +44,30 @@
 
 ---
 
+## Up and Running :inbox_tray:
+```bash
+# Install dependencies
+yarn
+
+# Setup iOS development environment
+yarn setup:ios
+
+# Start meteor 
+yarn start
+
+# To run IOS and Android 
+
+yarn _ios # for IOS 
+yarn _android # for Android 
+
+# to Update env Edit the App.json File
+
+# To deploy to App connect for android 
+
+fastlane android bump_badge_deploy_staging
+
+```
+
 ## Installation :inbox_tray:
 
 ```bash

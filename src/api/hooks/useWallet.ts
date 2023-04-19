@@ -6,10 +6,12 @@ import {
   getWithdrawalsUSDTRate,
   initiateWithdrawal,
 } from '@api/withdrawals/withdrawals';
+import env from '@env';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
+import { Adjust, AdjustEvent } from 'react-native-adjust';
 
 function useGetUserWithdrawals(currency: string, page: any) {
   return useInfiniteQuery(
@@ -54,12 +56,18 @@ function useInitializeWithdrawal() {
         mixpanel.track(`Withdraw to ${variables.type === 'fiat' ? 'Fiat' : 'Crypto'}`, {
           ...variables,
         });
+
+        const adjustEvent = new AdjustEvent(env.ACC_FN_WI);
+        adjustEvent.setTransactionId(`${variables.type}-${_data?.id}`);
+        adjustEvent.setRevenue(_data?.amount, variables?.currency);
+        Adjust.trackEvent(adjustEvent);
+
         await queryClient.invalidateQueries({ queryKey: ['user-default-wallet'] });
-        await queryClient.invalidateQueries({ queryKey: [`user-${variable?.currency}-wallet`] });
-        await queryClient.invalidateQueries([`transactions-bill-${variable?.currency}`]);
-        await queryClient.invalidateQueries([`payout-transactions-${variable?.currency}`]);
-        await queryClient.invalidateQueries([`transactions-${variable?.currency}`]);
-        await queryClient.invalidateQueries([`user-withdrals-${variable?.currency}`]);
+        await queryClient.invalidateQueries({ queryKey: [`user-${variables?.currency}-wallet`] });
+        await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`transactions-${variables?.currency}`]);
+        await queryClient.invalidateQueries([`user-withdrals-${variables?.currency}`]);
         navigation.navigate('WithdrawalFeedback');
       },
       onError: (data: any) => {

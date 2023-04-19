@@ -23,9 +23,11 @@ import {
   purchaseAirtime,
 } from '@api/transactions/transactions';
 import { CreateSellOrderRequestPayload, CreateBuyOrderRequestPayload } from '@api/transactions/types';
+import env from '@env';
 import { useNavigation } from '@react-navigation/native';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
+import { Adjust, AdjustEvent } from 'react-native-adjust';
 
 function useElectricityPlansProviders() {
   return useQuery([`electricity-plans-providers`], () => getAllElectricityPlansProviders());
@@ -366,6 +368,12 @@ function useCreateSellOrder() {
         mixpanel.track('Sell GiftCard', {
           ...variables,
         });
+
+        const adjustEvent = new AdjustEvent(env.ACC_GC_SL);
+        adjustEvent.setTransactionId(`${_data?.user_id}-${_data?.id}`);
+        adjustEvent.setRevenue(_data?.amount, variables?.currency);
+        Adjust.trackEvent(adjustEvent);
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -410,6 +418,12 @@ function useCreateBuyOrder() {
         mixpanel.track('Buy GiftCard', {
           ...variables,
         });
+
+        const adjustEvent = new AdjustEvent(env.ACC_GC_BY);
+        adjustEvent.setTransactionId(`${_data?.user_id}-${_data?.id}`);
+        adjustEvent.setRevenue(_data?.amount, variables?.currency);
+        Adjust.trackEvent(adjustEvent);
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);

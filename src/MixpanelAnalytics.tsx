@@ -1,5 +1,5 @@
 import env from '@env';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { Mixpanel, MixpanelType } from 'mixpanel-react-native';
 import React, { FC, useLayoutEffect } from 'react';
@@ -11,7 +11,6 @@ export const useMixpanel = () => useContext(MixpanelContext);
 
 export const MixpanelProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mixpanel, setMixpanel] = useState<MixpanelType>(null);
-  const queryClient = useQueryClient();
   const [data, setData] = useState<any>();
   useLayoutEffect(() => {
     async function fetchData() {
@@ -19,10 +18,11 @@ export const MixpanelProvider: FC<{ children: React.ReactNode }> = ({ children }
         const res = await cacheService.get('user');
         if (JSON.parse(res || {})?.id !== data?.id) {
           setData(JSON.parse(res || {}));
+          console.log('userID -set');
         }
         return res;
       } catch (error) {
-        console.error('errr mixpanel -', JSON.stringify(error));
+        console.error('errr mixpanel - no user id -', JSON.stringify(error));
       }
     }
     fetchData();
