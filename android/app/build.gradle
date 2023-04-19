@@ -141,8 +141,8 @@ android {
         applicationId "com.flipdigitals.cardvest"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 812220243
-        versionName "2.0.2"
+        versionCode 812220245
+        versionName "2.0.3"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -278,7 +278,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
-    compile 'com.android.installreferrer:installreferrer:2.2'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
