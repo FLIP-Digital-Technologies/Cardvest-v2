@@ -3,6 +3,7 @@
 #import "RNFBMessagingModule.h"
 #import "FBSDKApplicationDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBAudienceNetwork/FBAdSettings.h>
 #import <React/RCTLinkingManager.h> 
 
 #import <React/RCTBridge.h>
@@ -29,6 +30,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  [FBAdSettings setAdvertiserTrackingEnabled:YES];
+  Settings.setAdvertiserTrackingEnabled(true)
+  FBSDKCoreKit.Settings.setAdvertiserTrackingEnabled(true)
+  Settings.isAdvertiserIDCollectionEnabled = true
   return YES;
 }
 

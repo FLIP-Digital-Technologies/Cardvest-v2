@@ -1,4 +1,7 @@
 PODS:
+  - Adjust (4.33.3):
+    - Adjust/Core (= 4.33.3)
+  - Adjust/Core (4.33.3)
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -208,6 +211,8 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - OpenSSL-Universal (1.1.1100)
+  - Permission-AppTrackingTransparency (3.7.2):
+    - RNPermissions
   - Permission-Camera (3.7.2):
     - RNPermissions
   - Permission-FaceID (3.7.2):
@@ -428,6 +433,9 @@ PODS:
   - React-jsinspector (0.69.7)
   - React-logger (0.69.7):
     - glog
+  - react-native-adjust (4.33.0):
+    - Adjust (= 4.33.3)
+    - React-Core
   - react-native-fbsdk-next (11.1.0):
     - React-Core
     - react-native-fbsdk-next/Core (= 11.1.0)
@@ -635,6 +643,7 @@ DEPENDENCIES:
   - GoogleUtilities
   - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
   - OpenSSL-Universal (= 1.1.1100)
+  - Permission-AppTrackingTransparency (from `../node_modules/react-native-permissions/ios/AppTrackingTransparency/Permission-AppTrackingTransparency.podspec`)
   - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec`)
   - Permission-FaceID (from `../node_modules/react-native-permissions/ios/FaceID/Permission-FaceID.podspec`)
   - Permission-MediaLibrary (from `../node_modules/react-native-permissions/ios/MediaLibrary/Permission-MediaLibrary.podspec`)
@@ -656,6 +665,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-adjust (from `../node_modules/react-native-adjust`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
@@ -697,6 +707,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Adjust
     - CocoaAsyncSocket
     - FBAEMKit
     - FBAudienceNetwork
@@ -749,6 +760,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   MixpanelReactNative:
     :path: "../node_modules/mixpanel-react-native"
+  Permission-AppTrackingTransparency:
+    :path: "../node_modules/react-native-permissions/ios/AppTrackingTransparency/Permission-AppTrackingTransparency.podspec"
   Permission-Camera:
     :path: "../node_modules/react-native-permissions/ios/Camera/Permission-Camera.podspec"
   Permission-FaceID:
@@ -787,6 +800,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-adjust:
+    :path: "../node_modules/react-native-adjust"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-fingerprint-scanner:
@@ -865,6 +880,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Adjust: 41d0d5c031409aebe7fb1f5703ff0d3306133439
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -903,6 +919,7 @@ SPEC CHECKSUMS:
   MixpanelReactNative: 1df98c3be8467f89c9a84710034195d5cc295bbd
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Permission-AppTrackingTransparency: d2354f773ab0b84b74c69bc759f12a3b7bd2d0a0
   Permission-Camera: db22e80aa0858a8b6d65979a97f2f481dd8a0ebd
   Permission-FaceID: 7ddd8a335ebd1599a00ff59c6355e6cfb828d5b2
   Permission-MediaLibrary: d2e66f5b11eae797b3cf86853950e1592fdf6404
@@ -923,6 +940,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: a73bec0218ba959fc92f811b581ad6c2270c6b6f
   React-jsinspector: 8134ee22182b8dd98dc0973db6266c398103ce6c
   React-logger: 1e7ac909607ee65fd5c4d8bea8c6e644f66b8843
+  react-native-adjust: 5f5966b51459bf8cb074bf8ebc1307a2bfb7b1da
   react-native-fbsdk-next: c78dede90e3c50ab6936a7d56c43e1a9eb37e25a
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper: dc5290261fbeeb2faec1bdc57ae6dd8d562e1de4
@@ -967,6 +985,6 @@ SPEC CHECKSUMS:
   Yoga: 0b84a956f7393ef1f37f3bb213c516184e4a689d
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ec3b4f7e66931a9b368c62b0cb37710dbc7d80a8
+PODFILE CHECKSUM: 41f941dadef601e82494669c095e7e3c252149ae
 
 COCOAPODS: 1.11.3

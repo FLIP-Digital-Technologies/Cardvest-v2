@@ -1,4 +1,5 @@
 import Splashscreen from '@components/Splashscreen';
+import env from '@env';
 import '@i18n';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackScreen } from '@routes';
@@ -10,6 +11,8 @@ import customTheme from '@theme';
 import { NativeBaseProvider, StatusBar } from 'native-base';
 import React, { FC, Suspense, useEffect } from 'react';
 import { Platform } from 'react-native';
+import { Adjust, AdjustEvent, AdjustConfig } from 'react-native-adjust';
+import { AdjustOaid } from 'react-native-adjust-oaid';
 import 'react-native-gesture-handler';
 import { setCustomTextInput, setCustomText } from 'react-native-global-props';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -66,6 +69,21 @@ const queryClient = new QueryClient({
 export const getWidth: () => string = () => (Platform.OS === 'android' ? '150%' : 'auto');
 
 const App: FC = () => {
+  Adjust.getSdkVersion(function (sdkVersion) {
+    console.log('Adjust SDK version: ' + sdkVersion);
+  });
+  useEffect(() => {
+    const adjustConfig = new AdjustConfig(env.ADJ_TOKEN, AdjustConfig.EnvironmentSandbox);
+
+    if (Platform.OS === 'android') {
+      AdjustOaid.readOaid();
+    }
+    Adjust.create(adjustConfig);
+    return () => {
+      Adjust.componentWillUnmount();
+    };
+  }, []);
+
   useEffect(() => {
     isMountedRef.current = true;
 
