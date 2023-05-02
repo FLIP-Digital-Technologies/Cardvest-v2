@@ -141,7 +141,7 @@ android {
         applicationId "com.flipdigitals.cardvest"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 812220245
+        versionCode 812220246
         versionName "2.0.3"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 

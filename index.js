@@ -18,16 +18,16 @@ export async function initPixel() {
         if (ATT === RESULTS.GRANTED) {
           Settings.setAdvertiserTrackingEnabled(true).then(() => {
             Settings.initializeSDK();
+            Settings.FacebookAutoLogAppEventsEnabled(true);
           });
         }
       } catch (error) {
         console.error(error);
       } finally {
-        Settings.initializeSDK();
+        // Settings.initializeSDK();
       }
-      Settings.initializeSDK();
-      Settings.setAdvertiserTrackingEnabled(true);
-      Settings.FacebookAutoLogAppEventsEnabled(true);
+      // Settings.initializeSDK();
+      // Settings.setAdvertiserTrackingEnabled(true);
     }
   } else {
     Settings.initializeSDK();

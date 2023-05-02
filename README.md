@@ -250,3 +250,8 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## License :scroll:
 
 Licensed under [Mozilla Public License Version 2.0](LICENSE)
+
+
+// Node Error especially when using nvm
+
+sudo ln -s "$(which node)" /usr/local/bin/node 

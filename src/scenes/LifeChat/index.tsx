@@ -1,4 +1,5 @@
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import env from '@env';
 import { VStack } from 'native-base';
 import React, { FC, memo } from 'react';
 import { Dimensions } from 'react-native';
@@ -122,7 +123,7 @@ const LiveChatPage: FC = () => {
           // injectedJavaScript={INJECTED_JS}
           cacheEnabled={false}
           cacheMode={'LOAD_NO_CACHE'}
-          source={{ uri: 'https://fluffy-shortbread-389e6b.netlify.app/' }}
+          source={{ uri: `${env.API_URL.replace('/api/v2', '/chat')}` }}
         />
       </VStack>
     </BackButtonTitleCenter>
