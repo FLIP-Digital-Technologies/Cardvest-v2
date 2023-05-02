@@ -260,3 +260,13 @@ sudo ln -s "$(which node)" /usr/local/bin/node
 
 The error message suggests that Graphviz, specifically the "gvpr" tool, is not found in your system's $PATH. Graphviz is a dependency required for the madge library to generate dependency graphs.
 
+
+// [CXX1300] CMake '3.18.1' was not found in SDK, PATH, or by cmake.dir property.
+[CXX1301] - CMake '3.22.1' found in SDK did not satisfy requested version
+
+
+Open SDK Manager on Android Studio, Switch to the "SDK Tools" tab in the SDK Manager.
+Scroll through the list of SDK Tools until you find "CMake". Check the checkbox next to it to install or update CMake to the latest available version. If the required version is not listed, you can try checking the "Show Package Details" checkbox to see more options.
+
+After selecting the desired CMake version or updating it, click the "Apply" or "OK" button to apply the changes. Android Studio will download and install the selected version of CMake.
+
