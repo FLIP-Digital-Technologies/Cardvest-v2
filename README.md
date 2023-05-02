@@ -250,3 +250,13 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## License :scroll:
 
 Licensed under [Mozilla Public License Version 2.0](LICENSE)
+
+
+// Node Error especially when using nvm
+
+sudo ln -s "$(which node)" /usr/local/bin/node 
+
+// Error: Graphviz could not be found. Ensure that "gvpr" is in your $PATH. Error: spawn gvpr ENOENT
+
+The error message suggests that Graphviz, specifically the "gvpr" tool, is not found in your system's $PATH. Graphviz is a dependency required for the madge library to generate dependency graphs.
+
