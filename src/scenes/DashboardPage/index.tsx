@@ -406,7 +406,7 @@ const Dashboard: FC = () => {
       await handleRefreshCurrency();
       setRefreshing(false);
     } catch (error) {
-      console.error(error);
+      console.error('refresh ', error);
     }
   }, []);
   const getTrancationData = useMemo(

@@ -35,7 +35,7 @@ export const useCurrency = () => {
         await queryClient.invalidateQueries([`user-currency`]);
         await queryClient.invalidateQueries([`user-withdrals-${currency}`]);
       } catch (error) {
-        console.error(error);
+        console.error('currency hook ', error);
       }
     },
     [currency],
@@ -49,7 +49,7 @@ export const useCurrency = () => {
       await queryClient.invalidateQueries([`user-withdrals-${currency}`]);
       await queryClient.invalidateQueries([`user-currency`]);
     } catch (error) {
-      console.error(error);
+      console.error('refresh currency ', error);
     }
   }, [currency]);
 

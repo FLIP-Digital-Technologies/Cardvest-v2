@@ -101,7 +101,7 @@ export default function FileUploader({
       else {
         setFileState('failed');
         const _error = error as AxiosError;
-        console.error(_error);
+        console.error('upload ', _error);
         if (_error.response) {
           const response: any = _error.response.data;
 

@@ -35,7 +35,7 @@ const BuyElectricityPage: FC = () => {
         meter_type,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('electricity pur ', e);
     }
   };
   useEffect(() => {

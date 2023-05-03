@@ -21,7 +21,7 @@ const WalletsPage: FC = () => {
       await handleRefreshCurrency();
       setRefreshing(false);
     } catch (error) {
-      console.error(error);
+      console.error('get wallets ', error);
     }
   }, []);
   const getWalletData = useMemo(

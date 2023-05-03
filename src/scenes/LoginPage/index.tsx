@@ -43,7 +43,7 @@ const Login: FC = () => {
       });
       // await navigation.navigate('Dashboard');
     } catch (error) {
-      console.error(error);
+      console.error('login ', error);
     }
   };
   const handleDisabled = () => !email || !password || isLoading || validateEmail(email);

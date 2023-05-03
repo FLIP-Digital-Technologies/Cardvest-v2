@@ -3,9 +3,8 @@ import messaging from '@react-native-firebase/messaging';
 // import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import axios from 'axios';
-import React from 'react';
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
-import { Linking, Platform } from 'react-native';
+import { Linking } from 'react-native';
 import deviceInfoModule, { useIsEmulator } from 'react-native-device-info';
 
 // import pushTokenApi from '../api/push-token';
@@ -62,21 +61,22 @@ async function sendPushNotification(expoPushToken) {
 }
 
 export default function NotificationContainer({ children }) {
-  const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(false);
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  // const [expoPushToken, setExpoPushToken] = useState('');
+  // const [notification, setNotification] = useState(false);
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
   const [data, setData] = useState();
   const { loading, result } = useIsEmulator();
+
   useLayoutEffect(() => {
     async function fetchData() {
       try {
         const AppToken = await cacheService.get('login-user');
-        console.log(modelName, AppToken, 'first');
+        // // console.log(modelName, AppToken, 'first');
         const res = await cacheService.get('user');
-        if (JSON.parse(res || {})?.id !== data?.id) {
-          setData(JSON.parse(res || {}));
-          console.log('locked in ', modelName, AppToken, res);
+        if (JSON.parse(res || '{}')?.id !== data?.id) {
+          setData(JSON.parse(res || '{}'));
+          // console.log('locked in ', modelName, AppToken, res);
         }
         return res;
       } catch (error) {
@@ -89,9 +89,9 @@ export default function NotificationContainer({ children }) {
   // const lastNotificationResponse = Notifications.useLastNotificationResponse();
 
   useEffect(() => {
-    console.log('bird', modelName);
+    // console.log('bird', modelName);
     if (data) {
-      console.log('bird', modelName, 'naje000');
+      // console.log('bird', modelName, 'naje000');
       registerForPushNotificationsAsync().then(token => {
         console.log(
           'data',
@@ -143,7 +143,7 @@ export default function NotificationContainer({ children }) {
         }
         console.log('floak', token, deviceToken);
       } else {
-        // console.log("Must use a physical device for Push Notifications");
+        console.log('Must use a physical device for Push Notifications');
         return;
       }
       return { token, deviceToken };
@@ -154,10 +154,10 @@ export default function NotificationContainer({ children }) {
 
   const sendTokenToBackend = async ({ token, deviceToken }) => {
     // sendPushNotification(token);
-    console.log('phone', modelName, token, 'is the token and device token by my side', deviceToken);
+    // console.log('phone', modelName, token, 'is the token and device token by my side', deviceToken);
     try {
       const AppToken = await cacheService.get('login-user');
-      console.log(modelName, token, 'token is here and want to send push notification');
+      // console.log(modelName, token, 'token is here and want to send push notification');
       const res = await axios.post(
         `${env.API_URL}/push-notification/register`,
         {

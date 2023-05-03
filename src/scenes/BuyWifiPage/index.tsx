@@ -32,7 +32,7 @@ const BuyWifiPage: FC = () => {
         device_no,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('wifi ', e);
     }
   };
   const handleDisabled = () => !device_no || !bundle || !network || !amount;

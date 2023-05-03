@@ -26,7 +26,7 @@ const BuyAirtimePage: FC = () => {
         amount,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('airtime purchase ', e);
     }
   };
   const handleDisabled = () => !phoneNumber || !network || !amount;

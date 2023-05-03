@@ -33,7 +33,7 @@ const BuyDatePage: FC = () => {
         amount,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('data purchase', e);
     }
   };
   const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;

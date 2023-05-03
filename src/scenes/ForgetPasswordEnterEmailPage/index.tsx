@@ -24,7 +24,7 @@ const ForgetPasswordEnterEmail: FC = () => {
       });
     } catch (error) {
       setIsLoading(false);
-      console.error(error);
+      console.error('forgot password ', error);
     }
   };
   const handleDisabled = () => !email || isLoading || validateEmail(email);

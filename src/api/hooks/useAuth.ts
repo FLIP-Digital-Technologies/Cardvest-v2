@@ -101,7 +101,7 @@ function useLoginUser() {
       }
     },
     onError: (data: AxiosError) => {
-      console.error(data);
+      console.error('login error: ', data);
       if (data?.c) return;
       onOpenToast({
         status: 'error',

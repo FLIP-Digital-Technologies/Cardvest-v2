@@ -88,7 +88,7 @@ const TransactionPinModal = ({
       await closeModalVisible();
       await handleSubmit();
     } catch (err) {
-      console.error(err);
+      console.error('submit pin', err);
     }
   };
 
