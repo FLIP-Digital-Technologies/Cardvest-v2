@@ -95,15 +95,16 @@ export const AuthStackScreen: FC = () => {
 };
 
 export const RootStackScreen: FC = () => {
-  const [data, setData] = React.useState();
+  const [data, setData] = React.useState<any>();
   React.useLayoutEffect(() => {
     async function fetchData() {
       try {
         const res = await cacheService.get('user');
-        setData(JSON.parse(res || {}));
+        setData(JSON.parse(res || '{}'));
         return res;
       } catch (error) {
         console.log('erarr', JSON.stringify(error));
+        setData({});
       }
     }
     fetchData();
@@ -127,7 +128,7 @@ export const RootStackScreen: FC = () => {
   const sendFcmToken = async () => {
     try {
       await messaging().registerDeviceForRemoteMessages();
-      console.log('Your Firebase Token is:', 'deviceToken');
+      console.log(':', 'tring to get deviceToken');
       const deviceToken = await messaging().getToken();
       await cacheService.put('@DeviceToken', deviceToken);
       console.log('Your Firebase Token is:', deviceToken);
@@ -138,10 +139,10 @@ export const RootStackScreen: FC = () => {
       //   user_id: data?.id,
       //   type: 'register',
       // });
-      console.log('Your Firebase Token is:', deviceToken, 'res');
+      // console.log('Your Firebase Token is:', deviceToken, 'res');
     } catch (err) {
       //Do nothing
-      console.error(err);
+      console.error('Token extraction error ', err);
       return;
     }
   };

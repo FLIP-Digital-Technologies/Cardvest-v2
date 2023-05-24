@@ -22,7 +22,7 @@ export async function initPixel() {
           });
         }
       } catch (error) {
-        console.error(error);
+        console.error('facebook sdk: ', error);
       } finally {
         // Settings.initializeSDK();
       }

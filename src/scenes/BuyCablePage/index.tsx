@@ -40,7 +40,7 @@ const BuyCablePage: FC = () => {
         smart_card_no,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('cable sub error ', e);
     }
   };
   const handleDisabled = () => !phoneNumber || !bundle || !network || !amount;

@@ -21,7 +21,7 @@ const DeleteAccountFeedbackPage: FC = () => {
         token,
       });
     } catch (e: any) {
-      console.error(e);
+      console.error('delete account', e);
     }
   };
   return (

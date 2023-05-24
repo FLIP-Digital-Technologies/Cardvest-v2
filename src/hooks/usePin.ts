@@ -32,7 +32,7 @@ export const usePin = () => {
       navigation.navigate('Pin');
     } catch (e: AxiosError) {
       setIsLoading(false);
-      console.error(e);
+      console.error('set pin ', e);
     }
   }, [codeCurrentState, codeState, codeConfirmState]);
 
@@ -54,7 +54,7 @@ export const usePin = () => {
       });
     } catch (e: AxiosError) {
       setIsLoading(false);
-      console.error(e);
+      console.error('pin 2 ', e);
       onOpenToast({
         status: 'error',
         message: e?.b ? `${e?.response?.data?.message}: ${e?.b}` : e?.response?.data?.message || 'An error occurred',
@@ -72,7 +72,7 @@ export const usePin = () => {
       setIsLoading(false);
     } catch (error: AxiosError) {
       setIsLoading(false);
-      console.error(error);
+      console.error('pin 2 ', error);
       onOpenToast({
         status: 'error',
         message: error?.b
@@ -98,7 +98,7 @@ export const usePin = () => {
       });
     } catch (error: AxiosError) {
       setIsLoading(false);
-      console.error(error);
+      console.error('pin 3 ', error);
       onOpenToast({
         status: 'error',
         message: error?.b
@@ -122,7 +122,7 @@ export const usePin = () => {
       });
     } catch (e: AxiosError) {
       setIsLoading(false);
-      console.error(e);
+      console.error('pin 3 ', e);
       onOpenToast({
         status: 'error',
         message: e?.b ? `${e?.response?.data?.message}: ${e?.b}` : e?.response?.data?.message || 'An error occurred',

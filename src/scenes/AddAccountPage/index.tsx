@@ -22,7 +22,7 @@ const AddAccountPage: FC = () => {
       try {
         await verifyBankAccount({ banknumber: accNumber, bankname: accBank, currency });
       } catch (err) {
-        console.error(err);
+        console.error('bank verification  ', err);
       }
     }
     if (accNumber.length > 9 && accNumber.length < 11 && accBank && currency === 'NGN') {
@@ -49,7 +49,7 @@ const AddAccountPage: FC = () => {
         accountname: currency === 'GHS' ? accountname : bankAccount?.data?.account_name,
       });
     } catch (err) {
-      console.error(err);
+      console.error('create bank account error ', err);
     }
   };
   return (

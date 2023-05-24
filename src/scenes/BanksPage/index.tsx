@@ -24,7 +24,7 @@ const BankAccount = ({ data }: { data: any }) => {
         bank_id,
       });
     } catch (err) {
-      console.error(err);
+      console.error('delete bank error ', err);
     }
   };
   return (

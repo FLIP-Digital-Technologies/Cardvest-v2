@@ -24,7 +24,7 @@ const LoginBack: FC = () => {
         setData(JSON.parse(res || {}));
         return res;
       } catch (error) {
-        console.error(error);
+        console.error('login user ', error);
       }
     }
     fetchData();
@@ -39,7 +39,7 @@ const LoginBack: FC = () => {
       await setPassword('');
       // await navigation.navigate('Dashboard');
     } catch (error) {
-      console.error(error);
+      console.error('login user ', error);
     }
   };
   async function handleLogout() {

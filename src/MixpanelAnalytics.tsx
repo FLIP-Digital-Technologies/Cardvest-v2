@@ -16,9 +16,9 @@ export const MixpanelProvider: FC<{ children: React.ReactNode }> = ({ children }
     async function fetchData() {
       try {
         const res = await cacheService.get('user');
-        if (JSON.parse(res || {})?.id !== data?.id) {
-          setData(JSON.parse(res || {}));
-          console.log('userID -set');
+        if (JSON.parse(res || '{}')?.id !== data?.id) {
+          setData(JSON.parse(res || '{}'));
+          console.log('userID -set', res);
         }
         return res;
       } catch (error) {

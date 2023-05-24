@@ -51,7 +51,7 @@ const BuyGiftCardTradeSummaryPage: FC = (props: any) => {
         currency: buyGiftCard?.currency,
       });
     } catch (e) {
-      console.error(e);
+      console.error('buy gift card ', e);
     }
   };
 

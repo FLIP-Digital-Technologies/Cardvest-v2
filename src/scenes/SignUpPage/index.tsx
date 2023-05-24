@@ -240,7 +240,7 @@ const SignUp: FC = () => {
         nationality: country,
       });
     } catch (error) {
-      console.error(error);
+      console.error('create user ', error);
     }
   };
   const handleDisabled = useCallback(() => {
