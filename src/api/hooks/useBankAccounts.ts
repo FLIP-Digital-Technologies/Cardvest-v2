@@ -12,6 +12,7 @@ import {
   VerifyBankAccountRequestPayload,
 } from '@api/bank-accounts/types';
 import { useCurrency } from '@hooks/useCurrency';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -33,6 +34,15 @@ function useCreateBankAccount() {
         mixpanel.track('Add Bank Account', {
           ...variables,
         });
+
+        // Firebase Analytics: Add Bank Event
+        await analytics().logEvent('add_bank', {
+          user_id: data?.data?.user?.id,
+          bank_name: variables.bankname,
+          account_name: variables.accountname,
+          account_number: variables.banknumber,
+        });
+
         onOpenToast({
           status: 'success',
           message: 'Bank account created successfully',
