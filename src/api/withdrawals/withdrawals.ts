@@ -61,7 +61,14 @@ export async function retriveWithdrawal({ withdrawal_reference }: RetriveWithdra
   }
 }
 
-export async function initiateWithdrawal({ amount, bank, currency, type, wallet_address, network }: any) {
+export async function initiateWithdrawal({
+  amount,
+  bank,
+  currency,
+  type,
+  wallet_address,
+  network,
+}: InitiateWithdrawalRequestPayload) {
   try {
     const token = await cacheService.get('login-user');
     const response = await ApiClient.post(
