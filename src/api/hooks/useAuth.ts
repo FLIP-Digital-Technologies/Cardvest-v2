@@ -106,6 +106,17 @@ function useLoginUser() {
         // Mixpanel User Login
         mixpanel.track('Login');
 
+        // Firebase Analytics: Login Event
+        const currentDate = new Date().toISOString().split('T')[0];
+        const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
+
+        await analytics().logEvent('login', {
+          username: data?.data?.user?.username,
+          user_id: data?.data?.user?.id,
+          login_date: currentDate,
+          login_time: currentTime,
+        });
+
         await queryClient.setQueryData([`user`], user?.data);
         await cacheService.del('temp-login-user');
         await cacheService.put('user', user?.data);
