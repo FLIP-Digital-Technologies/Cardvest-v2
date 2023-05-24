@@ -30,6 +30,8 @@ PODS:
     - FBSDKCoreKit (= 15.0.0)
   - Firebase (10.5.0):
     - Firebase/Core (= 10.5.0)
+  - Firebase/Analytics (10.5.0):
+    - Firebase/Core
   - Firebase/Core (10.5.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 10.5.0)
@@ -547,6 +549,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (10.3.0):
     - React-Core
+  - RNFBAnalytics (17.5.0):
+    - Firebase/Analytics (= 10.5.0)
+    - React-Core
+    - RNFBApp
   - RNFBApp (17.3.1):
     - Firebase/CoreOnly (= 10.5.0)
     - React-Core
@@ -692,6 +698,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -854,6 +861,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNFBAnalytics:
+    :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -967,6 +976,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: cb9670ea9239998340eaab21df13fa12a1f9de15
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNDeviceInfo: 4701f0bf2a06b34654745053db0ce4cb0c53ada7
+  RNFBAnalytics: e701136827b1dc1a1d5a947de7eced64b13b9d3d
   RNFBApp: 6210da3d32c005190647805e6ced236d9be5520f
   RNFBMessaging: 97931c8e43df9382c3c8b5b2ea36d13d0eb59306
   RNGestureHandler: bad495418bcbd3ab47017a38d93d290ebd406f50

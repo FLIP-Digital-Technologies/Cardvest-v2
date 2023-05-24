@@ -10,7 +10,7 @@
 		00E356F31AD99517003FC87E /* CardvestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CardvestTests.m */; };
 		010945A6C6732E789D04C14E /* libPods-Cardvest-CardvestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973C9265F22F79B8D4962ABF /* libPods-Cardvest-CardvestTests.a */; };
 		064DD41E859E46BB8E4013F0 /* Satoshi-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6475CEC6DAC346589270CB8E /* Satoshi-Italic.ttf */; };
-		13B07FBD1A68108700A75B9A /* (null) in Resources */ = {isa = PBXBuildFile; };
+		13B07FBD1A68108700A75B9A /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		169CCFA811584301BB7961B6 /* Satoshi-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */; };
@@ -471,7 +471,7 @@
 				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
 				884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* (null) in Resources */,
+				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
 				3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */,
 				B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */,
 				B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */,
