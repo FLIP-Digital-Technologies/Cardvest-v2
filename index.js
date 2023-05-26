@@ -1,6 +1,7 @@
 /**
  * @format
  */
+import Clarity from '@Clarity';
 import messaging from '@react-native-firebase/messaging';
 import React from 'react';
 import { AppRegistry, LogBox, Platform } from 'react-native';
@@ -38,6 +39,7 @@ export async function initPixel() {
 function HeadlessCheck({ isHeadless }) {
   React.useEffect(() => {
     initPixel();
+    Clarity.initialize();
   }, []);
 
   if (isHeadless) {
