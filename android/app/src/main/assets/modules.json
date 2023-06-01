@@ -2,7 +2,7 @@
   "metro-runtime": "0.70.3",
   "@react-native/polyfills": "2.0.0",
   "@babel/runtime": "7.18.3",
-  "@react-native-firebase/messaging": "17.3.1",
+  "@react-native-firebase/messaging": "17.5.0",
   "react-native": "0.69.7",
   "invariant": "2.2.4",
   "stacktrace-parser": "0.1.10",
@@ -80,6 +80,7 @@
   "split-on-first": "1.1.0",
   "filter-obj": "1.1.0",
   "mixpanel-react-native": "2.2.0",
+  "superstruct": "0.6.2",
   "react-native-pager-view": "6.1.0",
   "react-native-fingerprint-scanner": "6.0.0",
   "react-native-otp-inputs": "7.4.0",
@@ -99,6 +100,7 @@
   "react-native-image-picker": "5.0.1",
   "react-native-tab-view": "3.3.0",
   "use-latest-callback": "0.1.5",
+  "react-native-clarity": "0.0.4",
   "react-native-permissions": "3.7.2",
   "react-native-fbsdk-next": "11.1.0"
 }

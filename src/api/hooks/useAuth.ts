@@ -2,6 +2,7 @@ import { useMixpanel } from '@MixpanelAnalytics';
 import { createUser, getUserData, loginUser } from '@api/Auth/auth';
 import { LoginUserRequestPayload } from '@api/users/types';
 import env from '@env';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -36,6 +37,21 @@ function useCreateUser() {
         const adjustEvent = new AdjustEvent(env.ACC_CRT);
         adjustEvent.setTransactionId(`${data?.data?.id}-${data?.data?.email}`);
         Adjust.trackEvent(adjustEvent);
+
+        // Firebase Analytics: Registration Event
+        const currentDate = new Date().toISOString().split('T')[0];
+        const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
+
+        await analytics().logEvent('registered', {
+          first_name: '',
+          last_name: '',
+          username: data?.data?.username,
+          email_address: data?.data?.email,
+          phone_number: data?.data?.phonenumber,
+          country: data?.data?.nationality,
+          reg_date: currentDate,
+          reg_time: currentTime,
+        });
 
         onOpenToast({
           status: 'success',
@@ -89,6 +105,17 @@ function useLoginUser() {
 
         // Mixpanel User Login
         mixpanel.track('Login');
+
+        // Firebase Analytics: Login Event
+        const currentDate = new Date().toISOString().split('T')[0];
+        const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
+
+        await analytics().logEvent('login', {
+          username: data?.data?.user?.username,
+          user_id: data?.data?.user?.id,
+          login_date: currentDate,
+          login_time: currentTime,
+        });
 
         await queryClient.setQueryData([`user`], user?.data);
         await cacheService.del('temp-login-user');

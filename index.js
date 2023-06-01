@@ -8,6 +8,7 @@ import { Settings } from 'react-native-fbsdk-next';
 import { PERMISSIONS, RESULTS, request, check } from 'react-native-permissions';
 import { name as appName } from './app.json';
 import App from './src/App';
+import Clarity from './src/Clarity';
 
 export async function initPixel() {
   if (Platform.OS === 'ios') {
@@ -38,6 +39,7 @@ export async function initPixel() {
 function HeadlessCheck({ isHeadless }) {
   React.useEffect(() => {
     initPixel();
+    Clarity.initialize();
   }, []);
 
   if (isHeadless) {

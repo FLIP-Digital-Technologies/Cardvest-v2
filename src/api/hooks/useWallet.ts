@@ -1,5 +1,6 @@
 import { useMixpanel } from '@MixpanelAnalytics';
 import { fundWallet, getCurrencyWallet, getDefaultWallet, switchDefaultWallet } from '@api/wallets/wallet';
+import { InitiateWithdrawalRequestPayload } from '@api/withdrawals/types';
 import {
   getAllWithdrawals,
   getWithdrawalsUSDTNetwork,
@@ -7,6 +8,7 @@ import {
   initiateWithdrawal,
 } from '@api/withdrawals/withdrawals';
 import env from '@env';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
@@ -48,7 +50,7 @@ function useInitializeWithdrawal() {
   const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['init-withdrawal'],
-    ({ amount, bank, currency, type, wallet_address, network }: any) =>
+    ({ amount, bank, currency, type, wallet_address, network }: InitiateWithdrawalRequestPayload) =>
       initiateWithdrawal({ amount, bank, currency, type, wallet_address, network }),
     {
       onSuccess: async (_data, variables) => {
@@ -61,6 +63,16 @@ function useInitializeWithdrawal() {
         adjustEvent.setTransactionId(`${variables.type}-${_data?.id}`);
         adjustEvent.setRevenue(_data?.amount, variables?.currency);
         Adjust.trackEvent(adjustEvent);
+
+        // Firebase Analytics: Withdrawal Event
+        await analytics().logEvent('withdrawal', {
+          user_id: user?.id,
+          wallet_type: variables.type,
+          currency: variables.currency,
+          amount: variables.amount,
+          bank_name: variables.bank,
+          wallet_address: variables.wallet_address,
+        });
 
         await queryClient.invalidateQueries({ queryKey: ['user-default-wallet'] });
         await queryClient.invalidateQueries({ queryKey: [`user-${variables?.currency}-wallet`] });

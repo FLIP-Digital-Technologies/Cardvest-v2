@@ -4,5 +4,9 @@ export type RetriveWithdrawalRequestPayload = {
 
 export type InitiateWithdrawalRequestPayload = {
   amount: number;
-  bank: string;
+  currency: string;
+  type: string;
+  bank?: string;
+  wallet_address?: string;
+  network?: string;
 };

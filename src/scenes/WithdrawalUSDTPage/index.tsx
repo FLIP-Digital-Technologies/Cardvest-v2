@@ -234,7 +234,7 @@ const WithdrawalUSDT: FC = () => {
       mixpanel.identify(user?.id?.toString());
       mixpanel.track('Withdraw to Crypto Attempt');
       await withdrawFunds({
-        amount,
+        amount: Number(amount),
         currency,
         type: 'crypto',
         wallet_address: account,

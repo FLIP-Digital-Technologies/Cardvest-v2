@@ -3,6 +3,7 @@ import { Bio, Logo } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
 import UseFingerprint from '@hooks/useFingerPrint';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { BoldText, validateEmail } from '@scenes/LoginPage';
@@ -52,6 +53,18 @@ const LoginBack: FC = () => {
     await cacheService.clear();
     await queryClient.clear();
     await navigation.navigate('Login');
+
+    // Firebase Analytics: Login Event
+    const currentDate = new Date().toISOString().split('T')[0];
+    const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
+    const user = data as any;
+
+    await analytics().logEvent('logout', {
+      username: user?.username,
+      user_id: user?.id,
+      login_date: currentDate,
+      login_time: currentTime,
+    });
   }
   const handleDisabled = () => !data?.email || !password || isLoading || validateEmail(data?.email);
   return (

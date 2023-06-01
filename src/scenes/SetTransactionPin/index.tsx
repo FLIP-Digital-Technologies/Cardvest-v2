@@ -1,16 +1,20 @@
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { usePin } from '@hooks/usePin';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
+import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
 import { Button, Text, VStack, View, useToken } from 'native-base';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useLayoutEffect, useState } from 'react';
 import OtpInputs from 'react-native-otp-inputs';
 
 const SetTransactionPin: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { handleSetUpTransactionPin, codeState, updateCode, codeConfirmState, updateCodeConfirm, isLoading } = usePin();
   const [confirm, setConfirm] = useState(false);
+  const [user, setUser] = useState<any>();
+
   const handleChange = (code: string) => {
     if (confirm) return updateCodeConfirm(code);
     return updateCode(code);
@@ -25,11 +29,35 @@ const SetTransactionPin: FC = () => {
     }
     try {
       await handleSetUpTransactionPin();
+
+      // Firebase Analytics: Created Pin Event
+      await analytics().logEvent('created_pin', {
+        user_id: user?.id,
+        username: user?.username,
+      });
+
       navigation.navigate('Dashboard');
     } catch (err) {
       console.error(err);
     }
   };
+
+  useLayoutEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await cacheService.get('user');
+        if (JSON.parse(res || '{}')) {
+          setUser(JSON.parse(res || '{}'));
+          console.log('userID -set', res);
+        }
+        return res;
+      } catch (error) {
+        console.error('errr in set transaction - no user id -', JSON.stringify(error));
+      }
+    }
+    fetchData();
+  });
+
   return (
     <BackButtonTitleCenter backAction={confirm ? () => setConfirm(false) : null} title="Set Transaction PIN">
       {confirm ? (

@@ -22,8 +22,11 @@ import {
   verifyMeter,
   purchaseAirtime,
 } from '@api/transactions/transactions';
+import { PurchaseWifiPlanslRequestPayload } from '@api/transactions/types';
+import { PurchaseElectricityTokenRequestPayload } from '@api/transactions/types';
 import { CreateSellOrderRequestPayload, CreateBuyOrderRequestPayload } from '@api/transactions/types';
 import env from '@env';
+import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
@@ -137,7 +140,15 @@ function usePurchaseElectricity() {
   const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-electricity-plans`],
-    ({ product, meter_no, customer_name, meter_type, phone_no, currency, amount }: any) =>
+    ({
+      product,
+      meter_no,
+      customer_name,
+      meter_type,
+      phone_no,
+      currency,
+      amount,
+    }: PurchaseElectricityTokenRequestPayload) =>
       purchaseElectricityToken({
         product,
         meter_no,
@@ -153,6 +164,17 @@ function usePurchaseElectricity() {
         mixpanel.track('Electricity Purchase', {
           ...variables,
         });
+
+        // Firebase Analytics: Buy Electricity Event
+        await analytics().logEvent('buy_electricity', {
+          user_id: user?.id,
+          username: user?.username,
+          provider: variables.product,
+          meter_type: variables.meter_type,
+          amount: variables.amount,
+          meter_number: variables.meter_no,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -180,7 +202,7 @@ function usePurchaseWifi() {
   const [mixpanel, user] = useMixpanel();
   return useMutation(
     [`purchase-data-plans`],
-    ({ currency, device_no, product, code, amount }: any) =>
+    ({ currency, device_no, product, code, amount }: PurchaseWifiPlanslRequestPayload) =>
       purchaseWifiPlans({
         currency,
         device_no,
@@ -194,6 +216,16 @@ function usePurchaseWifi() {
         mixpanel.track('Wifi Purchase', {
           ...variables,
         });
+
+        // Firebase Analytics: Buy Wifi Event
+        await analytics().logEvent('buy_wifi', {
+          user_id: user?.id,
+          username: user?.username,
+          provider: variables.product,
+          package: variables.code,
+          amount: variables.amount,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -236,6 +268,16 @@ function usePurchaseCable() {
         mixpanel.track('Cable Plan Purchase', {
           ...variables,
         });
+
+        // Firebase Analytics: Buy Cable Event
+        await analytics().logEvent('buy_cable', {
+          user_id: user?.id,
+          username: user?.username,
+          provider: variables?.product,
+          package: variables?.code,
+          amount: variables?.amount,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -277,6 +319,17 @@ function usePurchaseData() {
         mixpanel.track('Data Purchase', {
           ...variables,
         });
+
+        // Firebase Analytics: Buy Data Event
+        await analytics().logEvent('buy_data', {
+          user_id: user?.id,
+          username: user?.username,
+          network: variables?.product,
+          bundle: variables?.code,
+          amount: variables?.amount,
+          number: variables?.phone_no,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -317,6 +370,16 @@ function usePurchaseAirtime() {
         mixpanel.track('Airtime Purchase', {
           ...variables,
         });
+
+        // Firebase Analytics: Buy Airtime Event
+        await analytics().logEvent('buy_airtime', {
+          user_id: user?.id,
+          username: user?.username,
+          network: variables?.product,
+          amount: variables?.amount,
+          number: variables?.phone_no,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -374,6 +437,16 @@ function useCreateSellOrder() {
         adjustEvent.setRevenue(_data?.amount, variables?.currency);
         Adjust.trackEvent(adjustEvent);
 
+        // Firebase Analytics: Sell Giftcard Airtime Event
+        await analytics().logEvent('sell_giftcard', {
+          user_id: user?.id,
+          username: user?.username,
+          category: '-',
+          giftcard: variables.card_id,
+          amount: variables.amount,
+          payout_currency: variables.currency,
+        });
+
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
         await queryClient.invalidateQueries([`payout-transactions-${variables?.currency}`]);
@@ -423,6 +496,16 @@ function useCreateBuyOrder() {
         adjustEvent.setTransactionId(`${_data?.user_id}-${_data?.id}`);
         adjustEvent.setRevenue(_data?.amount, variables?.currency);
         Adjust.trackEvent(adjustEvent);
+
+        // Firebase Analytics: Buy Giftcard Airtime Event
+        await analytics().logEvent('buy_giftcard', {
+          user_id: user?.id,
+          username: user?.username,
+          category: '-',
+          giftcard: variables.card_id,
+          amount: variables.amount,
+          payout_currency: variables.currency,
+        });
 
         await queryClient.invalidateQueries([`user-${variables?.currency}-wallet`]);
         await queryClient.invalidateQueries([`transactions-bill-${variables?.currency}`]);
