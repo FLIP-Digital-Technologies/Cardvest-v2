@@ -1,10 +1,3 @@
-# React Native (React Query) Toolkit Start App <!-- omit in toc -->
-
-> A React Native boilerplate app to bootstrap your next app with React-Query!
-
-## 🔥🔥🔥 Upgraded to the latest React-Native (> 0.69.x) with brand New Architecture (Fabric) 🔥🔥🔥
-
-<br/>
 <div align="center">
     <img src="./react-native-starter-kit.png" width="100%" /> 
 </div>
@@ -25,9 +18,7 @@
 
 # Table of Contents <!-- omit in toc -->
 
-- [🔥🔥🔥 Upgraded to the latest React-Native (> 0.69.x) with brand New Architecture (Fabric) 🔥🔥🔥](#-upgraded-to-the-latest-react-native--069x-with-brand-new-architecture-fabric-)
 - [Installation :inbox_tray:](#installation-inbox_tray)
-- [Rename project and bundles :memo: :package:](#rename-project-and-bundles-memo-package)
   - [iOS & Android](#ios--android)
 - [Environment Setup :globe_with_meridians:](#environment-setup-globe_with_meridians)
 - [Scripts :wrench:](#scripts-wrench)
@@ -38,13 +29,12 @@
   - [Setup iOS](#setup-ios)
   - [Typescript (optional)](#typescript-optional)
 - [Roadmap :running:](#roadmap-running)
-- [Screenshots](#screenshots)
-- [Contributors :sparkles:](#contributors-sparkles)
 - [License :scroll:](#license-scroll)
 
 ---
 
-## Up and Running :inbox_tray:
+## Installation :inbox_tray:
+
 ```bash
 # Install dependencies
 yarn
@@ -67,40 +57,6 @@ yarn _android # for Android
 fastlane android bump_badge_deploy_staging
 
 ```
-
-## Installation :inbox_tray:
-
-```bash
-# Setup your project
-> npx degit IronTony/react-native-react-query-starter-app your-new-app
-
-> cd your-new-app
-
-# Install dependencies
-> yarn
-
-# if needed, setup iOS development environment
-yarn setup:ios
-```
-
-See [`environment`](#environment-setup-:globe_with_meridians:) section for how to configure env variables.
-
-See [`scripts`](#scripts-:wrench:) section for how to run the app.
-
----
-
-## Rename project and bundles :memo: :package:
-
-To rename the project and bundles, just follow these steps:
-
-### iOS & Android
-
-Run `npx react-native-rename [name] -b [bundle-identifier]` from the project root
-
-Example:
-`npx react-native-rename "Test New App" -b com.testnewapp`
-
----
 
 ## Environment Setup :globe_with_meridians:
 
@@ -206,50 +162,8 @@ _REMEMBER: the entry point file in the root of the project MUST be index.js_
 ✅ `Env` variables selection experimental way ⚗️⚗️⚗️<br />
 ✅ Typescript (optional use. Read the DOC above)<br />
 
----
-
-## Screenshots
-
-<div align="center">
-    <img src="./screenshots/screenshot1.png" width="50%" />
-</div>
-
-<div align="center">
-    <img src="./screenshots/screenshot2.png" width="50%" /> 
-</div>
-
-<div align="center">
-    <img src="./screenshots/screenshot3.png" width="50%" />
-</div>
 
 ---
-
-## Contributors :sparkles:
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/IronTony"><img src="https://avatars3.githubusercontent.com/u/3645225?v=4" width="100px;" alt=""/><br /><sub><b>IronTony</b></sub></a><br /><a href="#ideas-IronTony" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/IronTony/react-native-react-query-starter-app/commits?author=IronTony" title="Code">💻</a> <a href="https://github.com/IronTony/react-native-react-query-starter-app/commits?author=IronTony" title="Documentation">📖</a> <a href="https://github.com/IronTony/react-native-react-query-starter-app/issues?q=author%3AIronTony" title="Bug reports">🐛</a> <a href="#maintenance-IronTony" title="Maintenance">🚧</a> <a href="#platform-IronTony" title="Packaging/porting to new platform">📦</a> <a href="#question-IronTony" title="Answering Questions">💬</a> <a href="https://github.com/IronTony/react-native-react-query-starter-app/pulls?q=is%3Apr+reviewed-by%3AIronTony" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/IronTony/react-native-react-query-starter-app/commits?author=IronTony" title="Tests">⚠️</a> <a href="#example-IronTony" title="Examples">💡</a></td>
-    <td align="center"><a href="http://panz3r.dev"><img src="https://avatars3.githubusercontent.com/u/1754457?v=4" width="100px;" alt=""/><br /><sub><b>Mattia Panzeri</b></sub></a><br /><a href="#ideas-panz3r" title="Ideas, Planning, & Feedback">🤔</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
----
-
-## License :scroll:
-
-Licensed under [Mozilla Public License Version 2.0](LICENSE)
 
 
 // Node Error especially when using nvm
