@@ -438,6 +438,8 @@ PODS:
   - react-native-adjust (4.33.0):
     - Adjust (= 4.33.3)
     - React-Core
+  - react-native-clarity (0.0.4):
+    - React-Core
   - react-native-fbsdk-next (11.1.0):
     - React-Core
     - react-native-fbsdk-next/Core (= 11.1.0)
@@ -672,6 +674,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-adjust (from `../node_modules/react-native-adjust`)
+  - react-native-clarity (from `../node_modules/react-native-clarity`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
@@ -809,6 +812,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-adjust:
     :path: "../node_modules/react-native-adjust"
+  react-native-clarity:
+    :path: "../node_modules/react-native-clarity"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-fingerprint-scanner:
@@ -950,6 +955,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 8134ee22182b8dd98dc0973db6266c398103ce6c
   React-logger: 1e7ac909607ee65fd5c4d8bea8c6e644f66b8843
   react-native-adjust: 5f5966b51459bf8cb074bf8ebc1307a2bfb7b1da
+  react-native-clarity: 30846b4de2e7f6b81ff58377803d0ac21f35ddfb
   react-native-fbsdk-next: c78dede90e3c50ab6936a7d56c43e1a9eb37e25a
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-flipper: dc5290261fbeeb2faec1bdc57ae6dd8d562e1de4
