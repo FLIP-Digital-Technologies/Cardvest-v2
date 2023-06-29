@@ -121,4 +121,4 @@ function useGetBankList(currency: string) {
   return useQuery([`bank-list-${currency}`], () => getAllBankAccounts(currency));
 }
 
-export { useCreateBankAccount, useVerifyBankAccount, useGetBankList, useGetUserBank, useDeleteBankAccount };
+export { useCreateBankAccount, useDeleteBankAccount, useGetBankList, useGetUserBank, useVerifyBankAccount };

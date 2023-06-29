@@ -1,52 +1,49 @@
 import { getUserData } from '@api/Auth/auth';
 import { useGetAllTransactions } from '@api/hooks/useTransactions';
 import {
-  NotificationBell,
-  Withdrawal,
-  SellGiftCard,
-  BuyGiftCard,
-  Data,
-  Airtime,
-  Cable,
-  More,
-  Transaction,
-  Deposit,
-  WalletCircle,
-  CardsCircle,
-  UtilitiesCircle,
-  MTN,
+  AEDC,
   Airtel,
-  NMobile,
+  Airtime,
+  BuyGiftCard,
+  Cable,
+  CardsCircle,
+  Data,
+  Dstv,
+  EEDC,
+  EkoElectri,
   Glo,
+  Gotv,
+  IBEDC,
+  IkejaElectri,
+  JOSElectri,
+  KadunaElectri,
+  KanoElectri,
+  MTN,
+  More,
+  NMobile,
+  NotificationBell,
+  PHElectri,
+  SellGiftCard,
   Smile,
   Spectranet,
-  Dstv,
-  Gotv,
-  JOSElectri,
-  PHElectri,
-  KanoElectri,
-  KadunaElectri,
-  IkejaElectri,
-  IBEDC,
-  AEDC,
-  EkoElectri,
-  EEDC,
   StartIme,
+  Transaction,
+  UtilitiesCircle,
+  WalletCircle,
 } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useCurrency } from '@hooks/useCurrency';
-import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { BoldText } from '@scenes/LoginPage';
 import { CurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import * as dayjs from 'dayjs';
-import { Avatar, Box, HStack, Image, ScrollView, Text, View, VStack, Pressable, Button, Alert } from 'native-base';
+import { Avatar, Box, Button, HStack, Image, Pressable, ScrollView, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 import { RefreshControl } from 'react-native';
-import { Path, Rect, Svg } from 'react-native-svg';
 
 export function BillAvatar(type: string) {
   switch (type?.toLowerCase()) {
@@ -152,13 +149,7 @@ export const GreetingPanel = () => {
   );
 };
 
-export const BalancePanel = ({
-  withDeposit = false,
-}: {
-  defaultCurrency: string;
-  setCurrency?: any;
-  withDeposit?: boolean;
-}) => {
+export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleSwitchCurrency, currencyWallet } = useCurrency();
   const balance = currencyWallet?.balance;
@@ -179,7 +170,7 @@ export const BalancePanel = ({
           </Text>
         </HStack>
         <View my="1.5" />
-        {withDeposit ? (
+        {/* {withDeposit ? (
           <Button.Group>
             <Pressable
               w="48%"
@@ -218,24 +209,38 @@ export const BalancePanel = ({
               </HStack>
             </Pressable>
           </Button.Group>
-        ) : (
+        ) : ( */}
+        <HStack space={3}>
           <Pressable
-            w="100%"
+            flex={1}
             onPress={() => navigation.navigate('Withdraw')}
             borderRadius="lg"
             justifyContent="center"
-            mx="auto"
+            borderWidth={1}
+            borderColor={'#FAC915'}
             backgroundColor={'#FAC915'}>
             <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
-              <View width="5" h="5">
-                <Withdrawal />
-              </View>
-              <Text w="45%" px="1" color="black">
-                Withdraw Funds
+              <Text w="100%" textAlign={'center'} px="1" color="black">
+                Withdraw
               </Text>
             </HStack>
           </Pressable>
-        )}
+          <Pressable
+            flex={1}
+            onPress={() => navigation.navigate('Withdraw')}
+            borderRadius="lg"
+            justifyContent="center"
+            borderColor={'white'}
+            borderWidth={1}
+            backgroundColor={'rgba(255, 255, 255, 0.2)'}>
+            <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
+              <Text textAlign={'center'} px="1" color="white">
+                Fund
+              </Text>
+            </HStack>
+          </Pressable>
+        </HStack>
+        {/* )} */}
       </VStack>
     </Box>
   );

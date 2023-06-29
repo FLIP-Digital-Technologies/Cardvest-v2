@@ -5,11 +5,7 @@ import {
   getGiftcardsToBuy,
   getGiftcardsToSell,
 } from '@api/giftcards/giftcards';
-import {
-  GiftCardsToBuyRequestPayload,
-  GiftCardsToSellRequestPayload,
-  GiftcardRequestPayload,
-} from '@api/giftcards/types';
+import { GiftCardsToBuyRequestPayload, GiftCardsToSellRequestPayload } from '@api/giftcards/types';
 import { useQuery } from '@tanstack/react-query';
 
 function useGetAllBuyCategories() {
@@ -37,9 +33,9 @@ function useGetGiftcardDetails({ card_id }: any) {
 }
 
 export {
-  useGetGiftcardDetails,
+  useGetAllBuyCategories,
   useGetAllCategories,
+  useGetGiftcardDetails,
   useGetGiftcardsToBuy,
   useGetGiftcardsToSell,
-  useGetAllBuyCategories,
 };
