@@ -1,22 +1,22 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
+  Bank,
+  BuyGiftCardMore,
+  Calculator,
   CloseBtn,
   DrawerTopBG,
+  Home,
+  Logout,
   Love,
   Notification,
   RightAngle,
+  Settings,
   Support,
   TransactionHistory,
-  Bank,
-  Logout,
-  Home,
   Wallet,
-  Calculator,
-  Settings,
-  BuyGiftCardMore,
 } from '@assets/SVG';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
+import { DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddAccountFeedbackPage from '@scenes/AddAccountFeedbackPage';
 import AddAccountPage from '@scenes/AddAccountPage';
@@ -59,6 +59,7 @@ import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
 import TradeDetailPage from '@scenes/TradeDetailPage';
 import TransactionHistoryPage from '@scenes/TransactionHistoryPage';
+import VBAPage from '@scenes/VBAPage';
 import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
 import WithdrawalFeedbackPage from '@scenes/WithdrawalFeedbackPage';
@@ -66,9 +67,9 @@ import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
 import WithdrawalsPage from '@scenes/WithdrawalsPage';
 import { useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
-import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
-import { FC } from 'react';
+import { Avatar, Divider, HStack, Pressable, Text, VStack, View } from 'native-base';
 import * as React from 'react';
+import { FC } from 'react';
 import NotificationContainer from '../../NotificationContainer';
 
 const MainStack = createStackNavigator();
@@ -323,6 +324,13 @@ export const MainStackScreen: FC = () => {
         <MainStack.Screen
           name="Home"
           component={DashboardDrawerStack}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="VBAPage"
+          component={VBAPage}
           options={{
             headerShown: false,
           }}

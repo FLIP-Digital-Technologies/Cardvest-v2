@@ -6,20 +6,17 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { BalancePanel, EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
 import { BoldText } from '@scenes/LoginPage';
-import { HStack, Pressable, Text, View, VStack } from 'native-base';
+import { HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 
 const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleRefreshCurrency } = useCurrency();
   const { data: opps, isFetching } = useGetPayoutTransactions(currency);
-  const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(async () => {
     try {
-      setRefreshing(true);
       await handleRefreshCurrency();
-      setRefreshing(false);
     } catch (error) {
       console.error('get wallets ', error);
     }
