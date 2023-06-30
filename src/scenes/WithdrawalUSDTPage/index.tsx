@@ -6,8 +6,8 @@ import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { FormSelect } from '@scenes/CalculatorPage';
-import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
-import React, { FC, memo, useEffect, useMemo } from 'react';
+import { Box, CheckIcon, Divider, HStack, Input as NInput, Select, Text, VStack, View } from 'native-base';
+import React, { FC, memo, useEffect } from 'react';
 
 export const FormCurrencyPicker = (props: any) => {
   const { currency, setCurrency, label } = props;

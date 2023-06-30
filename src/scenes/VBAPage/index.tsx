@@ -1,6 +1,5 @@
 import { VBAImageAsset } from '@assets/SVG';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
 import { HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { useState } from 'react';
 
@@ -10,12 +9,12 @@ const points = [
   'It’s free of charge.',
 ];
 
-const VBAPage = () => {
-  const navigation = useNavigation();
+const VBAPage = ({ navigation }: any) => {
+  // const navigation = useNavigation();
   const [KYCVerified] = useState(false);
   return (
     <BackButtonTitleCenter noScroll title="Fund Wallet">
-      <View h="180px" my="5">
+      <View h="190px" my="5">
         <VBAImageAsset />
       </View>
       <View flex={1}>
@@ -37,7 +36,7 @@ const VBAPage = () => {
           <View h={55}>
             <Pressable
               flex={1}
-              onPress={() => navigation.navigate({ key: KYCVerified ? 'AccountDetailsPage' : 'VerifyKYCPage' })}
+              onPress={() => navigation.navigate(KYCVerified ? 'AccountDetailsPage' : 'IdentityVerificationPage')}
               borderRadius="lg"
               justifyContent="center"
               borderColor={'#235643'}

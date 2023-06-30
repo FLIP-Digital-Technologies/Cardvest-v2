@@ -39,6 +39,7 @@ import DeleteAccountPage from '@scenes/DeleteAccountPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
+import IdentityVerificationPage from '@scenes/IdentityVerificationPage';
 import KYCPage from '@scenes/KYCPage';
 import LifeChat from '@scenes/LifeChat';
 import LovePage from '@scenes/LovePage';
@@ -328,6 +329,7 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        {/* VBA Feature screens start */}
         <MainStack.Screen
           name="VBAPage"
           component={VBAPage}
@@ -335,6 +337,14 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        <MainStack.Screen
+          name="IdentityVerificationPage"
+          component={IdentityVerificationPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* VBA Feature screens end */}
         <MainStack.Screen
           name="SellGiftCard"
           component={SellGiftCardPage}
