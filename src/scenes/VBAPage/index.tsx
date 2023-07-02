@@ -19,7 +19,7 @@ const VBAPage = ({ navigation }: any) => {
       </View>
       <View flex={1}>
         <VStack space={3}>
-          <Text fontSize="4xl">The Cardvest Virtual Bank Account</Text>
+          <Text fontSize="3xl">The Cardvest Virtual Bank Account</Text>
           <View>
             {points.map((point, i) => (
               <HStack space={2} key={i}>

@@ -1,11 +1,14 @@
 import { QMarkAsset, ShieldAsset } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useNavigation } from '@react-navigation/native';
 import { Button, HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { useState } from 'react';
 import { Modal } from 'react-native';
 
 export default function IdentityVerificationPage() {
+  const navigation = useNavigation();
+
   const [showModal, setShowModal] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -17,7 +20,7 @@ export default function IdentityVerificationPage() {
   return (
     <BackButtonTitleCenter title="Identity Verification">
       <View flex={1}>
-        <View flex={1}>
+        <VStack space={5} flex={1} mt={10}>
           <Text textAlign="center">
             Please provide some information about yourself. We use this information to protect your account, and for
             compliance purposes.
@@ -29,20 +32,22 @@ export default function IdentityVerificationPage() {
             <Input label="Bank Verification Number (BVN)" onChangeText={setBVN} value={bvn} keyboardType="numeric" />
             {/* <Input label="Bank Verification Number (BVN)" onChangeText={setBVN} value={bvn} keyboardType="numeric" /> */}
             <View mb={10}>
-              <Button variant="link" onPress={onOpen}>
-                <HStack space={1}>
-                  <QMarkAsset />
-                  <Text textAlign="center" color={'#235643'}>
-                    Why do you need my BVN?
-                  </Text>
-                </HStack>
-              </Button>
+              <HStack space={1} justifyContent={'center'}>
+                <Button variant="link" onPress={onOpen}>
+                  <HStack space={1}>
+                    <QMarkAsset />
+                    <Text textAlign="center" color={'#235643'}>
+                      Why do you need my BVN?
+                    </Text>
+                  </HStack>
+                </Button>
+              </HStack>
             </View>
           </View>
           <View h={55} mt="auto" mb={5}>
             <Pressable
               flex={1}
-              onPress={() => null}
+              onPress={() => navigation.navigate('IdentityVerifiedSuccessPage' as any)}
               borderRadius="lg"
               justifyContent="center"
               borderColor={'#235643'}
@@ -55,7 +60,7 @@ export default function IdentityVerificationPage() {
               </HStack>
             </Pressable>
           </View>
-        </View>
+        </VStack>
 
         <Modal animationType="slide" transparent visible={showModal} onRequestClose={() => setShowModal(false)}>
           <Pressable flex={1} h="100%" backgroundColor="rgba(0,0,0,.2)" onPress={() => setShowModal(false)}>

@@ -40,6 +40,7 @@ import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
 import IdentityVerificationPage from '@scenes/IdentityVerificationPage';
+import IdentityVerifiedSuccessPage from '@scenes/IdentityVerifiedSuccessPage';
 import KYCPage from '@scenes/KYCPage';
 import LifeChat from '@scenes/LifeChat';
 import LovePage from '@scenes/LovePage';
@@ -60,6 +61,7 @@ import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
 import TradeDetailPage from '@scenes/TradeDetailPage';
 import TransactionHistoryPage from '@scenes/TransactionHistoryPage';
+import VBADetailsPage from '@scenes/VBADetailsPage';
 import VBAPage from '@scenes/VBAPage';
 import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
@@ -340,6 +342,20 @@ export const MainStackScreen: FC = () => {
         <MainStack.Screen
           name="IdentityVerificationPage"
           component={IdentityVerificationPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="IdentityVerifiedSuccessPage"
+          component={IdentityVerifiedSuccessPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="VBADetails"
+          component={VBADetailsPage}
           options={{
             headerShown: false,
           }}
