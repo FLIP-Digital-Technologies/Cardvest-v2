@@ -39,8 +39,10 @@ import DeleteAccountPage from '@scenes/DeleteAccountPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
+import ITunesGiftcardOptionsPage from '@scenes/ITunesGiftcardOptionsPage';
 import IdentityVerificationPage from '@scenes/IdentityVerificationPage';
 import IdentityVerifiedSuccessPage from '@scenes/IdentityVerifiedSuccessPage';
+import InsufficientFundsErrorPage from '@scenes/InsufficientFundsErrorPage';
 import KYCPage from '@scenes/KYCPage';
 import LifeChat from '@scenes/LifeChat';
 import LovePage from '@scenes/LovePage';
@@ -61,6 +63,7 @@ import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
 import TradeDetailPage from '@scenes/TradeDetailPage';
 import TransactionHistoryPage from '@scenes/TransactionHistoryPage';
+import TransactionProcessingPage from '@scenes/TransactionProcessingPage';
 import VBADetailsPage from '@scenes/VBADetailsPage';
 import VBAPage from '@scenes/VBAPage';
 import WalletsPage from '@scenes/WalletsPage';
@@ -508,9 +511,24 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        {/* Buy Giftcard feature screens start */}
         <MainStack.Screen
           name="BuyGiftCard"
           component={BuyGiftCardPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="ITunesGiftcardOptionsPage"
+          component={ITunesGiftcardOptionsPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="TransactionProcessing"
+          component={TransactionProcessingPage}
           options={{
             headerShown: false,
           }}
@@ -529,6 +547,14 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        <MainStack.Screen
+          name="InsufficientFundsErrorPage"
+          component={InsufficientFundsErrorPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* Buy Giftcard feature screens end */}
         <MainStack.Screen
           name="FundAccountFeedback"
           component={FundAccountFeedbackPage}
