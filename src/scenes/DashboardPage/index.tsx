@@ -188,7 +188,7 @@ export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any
           </Pressable>
           <Pressable
             flex={1}
-            onPress={() => navigation.navigate('VBAPage')}
+            onPress={() => navigation.navigate('VBADetails')}
             borderRadius="lg"
             justifyContent="center"
             borderColor={'white'}
@@ -375,6 +375,7 @@ const Dashboard: FC = () => {
       console.error('refresh ', error);
     }
   }, []);
+
   const getTrancationData = useMemo(
     () => ({
       ...opps?.pages[0],
@@ -382,6 +383,7 @@ const Dashboard: FC = () => {
     }),
     [opps],
   );
+
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -391,7 +393,9 @@ const Dashboard: FC = () => {
     });
     return b;
   }, [getTrancationData]);
+
   if (isFetching || !isFetched) return <CLoader />;
+
   return (
     <CSafeAreaView>
       <ScrollView

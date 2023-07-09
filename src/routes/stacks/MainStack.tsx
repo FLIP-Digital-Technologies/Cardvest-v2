@@ -30,6 +30,7 @@ import BuyGiftCardPage from '@scenes/BuyGiftCardPage';
 import BuyGiftCardTradeFeedbackPage from '@scenes/BuyGiftCardTradeFeedbackPage';
 import BuyGiftCardTradeSummaryPage from '@scenes/BuyGiftCardTradeSummaryPage';
 import BuyWifiPage from '@scenes/BuyWifiPage';
+import CalculateGiftcardPricePage from '@scenes/CalculateGiftcardPricePage';
 import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
 import ChangePinPage from '@scenes/ChangePinPage';
@@ -39,7 +40,6 @@ import DeleteAccountPage from '@scenes/DeleteAccountPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
-import ITunesGiftcardOptionsPage from '@scenes/ITunesGiftcardOptionsPage';
 import IdentityVerificationPage from '@scenes/IdentityVerificationPage';
 import IdentityVerifiedSuccessPage from '@scenes/IdentityVerifiedSuccessPage';
 import InsufficientFundsErrorPage from '@scenes/InsufficientFundsErrorPage';
@@ -520,8 +520,8 @@ export const MainStackScreen: FC = () => {
           }}
         />
         <MainStack.Screen
-          name="ITunesGiftcardOptionsPage"
-          component={ITunesGiftcardOptionsPage}
+          name="CalculateGiftcardPricePage"
+          component={CalculateGiftcardPricePage}
           options={{
             headerShown: false,
           }}

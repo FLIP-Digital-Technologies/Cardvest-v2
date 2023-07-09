@@ -1,18 +1,36 @@
+import { useVerifyBVN } from '@api/hooks/useBankAccounts';
 import { QMarkAsset, ShieldAsset } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
-import { useNavigation } from '@react-navigation/native';
+import { onOpenToast } from '@utils/toast';
 import { Button, HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { useState } from 'react';
 import { Modal } from 'react-native';
 
 export default function IdentityVerificationPage() {
-  const navigation = useNavigation();
+  const { mutate: verifyBVN, isLoading } = useVerifyBVN();
 
   const [showModal, setShowModal] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bvn, setBVN] = useState('');
+
+  const handleDisabled = () => !firstName || !lastName || !bvn;
+
+  const handleVerifyBvn = async () => {
+    try {
+      await verifyBVN({
+        firstName,
+        lastName,
+        bvn,
+      });
+    } catch (e) {
+      onOpenToast({
+        status: 'error',
+        message: `Error while verifying BVN: ${e}`,
+      });
+    }
+  };
 
   const onOpen = () => {
     setShowModal(true);
@@ -30,7 +48,7 @@ export default function IdentityVerificationPage() {
             <Input label="First Name" onChangeText={setFirstName} value={firstName} />
             <Input label="Last Name" onChangeText={setLastName} value={lastName} />
             <Input label="Bank Verification Number (BVN)" onChangeText={setBVN} value={bvn} keyboardType="numeric" />
-            {/* <Input label="Bank Verification Number (BVN)" onChangeText={setBVN} value={bvn} keyboardType="numeric" /> */}
+
             <View mb={10}>
               <HStack space={1} justifyContent={'center'}>
                 <Button variant="link" onPress={onOpen}>
@@ -44,14 +62,29 @@ export default function IdentityVerificationPage() {
               </HStack>
             </View>
           </View>
-          <View h={55} mt="auto" mb={5}>
+          <Button
+            onPress={handleVerifyBvn}
+            isLoading={isLoading}
+            isLoadingText="Verifying"
+            my="3"
+            size="lg"
+            py="4"
+            opacity={handleDisabled() ? 50 : 100}
+            disabled={handleDisabled()}
+            fontSize="md"
+            backgroundColor="CARDVESTGREEN"
+            color="white">
+            Verify KYC
+          </Button>
+          {/* <View h={55} mt="auto" mb={5}>
             <Pressable
               flex={1}
-              onPress={() => navigation.navigate('IdentityVerifiedSuccessPage' as any)}
               borderRadius="lg"
               justifyContent="center"
               borderColor={'#235643'}
               borderWidth={1}
+              opacity={handleDisabled() ? 50 : 100}
+              isDisabled={handleDisabled()}
               backgroundColor={'#235643'}>
               <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
                 <Text textAlign={'center'} px="1" color="white">
@@ -59,7 +92,7 @@ export default function IdentityVerificationPage() {
                 </Text>
               </HStack>
             </Pressable>
-          </View>
+          </View> */}
         </VStack>
 
         <Modal animationType="slide" transparent visible={showModal} onRequestClose={() => setShowModal(false)}>

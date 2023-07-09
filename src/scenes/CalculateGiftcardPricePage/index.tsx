@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
-const ITunesGiftcardOptionsPage: FC = () => {
+const CalculateGiftcardPricePage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
 
   const [quantity, setQuantity] = useState(1);
@@ -108,4 +108,4 @@ const ITunesGiftcardOptionsPage: FC = () => {
   );
 };
 
-export default memo(ITunesGiftcardOptionsPage);
+export default memo(CalculateGiftcardPricePage);

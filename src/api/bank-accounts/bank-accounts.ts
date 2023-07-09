@@ -2,9 +2,11 @@ import ApiClient from '@api';
 import env from '@env';
 import { cacheService } from '@utils/cache';
 import {
-  VerifyBankAccountRequestPayload,
   CreateBankAccountRequestPayload,
+  CreateVBAPayload,
   DeleteBankAccountRequestPayload,
+  VerifyBVNPayload,
+  VerifyBankAccountRequestPayload,
 } from './types';
 
 export async function getBankAccount(currency: string) {
@@ -36,6 +38,39 @@ export async function getAllBankAccounts(currency: string) {
   }
 }
 
+export async function getVBADetails(currency: string) {
+  try {
+    const token = await cacheService.get('login-user');
+
+    const response = await ApiClient.get(`${env.API_URL}/transactions/deposit/vba`, {
+      params: { currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching VBA Details: ', error);
+    throw error;
+  }
+}
+
+export async function getBVNStatus(currency: string) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/users/bank-verification`, {
+      params: { currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log('BVN VERIFICATION RESPONSE', response);
+    console.log('BVN VERIFICATION RESPONSE DATA', response.data);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function verifyBankAccount({ banknumber, bankname, currency }: VerifyBankAccountRequestPayload) {
   try {
     const token = await cacheService.get('login-user');
@@ -54,6 +89,19 @@ export async function verifyBankAccount({ banknumber, bankname, currency }: Veri
     return response.data;
   } catch (error) {
     console.error('verifyBankAccount - Error: ', error);
+    throw error;
+  }
+}
+
+export async function createVBA({ currency }: CreateVBAPayload) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(`${env.API_URL}/transactions/deposit/create-vba?currency=${currency}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('createVBA - Error: ', error);
     throw error;
   }
 }
@@ -84,6 +132,25 @@ export async function createBankAccount({
     return response.data;
   } catch (error) {
     console.error('createBankAccount - Error: ', error);
+    throw error;
+  }
+}
+
+export async function verifyBVN({ firstName, lastName, bvn, currency }: VerifyBVNPayload) {
+  try {
+    console.log(firstName, lastName);
+
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(
+      `${env.API_URL}/users/bank-verification?currency=${currency}`,
+      { firstname: firstName, lastname: lastName, bvn },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error('verify BVN - Error: ', error);
     throw error;
   }
 }

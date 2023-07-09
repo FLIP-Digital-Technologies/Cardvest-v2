@@ -1,3 +1,5 @@
+import { useCheckBVNVerification, useGetVBADetails } from '@api/hooks/useBankAccounts';
+import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useNavigation } from '@react-navigation/native';
 import { HStack, Pressable, Text, VStack } from 'native-base';
@@ -5,6 +7,21 @@ import React from 'react';
 
 export default function VBADetailsPage() {
   const navigation = useNavigation();
+  const { data, isFetching } = useGetVBADetails();
+
+  const { data: bvnVerificationData, isFetching: isFetchingBVNVerification } = useCheckBVNVerification();
+
+  if (isFetching || isFetchingBVNVerification) return <CLoader />;
+
+  if (!isFetching && !data) {
+    if (bvnVerificationData?.status) {
+      navigation.navigate('IdentityVerifiedSuccessPage' as any);
+    } else {
+      navigation.navigate('VBAPage' as any);
+    }
+    return null;
+  }
+
   return (
     <BackButtonTitleCenter noScroll title="Fund Wallet">
       <VStack justifyContent={'center'} alignItems={'center'} flex={1} mx="10" pb="10" space="7">

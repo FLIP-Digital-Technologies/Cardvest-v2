@@ -1,10 +1,25 @@
+import { useCreateVBA } from '@api/hooks/useBankAccounts';
 import { IdVerifiedAsset } from '@assets/SVG';
 import { useNavigation } from '@react-navigation/native';
-import { Button, HStack, Pressable, Text, VStack, View } from 'native-base';
+import { onOpenToast } from '@utils/toast';
+import { Button, HStack, Text, VStack, View } from 'native-base';
 import React from 'react';
 
 export default function IdentityVerifiedSuccessPage() {
   const navigation = useNavigation();
+  const { mutate: createVBA, isLoading } = useCreateVBA();
+
+  const handleCreateVBA = async () => {
+    try {
+      await createVBA();
+    } catch (e) {
+      onOpenToast({
+        status: 'error',
+        message: `Error while creating Virtual Bank Account: ${e}`,
+      });
+    }
+  };
+
   return (
     <VStack justifyContent={'center'} alignItems={'center'} flex={1} space={3}>
       <IdVerifiedAsset />
@@ -12,23 +27,19 @@ export default function IdentityVerifiedSuccessPage() {
         Identity Verified!
       </Text>
       <Text color={'gray.400'}>Your identity has been verified successfully!</Text>
-      <View mx="5" pt="5">
-        <HStack w="100%">
-          <Pressable
-            flex={1}
-            onPress={() => navigation.navigate('VBADetails' as any)}
-            borderRadius="lg"
-            justifyContent="center"
-            borderColor={'#235643'}
-            borderWidth={1}
-            backgroundColor={'#235643'}>
-            <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
-              <Text textAlign={'center'} px="1" color="white">
-                Request Virtual Account
-              </Text>
-            </HStack>
-          </Pressable>
-        </HStack>
+      <View mx="5" pt="5" flexDirection="row">
+        <Button
+          onPress={handleCreateVBA}
+          isLoading={isLoading}
+          isLoadingText="Verifying"
+          size="lg"
+          py="4"
+          flex={1}
+          fontSize="md"
+          backgroundColor="CARDVESTGREEN"
+          color="white">
+          Request Virtual Account
+        </Button>
       </View>
       <View>
         <HStack space={1} justifyContent={'center'}>

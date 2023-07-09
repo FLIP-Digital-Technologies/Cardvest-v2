@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { ProgressStepperIndicator } from '@scenes/KYCPage';
 import { BoldText, validateEmail } from '@scenes/LoginPage';
-import { View, Text, Center, Button, Pressable, ScrollView, HStack, CheckIcon, Select, Box } from 'native-base';
+import { Box, Button, Center, CheckIcon, HStack, Pressable, ScrollView, Select, Text, View } from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
 
 const ReferralSelect = (props: any) => {
@@ -82,7 +82,7 @@ export const CountrySelect = (props: any) => {
           <Select.Item
             isDisabled
             label="Select Country"
-            value="non"
+            value=""
             _disabled={{ opacity: 1 }}
             startIcon={
               <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
@@ -134,6 +134,71 @@ export const CountrySelect = (props: any) => {
               </HStack>
             }
           />
+        </Select>
+      </Box>
+    </Box>
+  );
+};
+
+export const SelectComponent = (props: any) => {
+  const { value, setValue, label, options = [], loading = true, loadingText = 'Loading', isDisabled = false } = props;
+  return (
+    <Box my="2">
+      {label && (
+        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
+          {label}
+        </Text>
+      )}
+      <Box backgroundColor="#F7F9FB">
+        <Select
+          selectedValue={value}
+          minWidth="200"
+          accessibilityLabel="Select"
+          placeholder={loading ? `${loadingText}...` : 'Select Country'}
+          isDisabled={loading || isDisabled}
+          borderColor="#F7F9FB"
+          _selectedItem={{
+            bg: '#F7F2DD',
+            endIcon: <CheckIcon size="5" />,
+          }}
+          height="50px"
+          fontSize="md"
+          onValueChange={(itemValue: string) => setValue(itemValue)}>
+          <Select.Item
+            isDisabled
+            label="Select Country"
+            value=""
+            _disabled={{ opacity: 1 }}
+            startIcon={
+              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
+                <Text fontSize="md" color="CARDVESTGREEN">
+                  Select Country
+                </Text>
+              </HStack>
+            }
+          />
+          {options.map((item: { label: string; value: string }) => (
+            <Select.Item
+              label={item.label}
+              value={item.value}
+              startIcon={
+                <HStack w="100%" justifyContent="space-between" alignItems="center">
+                  <HStack w="12" mx="-3" h="7" alignItems="center">
+                    <Text>{item.label}</Text>
+                  </HStack>
+                  {value === item.value ? (
+                    <View w="6" h="5">
+                      <RadioChecked />
+                    </View>
+                  ) : (
+                    <View w="6" h="5">
+                      <RadioUnChecked />
+                    </View>
+                  )}
+                </HStack>
+              }
+            />
+          ))}
         </Select>
       </Box>
     </Box>
