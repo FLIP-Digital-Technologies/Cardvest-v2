@@ -1806,3 +1806,16 @@ const wallet = `
 </svg>
 `;
 export const WalletAsset = () => <SvgXml xml={wallet} width="100%" />;
+
+const copyIcon = `
+<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10.05V12.3C13 15.3 11.8 16.5 8.8 16.5H5.95C2.95 16.5 1.75 15.3 1.75 12.3V9.45C1.75 6.45 2.95 5.25 5.95 5.25H8.2" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.0002 10.05H10.6002C8.8002 10.05 8.2002 9.45 8.2002 7.65V5.25L13.0002 10.05Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.9502 1.5H11.9502" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.5 3.75C5.5 2.505 6.505 1.5 7.75 1.5H9.715" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.7501 6V10.6425C16.7501 11.805 15.8051 12.75 14.6426 12.75" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.75 6H14.5C12.8125 6 12.25 5.4375 12.25 3.75V1.5L16.75 6Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const CopyAsset = () => <SvgXml xml={copyIcon} />;

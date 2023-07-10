@@ -2275,10 +2275,10 @@
     "@react-aria/ssr" "^3.0.1"
     "@react-aria/utils" "^3.3.0"
 
-"@react-native-clipboard/clipboard@^1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@react-native-clipboard/clipboard/-/clipboard-1.11.1.tgz#d3a9e685ce2383b1e92b89a334896c5575cc103d"
-  integrity sha512-nvSIIHzybVWqYxcJE5hpT17ekxAAg383Ggzw5WrYHtkKX61N1AwaKSNmXs5xHV7pmKSOe/yWjtSwxIzfW51I5Q==
+"@react-native-clipboard/clipboard@^1.11.2":
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/@react-native-clipboard/clipboard/-/clipboard-1.11.2.tgz#e826d0336b34e67294aaffa6878308900bc7d197"
+  integrity sha512-bHyZVW62TuleiZsXNHS1Pv16fWc0fh8O9WvBzl4h2fykqZRW9a+Pv/RGTH56E3X2PqzHP38K5go8zmCZUoIsoQ==
 
 "@react-native-community/async-storage@^1.12.1":
   version "1.12.1"
@@ -9296,6 +9296,11 @@ react-native-screens@^3.13.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-share@^9.2.2:
+  version "9.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-9.2.2.tgz#3ab2c81be52e11ee16dafd768b40c6ddd7938ddf"
+  integrity sha512-z99dvVuSvVfQ7VwrO+JWdfurAgDpkMvdZYmqIDG9HX8RHXIqU6oNVx2ePuNWXn4UgySyFjMUKjGv99njM0934Q==
 
 react-native-splash-screen@^3.3.0:
   version "3.3.0"

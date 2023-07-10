@@ -8,6 +8,7 @@ import { ProgressStepperIndicator } from '@scenes/KYCPage';
 import { BoldText, validateEmail } from '@scenes/LoginPage';
 import { Box, Button, Center, CheckIcon, HStack, Pressable, ScrollView, Select, Text, View } from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
+import { SvgUri } from 'react-native-svg';
 
 const ReferralSelect = (props: any) => {
   const { value, setValue, label } = props;
@@ -141,7 +142,16 @@ export const CountrySelect = (props: any) => {
 };
 
 export const SelectComponent = (props: any) => {
-  const { value, setValue, label, options = [], loading = true, loadingText = 'Loading', isDisabled = false } = props;
+  const {
+    value,
+    setValue,
+    label,
+    options = [],
+    loading = false,
+    loadingText = 'Loading',
+    isDisabled = false,
+    placeholder = 'Select',
+  } = props;
   return (
     <Box my="2">
       {label && (
@@ -153,8 +163,8 @@ export const SelectComponent = (props: any) => {
         <Select
           selectedValue={value}
           minWidth="200"
-          accessibilityLabel="Select"
-          placeholder={loading ? `${loadingText}...` : 'Select Country'}
+          accessibilityLabel={placeholder}
+          placeholder={loading ? `${loadingText}...` : placeholder}
           isDisabled={loading || isDisabled}
           borderColor="#F7F9FB"
           _selectedItem={{
@@ -166,24 +176,26 @@ export const SelectComponent = (props: any) => {
           onValueChange={(itemValue: string) => setValue(itemValue)}>
           <Select.Item
             isDisabled
-            label="Select Country"
+            label={label}
             value=""
             _disabled={{ opacity: 1 }}
             startIcon={
               <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
                 <Text fontSize="md" color="CARDVESTGREEN">
-                  Select Country
+                  {label}
                 </Text>
               </HStack>
             }
           />
-          {options.map((item: { label: string; value: string }) => (
+          {options.map((item: { label: string; value: string; img?: string }) => (
             <Select.Item
+              key={item.value}
               label={item.label}
               value={item.value}
               startIcon={
                 <HStack w="100%" justifyContent="space-between" alignItems="center">
-                  <HStack w="12" mx="-3" h="7" alignItems="center">
+                  <HStack h="7" alignItems="center">
+                    {!!item?.img && <SvgUri uri={item.img} height="100%" width="10px" />}
                     <Text>{item.label}</Text>
                   </HStack>
                   {value === item.value ? (

@@ -188,6 +188,8 @@ export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any
           </Pressable>
           <Pressable
             flex={1}
+            opacity={currency !== 'NGN' ? 50 : 100}
+            isDisabled={currency !== 'NGN'}
             onPress={() => navigation.navigate('VBADetails')}
             borderRadius="lg"
             justifyContent="center"
@@ -196,7 +198,7 @@ export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any
             backgroundColor={'rgba(255, 255, 255, 0.2)'}>
             <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
               <Text textAlign={'center'} px="1" color="white">
-                Fund
+                Fund {currency !== 'NGN' && '⏳'}
               </Text>
             </HStack>
           </Pressable>

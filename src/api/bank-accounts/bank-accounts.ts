@@ -47,7 +47,7 @@ export async function getVBADetails(currency: string) {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error fetching VBA Details: ', error);
     throw error;

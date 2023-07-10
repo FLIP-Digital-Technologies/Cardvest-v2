@@ -31,7 +31,7 @@ export default function IdentityVerifiedSuccessPage() {
         <Button
           onPress={handleCreateVBA}
           isLoading={isLoading}
-          isLoadingText="Verifying"
+          isLoadingText="Requesting"
           size="lg"
           py="4"
           flex={1}

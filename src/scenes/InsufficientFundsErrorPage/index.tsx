@@ -19,7 +19,7 @@ export default function InsufficientFundsErrorPage() {
         <HStack w="100%">
           <Pressable
             flex={1}
-            onPress={() => null}
+            onPress={() => navigation.navigate('VBADetails' as any)}
             borderRadius="lg"
             justifyContent="center"
             borderColor={'#235643'}

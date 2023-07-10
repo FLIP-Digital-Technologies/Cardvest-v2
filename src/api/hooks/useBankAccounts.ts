@@ -77,7 +77,7 @@ function useVerifyBankAccount() {
           message: 'Bank verified successfully',
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
@@ -141,7 +141,7 @@ function useVerifyBVN() {
         });
 
         // Firebase Analytics: BVN Verification Event
-        await analytics().logEvent('bvn-verified', {
+        await analytics().logEvent('bvn_verified', {
           user_id: data?.data?.user?.id,
           first_name: variables.firstName,
           last_name: variables.lastName,
@@ -155,8 +155,7 @@ function useVerifyBVN() {
         navigation.navigate('IdentityVerifiedSuccessPage');
       },
       onError: (data: any) => {
-        navigation.navigate('IdentityVerifiedSuccessPage');
-
+        // console.log('BVN VERIFICATION ERROR: ', data);
         if (data?.c) return;
         onOpenToast({
           status: 'error',
@@ -201,9 +200,9 @@ function useGetVBADetails() {
   return useQuery([`vba-details-${currency}`], () => getVBADetails(currency));
 }
 
-function useCheckBVNVerification() {
+function useCheckBVNVerification(enabled = false) {
   const { currency } = useCurrency();
-  return useQuery([`bvn-verified-${currency}`], () => getBVNStatus(currency));
+  return useQuery({ queryKey: [`bvn-verified-${currency}`], queryFn: () => getBVNStatus(currency), enabled });
 }
 
 export {
