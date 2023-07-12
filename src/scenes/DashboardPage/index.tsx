@@ -149,7 +149,7 @@ export const GreetingPanel = () => {
   );
 };
 
-export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any }) => {
+export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any; userData?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleSwitchCurrency, currencyWallet } = useCurrency();
   const balance = currencyWallet?.balance;
@@ -190,7 +190,15 @@ export const BalancePanel = (props: { defaultCurrency: string; setCurrency?: any
             flex={1}
             opacity={currency !== 'NGN' ? 50 : 100}
             isDisabled={currency !== 'NGN'}
-            onPress={() => navigation.navigate('VBADetails')}
+            onPress={() =>
+              navigation.navigate(
+                props?.userData?.has_virtual_account
+                  ? 'VBADetails'
+                  : props?.userData?.banking_verified
+                  ? 'IdentityVerifiedSuccessPage'
+                  : 'VBAPage',
+              )
+            }
             borderRadius="lg"
             justifyContent="center"
             borderColor={'white'}
@@ -356,7 +364,7 @@ const Dashboard: FC = () => {
   const { currency, handleRefreshCurrency } = useCurrency();
   const queryClient = useQueryClient();
   const { data: opps, isFetched } = useGetAllTransactions(currency);
-  const { isFetching }: any = useQuery({
+  const { isFetching, data: userData } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
       const token = await cacheService.get('login-user');
@@ -398,6 +406,8 @@ const Dashboard: FC = () => {
 
   if (isFetching || !isFetched) return <CLoader />;
 
+  console.log('USER DATA', userData);
+
   return (
     <CSafeAreaView>
       <ScrollView
@@ -408,7 +418,7 @@ const Dashboard: FC = () => {
           flexGrow: 1,
         }}>
         <GreetingPanel />
-        <BalancePanel defaultCurrency={currency} />
+        <BalancePanel defaultCurrency={currency} userData={userData} />
         <HStack justifyContent="space-between" flexWrap={'wrap'}>
           {[
             {

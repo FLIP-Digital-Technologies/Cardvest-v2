@@ -1,4 +1,4 @@
-import { useCheckBVNVerification, useGetVBADetails } from '@api/hooks/useBankAccounts';
+import { useGetVBADetails } from '@api/hooks/useBankAccounts';
 import { CopyAsset } from '@assets/SVG';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
@@ -27,18 +27,16 @@ export default function VBADetailsPage() {
   const navigation = useNavigation();
   const { data, isFetching } = useGetVBADetails();
 
-  const { data: bvnVerificationData, isFetching: isFetchingBVNVerification } = useCheckBVNVerification(
-    !data && !isFetching,
-  );
+  // const { data: bvnVerificationData, isFetching: isFetchingBVNVerification } = useCheckBVNVerification( !data && !isFetching );
 
-  if (isFetching || isFetchingBVNVerification) return <CLoader />;
+  if (isFetching) return <CLoader />;
 
   if (!isFetching && !data) {
-    if (bvnVerificationData?.status) {
-      navigation.navigate('IdentityVerifiedSuccessPage' as any);
-    } else {
-      navigation.navigate('VBAPage' as any);
-    }
+    // if (bvnVerificationData?.status) {
+    //   navigation.navigate('IdentityVerifiedSuccessPage' as any);
+    // } else {
+    navigation.navigate('VBAPage' as any);
+    // }
     return null;
   }
 
@@ -46,7 +44,7 @@ export default function VBADetailsPage() {
     <BackButtonTitleCenter noScroll title="Fund Wallet">
       <VStack justifyContent={'center'} alignItems={'center'} flex={1} mx="10" pb="10" space="7">
         <VStack alignItems={'center'} space={1}>
-          <Text>CardVest Account Number</Text>
+          <Text>{data.accountname}</Text>
           <Pressable onPress={() => copyText(data.banknumber)}>
             <HStack space={2} justifyItems="center" alignItems="center">
               <Text fontSize={'3xl'}>{data.banknumber}</Text>

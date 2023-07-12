@@ -14,12 +14,14 @@ import {
   HStack,
   IconButton,
   Input,
+  Pressable,
   Select,
   Text,
   VStack,
   View,
 } from 'native-base';
 import React, { FC, memo, useState } from 'react';
+import { Modal } from 'react-native';
 
 const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
   const { mutate: createBuyTransaction, isLoading } = useCreateBuyTransaction();
@@ -52,7 +54,10 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(cardUnit * params.giftcard.rate * quantity);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const onOpen = () => {
+    setShowModal(true);
+  };
   const addQty = () => {
     setQuantity(prev => {
       const newQty = prev + 1;
@@ -130,6 +135,7 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                     }>
                     {params.giftcard.denominations.map((item: any) => (
                       <Select.Item
+                        key={`${item}`}
                         label={`${item}`}
                         value={item}
                         startIcon={
@@ -180,7 +186,8 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
             </HStack>
           </VStack>
         </View>
-        <HStack space={3}>
+
+        <HStack space={2} alignItems={'center'}>
           <Checkbox
             colorScheme={'green'}
             value="test"
@@ -188,7 +195,14 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
             isChecked={agreeToTerms}
             onChange={setAgreeToTerms}
           />
-          <Text color="CARDVESTGREEN">Agree to Terms and Conditions</Text>
+          <HStack alignItems={'center'}>
+            <Text color="CARDVESTGREEN">Agree to</Text>
+            <Button variant="link" p={1} onPress={onOpen}>
+              <Text color="CARDVESTGREEN" underline>
+                Terms and Conditions
+              </Text>
+            </Button>
+          </HStack>
         </HStack>
 
         <Button
@@ -205,6 +219,49 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
           Proceed to payment
         </Button>
       </VStack>
+
+      {/* Terms and conditions modal */}
+      <Modal animationType="slide" transparent visible={showModal} onRequestClose={() => setShowModal(false)}>
+        <Pressable flex={1} h="100%" backgroundColor="rgba(0,0,0,.2)" onPress={() => setShowModal(false)}>
+          <Pressable onPress={e => e.stopPropagation()} backgroundColor={'white'} mt="auto" p={10} borderTopRadius={20}>
+            <View>
+              <VStack space={5} h="auto">
+                <View flexDirection={'row'}>
+                  <Text color={'#235643'} fontSize={'lg'}>
+                    Terms and Conditions
+                  </Text>
+                </View>
+                <View>
+                  <Text>
+                    By submitting this order, you confirm that you understand the purpose of the gift card you are about
+                    to purchase and how to make use of it. You also confirm that once the gift code is delivered, you
+                    are solely responsible for the safe keep from there on.
+                  </Text>
+                </View>
+                <View>
+                  <Text>NOTE: Gift card purchase orders are not refundable.</Text>
+                </View>
+                <View h={55} mt="auto" mb={5}>
+                  <Pressable
+                    flex={1}
+                    onPress={() => setShowModal(false)}
+                    borderRadius="lg"
+                    justifyContent="center"
+                    borderColor={'#235643'}
+                    borderWidth={1}
+                    backgroundColor={'#235643'}>
+                    <HStack p="4" mx="auto" justifyContent="center" alignItems="center">
+                      <Text textAlign={'center'} px="1" color="white">
+                        Return to Purchase
+                      </Text>
+                    </HStack>
+                  </Pressable>
+                </View>
+              </VStack>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </BackButtonTitleCenter>
   );
 };

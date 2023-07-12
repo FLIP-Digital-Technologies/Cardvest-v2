@@ -189,7 +189,8 @@ function useCreateVBA() {
       if (data?.c) return;
       onOpenToast({
         status: 'error',
-        message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'BVN Verification failed.',
+        message:
+          data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Error creating Virtual Bank Account.',
       });
     },
   });

@@ -3,7 +3,7 @@
 /***********************************************/
 
 export default {
-  API_URL: 'https://staging.cardvest.ng/api/v2',
+  API_URL: 'https://api.cardvest.ng/api/v2',
   ENV: 'staging',
   MXP_PRO_TOKS: '406f69b81f42a113baade56967f62ec1',
   ADJ_TOKEN: 'vg0lx4h6nkzk',

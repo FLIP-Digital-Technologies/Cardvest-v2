@@ -7,7 +7,7 @@ import { Money } from '@scenes/DashboardPage';
 import { UploadPanel } from '@scenes/SellGiftCard';
 import { useQueryClient } from '@tanstack/react-query';
 import * as dayjs from 'dayjs';
-import { View, Text, VStack, Button, Pressable, Modal, HStack, Image, Link } from 'native-base';
+import { Button, HStack, Image, Link, Modal, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
 export const UploadedItems = ({ images }: { images?: Array<string> }) => {
@@ -106,7 +106,7 @@ const TagIndicator = ({ text, color }: { text: string; color: string }) => {
   );
 };
 
-const ItemText = ({ body, title }: { body: string; title: string }) => {
+const ItemText = ({ body = '', title, children = null }: { body?: string; title: string; children?: any }) => {
   return (
     <VStack my="2">
       <Text my="1" color="CARDVESTGREY.50">
@@ -114,6 +114,7 @@ const ItemText = ({ body, title }: { body: string; title: string }) => {
       </Text>
       <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
         {body}
+        {children}
       </Text>
     </VStack>
   );
@@ -153,6 +154,27 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const userData: any = queryClient.getQueryData(['user']);
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
+
+  // console.log(data);{
+  //   data: {
+  //     admin_comment: null,
+  //     amount: 792,
+  //     card: null,
+  //     comment: null,
+  //     created_at: '2023-07-10T17:52:32.000000Z',
+  //     description: '1 unit(s) of 0.99USD PUBG Mobile UC NG Order',
+  //     id: 180,
+  //     payment_status: 'succeed',
+  //     redeem_code: [{"cardNumber": "X32jxtest", "pinCode": "29336test"}]
+  //     reference: 'CVD-RDLY-BUY-OipLtRcnOpBogSRm',
+  //     status: 'succeed',
+  //     type: 'buy',
+  //     unit: 1,
+  //     user_id: 34,
+  //   },
+  //   message: 'Transaction fetched successfully',
+  // };
+
   if (!isFetched) return <CLoader />;
   const body = `
 Name: ${userData?.firstname} ${userData?.lastname}
@@ -278,6 +300,25 @@ Transaction Reference: ${data?.data?.reference}
             ) : (
               <UploadedItems images={data?.data?.images} />
             )}
+          </TradeDetailPanel>
+        )}
+        {data?.data?.redeem_code && data?.data?.redeem_code?.length > 0 && (
+          <TradeDetailPanel title="GIFT CARD DETAILS">
+            <ItemText title="Card PIN/Code">
+              {data?.data?.redeem_code &&
+                data?.data?.redeem_code?.map((item: any) => (
+                  <>
+                    <Text>{'\u2022'}</Text>
+
+                    <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
+                      {'  '}
+                      {item.cardNumber}
+                      {' - '}
+                      {item.pinCode}
+                    </Text>
+                  </>
+                ))}
+            </ItemText>
           </TradeDetailPanel>
         )}
         {data?.data?.type.toLowerCase() !== 'bill' ? (

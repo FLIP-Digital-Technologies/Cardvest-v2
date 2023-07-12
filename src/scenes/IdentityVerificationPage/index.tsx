@@ -2,12 +2,16 @@ import { useVerifyBVN } from '@api/hooks/useBankAccounts';
 import { QMarkAsset, ShieldAsset } from '@assets/SVG';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
+import { useQueryClient } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
 import { Button, HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { useState } from 'react';
 import { Modal } from 'react-native';
 
 export default function IdentityVerificationPage() {
+  const queryClient = useQueryClient();
+  const userData: any = queryClient.getQueryData(['user']);
+
   const { mutate: verifyBVN, isLoading } = useVerifyBVN();
 
   const [showModal, setShowModal] = useState(false);
@@ -19,6 +23,10 @@ export default function IdentityVerificationPage() {
 
   const handleVerifyBvn = async () => {
     try {
+      if (userData) {
+        if (userData?.firstname !== firstName) throw new Error("Entered first name doesn't match user's firstname");
+        if (userData?.lastname !== lastName) throw new Error("Entered last name doesn't match user's last name");
+      }
       await verifyBVN({
         firstName,
         lastName,
@@ -27,7 +35,7 @@ export default function IdentityVerificationPage() {
     } catch (e) {
       onOpenToast({
         status: 'error',
-        message: `Error while verifying BVN: ${e}`,
+        message: `Error: ${e}`,
       });
     }
   };

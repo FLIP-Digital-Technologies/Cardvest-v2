@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { BalancePanel, EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
 import { BoldText } from '@scenes/LoginPage';
+import { useQueryClient } from '@tanstack/react-query';
 import { HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 
@@ -13,6 +14,9 @@ const WalletsPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleRefreshCurrency } = useCurrency();
   const { data: opps, isFetching } = useGetPayoutTransactions(currency);
+  const queryClient = useQueryClient();
+
+  const userData = queryClient.getQueryData(['user']);
 
   const onRefresh = React.useCallback(async () => {
     try {
@@ -41,7 +45,7 @@ const WalletsPage: FC = () => {
   return (
     <BackButtonTitleCenter onRefresh={onRefresh} title="Wallets">
       <View mt="4">
-        <BalancePanel defaultCurrency={currency} withDeposit={true} />
+        <BalancePanel defaultCurrency={currency} userData={userData} />
 
         <VStack my="5">
           <View>
