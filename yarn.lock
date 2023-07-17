@@ -8816,10 +8816,10 @@ react-native-fbsdk-next@^11.1.0:
   version "6.0.0"
   resolved "git+https://github.com/hieuvp/react-native-fingerprint-scanner.git#9cecc0db326471c571553ea85f7c016fee2f803d"
 
-react-native-flipper@0.159.0:
-  version "0.159.0"
-  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.159.0.tgz#f730467eb25f91ae21531ae03506391dc1db789b"
-  integrity sha512-7lFEpbv542q8Bf8qtkPeuq3ICr725F/DUKL1p30uVphT47FIgDpCOA9l/rBZk1/ExaI+BoooikLiz/d+Wthuxg==
+react-native-flipper@0.206.0:
+  version "0.206.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.206.0.tgz#accd8e539463de26d543bfc384d0ff7810e0074b"
+  integrity sha512-QqSpA8+73zWgSrd87ZAPHBmh3biMKpgtpx+3ZH2opQfyNP5shWXo6iKpYt3L3un7ZkOQ8oF/9xiKgNkBAOXQ9g==
 
 react-native-gesture-handler@2.5.0:
   version "2.5.0"
