@@ -43,9 +43,10 @@ const BuyGiftCardPage: FC = () => {
   return (
     <BackButtonTitleCenter title="Buy Giftcard">
       <VStack space={5} my="5" flex={1}>
-        <FormCurrencyPicker label="Payout Wallet" setCurrency={handleSwitchCurrency} currency={currency} />
+        <FormCurrencyPicker label="Payout Wallet" setCurrency={handleSwitchCurrency} currency={currency} onlyNaira />
         <SelectComponent
           label="What country are you buying from?"
+          searchable
           setValue={setCountry}
           value={country}
           loading={isFetchingCountries}
@@ -53,6 +54,7 @@ const BuyGiftCardPage: FC = () => {
         />
         <SelectComponent
           label="Giftcard"
+          searchable
           setValue={handleSelectGiftcard}
           value={giftcard.id}
           loading={isFetchingGiftcards}

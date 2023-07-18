@@ -127,6 +127,7 @@ function useGetBankList(currency: string) {
 }
 
 function useVerifyBVN() {
+  const queryClient = useQueryClient();
   const { currency } = useCurrency();
   const navigation = useNavigation<GenericNavigationProps>();
   const [mixpanel] = useMixpanel();
@@ -140,6 +141,8 @@ function useVerifyBVN() {
           lastName: variables.lastName,
         });
 
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
         // Firebase Analytics: BVN Verification Event
         await analytics().logEvent('bvn_verified', {
           user_id: data?.data?.user?.id,
@@ -152,6 +155,7 @@ function useVerifyBVN() {
           status: 'success',
           message: 'BVN verified successfully',
         });
+
         navigation.navigate('IdentityVerifiedSuccessPage');
       },
       onError: (data: any) => {
@@ -167,15 +171,17 @@ function useVerifyBVN() {
 }
 
 function useCreateVBA() {
+  const queryClient = useQueryClient();
   const { currency } = useCurrency();
   const navigation = useNavigation<GenericNavigationProps>();
   const [mixpanel] = useMixpanel();
   return useMutation(['verify-bvn'], () => createVBA({ currency }), {
     onSuccess: async (data: any) => {
       mixpanel.track('create-vba');
+      queryClient.invalidateQueries({ queryKey: ['user'] });
 
       // Firebase Analytics: BVN Verification Event
-      await analytics().logEvent('vba-created', {
+      await analytics().logEvent('vba_created', {
         user_id: data?.data?.user?.id,
       });
 

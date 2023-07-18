@@ -6,7 +6,20 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { ProgressStepperIndicator } from '@scenes/KYCPage';
 import { BoldText, validateEmail } from '@scenes/LoginPage';
-import { Box, Button, Center, CheckIcon, HStack, Pressable, ScrollView, Select, Text, View } from 'native-base';
+import {
+  Actionsheet,
+  Box,
+  Button,
+  Center,
+  CheckIcon,
+  FlatList,
+  HStack,
+  Pressable,
+  ScrollView,
+  Select,
+  Text,
+  View,
+} from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
 import { SvgUri } from 'react-native-svg';
 
@@ -141,78 +154,112 @@ export const CountrySelect = (props: any) => {
   );
 };
 
-export const SelectComponent = (props: any) => {
-  const {
-    value,
-    setValue,
-    label,
-    options = [],
-    loading = false,
-    loadingText = 'Loading',
-    isDisabled = false,
-    placeholder = 'Select',
-  } = props;
+const SelectItem = memo(({ value, item, setValue }: any) => {
+  const active = value === item.value;
+  // console.log(item);
   return (
-    <Box my="2">
-      {label && (
-        <Text mb="2" color="CARDVESTGREY.400" fontWeight={'light'}>
-          {label}
-        </Text>
-      )}
-      <Box backgroundColor="#F7F9FB">
-        <Select
-          selectedValue={value}
-          minWidth="200"
-          accessibilityLabel={placeholder}
-          placeholder={loading ? `${loadingText}...` : placeholder}
-          isDisabled={loading || isDisabled}
-          borderColor="#F7F9FB"
-          _selectedItem={{
-            bg: '#F7F2DD',
-            endIcon: <CheckIcon size="5" />,
-          }}
-          height="50px"
-          fontSize="md"
-          onValueChange={(itemValue: string) => setValue(itemValue)}>
-          <Select.Item
-            isDisabled
-            label={label}
-            value=""
-            _disabled={{ opacity: 1 }}
-            startIcon={
-              <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
-                <Text fontSize="md" color="CARDVESTGREEN">
-                  {label}
-                </Text>
-              </HStack>
-            }
+    <>
+      <Pressable onPress={() => setValue(item.value)}>
+        <HStack w="87%" py="2" justifyContent="space-between" alignItems="center" px="3">
+          <HStack h="7" space="2" alignItems="center">
+            {!!item?.img && (
+              <View h="7" w="7" rounded={'full'} overflow="hidden">
+                <SvgUri uri={item.img} style={{ borderRadius: 99999 }} height="100%" width="100%" />
+              </View>
+            )}
+            <Text>{item.label}</Text>
+          </HStack>
+          {active ? (
+            <View w="6" h="5">
+              <RadioChecked />
+            </View>
+          ) : (
+            <View w="6" h="5">
+              <RadioUnChecked />
+            </View>
+          )}
+        </HStack>
+      </Pressable>
+    </>
+  );
+});
+
+export const SelectComponent = ({
+  value,
+  setValue,
+  label = '',
+  options = [],
+  loading = false,
+  loadingText = 'Loading',
+  isDisabled = false,
+  placeholder = 'Select',
+  searchable = false,
+}: any) => {
+  const [showOptions, setShowOptions] = useState(false);
+
+  const [displayedOptions, setDisplayedOptions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (q: string) => {
+    if (!searchable) return;
+    setSearchQuery(q);
+    search(q);
+  };
+
+  function toggleShowOptions() {
+    if (isDisabled) return;
+    setShowOptions(!showOptions);
+  }
+
+  async function search(q: string) {
+    const results: { label: string }[] = [];
+    if (q) {
+      options.forEach((item: { label: string }) => {
+        if (item.label.toLowerCase().includes(q.toLowerCase())) {
+          results.push(item);
+        }
+      });
+      setDisplayedOptions(results as any);
+    } else {
+      setDisplayedOptions(options);
+    }
+  }
+
+  return (
+    <Box>
+      <Pressable onPress={toggleShowOptions}>
+        <Input
+          label={label}
+          placeholder={loading ? loadingText + '...' : placeholder}
+          value={options.find((item: any) => item.value === value)?.label || ''}
+          disabled
+          placeholderTextColor="#000"
+        />
+      </Pressable>
+      <Actionsheet isOpen={showOptions} onClose={toggleShowOptions}>
+        <Actionsheet.Content h={options.length > 5 ? '2xl' : 'md'} mt="auto">
+          {searchable ? (
+            <View w="100%" p="0" h="auto">
+              <Input value={searchQuery} onChangeText={handleSearch} placeholder="Search item" />
+            </View>
+          ) : null}
+          <FlatList
+            flex={1}
+            keyExtractor={(item: any) => item.value}
+            data={displayedOptions.length ? displayedOptions : options}
+            renderItem={({ item }: any) => (
+              <SelectItem
+                value={value}
+                item={item}
+                setValue={(val: any) => {
+                  setValue(val);
+                  toggleShowOptions();
+                }}
+              />
+            )}
           />
-          {options.map((item: { label: string; value: string; img?: string }) => (
-            <Select.Item
-              key={item.value}
-              label={item.label}
-              value={item.value}
-              startIcon={
-                <HStack w="100%" justifyContent="space-between" alignItems="center">
-                  <HStack h="7" alignItems="center">
-                    {!!item?.img && <SvgUri uri={item.img} height="100%" width="10px" />}
-                    <Text>{item.label}</Text>
-                  </HStack>
-                  {value === item.value ? (
-                    <View w="6" h="5">
-                      <RadioChecked />
-                    </View>
-                  ) : (
-                    <View w="6" h="5">
-                      <RadioUnChecked />
-                    </View>
-                  )}
-                </HStack>
-              }
-            />
-          ))}
-        </Select>
-      </Box>
+        </Actionsheet.Content>
+      </Actionsheet>
     </Box>
   );
 };

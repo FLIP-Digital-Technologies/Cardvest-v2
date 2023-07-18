@@ -1,5 +1,5 @@
 import { ShowPassword } from '@assets/SVG';
-import { Input as NBInput, Box, Text, Pressable } from 'native-base';
+import { Box, Input as NBInput, Pressable, Text } from 'native-base';
 import React from 'react';
 
 export const getKeyboardType = (label: string) => {
@@ -30,8 +30,10 @@ const Input = ({
   onChangeText,
   disabled = false,
   maxLength = '',
-  keyboardType = '',
+  keyboardType = 'default',
+  componentRef = null,
   hint,
+  placeholderTextColor,
 }: {
   label?: string;
   fontWeight?: string;
@@ -58,6 +60,8 @@ const Input = ({
     | 'twitter'
     | 'web-search'
     | 'visible-password';
+  componentRef?: any;
+  placeholderTextColor?: string;
 }) => {
   const [show, setShow] = React.useState(false);
   return (
@@ -84,6 +88,7 @@ const Input = ({
           _focus={{
             backgroundColor: '#F7F9FB',
           }}
+          ref={componentRef}
           keyboardType={keyboardType || getKeyboardType(label)}
           InputRightElement={
             type === 'password' ? (
@@ -96,6 +101,7 @@ const Input = ({
           }
           type={type !== 'password' ? type : show ? 'text' : 'password'}
           onChangeText={onChangeText}
+          placeholderTextColor={placeholderTextColor}
         />
       </Box>
       {hint && (

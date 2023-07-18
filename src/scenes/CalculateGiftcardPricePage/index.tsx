@@ -51,7 +51,7 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
   }
 
   const [cardUnit, setCardUnit] = useState(params.giftcard.denominations[0]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number>(1);
   const [total, setTotal] = useState(cardUnit * params.giftcard.rate * quantity);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -153,7 +153,20 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                 <Text color="CARDVESTGREEN" flex={1}>
                   Quantity:
                 </Text>
-                <Input backgroundColor={'white'} value={`${quantity}`} flex={1} />
+                <Input
+                  backgroundColor={'white'}
+                  onChangeText={(val: string) => {
+                    if (val === '') {
+                      return setQuantity(0);
+                    }
+                    if (!Number.isNaN(parseInt(val))) {
+                      setQuantity(parseInt(val));
+                    }
+                  }}
+                  keyboardType="numeric"
+                  value={`${quantity}`}
+                  flex={1}
+                />
                 <HStack flex={1} space={3}>
                   <IconButton
                     variant="solid"
@@ -208,7 +221,7 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
         <Button
           isLoading={isLoading}
           isLoadingText="Processing"
-          isDisabled={!agreeToTerms}
+          isDisabled={!agreeToTerms || !quantity}
           onPress={handleSubmit}
           mt="auto"
           size="lg"

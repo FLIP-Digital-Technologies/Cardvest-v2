@@ -55,7 +55,11 @@ export default function VBADetailsPage() {
         </VStack>
         <Text textAlign={'center'} fontSize={'sm'} color="gray.400">
           Money transferred to this bank account number will automatically top up your CardVest wallet. Receive funds
-          from any local bank account directly into your CardVest wallet.
+          from only bank accounts that match this account name. Any money sent from this account name would be flagged
+          and refunded to the sender's account.
+        </Text>
+        <Text textAlign={'center'} bold>
+          A 1.5% fee applies on every deposit.
         </Text>
         <HStack>
           <Pressable

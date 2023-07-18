@@ -309,12 +309,8 @@ Transaction Reference: ${data?.data?.reference}
                 data?.data?.redeem_code?.map((item: any) => (
                   <>
                     <Text>{'\u2022'}</Text>
-
                     <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
-                      {'  '}
-                      {item.cardNumber}
-                      {' - '}
-                      {item.pinCode}
+                      {item?.cardNumber ?? item?.pinCode}
                     </Text>
                   </>
                 ))}

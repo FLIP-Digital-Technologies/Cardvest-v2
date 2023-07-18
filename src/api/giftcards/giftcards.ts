@@ -130,7 +130,7 @@ export async function getCountries() {
     const response = await ApiClient.get(`${env.API_URL}/giftcards/buy/countries`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data.data.map((item: any) => ({ label: item.name, value: item.isoName }));
+    return response.data.data.map((item: any) => ({ label: item.name, value: item.isoName, img: item.flagUrl }));
   } catch (error) {
     console.error('getBuyableGiftcards - Error: ', error);
     throw error;

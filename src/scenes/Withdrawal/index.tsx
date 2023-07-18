@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { FormSelect } from '@scenes/CalculatorPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
-import { Button, Divider, HStack, Pressable, Text, View, VStack } from 'native-base';
+import { Button, HStack, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
 const WithdrawalPage: FC = () => {
@@ -79,7 +79,7 @@ const WithdrawalPage: FC = () => {
             color="white">
             Withdraw Funds
           </Button>
-          <View position="relative">
+          {/* <View position="relative">
             <Divider my="60px" backgroundColor="#909090" />
             <View backgroundColor="#fff" w="6" zIndex={9} position="absolute" top="40%" left="45%" right="0%">
               <Text m="auto">OR</Text>
@@ -96,7 +96,7 @@ const WithdrawalPage: FC = () => {
             <Text px="1" fontSize="lg" color="black">
               Withdraw USDT
             </Text>
-          </Button>
+          </Button> */}
         </VStack>
       </View>
     </BackButtonTitleCenter>
