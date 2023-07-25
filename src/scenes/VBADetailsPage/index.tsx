@@ -59,7 +59,7 @@ export default function VBADetailsPage() {
           refunded to the sender's account.
         </Text>
         <Text textAlign={'center'} bold>
-          A 1.5% fee applies on every deposit.
+          Deposits below ₦2k cost ₦20, while others above ₦2k incur a 1% fee
         </Text>
         <HStack>
           <Pressable

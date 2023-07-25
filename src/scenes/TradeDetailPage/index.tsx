@@ -155,22 +155,26 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
 
-  // console.log(data);{
+  // console.log(data);
+  // let x = {
   //   data: {
-  //     admin_comment: null,
-  //     amount: 792,
+  //     admin_comment: 'For testing transactions',
+  //     admin_images: null,
+  //     amount: 10000,
+  //     bank: null,
+  //     bank_id: null,
   //     card: null,
   //     comment: null,
-  //     created_at: '2023-07-10T17:52:32.000000Z',
-  //     description: '1 unit(s) of 0.99USD PUBG Mobile UC NG Order',
-  //     id: 180,
-  //     payment_status: 'succeed',
-  //     redeem_code: [{"cardNumber": "X32jxtest", "pinCode": "29336test"}]
-  //     reference: 'CVD-RDLY-BUY-OipLtRcnOpBogSRm',
+  //     created_at: '2023-07-10T09:01:01.000000Z',
+  //     description: null,
+  //     id: 171,
+  //     images: [],
+  //     payment_status: 'pending',
+  //     recipient: { id: 34, username: 'dondaniel' },
+  //     reference: 'CVCRDTQCYRBPMDZD',
   //     status: 'succeed',
-  //     type: 'buy',
-  //     unit: 1,
-  //     user_id: 34,
+  //     type: 'credit',
+  //     unit: 0,
   //   },
   //   message: 'Transaction fetched successfully',
   // };
@@ -225,10 +229,10 @@ Transaction Reference: ${data?.data?.reference}
             />
           )}
           {data?.data?.payment_status &&
-            data?.data?.type.toLowerCase() !== 'bill' &&
-            data?.data?.type.toLowerCase() !== 'payout' &&
-            data?.data?.type.toLowerCase() !== 'fiat' &&
-            data?.data?.type.toLowerCase() !== 'crypto' && (
+            data?.data?.type?.toLowerCase() !== 'bill' &&
+            data?.data?.type?.toLowerCase() !== 'payout' &&
+            data?.data?.type?.toLowerCase() !== 'fiat' &&
+            data?.data?.type?.toLowerCase() !== 'crypto' && (
               <ItemButton
                 title="Payment Status"
                 body={
@@ -251,7 +255,7 @@ Transaction Reference: ${data?.data?.reference}
           />
         </TradeDetailPanel>
         <TradeDetailPanel title="TRANSACTION INFO">
-          {data?.data?.type.toLowerCase() !== 'bill' ? (
+          {data?.data?.type?.toLowerCase() !== 'bill' ? (
             <>
               <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
               {data?.data?.card && (
@@ -317,7 +321,7 @@ Transaction Reference: ${data?.data?.reference}
             </ItemText>
           </TradeDetailPanel>
         )}
-        {data?.data?.type.toLowerCase() !== 'bill' ? (
+        {data?.data?.type?.toLowerCase() !== 'bill' ? (
           <TradeDetailPanel title="TRANSACTION FEEDBACK">
             <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
           </TradeDetailPanel>

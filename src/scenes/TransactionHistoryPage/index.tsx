@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useGetAllTransactions, useGetPayoutTransactions, useGetAllBillTransactions } from '@api/hooks/useTransactions';
+import { useGetAllBillTransactions, useGetAllTransactions, useGetPayoutTransactions } from '@api/hooks/useTransactions';
 import CLoader from '@components/CLoader';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
@@ -8,10 +8,10 @@ import { GenericNavigationProps } from '@routes/types';
 import { EmptyPanel, TransDate, TransactionPanel } from '@scenes/DashboardPage';
 import { BoldText } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
-import { Box, useColorModeValue, Pressable, Text, View, FlatList } from 'native-base';
+import { Box, FlatList, Pressable, Text, View, useColorModeValue } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
-import { Animated, Dimensions } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { Dimensions } from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
 
 const FirstRoute = () => {
   const navigation = useNavigation<GenericNavigationProps>();
@@ -22,7 +22,7 @@ const FirstRoute = () => {
   const getTrancationData = useMemo(
     () => ({
       ...opps?.pages[page - 1],
-      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
+      data: opps?.pages?.flatMap((page, i) => page.data.map((data: any) => data)),
     }),
     [opps],
   );
@@ -77,6 +77,9 @@ const SecondRoute = () => {
   const queryClient = useQueryClient();
   const [page] = useState(1);
   const { data: opps, isFetching, isLoading, fetchNextPage } = useGetPayoutTransactions(currency, page);
+
+  console.log('wallet transactions', opps?.pages[0]?.data);
+
   const getTrancationData = useMemo(
     () => ({
       ...opps?.pages[page - 1],
@@ -93,13 +96,16 @@ const SecondRoute = () => {
     });
     return b;
   }, [getTrancationData]);
+
   if (isLoading) return <CLoader />;
+
   if (getTrancationData?.data?.length === 0)
     return (
       <View w="100%" h="full" flex={1} justifyContent={'center'}>
         <EmptyPanel action={() => navigation.navigate('BuyGiftCard')} actionText="Trade Now" />
       </View>
     );
+
   return (
     <View w="100%" mb="8" h="full">
       <FlatList

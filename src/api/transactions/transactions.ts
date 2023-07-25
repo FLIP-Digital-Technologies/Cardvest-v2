@@ -2,21 +2,21 @@ import ApiClient from '@api';
 import env from '@env';
 import { cacheService } from '@utils/cache';
 import {
-  CreateSellOrderRequestPayload,
-  CreateBuyOrderRequestPayload,
   CancelTransactionRequestPayload,
-  PurchaseAirtimeRequestPayload,
+  CreateBuyOrderRequestPayload,
+  CreateSellOrderRequestPayload,
   DataPlansRequestPayload,
+  PurchaseAirtimeRequestPayload,
   PurchaseDataPlansRequestPayload,
-  RetryDataPlanPurchaseRequestPayload,
-  VerifyDataPlanPurchase,
+  PurchaseElectricityTokenRequestPayload,
   PurchaseWifiPlanslRequestPayload,
+  RetryDataPlanPurchaseRequestPayload,
+  RetryTokenPurchaseRequestPayload,
+  RetryWifiPlanPurchaseRequestPayload,
+  VerifyDataPlanPurchase,
+  VerifyMeterRequestPayload,
   VerifyWifiPlanPurchaseRequestPayload,
   VerifyWifiPlanRequestPayload,
-  RetryWifiPlanPurchaseRequestPayload,
-  PurchaseElectricityTokenRequestPayload,
-  VerifyMeterRequestPayload,
-  RetryTokenPurchaseRequestPayload,
   VeriyPowerTokenPurchaseRequestPayload,
 } from './types';
 
@@ -52,11 +52,10 @@ export async function getAllTransactions(currency: string, pagination: any) {
 export async function getPayoutTransactions(currency: string, pagination: any) {
   try {
     const token = await cacheService.get('login-user');
-    const response = await ApiClient.get(`${env.API_URL}/transactions/payouts`, {
+    const response = await ApiClient.get(`${env.API_URL}/transactions/wallets?currency=NGN`, {
       params: { page: pagination?.pageParam, currency },
       headers: { Authorization: `Bearer ${token}` },
     });
-
     return response.data;
   } catch (error) {
     console.error('getPayoutTransactions - Error: ', error);

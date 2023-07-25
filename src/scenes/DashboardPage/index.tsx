@@ -271,6 +271,10 @@ export const TransDate: (created_at: any) => string = created_at => {
 
 export const TransactionPanel = ({ data, currency, type }: { data: any; currency: string; type?: any }) => {
   const navigation = useNavigation<GenericNavigationProps>();
+  // console.log('TRANSACTION PANEL DATA', data);
+  // console.log('CURRENCY', currency);
+  // console.log('TYPE', type);
+
   return (
     <Pressable
       onPress={() =>
@@ -307,7 +311,9 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
           <VStack mx="3">
             <Text color="CARDVESTBLACK.50" style={{ textTransform: 'capitalize' }} fontSize="md">
               {data?.card?.category_name}
-              {type === 'withdrawals' && 'Withdrawals'}
+              {data?.type || type}
+              {/* {type === 'wallet' && 'Wallet'}
+              {type === 'withdrawals' && 'Withdrawals'} */}
               {type === 'utilities' && data?.bill?.product}
             </Text>
             <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
@@ -317,7 +323,7 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
         </HStack>
         <VStack alignItems="flex-end">
           <Text color="CARDVESTBLACK.50" fontSize="md">
-            {data?.type === 'sell' ? '+' : '-'}
+            {data?.type === 'sell' ? '+' : data?.isDebit ? '-' : '+'}
             {currency} {Money(data?.amount, currency)}
           </Text>
           <Text
