@@ -1,7 +1,7 @@
 import ApiClient from '@api';
 import {
-  GiftCardsToSellRequestPayload,
   GiftCardsToBuyRequestPayload,
+  GiftCardsToSellRequestPayload,
   GiftcardRequestPayload,
 } from '@api/giftcards/types';
 import env from '@env';
@@ -122,4 +122,43 @@ export async function getGiftcard({ card_id }: GiftcardRequestPayload) {
   //   console.error('getGiftcard - Error: ', error);
   //   throw error;
   // }
+}
+
+export async function getCountries() {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/giftcards/buy/countries`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.data.map((item: any) => ({ label: item.name, value: item.isoName, img: item.flagUrl }));
+  } catch (error) {
+    console.error('getBuyableGiftcards - Error: ', error);
+    throw error;
+  }
+}
+
+export async function getGiftcardsByCountry(country: string) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/giftcards/buy/${country}/cards`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.data.map((item: any) => ({ label: item.name, value: item.id, ...item }));
+  } catch (error) {
+    console.error('getBuyableGiftcards - Error: ', error);
+    throw error;
+  }
+}
+
+export async function createBuyTransaction(payload: any) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.post(`${env.API_URL}/transactions/buy`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('createTransaction - Error: ', error);
+    throw error;
+  }
 }

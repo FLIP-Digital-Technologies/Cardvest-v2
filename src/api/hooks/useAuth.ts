@@ -8,7 +8,6 @@ import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
-import { AxiosError } from 'axios';
 import { Adjust, AdjustEvent } from 'react-native-adjust';
 
 function useCreateUser() {
@@ -58,7 +57,7 @@ function useCreateUser() {
           message: 'User created successfully, Kindly login with your email and password.',
         });
       },
-      onError: async (data: AxiosError) => {
+      onError: async (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
@@ -127,7 +126,7 @@ function useLoginUser() {
         });
       }
     },
-    onError: (data: AxiosError) => {
+    onError: (data: any) => {
       console.error('login error: ', data);
       if (data?.c) return;
       onOpenToast({

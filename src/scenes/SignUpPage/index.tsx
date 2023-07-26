@@ -6,8 +6,22 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { ProgressStepperIndicator } from '@scenes/KYCPage';
 import { BoldText, validateEmail } from '@scenes/LoginPage';
-import { View, Text, Center, Button, Pressable, ScrollView, HStack, CheckIcon, Select, Box } from 'native-base';
+import {
+  Actionsheet,
+  Box,
+  Button,
+  Center,
+  CheckIcon,
+  FlatList,
+  HStack,
+  Pressable,
+  ScrollView,
+  Select,
+  Text,
+  View,
+} from 'native-base';
 import React, { FC, memo, useCallback, useState } from 'react';
+import { SvgUri } from 'react-native-svg';
 
 const ReferralSelect = (props: any) => {
   const { value, setValue, label } = props;
@@ -82,7 +96,7 @@ export const CountrySelect = (props: any) => {
           <Select.Item
             isDisabled
             label="Select Country"
-            value="non"
+            value=""
             _disabled={{ opacity: 1 }}
             startIcon={
               <HStack position="relative" w="100%" justifyContent="space-between" alignItems="center">
@@ -136,6 +150,116 @@ export const CountrySelect = (props: any) => {
           />
         </Select>
       </Box>
+    </Box>
+  );
+};
+
+const SelectItem = memo(({ value, item, setValue }: any) => {
+  const active = value === item.value;
+  // console.log(item);
+  return (
+    <>
+      <Pressable onPress={() => setValue(item.value)}>
+        <HStack w="87%" py="2" justifyContent="space-between" alignItems="center" px="3">
+          <HStack h="7" space="2" alignItems="center">
+            {!!item?.img && (
+              <View h="7" w="7" rounded={'full'} overflow="hidden">
+                <SvgUri uri={item.img} style={{ borderRadius: 99999 }} height="100%" width="100%" />
+              </View>
+            )}
+            <Text>{item.label}</Text>
+          </HStack>
+          {active ? (
+            <View w="6" h="5">
+              <RadioChecked />
+            </View>
+          ) : (
+            <View w="6" h="5">
+              <RadioUnChecked />
+            </View>
+          )}
+        </HStack>
+      </Pressable>
+    </>
+  );
+});
+
+export const SelectComponent = ({
+  value,
+  setValue,
+  label = '',
+  options = [],
+  loading = false,
+  loadingText = 'Loading',
+  isDisabled = false,
+  placeholder = 'Select',
+  searchable = false,
+}: any) => {
+  const [showOptions, setShowOptions] = useState(false);
+
+  const [displayedOptions, setDisplayedOptions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (q: string) => {
+    if (!searchable) return;
+    setSearchQuery(q);
+    search(q);
+  };
+
+  function toggleShowOptions() {
+    if (isDisabled) return;
+    setShowOptions(!showOptions);
+  }
+
+  async function search(q: string) {
+    const results: { label: string }[] = [];
+    if (q) {
+      options.forEach((item: { label: string }) => {
+        if (item.label.toLowerCase().includes(q.toLowerCase())) {
+          results.push(item);
+        }
+      });
+      setDisplayedOptions(results as any);
+    } else {
+      setDisplayedOptions(options);
+    }
+  }
+
+  return (
+    <Box>
+      <Pressable onPress={toggleShowOptions}>
+        <Input
+          label={label}
+          placeholder={loading ? loadingText + '...' : placeholder}
+          value={options.find((item: any) => item.value === value)?.label || ''}
+          disabled
+          placeholderTextColor="#000"
+        />
+      </Pressable>
+      <Actionsheet isOpen={showOptions} onClose={toggleShowOptions}>
+        <Actionsheet.Content h={options.length > 5 ? '2xl' : 'md'} mt="auto">
+          {searchable ? (
+            <View w="100%" p="0" h="auto">
+              <Input value={searchQuery} onChangeText={handleSearch} placeholder="Search item" />
+            </View>
+          ) : null}
+          <FlatList
+            flex={1}
+            keyExtractor={(item: any) => item.value}
+            data={displayedOptions.length ? displayedOptions : options}
+            renderItem={({ item }: any) => (
+              <SelectItem
+                value={value}
+                item={item}
+                setValue={(val: any) => {
+                  setValue(val);
+                  toggleShowOptions();
+                }}
+              />
+            )}
+          />
+        </Actionsheet.Content>
+      </Actionsheet>
     </Box>
   );
 };

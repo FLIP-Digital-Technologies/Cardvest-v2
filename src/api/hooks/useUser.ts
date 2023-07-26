@@ -1,13 +1,6 @@
 import { getNotification } from '@api/push-notification/push-notification';
-import { CreateUserRequestPayload, ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
-import {
-  createUser,
-  deleteUser,
-  getUserDetails,
-  modifyUser,
-  modifyUserPassword,
-  resendVerificationEmail,
-} from '@api/users/users';
+import { ModifyUserRequestPayload, UserDetailsRequestPayload } from '@api/users/types';
+import { deleteUser, getUserDetails, modifyUser, modifyUserPassword, resendVerificationEmail } from '@api/users/users';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -122,4 +115,4 @@ function useDeleteUser() {
   });
 }
 
-export { useDeleteUser, useUser, useModifyUser, useModifyUserPassword, useGetNotification, useResendVerificationEmail };
+export { useDeleteUser, useGetNotification, useModifyUser, useModifyUserPassword, useResendVerificationEmail, useUser };

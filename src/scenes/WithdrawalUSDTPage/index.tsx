@@ -6,11 +6,11 @@ import TransactionPinModal from '@components/TransactionPinModal';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { FormSelect } from '@scenes/CalculatorPage';
-import { Box, HStack, Text, View, VStack, Select, CheckIcon, Divider, Input as NInput } from 'native-base';
-import React, { FC, memo, useEffect, useMemo } from 'react';
+import { Box, CheckIcon, Divider, HStack, Input as NInput, Select, Text, VStack, View } from 'native-base';
+import React, { FC, memo, useEffect } from 'react';
 
 export const FormCurrencyPicker = (props: any) => {
-  const { currency, setCurrency, label } = props;
+  const { currency, setCurrency, label, onlyNaira = false } = props;
   return (
     <Box my="2">
       {label && (
@@ -66,27 +66,29 @@ export const FormCurrencyPicker = (props: any) => {
               </HStack>
             }
           />
-          <Select.Item
-            label="GHS"
-            value="GHS"
-            startIcon={
-              <HStack w="100%" justifyContent="space-between" alignItems="center">
-                <HStack w="12" mx="-3" h="7" alignItems="center">
-                  <GHS />
-                  <Text> GHS</Text>
+          {!onlyNaira && (
+            <Select.Item
+              label="GHS"
+              value="GHS"
+              startIcon={
+                <HStack w="100%" justifyContent="space-between" alignItems="center">
+                  <HStack w="12" mx="-3" h="7" alignItems="center">
+                    <GHS />
+                    <Text> GHS</Text>
+                  </HStack>
+                  {currency === 'GHS' ? (
+                    <View w="6" h="5">
+                      <RadioChecked />
+                    </View>
+                  ) : (
+                    <View w="6" h="5">
+                      <RadioUnChecked />
+                    </View>
+                  )}
                 </HStack>
-                {currency === 'GHS' ? (
-                  <View w="6" h="5">
-                    <RadioChecked />
-                  </View>
-                ) : (
-                  <View w="6" h="5">
-                    <RadioUnChecked />
-                  </View>
-                )}
-              </HStack>
-            }
-          />
+              }
+            />
+          )}
         </Select>
       </Box>
     </Box>

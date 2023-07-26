@@ -1,14 +1,19 @@
 import { useMixpanel } from '@MixpanelAnalytics';
 import {
   createBankAccount,
+  createVBA,
   deleteBankAccount,
   getAllBankAccounts,
+  getBVNStatus,
   getBankAccount,
+  getVBADetails,
+  verifyBVN,
   verifyBankAccount,
 } from '@api/bank-accounts/bank-accounts';
 import {
   CreateBankAccountRequestPayload,
   DeleteBankAccountRequestPayload,
+  VerifyBVNPayload,
   VerifyBankAccountRequestPayload,
 } from '@api/bank-accounts/types';
 import { useCurrency } from '@hooks/useCurrency';
@@ -25,10 +30,10 @@ function useCreateBankAccount() {
   const [mixpanel, user] = useMixpanel();
   return useMutation(
     ['new-bank-account'],
-    ({ banknumber, bankname, code, accountname, currency }: CreateBankAccountRequestPayload) =>
+    ({ banknumber, bankname, code, accountname }: CreateBankAccountRequestPayload) =>
       createBankAccount({ banknumber, bankname, code, accountname, currency }),
     {
-      onSuccess: async (data: any, variables) => {
+      onSuccess: async (data, variables) => {
         mixpanel.identify(user?.id?.toString());
         await queryClient.invalidateQueries([`user-bank-${currency}`]);
         mixpanel.track('Add Bank Account', {
@@ -49,11 +54,11 @@ function useCreateBankAccount() {
         });
         navigation.navigate('AddAccountFeedback');
       },
-      onError: (data: any) => {
-        if (data?.c) return;
+      onError: (err: any) => {
+        if (err?.c) return;
         onOpenToast({
           status: 'error',
-          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Bank account not created',
+          message: err?.b?.length > 0 ? `${err?.b}` : err?.response?.err?.message || 'Bank account not created',
         });
       },
     },
@@ -72,7 +77,7 @@ function useVerifyBankAccount() {
           message: 'Bank verified successfully',
         });
       },
-      onError: data => {
+      onError: (data: any) => {
         if (data?.c) return;
         onOpenToast({
           status: 'error',
@@ -121,4 +126,100 @@ function useGetBankList(currency: string) {
   return useQuery([`bank-list-${currency}`], () => getAllBankAccounts(currency));
 }
 
-export { useCreateBankAccount, useVerifyBankAccount, useGetBankList, useGetUserBank, useDeleteBankAccount };
+function useVerifyBVN() {
+  const queryClient = useQueryClient();
+  const { currency } = useCurrency();
+  const navigation = useNavigation<GenericNavigationProps>();
+  const [mixpanel] = useMixpanel();
+  return useMutation(
+    ['verify-bvn'],
+    ({ firstName, lastName, bvn }: VerifyBVNPayload) => verifyBVN({ firstName, lastName, bvn, currency }),
+    {
+      onSuccess: async (data: any, variables) => {
+        mixpanel.track('Verify BVN', {
+          firstName: variables.firstName,
+          lastName: variables.lastName,
+        });
+
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+
+        // Firebase Analytics: BVN Verification Event
+        await analytics().logEvent('bvn_verified', {
+          user_id: data?.data?.user?.id,
+          first_name: variables.firstName,
+          last_name: variables.lastName,
+          // bvn: variables.bvn,
+        });
+
+        onOpenToast({
+          status: 'success',
+          message: 'BVN verified successfully',
+        });
+
+        navigation.navigate('IdentityVerifiedSuccessPage');
+      },
+      onError: (data: any) => {
+        // console.log('BVN VERIFICATION ERROR: ', data);
+        if (data?.c) return;
+        onOpenToast({
+          status: 'error',
+          message: data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'BVN Verification failed.',
+        });
+      },
+    },
+  );
+}
+
+function useCreateVBA() {
+  const queryClient = useQueryClient();
+  const { currency } = useCurrency();
+  const navigation = useNavigation<GenericNavigationProps>();
+  const [mixpanel] = useMixpanel();
+  return useMutation(['verify-bvn'], () => createVBA({ currency }), {
+    onSuccess: async (data: any) => {
+      mixpanel.track('create-vba');
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+
+      // Firebase Analytics: BVN Verification Event
+      await analytics().logEvent('vba_created', {
+        user_id: data?.data?.user?.id,
+      });
+
+      onOpenToast({
+        status: 'success',
+        message: 'Virtual bank account created.',
+      });
+      navigation.navigate('VBADetails');
+    },
+    onError: (data: any) => {
+      if (data?.c) return;
+      onOpenToast({
+        status: 'error',
+        message:
+          data?.b?.length > 0 ? `${data?.b}` : data?.response?.data?.message || 'Error creating Virtual Bank Account.',
+      });
+    },
+  });
+}
+
+function useGetVBADetails() {
+  const { currency } = useCurrency();
+  return useQuery([`vba-details-${currency}`], () => getVBADetails(currency));
+}
+
+function useCheckBVNVerification(enabled = false) {
+  const { currency } = useCurrency();
+  return useQuery({ queryKey: [`bvn-verified-${currency}`], queryFn: () => getBVNStatus(currency), enabled });
+}
+
+export {
+  useCheckBVNVerification,
+  useCreateBankAccount,
+  useCreateVBA,
+  useDeleteBankAccount,
+  useGetBankList,
+  useGetUserBank,
+  useGetVBADetails,
+  useVerifyBVN,
+  useVerifyBankAccount,
+};

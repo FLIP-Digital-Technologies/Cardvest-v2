@@ -4,7 +4,7 @@ import CSafeAreaView from '@components/CSafeAreaView';
 import Input from '@components/Input';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { View, Text, Center, Button, Box, Pressable, ScrollView, Heading } from 'native-base';
+import { Box, Button, Center, Pressable, ScrollView, Text, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 import { Platform } from 'react-native';
 

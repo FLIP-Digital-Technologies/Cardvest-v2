@@ -1,22 +1,22 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
+  Bank,
+  BuyGiftCardMore,
+  Calculator,
   CloseBtn,
   DrawerTopBG,
+  Home,
+  Logout,
   Love,
   Notification,
   RightAngle,
+  Settings,
   Support,
   TransactionHistory,
-  Bank,
-  Logout,
-  Home,
   Wallet,
-  Calculator,
-  Settings,
-  BuyGiftCardMore,
 } from '@assets/SVG';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
+import { DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddAccountFeedbackPage from '@scenes/AddAccountFeedbackPage';
 import AddAccountPage from '@scenes/AddAccountPage';
@@ -30,6 +30,7 @@ import BuyGiftCardPage from '@scenes/BuyGiftCardPage';
 import BuyGiftCardTradeFeedbackPage from '@scenes/BuyGiftCardTradeFeedbackPage';
 import BuyGiftCardTradeSummaryPage from '@scenes/BuyGiftCardTradeSummaryPage';
 import BuyWifiPage from '@scenes/BuyWifiPage';
+import CalculateGiftcardPricePage from '@scenes/CalculateGiftcardPricePage';
 import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
 import ChangePinPage from '@scenes/ChangePinPage';
@@ -39,6 +40,9 @@ import DeleteAccountPage from '@scenes/DeleteAccountPage';
 import DepositPage from '@scenes/DepositPage';
 import ForgotPinPage from '@scenes/ForgotPinPage';
 import FundAccountFeedbackPage from '@scenes/FundAccountFeedbackPage';
+import IdentityVerificationPage from '@scenes/IdentityVerificationPage';
+import IdentityVerifiedSuccessPage from '@scenes/IdentityVerifiedSuccessPage';
+import InsufficientFundsErrorPage from '@scenes/InsufficientFundsErrorPage';
 import KYCPage from '@scenes/KYCPage';
 import LifeChat from '@scenes/LifeChat';
 import LovePage from '@scenes/LovePage';
@@ -59,6 +63,9 @@ import SettingPage from '@scenes/SettingPage';
 import SupportPage from '@scenes/SupportPage';
 import TradeDetailPage from '@scenes/TradeDetailPage';
 import TransactionHistoryPage from '@scenes/TransactionHistoryPage';
+import TransactionProcessingPage from '@scenes/TransactionProcessingPage';
+import VBADetailsPage from '@scenes/VBADetailsPage';
+import VBAPage from '@scenes/VBAPage';
 import WalletsPage from '@scenes/WalletsPage';
 import Withdrawal from '@scenes/Withdrawal';
 import WithdrawalFeedbackPage from '@scenes/WithdrawalFeedbackPage';
@@ -66,9 +73,9 @@ import WithdrawalUSDTPage from '@scenes/WithdrawalUSDTPage';
 import WithdrawalsPage from '@scenes/WithdrawalsPage';
 import { useQuery } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
-import { View, Text, Avatar, VStack, HStack, Pressable, Divider } from 'native-base';
-import { FC } from 'react';
+import { Avatar, Divider, HStack, Pressable, Text, VStack, View } from 'native-base';
 import * as React from 'react';
+import { FC } from 'react';
 import NotificationContainer from '../../NotificationContainer';
 
 const MainStack = createStackNavigator();
@@ -327,6 +334,36 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        {/* VBA Feature screens start */}
+        <MainStack.Screen
+          name="VBAPage"
+          component={VBAPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="IdentityVerificationPage"
+          component={IdentityVerificationPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="IdentityVerifiedSuccessPage"
+          component={IdentityVerifiedSuccessPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="VBADetails"
+          component={VBADetailsPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* VBA Feature screens end */}
         <MainStack.Screen
           name="SellGiftCard"
           component={SellGiftCardPage}
@@ -474,9 +511,24 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        {/* Buy Giftcard feature screens start */}
         <MainStack.Screen
           name="BuyGiftCard"
           component={BuyGiftCardPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="CalculateGiftcardPricePage"
+          component={CalculateGiftcardPricePage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="TransactionProcessing"
+          component={TransactionProcessingPage}
           options={{
             headerShown: false,
           }}
@@ -495,6 +547,14 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        <MainStack.Screen
+          name="InsufficientFundsErrorPage"
+          component={InsufficientFundsErrorPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* Buy Giftcard feature screens end */}
         <MainStack.Screen
           name="FundAccountFeedback"
           component={FundAccountFeedbackPage}

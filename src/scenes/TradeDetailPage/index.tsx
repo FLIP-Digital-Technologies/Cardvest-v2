@@ -7,7 +7,7 @@ import { Money } from '@scenes/DashboardPage';
 import { UploadPanel } from '@scenes/SellGiftCard';
 import { useQueryClient } from '@tanstack/react-query';
 import * as dayjs from 'dayjs';
-import { View, Text, VStack, Button, Pressable, Modal, HStack, Image, Link } from 'native-base';
+import { Button, HStack, Image, Link, Modal, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 
 export const UploadedItems = ({ images }: { images?: Array<string> }) => {
@@ -106,7 +106,7 @@ const TagIndicator = ({ text, color }: { text: string; color: string }) => {
   );
 };
 
-const ItemText = ({ body, title }: { body: string; title: string }) => {
+const ItemText = ({ body = '', title, children = null }: { body?: string; title: string; children?: any }) => {
   return (
     <VStack my="2">
       <Text my="1" color="CARDVESTGREY.50">
@@ -114,6 +114,7 @@ const ItemText = ({ body, title }: { body: string; title: string }) => {
       </Text>
       <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
         {body}
+        {children}
       </Text>
     </VStack>
   );
@@ -153,6 +154,31 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const userData: any = queryClient.getQueryData(['user']);
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
+
+  // console.log(data);
+  // let x = {
+  //   data: {
+  //     admin_comment: 'For testing transactions',
+  //     admin_images: null,
+  //     amount: 10000,
+  //     bank: null,
+  //     bank_id: null,
+  //     card: null,
+  //     comment: null,
+  //     created_at: '2023-07-10T09:01:01.000000Z',
+  //     description: null,
+  //     id: 171,
+  //     images: [],
+  //     payment_status: 'pending',
+  //     recipient: { id: 34, username: 'dondaniel' },
+  //     reference: 'CVCRDTQCYRBPMDZD',
+  //     status: 'succeed',
+  //     type: 'credit',
+  //     unit: 0,
+  //   },
+  //   message: 'Transaction fetched successfully',
+  // };
+
   if (!isFetched) return <CLoader />;
   const body = `
 Name: ${userData?.firstname} ${userData?.lastname}
@@ -203,10 +229,10 @@ Transaction Reference: ${data?.data?.reference}
             />
           )}
           {data?.data?.payment_status &&
-            data?.data?.type.toLowerCase() !== 'bill' &&
-            data?.data?.type.toLowerCase() !== 'payout' &&
-            data?.data?.type.toLowerCase() !== 'fiat' &&
-            data?.data?.type.toLowerCase() !== 'crypto' && (
+            data?.data?.type?.toLowerCase() !== 'bill' &&
+            data?.data?.type?.toLowerCase() !== 'payout' &&
+            data?.data?.type?.toLowerCase() !== 'fiat' &&
+            data?.data?.type?.toLowerCase() !== 'crypto' && (
               <ItemButton
                 title="Payment Status"
                 body={
@@ -229,7 +255,7 @@ Transaction Reference: ${data?.data?.reference}
           />
         </TradeDetailPanel>
         <TradeDetailPanel title="TRANSACTION INFO">
-          {data?.data?.type.toLowerCase() !== 'bill' ? (
+          {data?.data?.type?.toLowerCase() !== 'bill' ? (
             <>
               <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
               {data?.data?.card && (
@@ -280,7 +306,22 @@ Transaction Reference: ${data?.data?.reference}
             )}
           </TradeDetailPanel>
         )}
-        {data?.data?.type.toLowerCase() !== 'bill' ? (
+        {data?.data?.redeem_code && data?.data?.redeem_code?.length > 0 && (
+          <TradeDetailPanel title="GIFT CARD DETAILS">
+            <ItemText title="Card PIN/Code">
+              {data?.data?.redeem_code &&
+                data?.data?.redeem_code?.map((item: any) => (
+                  <>
+                    <Text>{'\u2022'}</Text>
+                    <Text my="1" color="CARDVESTGREY.900" style={{ textTransform: 'uppercase' }}>
+                      {item?.cardNumber ?? item?.pinCode}
+                    </Text>
+                  </>
+                ))}
+            </ItemText>
+          </TradeDetailPanel>
+        )}
+        {data?.data?.type?.toLowerCase() !== 'bill' ? (
           <TradeDetailPanel title="TRANSACTION FEEDBACK">
             <ItemText title="Admin’s Feedback" body={data?.data?.admin_comment || 'N/A'} />
           </TradeDetailPanel>

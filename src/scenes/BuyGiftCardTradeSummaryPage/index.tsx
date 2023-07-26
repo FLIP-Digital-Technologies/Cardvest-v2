@@ -2,7 +2,7 @@ import { useMixpanel } from '@MixpanelAnalytics';
 import { useCreateBuyOrder } from '@api/hooks/useTransactions';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import * as dayjs from 'dayjs';
-import { View, Text, VStack, HStack } from 'native-base';
+import { HStack, Text, VStack, View } from 'native-base';
 import React, { FC, memo } from 'react';
 
 export const SummaryPanel = ({
