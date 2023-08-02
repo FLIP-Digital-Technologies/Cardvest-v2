@@ -3,7 +3,7 @@ import messaging from '@react-native-firebase/messaging';
 // import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import axios from 'axios';
-import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Linking } from 'react-native';
 import deviceInfoModule, { useIsEmulator } from 'react-native-device-info';
 
@@ -76,7 +76,7 @@ export default function NotificationContainer({ children }) {
         const res = await cacheService.get('user');
         if (JSON.parse(res || '{}')?.id !== data?.id) {
           setData(JSON.parse(res || '{}'));
-          // console.log('locked in ', modelName, AppToken, res);
+          console.log('locked in ', modelName, AppToken, res);
         }
         return res;
       } catch (error) {
@@ -89,17 +89,17 @@ export default function NotificationContainer({ children }) {
   // const lastNotificationResponse = Notifications.useLastNotificationResponse();
 
   useEffect(() => {
-    // console.log('bird', modelName);
+    console.log('bird', modelName);
     if (data) {
-      // console.log('bird', modelName, 'naje000');
+      console.log('bird', modelName, 'naje000');
       registerForPushNotificationsAsync().then(token => {
-        console.log(
-          'data',
-          'we have made our promise and returning data for you to send to backend',
-          modelName,
-          'aje',
-          token,
-        );
+        // console.log(
+        //   'data',
+        //   'we have made our promise and returning data for you to send to backend',
+        //   modelName,
+        //   'aje',
+        //   token,
+        // );
         if (token) sendTokenToBackend(token);
       });
     }
@@ -138,7 +138,7 @@ export default function NotificationContainer({ children }) {
           finalStatus = status;
         }
         if (finalStatus !== 'granted') {
-          // console.log("Failed to get push token for push notification!");
+          console.log('Failed to get push token for push notification!');
           return;
         }
         console.log('floak', token, deviceToken);
@@ -154,10 +154,10 @@ export default function NotificationContainer({ children }) {
 
   const sendTokenToBackend = async ({ token, deviceToken }) => {
     // sendPushNotification(token);
-    // console.log('phone', modelName, token, 'is the token and device token by my side', deviceToken);
+    console.log('phone', modelName, token, 'is the token and device token by my side', deviceToken);
     try {
       const AppToken = await cacheService.get('login-user');
-      // console.log(modelName, token, 'token is here and want to send push notification');
+      console.log(modelName, token, 'token is here and want to send push notification');
       const res = await axios.post(
         `${env.API_URL}/push-notification/register`,
         {

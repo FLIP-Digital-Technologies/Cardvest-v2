@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { cacheService } from '@utils/cache';
 import { onOpenToast } from '@utils/toast';
-import { Button, Text, VStack, View, useToken } from 'native-base';
+import { Button, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useLayoutEffect, useState } from 'react';
 import OtpInputs from 'react-native-otp-inputs';
 

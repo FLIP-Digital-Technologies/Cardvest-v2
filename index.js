@@ -5,7 +5,7 @@ import messaging from '@react-native-firebase/messaging';
 import React from 'react';
 import { AppRegistry, LogBox, Platform } from 'react-native';
 import { Settings } from 'react-native-fbsdk-next';
-import { PERMISSIONS, RESULTS, request, check } from 'react-native-permissions';
+import { PERMISSIONS, RESULTS, check, request } from 'react-native-permissions';
 import { name as appName } from './app.json';
 import App from './src/App';
 import Clarity from './src/Clarity';

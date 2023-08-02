@@ -1346,7 +1346,7 @@ export const Gotv = () => <SvgXml xml={GotvIcon} width="100%" height="100%" />;
 
 const DropDownIcon = `
 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.96004 4.9751L6.70004 8.2351C6.31504 8.6201 5.68504 8.6201 5.30004 8.2351L2.04004 4.9751" stroke="#212121" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.96004 4.9751L6.70004 8.2351C6.31504 8.6201 5.68504 8.6201 5.30004 8.2351L2.04004 4.9751" stroke="#000" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `;
 

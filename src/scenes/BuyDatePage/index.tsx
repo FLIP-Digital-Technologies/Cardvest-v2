@@ -1,5 +1,5 @@
 import { useMixpanel } from '@MixpanelAnalytics';
-import { useGetDataPlans, usePurchaseData, useGetDataPlansProviders } from '@api/hooks/useTransactions';
+import { useGetDataPlans, useGetDataPlansProviders, usePurchaseData } from '@api/hooks/useTransactions';
 import Input from '@components/Input';
 import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';

@@ -6,7 +6,7 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { BoldText } from '@scenes/LoginPage';
 import { onOpenToast } from '@utils/toast';
-import { View, Button, ScrollView, Text, VStack, Pressable } from 'native-base';
+import { Button, Pressable, ScrollView, Text, VStack, View } from 'native-base';
 import React, { FC, memo } from 'react';
 
 const ReferralPage: FC = () => {

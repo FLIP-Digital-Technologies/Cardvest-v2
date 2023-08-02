@@ -11,6 +11,7 @@ module.exports = {
   ],
   rules: {
     'ordered-imports': 0,
+    'no-useless-catch': "off"
   },
   overrides: [
     {
@@ -31,6 +32,7 @@ module.exports = {
         'react-native/no-inline-styles': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
+        "@typescript-eslint/no-explicit-any": "off"
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {

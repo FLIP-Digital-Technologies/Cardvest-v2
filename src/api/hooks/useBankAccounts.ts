@@ -159,7 +159,7 @@ function useVerifyBVN() {
         navigation.navigate('IdentityVerifiedSuccessPage');
       },
       onError: (data: any) => {
-        // console.log('BVN VERIFICATION ERROR: ', data);
+        console.log('BVN VERIFICATION ERROR: ', data);
         if (data?.c) return;
         onOpenToast({
           status: 'error',

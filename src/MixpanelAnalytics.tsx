@@ -2,8 +2,7 @@ import env from '@env';
 // import { useQueryClient } from '@tanstack/react-query';
 import { cacheService } from '@utils/cache';
 import { Mixpanel, MixpanelType } from 'mixpanel-react-native';
-import React, { FC, useLayoutEffect } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { FC, createContext, useContext, useEffect, useLayoutEffect, useState } from 'react';
 
 const MixpanelContext = createContext<any>(null);
 

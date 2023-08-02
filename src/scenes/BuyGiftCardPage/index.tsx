@@ -4,7 +4,7 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { SelectComponent } from '@scenes/SignUpPage';
+import { NBSelectComponent, SelectComponent } from '@scenes/SignUpPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Button, VStack } from 'native-base';
 import React, { FC, memo, useState } from 'react';
@@ -12,7 +12,7 @@ import React, { FC, memo, useState } from 'react';
 const BuyGiftCardPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleSwitchCurrency } = useCurrency();
-  const [country, setCountry] = useState<string>('');
+  const [country, setCountry] = useState<string>(currency === 'NGN' ? 'NG' : currency === 'GHC' ? 'GH' : '');
   const [giftcard, setGiftcard] = useState<any>('');
   const [recipientEmail, setRecipientEmail] = useState('');
   const { data: countries, isFetching: isFetchingCountries } = useGetGiftcardCountries();
@@ -46,18 +46,21 @@ const BuyGiftCardPage: FC = () => {
         <FormCurrencyPicker label="Payout Wallet" setCurrency={handleSwitchCurrency} currency={currency} onlyNaira />
         <SelectComponent
           label="What country are you buying from?"
+          placeholder="Select Country"
           searchable
           setValue={setCountry}
           value={country}
           loading={isFetchingCountries}
+          loadingText="Please wait"
           options={countries}
         />
-        <SelectComponent
+        <NBSelectComponent
           label="Giftcard"
-          searchable
+          placeholder="Select Giftcard"
           setValue={handleSelectGiftcard}
           value={giftcard.id}
           loading={isFetchingGiftcards}
+          isDisabled={!country}
           options={giftcards}
         />
         <Input label="Recipient's Email" value={recipientEmail} onChangeText={setRecipientEmail} />

@@ -139,7 +139,7 @@ export const RootStackScreen: FC = () => {
       //   user_id: data?.id,
       //   type: 'register',
       // });
-      // console.log('Your Firebase Token is:', deviceToken, 'res');
+      console.log('Your Firebase Token is:', deviceToken, 'res');
     } catch (err) {
       //Do nothing
       console.error('Token extraction error ', err);
