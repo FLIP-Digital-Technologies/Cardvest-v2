@@ -4,7 +4,7 @@ import BackButtonTitleCenter from '@components/Wrappers/BackButtonTitleCenter';
 import { useCurrency } from '@hooks/useCurrency';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { NBSelectComponent, SelectComponent } from '@scenes/SignUpPage';
+import { SelectComponent } from '@scenes/SignUpPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { Button, VStack } from 'native-base';
 import React, { FC, memo, useState } from 'react';
@@ -54,8 +54,9 @@ const BuyGiftCardPage: FC = () => {
           loadingText="Please wait"
           options={countries}
         />
-        <NBSelectComponent
+        <SelectComponent
           label="Giftcard"
+          searchable
           placeholder="Select Giftcard"
           setValue={handleSelectGiftcard}
           value={giftcard.id}
@@ -67,7 +68,6 @@ const BuyGiftCardPage: FC = () => {
 
         <Button
           onPress={handleSubmit}
-          // navigation.navigate('InsufficientFundsErrorPage' as any)}
           my="3"
           size="lg"
           py="4"
