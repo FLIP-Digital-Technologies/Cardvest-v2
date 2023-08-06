@@ -11,7 +11,7 @@ import { GenericNavigationProps } from '@routes/types';
 import { FormSelect } from '@scenes/CalculatorPage';
 import { Money } from '@scenes/DashboardPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
-import { Box, HStack, Text, View, VStack, Divider, Button, Pressable, Modal, Image } from 'native-base';
+import { Box, Button, Divider, HStack, Image, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 
 export const UploadPanel = ({

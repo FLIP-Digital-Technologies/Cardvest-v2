@@ -61,12 +61,12 @@ export async function getBVNStatus(currency: string) {
       params: { currency },
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log('BVN VERIFICATION RESPONSE', response);
-    console.log('BVN VERIFICATION RESPONSE DATA', response.data);
+    // console.log('BVN VERIFICATION RESPONSE', response);
+    // console.log('BVN VERIFICATION RESPONSE DATA', response.data);
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw error;
   }
 }
@@ -138,7 +138,7 @@ export async function createBankAccount({
 
 export async function verifyBVN({ firstName, lastName, bvn, currency }: VerifyBVNPayload) {
   try {
-    console.log(firstName, lastName);
+    // console.log(firstName, lastName);
 
     const token = await cacheService.get('login-user');
     const response = await ApiClient.post(

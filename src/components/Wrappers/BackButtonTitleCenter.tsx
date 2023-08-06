@@ -2,7 +2,7 @@ import { BackButton } from '@assets/SVG';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { HStack, ScrollView, Text, View, VStack, Pressable, Button } from 'native-base';
+import { Button, HStack, Pressable, ScrollView, Text, VStack, View } from 'native-base';
 import React, { FC, memo } from 'react';
 import { RefreshControl } from 'react-native';
 
@@ -37,7 +37,7 @@ const BackButtonTitleCenter: FC<{
           <Pressable h="10" w="10" onPress={backAction ? backAction : () => navigation.goBack()}>
             <BackButton />
           </Pressable>
-          <Text fontSize="lg" mx="auto" textAlign="center">
+          <Text fontSize="lg" mx="auto" flex={1} textAlign="center">
             {title}
           </Text>
           <View w="10" />

@@ -23,7 +23,7 @@ const Input = ({
   label = '',
   placeholder = '',
   fontWeight = '',
-  color = 'CARDVESTBLACK.50',
+  color = 'black',
   InputRightElement,
   value,
   type,
@@ -34,6 +34,7 @@ const Input = ({
   componentRef = null,
   hint,
   placeholderTextColor,
+  ...props
 }: {
   label?: string;
   fontWeight?: string;
@@ -102,6 +103,7 @@ const Input = ({
           type={type !== 'password' ? type : show ? 'text' : 'password'}
           onChangeText={onChangeText}
           placeholderTextColor={placeholderTextColor}
+          {...props}
         />
       </Box>
       {hint && (

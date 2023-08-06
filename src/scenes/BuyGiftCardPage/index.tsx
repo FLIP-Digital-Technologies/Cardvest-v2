@@ -12,7 +12,7 @@ import React, { FC, memo, useState } from 'react';
 const BuyGiftCardPage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
   const { currency, handleSwitchCurrency } = useCurrency();
-  const [country, setCountry] = useState<string>('');
+  const [country, setCountry] = useState<string>(currency === 'NGN' ? 'NG' : currency === 'GHC' ? 'GH' : '');
   const [giftcard, setGiftcard] = useState<any>('');
   const [recipientEmail, setRecipientEmail] = useState('');
   const { data: countries, isFetching: isFetchingCountries } = useGetGiftcardCountries();
@@ -46,25 +46,28 @@ const BuyGiftCardPage: FC = () => {
         <FormCurrencyPicker label="Payout Wallet" setCurrency={handleSwitchCurrency} currency={currency} onlyNaira />
         <SelectComponent
           label="What country are you buying from?"
+          placeholder="Select Country"
           searchable
           setValue={setCountry}
           value={country}
           loading={isFetchingCountries}
+          loadingText="Please wait"
           options={countries}
         />
         <SelectComponent
           label="Giftcard"
           searchable
+          placeholder="Select Giftcard"
           setValue={handleSelectGiftcard}
           value={giftcard.id}
           loading={isFetchingGiftcards}
+          isDisabled={!country}
           options={giftcards}
         />
         <Input label="Recipient's Email" value={recipientEmail} onChangeText={setRecipientEmail} />
 
         <Button
           onPress={handleSubmit}
-          // navigation.navigate('InsufficientFundsErrorPage' as any)}
           my="3"
           size="lg"
           py="4"

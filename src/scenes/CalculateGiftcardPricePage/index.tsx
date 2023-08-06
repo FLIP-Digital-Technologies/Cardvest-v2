@@ -30,22 +30,6 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
 
   const params = route.params;
 
-  // const giftcardData = {
-  //   brand: { brandId: 320, brandName: 'Binance' },
-  //   country: { flagUrl: 'https://s3.amazonaws.com/rld-flags/ng.svg', isoName: 'NG', name: 'Nigeria' },
-  //   denominations: [50, 100],
-  //   id: 16192,
-  //   label: 'Binance NG',
-  //   logo_url: 'https://cdn.reloadly.com/giftcards/e9333314-918b-4339-b495-854b7f714376.png',
-  //   name: 'Binance NG',
-  //   rate: 800,
-  //   rates: { NGN: 1 },
-  //   redeemInstruction: 'To redeem, visit https://www.binance.com/en/gift-card',
-  //   terms:
-  //     "To redeem, visit https://www.binance.com/en/gift-card or Download the Binance App from https://binance.com/en/download. Create an account, then tap the 'Profile Icon' on top left corner, tap Gift Card: tap Receive, tap Redeem Crypto, enter Gift Card code (16-digit alphanumeric sequence. For more questions, please see Gift Cards FAQ",
-  //   value: 16192,
-  // };
-
   if (!params?.wallet || !params?.country || !params?.giftcard || !params?.recipientEmail) {
     navigation.navigate('BuyGiftCard');
   }
@@ -110,9 +94,9 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
         Go to apple.com/redeem to add to your Apple Account balance
       </Text> */}
       <VStack space={5} my="5" flex={1}>
-        <View borderRadius={15} p="5" backgroundColor={'gray.100'}>
+        <View borderRadius={15} p="5" backgroundColor={'#F7F9FB'}>
           <VStack space={5}>
-            <VStack space={3} pb={3} borderBottomColor={'CARDVESTGREEN'} borderBottomWidth={1} borderStyle={'dashed'}>
+            <VStack space={3} pb={7} borderBottomColor={'CARDVESTGREEN'} borderBottomWidth={1} borderStyle={'dashed'}>
               <HStack alignItems={'center'} space={3}>
                 <Text color="CARDVESTGREEN" flex={1}>
                   Card Unit:
@@ -120,6 +104,8 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                 <Box flex={1}>
                   <Select
                     backgroundColor="white"
+                    p="3"
+                    borderRadius={'lg'}
                     selectedValue={cardUnit}
                     accessibilityLabel="Choose Card Unit"
                     _selectedItem={{
@@ -155,6 +141,8 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                 </Text>
                 <Input
                   backgroundColor={'white'}
+                  p="3"
+                  borderRadius={'lg'}
                   onChangeText={(val: string) => {
                     if (val === '') {
                       return setQuantity(0);
@@ -167,10 +155,10 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                   value={`${quantity}`}
                   flex={1}
                 />
-                <HStack flex={1} space={3}>
+                <HStack flex={1} space={2}>
                   <IconButton
                     variant="solid"
-                    size={'sm'}
+                    size={'xs'}
                     backgroundColor={'CARDVESTGREEN'}
                     color="white"
                     borderRadius={'full'}
@@ -179,7 +167,7 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                   />
                   <IconButton
                     variant="solid"
-                    size={'sm'}
+                    size={'xs'}
                     backgroundColor={'CARDVESTGREEN'}
                     color="white"
                     borderRadius={'full'}
@@ -189,7 +177,7 @@ const CalculateGiftcardPricePage: FC = ({ route, navigation }: any) => {
                 </HStack>
               </HStack>
             </VStack>
-            <HStack alignItems={'center'} space={3}>
+            <HStack alignItems={'center'} space={3} pt="2" pb="3">
               <Text color="CARDVESTGREEN" flex={1}>
                 Total Price:
               </Text>
