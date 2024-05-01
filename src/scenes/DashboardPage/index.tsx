@@ -44,6 +44,7 @@ import * as dayjs from 'dayjs';
 import { Avatar, Box, Button, HStack, Image, Pressable, ScrollView, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 import { RefreshControl } from 'react-native';
+import { CryptoIcon } from './components/CryptoIcon';
 
 export function BillAvatar(type: string) {
   switch (type?.toLowerCase()) {
@@ -438,6 +439,11 @@ const Dashboard: FC = () => {
               icon: <BuyGiftCard />,
             },
             {
+              title: 'Sell Crypto',
+              action: () => navigation.navigate('SellCryptoPage'),
+              icon: <CryptoIcon />,
+            },
+            {
               title: 'Data',
               action: () => navigation.navigate('BuyDate'),
               icon: <Data />,
@@ -446,11 +452,6 @@ const Dashboard: FC = () => {
               title: 'Airtime',
               action: () => navigation.navigate('BuyAirtime'),
               icon: <Airtime />,
-            },
-            {
-              title: 'Cable',
-              action: () => navigation.navigate('Cable'),
-              icon: <Cable />,
             },
             {
               title: 'More',
