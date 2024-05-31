@@ -1,5 +1,7 @@
 import { useGetAllCategories, useGetGiftcardsToSell } from '@api/hooks/useGiftcards';
 import { Camera, RedTrash, Uploading } from '@assets/SVG';
+import CopyIcon from '@assets/SVG/copy-icon';
+import QRCodeIcon from '@assets/SVG/qrcode-icon';
 import Input from '@components/Input';
 import TextArea from '@components/TextArea';
 import MediaUploader from '@components/Upload/MediaUploader';
@@ -11,72 +13,17 @@ import { FormSelect } from '@scenes/CalculatorPage';
 import { Money } from '@scenes/DashboardPage';
 import { SelectComponent } from '@scenes/SignUpPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
-import { Box, Button, Divider, Flex, HStack, Image, Pressable, Text, VStack, View } from 'native-base';
+import { Box, Button, Divider, Flex, HStack, Icon, Image, Modal, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 import { SelectItemOption } from 'types';
-
-export const UploadPanel = ({
-  canDelete = true,
-  showIcon = true,
-  source,
-}: {
-  canDelete?: boolean;
-  showIcon?: boolean;
-  source?: any;
-}) => {
-  return (
-    <HStack my="3" alignItems="center" justifyContent="space-between">
-      <HStack alignItems="center">
-        <Image src={source} alt="image" borderRadius="lg" h="12" w="12" mr="3" />
-        {source.length > 0 && <Text underline>{source?.split('gift-cards/')?.[1]}</Text>}
-      </HStack>
-      {showIcon && (
-        <React.Fragment>
-          {canDelete ? (
-            <View w="5" h="7">
-              <RedTrash />
-            </View>
-          ) : (
-            <View w="16" h="7">
-              <Uploading />
-            </View>
-          )}
-        </React.Fragment>
-      )}
-    </HStack>
-  );
-};
-
-export const UploadButton = ({ label, onPress, imgs }: { label: string; onPress: any; imgs?: any }) => {
-  return (
-    <React.Fragment>
-      <Box my="2">
-        {(label || onPress) && (
-          <Text mb="2" color="CARDVESTGREY.400">
-            {label || 'Upload Giftcard Image'}
-          </Text>
-        )}
-        <Pressable onPress={() => onPress()} py="4" px="1" backgroundColor="#F7F9FB">
-          <HStack alignItems="center">
-            <View w="10" h="4">
-              <Camera />
-            </View>
-            <Text underline color="CARDVESTGREEN">
-              Upload images here
-            </Text>
-          </HStack>
-        </Pressable>
-        <Text mt="2" fontWeight="light" color="#BABABA" fontSize="xs">
-          You can upload multiple valid images at once
-        </Text>
-      </Box>
-    </React.Fragment>
-  );
-};
 
 const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   const params = route.params;
+
+  // states
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [showRates, setShowRates] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -102,24 +49,75 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
           Please send all USDT via the BEP20 network.
         </Text>
 
-        <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#eeeeee" color="white">
-          <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
-            Tap to scan QR code
-          </Text>
+        <Button
+          my="3"
+          size="lg"
+          p="4"
+          fontSize="md"
+          backgroundColor="#eeeeee"
+          color="white"
+          onPress={() => setShowQRCode(true)}>
+          <HStack space={4} alignItems={'center'}>
+            <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
+              Tap to scan QR code
+            </Text>
+            <QRCodeIcon />
+          </HStack>
         </Button>
 
         <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#eeeeee" color="white">
-          <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
-            0x2966930143c8c460971,,,
-          </Text>
+          <HStack space={'4'}>
+            <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
+              0x2966930143c8c460971,,,
+            </Text>
+            <CopyIcon />
+          </HStack>
         </Button>
 
         <Flex flexGrow={1} mt={24} justifyContent={'flex-end'}>
-          <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#FAC915" color="black">
+          <Button
+            my="3"
+            size="lg"
+            p="4"
+            fontSize="md"
+            backgroundColor="#FAC915"
+            color="black"
+            onPress={() => setShowRates(true)}>
             <Text fontSize={'md'}>Check Rates</Text>
+          </Button>
+
+          <Button
+            backgroundColor={'CARDVESTGREEN'}
+            my="3"
+            size="lg"
+            p="4"
+            fontSize="md"
+            color="black"
+            onPress={() => navigation.navigate('SellCryptoFeedbackPage')}>
+            I have sent the coin
           </Button>
         </Flex>
       </Flex>
+
+      <Modal isOpen={showQRCode} onClose={() => setShowQRCode(false)}>
+        <Modal.Content>
+          <Modal.CloseButton />
+          <Modal.Header>Scan QR code to send USDT</Modal.Header>
+          <Modal.Body p={8}>
+            <View height={200} mt={4} backgroundColor={'gray.300'} />
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+
+      <Modal isOpen={showRates} onClose={() => setShowRates(false)}>
+        <Modal.Content>
+          <Modal.CloseButton />
+          <Modal.Header>Crypto Rates</Modal.Header>
+          <Modal.Body>
+            <Text fontSize={'md'}>Here is the list of the available crypto rates</Text>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </BackButtonTitleCenter>
   );
 };
