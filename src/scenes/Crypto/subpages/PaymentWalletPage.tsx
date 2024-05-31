@@ -11,7 +11,7 @@ import { FormSelect } from '@scenes/CalculatorPage';
 import { Money } from '@scenes/DashboardPage';
 import { SelectComponent } from '@scenes/SignUpPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
-import { Box, Button, Divider, HStack, Image, Pressable, Text, VStack, View } from 'native-base';
+import { Box, Button, Divider, Flex, HStack, Image, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo, useState } from 'react';
 import { SelectItemOption } from 'types';
 
@@ -87,13 +87,39 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   };
   return (
     <BackButtonTitleCenter title="USDT Wallet" isDisabled={false} action={() => handleSubmit()}>
-      <View my="7">
+      <Flex flexDirection={'column'} my="7">
         <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Get the current value for your transaction
         </Text>
 
         <View p="3" />
-      </View>
+        <Text mx="auto" textAlign="center" fontSize="md" color="black">
+          Send USDT to your address and it will be automatically converted to NAIRA or CEDIS depending on the preferred
+          payout wallet, and based on the current rate.
+        </Text>
+
+        <Text mx="auto" mt={16} fontWeight="black" textAlign="center" fontSize="md" color="CARDVESTGREEN">
+          Please send all USDT via the BEP20 network.
+        </Text>
+
+        <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#eeeeee" color="white">
+          <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
+            Tap to scan QR code
+          </Text>
+        </Button>
+
+        <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#eeeeee" color="white">
+          <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
+            0x2966930143c8c460971,,,
+          </Text>
+        </Button>
+
+        <Flex flexGrow={1} mt={24} justifyContent={'flex-end'}>
+          <Button my="3" size="lg" p="4" fontSize="md" backgroundColor="#FAC915" color="black">
+            <Text fontSize={'md'}>Check Rates</Text>
+          </Button>
+        </Flex>
+      </Flex>
     </BackButtonTitleCenter>
   );
 };

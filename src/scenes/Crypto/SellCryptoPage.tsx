@@ -91,7 +91,7 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
 
   const handleSubmit = async () => {
     try {
-      // navigation.navigate();
+      navigation.navigate('SellCryptoPaymentPage');
     } catch (e) {
       console.error(e);
     }
