@@ -16,7 +16,7 @@ const WalletsHistory = () => {
   const [page] = useState(1);
   const { data: opps, isFetching, isLoading, fetchNextPage } = useGetPayoutTransactions(currency, page);
 
-  console.log('wallet transactions', opps?.pages[0]?.data);
+  // console.log('wallet transactions', opps?.pages[0]?.data);
 
   const getTrancationData = useMemo(
     () => ({

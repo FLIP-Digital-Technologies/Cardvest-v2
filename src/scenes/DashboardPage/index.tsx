@@ -320,7 +320,6 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
               {type === 'utilities' && ` ${data?.bill?.product}`}
               {type === 'crypto' && (
                 <Text fontWeight={'bold'} textTransform={'uppercase'}>
-                  {' '}
                   {data?.coin}
                 </Text>
               )}
