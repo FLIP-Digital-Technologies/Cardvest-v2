@@ -9,6 +9,7 @@ import { GenericNavigationProps } from '@routes/types';
 import { onOpenToast } from '@utils/toast';
 import { Button, Flex, HStack, Image, Modal, Text, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
+import { Pressable } from 'react-native';
 
 const cryptoTradeData: CryptoTradeData = {
   id: 127416,
@@ -35,7 +36,7 @@ const cryptoTradeData: CryptoTradeData = {
 
 const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
-  const tradeDetails = (route.params as CryptoTradeData) ?? cryptoTradeData;
+  const tradeDetails = route.params as CryptoTradeData;
 
   // states
   const [showQRCode, setShowQRCode] = useState(false);
@@ -56,14 +57,34 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
         </Text>
 
         <View p="3" />
-        <Text mx="auto" textAlign="center" fontSize="md" color="black">
+        <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Send <Text fontWeight={'bold'}>{tradeDetails.coin}</Text> to your address and it will be automatically
           converted to NAIRA or CEDIS depending on the preferred payout wallet, and based on the current rate.
         </Text>
 
         <Text mx="auto" mt={16} fontWeight="black" textAlign="center" fontSize="md" color="CARDVESTGREEN">
-          Please send all {tradeDetails.coin} with fee in mind.
+          Please send{' '}
+          <Text underline fontStyle={'italic'}>
+            {tradeDetails.payable_amount}
+          </Text>{' '}
+          {tradeDetails.coin} to the wallet below. Please include the necessary fee.
         </Text>
+
+        <Pressable
+          onPress={() => {
+            Clipboard.setString(`${tradeDetails.payable_amount}`);
+            onOpenToast({
+              status: 'success',
+              message: 'Address copied to clipboard',
+            });
+          }}>
+          <HStack justifyContent={'center'} my={'4'}>
+            <Text fontSize={'md'} textAlign={'center'} color={'CARDVESTGREEN'}>
+              Copy Amount{' '}
+            </Text>
+            <CopyIcon />
+          </HStack>
+        </Pressable>
 
         <Button
           my="3"

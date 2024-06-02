@@ -10,10 +10,9 @@ import { SelectComponent } from '@scenes/SignUpPage';
 import { FormCurrencyPicker } from '@scenes/WithdrawalUSDTPage';
 import { formatCurrency, getCurrencySymbol, toMoney } from '@utils/functions';
 import { onOpenToast } from '@utils/toast';
-import { Box, Button, HStack, Modal, Pressable, Text, VStack, View } from 'native-base';
+import { Box, Button, HStack, Modal, Pressable, Text, VStack, View, WarningIcon } from 'native-base';
 import React, { useEffect } from 'react';
 import { FC, memo, useState } from 'react';
-import { Alert } from 'react-native';
 
 const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
@@ -37,8 +36,8 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   const [mixpanel, user] = useMixpanel();
 
   const handleSubmit = async () => {
-    return navigation.navigate('SellCryptoPaymentPage');
-    if (!amount || !selectedCoin || !currency) {
+    // return navigation.navigate('SellCryptoPaymentPage');
+    if (!amountUSD || !selectedCoin || !currency) {
       onOpenToast({
         status: 'error',
         message: 'Please fill all necessary inputs',
@@ -50,7 +49,7 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
       mixpanel.identify(user?.id?.toString());
       mixpanel.track('Sell GiftCard Attempt');
       await sellCryptoAction({
-        amount: amount,
+        amount: amountUSD,
         coin: selectedCoin,
         currency: currency,
       });
@@ -114,7 +113,15 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
 
   useEffect(() => {
     const coin = availableCoins?.find(c => c.name === selectedCoin);
-    if (coin) setSelectedCoinData(coin);
+    if (coin) {
+      setSelectedCoinData(coin);
+      // get the min rate from the rules
+      const minRate = coin.rules.reduce((min, rule) => {
+        const rate = parseFloat(rule.min);
+        return rate < min ? rate : min;
+      }, Infinity);
+      setMinUSDAmount(minRate);
+    }
   }, [availableCoins, selectedCoin]);
 
   useEffect(() => {
@@ -123,7 +130,12 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   }, [currency, selectedCoin]);
 
   return (
-    <BackButtonTitleCenter title="Sell Crypto" actionText="Proceed" isDisabled={false} action={() => handleSubmit()}>
+    <BackButtonTitleCenter
+      title="Sell Crypto"
+      actionText="Proceed"
+      isDisabled={false}
+      action={() => handleSubmit()}
+      isLoading={isLoading}>
       <View my="7">
         <Text mx="auto" textAlign="center" fontSize="md" color="CARDVESTGREEN">
           Get the current value for your transaction
@@ -152,7 +164,7 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
 
         <View p="3" />
         <Input
-          label="Amount"
+          label={`Amount (${selectedCoin})`}
           placeholder="Enter Amount"
           keyboardType="decimal-pad"
           onChangeText={value => {
@@ -165,7 +177,7 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
 
         <View p="3" />
         <Input
-          label="USD Equivalent"
+          label="Amount in USD"
           keyboardType="decimal-pad"
           placeholder="USD Equivalent"
           onChangeText={value => {
@@ -175,6 +187,12 @@ const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
           value={`${amountUSD ?? ''}`}
           disabled={isInputDisabled}
         />
+        {minUSDAmount && (
+          <HStack alignItems={'center'} space={'2'}>
+            <WarningIcon color="red.500" />
+            <Text>The minimum amount is ${formatCurrency(minUSDAmount)}</Text>
+          </HStack>
+        )}
 
         <View p="3" />
         <Box>
