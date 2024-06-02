@@ -294,11 +294,12 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
         justifyContent="space-between"
         alignItems="center">
         <HStack alignItems="center">
-          {type === 'withdrawals' && (
-            <View w="10" h="10">
-              <WalletCircle />
-            </View>
-          )}
+          {type === 'withdrawals' ||
+            (type === 'crypto' && (
+              <View w="10" h="10">
+                <WalletCircle />
+              </View>
+            ))}
           {type === 'cards' && (
             <View w="10" h="10">
               <CardsCircle />
@@ -312,10 +313,17 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
           <VStack mx="3">
             <Text color="CARDVESTBLACK.50" style={{ textTransform: 'capitalize' }} fontSize="md">
               {data?.card?.category_name}
-              {data?.type || type}
+              {/* Don't display type for crypto sales */}
+              {type !== 'crypto' && (data?.type || type)}
               {/* {type === 'wallet' && 'Wallet'}
               {type === 'withdrawals' && 'Withdrawals'} */}
-              {type === 'utilities' && data?.bill?.product}
+              {type === 'utilities' && ` ${data?.bill?.product}`}
+              {type === 'crypto' && (
+                <Text fontWeight={'bold'} textTransform={'uppercase'}>
+                  {' '}
+                  {data?.coin}
+                </Text>
+              )}
             </Text>
             <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
               {dayjs.default(data?.created_at).format('hh:mmA')}

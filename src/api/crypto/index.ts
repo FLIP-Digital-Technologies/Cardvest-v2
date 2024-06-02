@@ -14,6 +14,20 @@ import {
   SellCryptoPayload,
 } from './types';
 
+export async function getAllCryptoTransactions(currency: string, pagination: any) {
+  try {
+    const token = await cacheService.get('login-user');
+    const response = await ApiClient.get(`${env.API_URL}/transactions/crypto`, {
+      params: { page: pagination?.pageParam, currency },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('getAllBillTransactions - Error: ', error);
+    throw error;
+  }
+}
+
 export async function getAvailableCoins({ currency }: { currency: string }): Promise<Coin[]> {
   if (!currency) throw new Error('Currency is required');
 

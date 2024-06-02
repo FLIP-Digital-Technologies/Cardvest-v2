@@ -1,11 +1,24 @@
 import { useMixpanel } from '@MixpanelAnalytics';
-import { createCryptoTransaction, getAvailableCoins } from '@api/crypto';
+import { createCryptoTransaction, getAllCryptoTransactions, getAvailableCoins } from '@api/crypto';
 import { CryptoTradeData, CryptoTransactionResponse, SellCryptoPayload } from '@api/crypto/types';
 import analytics from '@react-native-firebase/analytics';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { onOpenToast } from '@utils/toast';
+
+function useGetAllCryptoTransactions(currency: string, page?: number) {
+  return useInfiniteQuery(
+    [`transactions-crypto-${currency}`, currency, page],
+    pagination => getAllCryptoTransactions(currency, pagination),
+    {
+      getPreviousPageParam: firstPage =>
+        firstPage?.meta?.current_page === 1 ? undefined : firstPage?.meta?.current_page - 1,
+      getNextPageParam: lastPage =>
+        lastPage?.meta?.last_page <= lastPage?.meta?.current_page ? undefined : lastPage?.meta?.current_page + 1,
+    },
+  );
+}
 
 function useGetAvailableCrypto({ currency }: { currency: string }) {
   return useQuery([`crypto-coins-${currency}`], () => getAvailableCoins({ currency }));
@@ -38,4 +51,4 @@ function useCreateCryptoTransaction() {
   );
 }
 
-export { useGetAvailableCrypto, useCreateCryptoTransaction };
+export { useGetAvailableCrypto, useCreateCryptoTransaction, useGetAllCryptoTransactions };

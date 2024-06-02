@@ -1,3 +1,4 @@
+import { useGetAllCryptoTransactions } from '@api/hooks/useCryptoTransactions';
 import { useGetAllBillTransactions } from '@api/hooks/useTransactions';
 import CLoader from '@components/CLoader';
 import { useCurrency } from '@hooks/useCurrency';
@@ -14,7 +15,8 @@ const CryptoHistory = () => {
   const { currency } = useCurrency();
   const queryClient = useQueryClient();
   const [page] = useState(1);
-  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllBillTransactions(currency, page);
+  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllCryptoTransactions(currency, page);
+
   const getTrancationData = useMemo(
     () => ({
       ...opps?.pages[page - 1],
@@ -22,6 +24,7 @@ const CryptoHistory = () => {
     }),
     [opps],
   );
+
   const a = useMemo(() => {
     const b: any = {};
     getTrancationData?.data?.map((i: any) => {
@@ -31,13 +34,16 @@ const CryptoHistory = () => {
     });
     return b;
   }, [getTrancationData]);
+
   if (isLoading) return <CLoader />;
+
   if (getTrancationData?.data?.length === 0)
     return (
       <View w="100%" h="full" flex={1} justifyContent={'center'}>
         <EmptyPanel action={() => navigation.navigate('More')} actionText="Pay Bills" />
       </View>
     );
+
   return (
     <View w="100%" mb="8" h="full">
       <FlatList
@@ -49,7 +55,7 @@ const CryptoHistory = () => {
                 {TransDate(item)}
               </BoldText>
               {a[item].map((item: any, ind: number) => (
-                <TransactionPanel currency={currency} data={item} type={'utilities'} key={ind} />
+                <TransactionPanel currency={currency} data={item} type={'crypto'} key={ind} />
               ))}
             </React.Fragment>
           );
