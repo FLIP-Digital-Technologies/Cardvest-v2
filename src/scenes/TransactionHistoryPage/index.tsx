@@ -12,195 +12,20 @@ import { Box, FlatList, Pressable, Text, View, useColorModeValue } from 'native-
 import React, { FC, memo, useMemo, useState } from 'react';
 import { Dimensions } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
-
-const FirstRoute = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
-  const { currency } = useCurrency();
-  const queryClient = useQueryClient();
-  const [page] = useState(1);
-  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllTransactions(currency, page);
-  const getTrancationData = useMemo(
-    () => ({
-      ...opps?.pages[page - 1],
-      data: opps?.pages?.flatMap((page, i) => page.data.map((data: any) => data)),
-    }),
-    [opps],
-  );
-  const a = useMemo(() => {
-    const b: any = {};
-    getTrancationData?.data?.map((i: any) => {
-      // @ts-ignore
-      b[i?.created_at?.slice(0, 10)] =
-        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
-    });
-    return b;
-  }, [getTrancationData]);
-  if (isLoading) return <CLoader />;
-  if (getTrancationData?.data?.length === 0)
-    return (
-      <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel action={() => navigation.navigate('SellGiftCard')} actionText="Trade Now" />
-      </View>
-    );
-  return (
-    <View w="100%" mb="8" h="full">
-      <FlatList
-        data={Object.keys(a)}
-        renderItem={({ item }) => {
-          return (
-            <React.Fragment>
-              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
-                {TransDate(item)}
-              </BoldText>
-              {a[item].map((item: any, ind: number) => (
-                <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
-              ))}
-            </React.Fragment>
-          );
-        }}
-        keyExtractor={(item: any) => item}
-        onRefresh={() => queryClient.invalidateQueries([`transactions-${currency}`])}
-        refreshing={isFetching}
-        onEndReached={
-          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => fetchNextPage()
-            : () => null
-        }
-      />
-    </View>
-  );
-};
-
-const SecondRoute = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
-  const { currency } = useCurrency();
-  const queryClient = useQueryClient();
-  const [page] = useState(1);
-  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetPayoutTransactions(currency, page);
-
-  console.log('wallet transactions', opps?.pages[0]?.data);
-
-  const getTrancationData = useMemo(
-    () => ({
-      ...opps?.pages[page - 1],
-      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
-    }),
-    [opps],
-  );
-  const a = useMemo(() => {
-    const b: any = {};
-    getTrancationData?.data?.map((i: any) => {
-      // @ts-ignore
-      b[i?.created_at?.slice(0, 10)] =
-        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
-    });
-    return b;
-  }, [getTrancationData]);
-
-  if (isLoading) return <CLoader />;
-
-  if (getTrancationData?.data?.length === 0)
-    return (
-      <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel action={() => navigation.navigate('BuyGiftCard')} actionText="Trade Now" />
-      </View>
-    );
-
-  return (
-    <View w="100%" mb="8" h="full">
-      <FlatList
-        data={Object.keys(a)}
-        renderItem={({ item }) => {
-          return (
-            <React.Fragment>
-              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
-                {TransDate(item)}
-              </BoldText>
-              {a[item].map((item: any, ind: number) => (
-                <TransactionPanel currency={currency} data={item} type={'cards'} key={ind} />
-              ))}
-            </React.Fragment>
-          );
-        }}
-        keyExtractor={(item: any) => item}
-        onRefresh={() => queryClient.invalidateQueries([`payout-transactions-${currency}`])}
-        refreshing={isFetching}
-        onEndReached={
-          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => fetchNextPage()
-            : () => null
-        }
-      />
-    </View>
-  );
-};
-
-const ThirdRoute = () => {
-  const navigation = useNavigation<GenericNavigationProps>();
-  const { currency } = useCurrency();
-  const queryClient = useQueryClient();
-  const [page] = useState(1);
-  const { data: opps, isFetching, isLoading, fetchNextPage } = useGetAllBillTransactions(currency, page);
-  const getTrancationData = useMemo(
-    () => ({
-      ...opps?.pages[page - 1],
-      data: opps?.pages?.flatMap((page, i) => page.data.map(data => data)),
-    }),
-    [opps],
-  );
-  const a = useMemo(() => {
-    const b: any = {};
-    getTrancationData?.data?.map((i: any) => {
-      // @ts-ignore
-      b[i?.created_at?.slice(0, 10)] =
-        b[i?.created_at?.slice(0, 10)]?.length > 0 ? [...b[i?.created_at?.slice(0, 10)], i] : [i];
-    });
-    return b;
-  }, [getTrancationData]);
-  if (isLoading) return <CLoader />;
-  if (getTrancationData?.data?.length === 0)
-    return (
-      <View w="100%" h="full" flex={1} justifyContent={'center'}>
-        <EmptyPanel action={() => navigation.navigate('More')} actionText="Pay Bills" />
-      </View>
-    );
-  return (
-    <View w="100%" mb="8" h="full">
-      <FlatList
-        data={Object.keys(a)}
-        renderItem={({ item }) => {
-          return (
-            <React.Fragment>
-              <BoldText p="2" w="100%" bg="#F9F9F9" my="3" textAlign="center">
-                {TransDate(item)}
-              </BoldText>
-              {a[item].map((item: any, ind: number) => (
-                <TransactionPanel currency={currency} data={item} type={'utilities'} key={ind} />
-              ))}
-            </React.Fragment>
-          );
-        }}
-        keyExtractor={(item: any) => item}
-        onRefresh={() => queryClient.invalidateQueries([`transactions-bill-${currency}`])}
-        refreshing={isFetching}
-        onEndReached={
-          getTrancationData?.meta?.current_page < getTrancationData?.meta?.last_page
-            ? () => fetchNextPage()
-            : () => null
-        }
-      />
-    </View>
-  );
-};
+import CryptoHistory from './components/crypto';
+import GiftcardHistory from './components/giftcard';
+import UtilitiesHistory from './components/utilities';
+import WalletsHistory from './components/wallets';
 
 const initialLayout = {
   width: Dimensions.get('window').width,
 };
 
 const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
+  giftcard: GiftcardHistory,
+  wallets: WalletsHistory,
+  utilities: UtilitiesHistory,
+  crypto: CryptoHistory,
 });
 
 const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
@@ -210,18 +35,23 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
   const [index, setIndex] = React.useState(tab);
   const [routes] = React.useState([
     {
-      key: 'first',
+      key: 'giftcard',
       title: 'Giftcard',
     },
     {
-      key: 'second',
+      key: 'wallets',
       title: 'Wallets',
     },
     {
-      key: 'third',
+      key: 'utilities',
       title: 'Utilities',
     },
+    {
+      key: 'crypto',
+      title: 'Crypto',
+    },
   ]);
+
   const renderdTabBar = (props: any) => {
     const inputRange = props.navigationState.routes.map((x: any, i: number) => i);
     return (
@@ -252,6 +82,7 @@ const TransactionHistoryPage: FC<{ route: any }> = ({ route }) => {
       </Box>
     );
   };
+
   return (
     <React.Fragment>
       <BackButtonTitleCenter noScroll title="Transaction History" backAction={() => navigation.goBack()}>
