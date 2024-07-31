@@ -1,25 +1,8 @@
-<div align="center">
-    <img src="./react-native-starter-kit.png" width="100%" /> 
-</div>
-
-[![License](https://img.shields.io/github/license/IronTony/react-native-react-query-starter-app)](LICENSE)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-screen.svg?style=flat)](#contributors-:sparkles:)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-[![Issues](https://img.shields.io/github/issues/IronTony/react-native-react-query-starter-app.svg)](https://github.com/IronTony/react-native-react-query-starter-app/issues)
-
-<img src="https://img.icons8.com/color/48/000000/travis-ci.png" width="30px" /> [![Build](https://travis-ci.com/IronTony/react-native-react-query-starter-app.svg?branch=master)](https://travis-ci.com/IronTony/react-native-react-query-starter-app)
-
-[![Build](https://img.shields.io/badge/iOS%20Tested-success-brightgreen.svg)](https://github.com/IronTony/react-native-react-query-starter-app)
-[![Build](https://img.shields.io/badge/Android%20Tested-success-brightgreen.svg)](https://github.com/IronTony/react-native-react-query-starter-app)
-
-<a href="https://www.buymeacoffee.com/IronTony" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-blue.png" alt="Buy Me A Coffee" width="217px" /></a>
 
 # Table of Contents <!-- omit in toc -->
 
 - [Installation :inbox_tray:](#installation-inbox_tray)
-  - [iOS & Android](#ios--android)
+  - [iOS & Android] (#ios--android)
 - [Environment Setup :globe_with_meridians:](#environment-setup-globe_with_meridians)
 - [Scripts :wrench:](#scripts-wrench)
   - [Run the app](#run-the-app)
@@ -29,7 +12,7 @@
   - [Setup iOS](#setup-ios)
   - [Typescript (optional)](#typescript-optional)
 - [Roadmap :running:](#roadmap-running)
-- [License :scroll:](#license-scroll)
+- [License :scroll:] (#license-scroll)
 
 ---
 
@@ -135,52 +118,77 @@ Our hint is to create all files as below:
 - files with logic and Views with `tsx` extension
 - files with Stylesheet and others with `ts` extension
 
-To enable full Typescript checks, just open the `tsconfig.json` file and chage as below:<br/>
+To enable full Typescript checks, just open the `tsconfig.json` file and chage as below:
 
-```
+```json
 "noImplicitAny": true, // set to true to be explicit and declare all types now<br/>
 "strict": true,  // enable it to use fully Typescript set of invasive rules<br/>
 ```
 
-_REMEMBER: the entry point file in the root of the project MUST be index.js_
+### _REMEMBER: the entry point file in the root of the project MUST be index.js_
 
 ---
 
 ## Roadmap :running:
 
-✅ Initial Setup<br/>
-✅ Splashscreen (https://github.com/crazycodeboy/react-native-splash-screen)<br/>
-✅ Toolbox (https://github.com/panz3r/react-native-toolbox)<br/>
-✅ Standard tree folders structure<br/>
-✅ `React-Native 0.69 (new architecture)`<br/>
-✅ `React-query`<br/>
-✅ `React-query Custom hooks (eg. GET, POST, PUT, PATCH, DELETE)`<br/>
-✅ `React Native Flipper Integration`<br/>
-✅ `i18next`<br/>
-✅ `React-navigation v6` ❤️<br/>
-✅ `Nativebase v3` as design system<br />
-✅ `Env` variables selection experimental way ⚗️⚗️⚗️<br />
-✅ Typescript (optional use. Read the DOC above)<br />
+✅ Initial Setup
+✅ Splashscreen (<https://github.com/crazycodeboy/react-native-splash-screen>)
+✅ Toolbox (<https://github.com/panz3r/react-native-toolbox>)
+✅ Standard tree folders structure
+✅ `React-Native 0.69 (new architecture)`
+✅ `React-query`
+✅ `React-query Custom hooks (eg. GET, POST, PUT, PATCH, DELETE)`
+✅ `React Native Flipper Integration`
+✅ `i18next`
+✅ `React-navigation v6` ❤️
+✅ `Nativebase v3` as design system
+✅ `Env` variables selection experimental way ⚗️⚗️⚗️
+✅ Typescript (optional use. Read the DOC above)
 
+## Building Android or iOS App
 
----
+It's better to make use of Android Studio and Xcode for Android and iOS app building respectively.
 
+If you encounter duplicate resources error. This online resource should help you out:
+[Stackoverflow Accepted Answer](https://stackoverflow.com/questions/53239705/react-native-error-duplicate-resources-android)
+
+### TL;DR
+
+Add the following to after the `doFirst` call in the `node_modules/react-native/react.gradle` file:
+
+```gradle
+
+doLast {
+    def moveFunc = { resSuffix ->
+        File originalDir = file("$buildDir/generated/res/react/release/drawable-${resSuffix}");
+        if (originalDir.exists()) {
+            File destDir = file("$buildDir/../src/main/res/drawable-${resSuffix}");
+            ant.move(file: originalDir, tofile: destDir);
+        }
+    }
+    moveFunc.curry("ldpi").call()
+    moveFunc.curry("mdpi").call()
+    moveFunc.curry("hdpi").call()
+    moveFunc.curry("xhdpi").call()
+    moveFunc.curry("xxhdpi").call()
+    moveFunc.curry("xxxhdpi").call()
+}
+```
+
+## Extras (Not formatted)
 
 // Node Error especially when using nvm
 
-sudo ln -s "$(which node)" /usr/local/bin/node 
+sudo ln -s "$(which node)" /usr/local/bin/node
 
 // Error: Graphviz could not be found. Ensure that "gvpr" is in your $PATH. Error: spawn gvpr ENOENT
 
 The error message suggests that Graphviz, specifically the "gvpr" tool, is not found in your system's $PATH. Graphviz is a dependency required for the madge library to generate dependency graphs.
 
-
 // [CXX1300] CMake '3.18.1' was not found in SDK, PATH, or by cmake.dir property.
 [CXX1301] - CMake '3.22.1' found in SDK did not satisfy requested version
-
 
 Open SDK Manager on Android Studio, Switch to the "SDK Tools" tab in the SDK Manager.
 Scroll through the list of SDK Tools until you find "CMake". Check the checkbox next to it to install or update CMake to the latest available version. If the required version is not listed, you can try checking the "Show Package Details" checkbox to see more options.
 
 After selecting the desired CMake version or updating it, click the "Apply" or "OK" button to apply the changes. Android Studio will download and install the selected version of CMake.
-
