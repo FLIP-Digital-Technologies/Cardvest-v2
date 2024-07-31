@@ -44,6 +44,7 @@ import * as dayjs from 'dayjs';
 import { Avatar, Box, Button, HStack, Image, Pressable, ScrollView, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useMemo } from 'react';
 import { RefreshControl } from 'react-native';
+import { CryptoIcon } from './components/CryptoIcon';
 
 export function BillAvatar(type: string) {
   switch (type?.toLowerCase()) {
@@ -293,11 +294,12 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
         justifyContent="space-between"
         alignItems="center">
         <HStack alignItems="center">
-          {type === 'withdrawals' && (
-            <View w="10" h="10">
-              <WalletCircle />
-            </View>
-          )}
+          {type === 'withdrawals' ||
+            (type === 'crypto' && (
+              <View w="10" h="10">
+                <WalletCircle />
+              </View>
+            ))}
           {type === 'cards' && (
             <View w="10" h="10">
               <CardsCircle />
@@ -311,10 +313,16 @@ export const TransactionPanel = ({ data, currency, type }: { data: any; currency
           <VStack mx="3">
             <Text color="CARDVESTBLACK.50" style={{ textTransform: 'capitalize' }} fontSize="md">
               {data?.card?.category_name}
-              {data?.type || type}
+              {/* Don't display type for crypto sales */}
+              {type !== 'crypto' && (data?.type || type)}
               {/* {type === 'wallet' && 'Wallet'}
               {type === 'withdrawals' && 'Withdrawals'} */}
-              {type === 'utilities' && data?.bill?.product}
+              {type === 'utilities' && ` ${data?.bill?.product}`}
+              {type === 'crypto' && (
+                <Text fontWeight={'bold'} textTransform={'uppercase'}>
+                  {data?.coin}
+                </Text>
+              )}
             </Text>
             <Text color="CARDVESTGREY.400" fontSize="xs" fontWeight="light">
               {dayjs.default(data?.created_at).format('hh:mmA')}
@@ -438,6 +446,11 @@ const Dashboard: FC = () => {
               icon: <BuyGiftCard />,
             },
             {
+              title: 'Sell Crypto',
+              action: () => navigation.navigate('SellCryptoPage'),
+              icon: <CryptoIcon />,
+            },
+            {
               title: 'Data',
               action: () => navigation.navigate('BuyDate'),
               icon: <Data />,
@@ -446,11 +459,6 @@ const Dashboard: FC = () => {
               title: 'Airtime',
               action: () => navigation.navigate('BuyAirtime'),
               icon: <Airtime />,
-            },
-            {
-              title: 'Cable',
-              action: () => navigation.navigate('Cable'),
-              icon: <Cable />,
             },
             {
               title: 'More',

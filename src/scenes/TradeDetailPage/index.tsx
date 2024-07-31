@@ -6,6 +6,7 @@ import { useCurrency } from '@hooks/useCurrency';
 import { Money } from '@scenes/DashboardPage';
 import { UploadPanel } from '@scenes/SellGiftCard';
 import { useQueryClient } from '@tanstack/react-query';
+import { formatCurrency } from '@utils/functions';
 import * as dayjs from 'dayjs';
 import { Button, HStack, Image, Link, Modal, Pressable, Text, VStack, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
@@ -155,7 +156,7 @@ const TradeDetailPage: FC<{ route: any }> = ({ route }) => {
   const { currency } = useCurrency();
   const { data, isFetched } = useGetTransaction({ transaction_reference, type });
 
-  // console.log(data);
+  // console.log('the trade data: ', data.data.coin);
   // let x = {
   //   data: {
   //     admin_comment: 'For testing transactions',
@@ -258,6 +259,7 @@ Transaction Reference: ${data?.data?.reference}
           {data?.data?.type?.toLowerCase() !== 'bill' ? (
             <>
               <ItemButton title="Transaction Type" body={data?.data?.type?.toUpperCase()} color="#39A307" />
+
               {data?.data?.card && (
                 <>
                   <ItemText
@@ -267,7 +269,22 @@ Transaction Reference: ${data?.data?.reference}
                   <ItemText title="Rate" body={`${data?.data?.card?.rates?.[currency]}/$`} />
                 </>
               )}
-              {data?.data?.unit >= 0 && <ItemText title="Unit" body={data?.data?.unit?.toString() || 'N/A'} />}
+
+              {/* For crypto sales */}
+              {data?.data?.coin && <ItemText title="Coin" body={data?.data?.coin || 'N/A'} />}
+
+              {data?.data?.unit >= 0 && (
+                <ItemText
+                  title={data?.data?.coin ? 'Coin Amount' : 'Unit'}
+                  body={data?.data?.unit?.toString() || 'N/A'}
+                />
+              )}
+
+              {/* For crypto sales */}
+              {data?.data?.usd_amount && (
+                <ItemText title="Amount in USD" body={formatCurrency(data?.data?.usd_amount) || 'N/A'} />
+              )}
+
               {data?.data?.wallet_address && (
                 <ItemText title="Wallet Address" body={data?.data?.wallet_address?.toString() || 'N/A'} />
               )}
@@ -281,7 +298,9 @@ Transaction Reference: ${data?.data?.reference}
                   />
                 </>
               )}
+
               <ItemText title="Total Amount" body={`${currency} ${Money(data?.data?.amount, currency)}`} />
+
               <ItemText title="User’s Comment" body={data?.data?.comment || 'N/A'} />
             </>
           ) : (
