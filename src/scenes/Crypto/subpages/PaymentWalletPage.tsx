@@ -11,29 +11,6 @@ import { Button, Flex, HStack, Image, Modal, Text, View } from 'native-base';
 import React, { FC, memo, useState } from 'react';
 import { Pressable } from 'react-native';
 
-const cryptoTradeData: CryptoTradeData = {
-  id: 127416,
-  reference: 'CVR40JIR8QPI',
-  type: 'sell-crypto',
-  amount: 216000,
-  unit: 444.44444444444446,
-  status: 'pending',
-  created_at: '2024-06-02T01:22:01.000000Z',
-  coin: 'ADA (BEP20)',
-  payable_amount: 444.44444444444446,
-  rate: 0.45,
-  usd_amount: 200,
-  payment_details: {
-    id: 3999631,
-    minimumAmount: 0.49275503,
-    address: '0x04CdcEdd0D042969fcf5d37198747ee69E8421ec',
-    rate: 0.451791,
-    expDate: '2024-06-02T01:52:01.0615683Z',
-    qrCode:
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAYAAAB0rZ5cAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABCRJREFUeJzt3VFu2zgUQNG6mP1v2d2AChBDlqRuzvmP7TgXBF4oUZ/v9/v9BWG/T38A+NdETp7IyRM5eSInT+TkiZw8kZMncvJETp7IyRM5eSInT+TkiZw8kZMncvJETp7Iyftv9Qt+Pp/VL/m/rb59dfXvNvP5Zj7L0/uW/25WcvJETp7IyRM5ecsHzyc7zi/aMTiNDmyjv+/oZ356vdXvMfq+q+34u1nJyRM5eSInT+TkbRk8n5waiFa/76lDgWcG3tXvO+rUd2UlJ0/k5ImcPJGTd2zwvMnoTuaOoev2y2DfyEpOnsjJEzl5IifP4PkXMwPgzM+uvnTXY1qt5PwAIidP5OSJnLxjg+ftA9HoELdjN3Jm4F3t9r/bEys5eSInT+TkiZy8LYOnS0WfzRxWdGoH9Y2s5OSJnDyRkydy8j7fN25hTbjpctTVn+WmndGbWMnJEzl5IidP5OQtHzxvukT11BB3apfx1Gm/o5xqC/+IyMkTOXkiJ++VhwudGmBWXxq7+vEsq3c8Vx+w9GTHDrSVnDyRkydy8kRO3lWHC+3YLV091OwYRmeG1tHHwsx8LzcNmU+s5OSJnDyRkydy8pYPnjt2yVb/7GqrdxRXD3YzBxPNvO8pVnLyRE6eyMkTOXmv3PF8ctMzNk8NgDft5t7ESk6eyMkTOXkiJ2/54DkzmOwYdE693o6BbcfwPePU92IlJ0/k5ImcPJGTd9Wltqtf76ZTXlf/Hjfdp3nTPbdPrOTkiZw8kZMncvJeeartk5t2VZ/cNMiOvt6MU7uqT6zk5ImcPJGTJ3LytgyeO3Yeb7r38PYd3h3f6U1/Nys5eSInT+TkiZy8Lfd4PrnpEtodBxiNOvX9rT4QafV3OsNKTp7IyRM5eSIn79iO58zAsWNY2XEI0ajVg+Kp+0NX/+woKzl5IidP5OSJnLyr7vG8/dLYU481mXmPmWF01E0n+z6xkpMncvJETp7IybvqOZ5PdlwCeuqZok9uOpRn1O2f2UpOnsjJEzl5Iifv8z21zXjI7btz5Xtkd7zeEys5eSInT+TkiZy8Y4cL7TCzuzljxy7tqc88+rOjXGoLC4icPJGTJ3Lyrn+cyqjV92mO/uzqS3dvfxTL6s9ixxMWEDl5IidP5OQdu8fz9l2yUauH0dH3mLH69W76ezyxkpMncvJETp7IybvqVNs3mtndvGlgu/0+zRlWcvJETp7IyRM5eQbPX3vuZRx9vdWX6Z763Ua5xxMWEDl5IidP5ORd/ziVU+976vLWHafGjrr9MSmjrOTkiZw8kZMncvK2DJ43DStvHMROHRC0+tTdU/9ssJKTJ3LyRE6eyMn7cc/x5OexkpMncvJETp7IyRM5eSInT+TkiZw8kZMncvJETp7IyRM5eSInT+TkiZw8kZMncvJETt4fDVwcjii6C6QAAAAASUVORK5CYII=',
-  },
-};
-
 const SellCryptoPage: FC<{ route: any }> = ({ route }) => {
   const navigation = useNavigation<GenericNavigationProps>();
   const tradeDetails = route.params as CryptoTradeData;
