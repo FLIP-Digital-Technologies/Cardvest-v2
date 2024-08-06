@@ -7,8 +7,21 @@ import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { validateEmail } from '@scenes/LoginPage';
 import { useQueryClient } from '@tanstack/react-query';
-import { View, Text, Center, Button, Box, Pressable, ScrollView, Avatar, HStack, VStack } from 'native-base';
+import {
+  View,
+  Text,
+  Center,
+  Button,
+  Box,
+  Pressable,
+  ScrollView,
+  Avatar,
+  HStack,
+  VStack,
+  ChevronRightIcon,
+} from 'native-base';
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
+import { Linking } from 'react-native';
 
 const UploadButton = (props: any) => (
   <Pressable mt="2" {...props}>
@@ -17,6 +30,10 @@ const UploadButton = (props: any) => (
     </Text>
   </Pressable>
 );
+
+const openWebPage = () => {
+  Linking.openURL('https://app.cardvest.ng/settings');
+};
 
 const ProfilePage: FC = () => {
   const navigation = useNavigation<GenericNavigationProps>();
@@ -96,6 +113,21 @@ const ProfilePage: FC = () => {
             CustomButton={UploadButton}
           />
         </Center>
+
+        <Pressable onPress={openWebPage}>
+          <Center paddingY={4} flexDir="row" justifyContent="space-between">
+            <Text fontWeight={700} fontSize="14" color={'CARDVESTGREEN'}>
+              KYC Level
+            </Text>
+            <View flexDir="row" alignItems="center">
+              <View backgroundColor="#FAC915" borderRadius={3} color={'black'} paddingX={2} mr={4}>
+                <Text fontSize={12}>Level 1</Text>
+              </View>
+              <ChevronRightIcon />
+            </View>
+          </Center>
+        </Pressable>
+
         <View my="6">
           <Input label="First Name" value={firstname} onChangeText={setFirstName} />
           <Input label="Last Name" value={lastname} onChangeText={setLastName} />
@@ -140,3 +172,5 @@ const ProfilePage: FC = () => {
 };
 
 export default memo(ProfilePage);
+
+// function
