@@ -19,6 +19,7 @@ import {
   HStack,
   VStack,
   ChevronRightIcon,
+  Flex,
 } from 'native-base';
 import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import { Linking } from 'react-native';
@@ -47,6 +48,8 @@ const ProfilePage: FC = () => {
   const [email, setEmail] = useState(data?.email);
   const [username, setUsername] = useState(data?.username);
   const [phoneNumber, setPhoneNumber] = useState(data?.phonenumber);
+  const [currentLevel, setCurrentLevel] = useState(Number(data?.kyc?.current_level));
+
   const handleSubmit = async () => {
     try {
       await updateUser({
@@ -116,13 +119,18 @@ const ProfilePage: FC = () => {
 
         <Pressable onPress={openWebPage}>
           <Center paddingY={4} flexDir="row" justifyContent="space-between">
-            <Text fontWeight={700} fontSize="14" color={'CARDVESTGREEN'}>
-              KYC Level
-            </Text>
-            <View flexDir="row" alignItems="center">
-              <View backgroundColor="#FAC915" borderRadius={3} color={'black'} paddingX={2} mr={4}>
-                <Text fontSize={12}>Level 1</Text>
+            <Flex direction="row">
+              <Text fontWeight={700} fontSize="14" color={'CARDVESTGREEN'} paddingRight={3}>
+                KYC
+              </Text>
+              <View backgroundColor="#FAC915" borderRadius={3} color={'black'} paddingX={2}>
+                <Text fontSize={12}>Level {currentLevel}</Text>
               </View>
+            </Flex>
+            <View flexDir="row" alignItems="center">
+              <Text color={'CARDVESTGREEN'} mr={4}>
+                Upgrade KYC
+              </Text>
               <ChevronRightIcon />
             </View>
           </Center>

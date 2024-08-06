@@ -39,4 +39,8 @@ function useCreateBuyTransaction() {
   });
 }
 
-export { useGetAvailableCrypto, useCreateBuyTransaction };
+function useGetKYCLevel() {
+  // return useQuery([`crypto-coins-${currency}`], () => getAvailableCoins({ currency }));
+}
+
+export { useGetAvailableCrypto, useCreateBuyTransaction, useGetKYCLevel };
