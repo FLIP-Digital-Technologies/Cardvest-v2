@@ -22,7 +22,7 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build Android
         run: |
@@ -51,7 +51,7 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Install CocoaPods
         run: |
