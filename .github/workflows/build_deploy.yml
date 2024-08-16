@@ -1,0 +1,93 @@
+name: Build and Deploy
+
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Android
+        run: |
+          cd android
+          ./gradlew assembleRelease
+
+      - name: Upload Android APK to Play Store Beta
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.flipdigitals.cardvest
+          releaseFile: android/app/build/outputs/apk/release/app-release.apk
+          track: beta
+          whatsNewDirectory: android/fastlane/metadata/android/beta
+
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods
+          cd ios
+          pod install --repo-update
+
+      - name: Build iOS
+        run: |
+          xcodebuild -workspace Cardvest.xcworkspace \
+            -scheme Cardvest \
+            -sdk iphoneos \
+            -configuration Release \
+            archive \
+            -archivePath $PWD/build/Cardvest.xcarchive
+          xcodebuild -exportArchive \
+            -archivePath $PWD/build/Cardvest.xcarchive \
+            -exportOptionsPlist ios/exportOptions.plist \
+            -exportPath $PWD/build
+
+  deploy-ios:
+    needs: build-ios
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Fastlane
+        run: sudo gem install fastlane
+
+      - name: Upload to TestFlight
+        env:
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        run: |
+          cd ios
+          fastlane pilot upload --ipa ../build/Cardvest.ipa
