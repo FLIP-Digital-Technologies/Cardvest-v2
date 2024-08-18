@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android_abb
-          path: "./build/outputs/bundle/release/app-release.aab"
+          path: "./android/app/build/outputs/bundle/release/app-release.aab"
 
       - name: Encode JSON file and set as ENV
         run: |
