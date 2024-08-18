@@ -30,7 +30,7 @@
     "android:bundle:create": "rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "android:assemble:debug": "cd android && ./gradlew assembleDebug",
     "android:assemble:release": "cd android && ./gradlew assembleRelease",
-    "android:bundle:release": "cd android && ./gradlew bundleRelease",
+    "android:bundle:release": "cd android && ./gradlew clean && ./gradlew bundleRelease",
     "release-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/ && rm -rf android/app/src/main/res/drawable-* && rm -rf android/app/src/main/res/raw/* && cd android && ./gradlew assembleRelease && cd ..",
     "android:assemble:bundle": "cd android && ./gradlew bundleRelease",
     "ios:bundle:create": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
@@ -42,7 +42,7 @@
     "prettier-format:staged": "prettier --write \"./src/**/*.{js,jsx,ts,tsx}\"",
     "dependencies:checkCircular": "madge src/ --circular",
     "dependencies:graph": "madge src/ --circular --image deps-graph.svg",
-    "postinstall": "husky install"
+    "postinstall": "husky instal && node ./android/fixAndroid/android-release-fix.js"
   },
   "dependencies": {
     "@react-native-clipboard/clipboard": "^1.10.0",

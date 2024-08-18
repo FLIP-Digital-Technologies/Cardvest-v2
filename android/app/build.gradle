@@ -145,6 +145,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 812220256
         versionName "2.1.0"
+        multiDexEnabled true
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -269,6 +270,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:2.0.1' //enter the latest multidex version
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
