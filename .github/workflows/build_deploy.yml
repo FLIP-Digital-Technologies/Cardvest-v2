@@ -29,14 +29,30 @@ jobs:
           java -version
           yarn android:bundle:release
 
-      - name: Upload Android APK to Play Store Beta
-        uses: r0adkll/upload-google-play@v1
+      - name: Upload ABB for upload
+        uses: actions/upload-artifact@v4
         with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.flipdigitals.cardvest
-          releaseFile: android/app/build/outputs/apk/release/app-release.abb
-          track: beta
-          whatsNewDirectory: android/fastlane/metadata/android/beta
+          name: android_abb
+          path: "./build/outputs/bundle/release/app-release.aab"
+
+      - name: Encode JSON file and set as ENV
+        run: |
+          LOCAL_SERVICE_ACCOUNT_JSON=$(base64 googleservices.json)
+          echo "SERVICE_ACCOUNT_JSON=$LOCAL_SERVICE_ACCOUNT_JSON" >> $GITHUB_ENV
+
+      - name: Decode and use JSON content
+        run: |
+          echo "$SERVICE_ACCOUNT_JSON" | base64 --decode
+
+      - name: Upload Android App Bundle to Google Play Store
+        id: upload_aab
+        uses: KevinRohn/github-action-upload-play-store@v1.0.0
+        with:
+          service_account_json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          package_name: "com.flipdigitals.cardvest"
+          aab_file_path: "./build/outputs/bundle/release/app-release.aab"
+          track: "internal"
+          release_status: "draft"
 
   build-ios:
     runs-on: macos-latest
