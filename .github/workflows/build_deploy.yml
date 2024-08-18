@@ -35,15 +35,6 @@ jobs:
           name: android_abb
           path: "./android/app/build/outputs/bundle/release/app-release.aab"
 
-      - name: Encode JSON file and set as ENV
-        run: |
-          LOCAL_SERVICE_ACCOUNT_JSON=$(base64 googleservices.json)
-          echo "SERVICE_ACCOUNT_JSON=$LOCAL_SERVICE_ACCOUNT_JSON" >> $GITHUB_ENV
-
-      - name: Decode and use JSON content
-        run: |
-          echo "$SERVICE_ACCOUNT_JSON" | base64 --decode
-
       - name: Upload Android App Bundle to Google Play Store
         id: upload_aab
         uses: KevinRohn/github-action-upload-play-store@v1.0.0
