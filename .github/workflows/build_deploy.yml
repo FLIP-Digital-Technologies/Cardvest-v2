@@ -37,13 +37,13 @@ jobs:
 
       - name: Upload Android App Bundle to Google Play Store
         id: upload_aab
-        uses: KevinRohn/github-action-upload-play-store@v1.0.0
+        uses: r0adkll/upload-google-play@v1
         with:
-          service_account_json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-          package_name: "com.flipdigitals.cardvest"
-          aab_file_path: "./android/app/build/outputs/bundle/release/app-release.aab"
-          track: "internal"
-          release_status: "completed"
+          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: com.flipdigitals.cardvest
+          releaseFile: "./android/app/build/outputs/bundle/release/app-release.aab"
+          track: internal
+          userFraction: 0.33
 
   build-ios:
     runs-on: macos-latest
