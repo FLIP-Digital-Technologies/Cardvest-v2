@@ -68,7 +68,7 @@ jobs:
 
       - name: Build iOS
         run: |
-          xcodebuild -workspace Cardvest.xcworkspace \
+          xcodebuild -workspace ios/Cardvest.xcworkspace \
             -scheme Cardvest \
             -sdk iphoneos \
             -configuration Release \
