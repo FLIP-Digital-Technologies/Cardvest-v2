@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CardvestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CardvestTests.m */; };
 		064DD41E859E46BB8E4013F0 /* Satoshi-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6475CEC6DAC346589270CB8E /* Satoshi-Italic.ttf */; };
-		13B07FBD1A68108700A75B9A /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		13B07FBD1A68108700A75B9A /* (null) in Resources */ = {isa = PBXBuildFile; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		169CCFA811584301BB7961B6 /* Satoshi-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */; };
+		188497BC2C73F46100026AA7 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 188497BB2C73F46100026AA7 /* FacebookCore */; };
 		22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351AD53139B04D48A492DCC9 /* Lato-Bold.ttf */; };
 		259D0F17F29F4D2BB628341E /* Satoshi-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1976986C3A9496A94A2E7D5 /* Satoshi-Light.ttf */; };
 		2909319D33DD472694DDAF1F /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2152AF86EDF4EEDBD2D3F17 /* Lato-Thin.ttf */; };
@@ -28,7 +29,6 @@
 		4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */; };
 		5FC3A638A586EC4720D65A4E /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1AF4FF0616E657C606479 /* libPods-Cardvest.a */; };
 		86659DF594B74ECF996681F4 /* Satoshi-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */; };
-		88329CB129CDDED500706034 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88329CB029CDDED500706034 /* FacebookCore */; };
 		884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */; };
 		884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */; };
 		884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */; };
@@ -84,6 +84,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Cardvest/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Cardvest/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Cardvest/main.m; sourceTree = "<group>"; };
+		181044ED2C73F01B00F0D295 /* FBSDKCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit.xcframework; path = Pods/FBSDKCoreKit/XCFrameworks/FBSDKCoreKit.xcframework; sourceTree = "<group>"; };
 		197BF68625FDF791C67B18DB /* Pods-Cardvest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest.release.xcconfig"; path = "Target Support Files/Pods-Cardvest/Pods-Cardvest.release.xcconfig"; sourceTree = "<group>"; };
 		1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Thin.ttf"; path = "../src/assets/fonts/Satoshi-Thin.ttf"; sourceTree = "<group>"; };
 		2436BC37CFF14845A08BC38C /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -175,10 +176,10 @@
 			files = (
 				889B7D7529EFC14C0095770C /* AppTrackingTransparency.framework in Frameworks */,
 				889B7D7329EFC1420095770C /* StoreKit.framework in Frameworks */,
+				188497BC2C73F46100026AA7 /* FacebookCore in Frameworks */,
 				889B7D7129EFC1380095770C /* AdSupport.framework in Frameworks */,
 				889B7D6F29EFC12D0095770C /* AdServices.framework in Frameworks */,
 				889B7D6D29EFC1110095770C /* iAd.framework in Frameworks */,
-				88329CB129CDDED500706034 /* FacebookCore in Frameworks */,
 				5FC3A638A586EC4720D65A4E /* libPods-Cardvest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +223,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				181044ED2C73F01B00F0D295 /* FBSDKCoreKit.xcframework */,
 				889B7D7429EFC14C0095770C /* AppTrackingTransparency.framework */,
 				889B7D7229EFC1420095770C /* StoreKit.framework */,
 				889B7D7029EFC1380095770C /* AdSupport.framework */,
@@ -391,7 +393,7 @@
 			);
 			name = Cardvest;
 			packageProductDependencies = (
-				88329CB029CDDED500706034 /* FacebookCore */,
+				188497BB2C73F46100026AA7 /* FacebookCore */,
 			);
 			productName = Cardvest;
 			productReference = 13B07F961A680F5B00A75B9A /* Cardvest.app */;
@@ -472,7 +474,7 @@
 				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
 				884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
+				13B07FBD1A68108700A75B9A /* (null) in Resources */,
 				3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */,
 				B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */,
 				B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */,
@@ -760,7 +762,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 812220257;
+				CURRENT_PROJECT_VERSION = 812220260;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
@@ -792,7 +794,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 812220257;
+				CURRENT_PROJECT_VERSION = 812220260;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				INFOPLIST_FILE = Cardvest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CardVest;
@@ -848,7 +850,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -927,7 +929,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_lato = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimuSatoshir*]" = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1014,9 +1016,8 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		88329CB029CDDED500706034 /* FacebookCore */ = {
+		188497BB2C73F46100026AA7 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
 /* End XCSwiftPackageProductDependency section */

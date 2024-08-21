@@ -33,24 +33,17 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android_abb
-          path: /outputs/release/app-release.aab
-
-      - name: Download ABB for upload to playstore
-        uses: actions/download-artifact@v4
-        with:
-          name: android_abb
-          path: /outputs/release/app-release.aab
+          path: "./android/app/build/outputs/bundle/release/app-release.aab"
 
       - name: Upload Android App Bundle to Google Play Store
         id: upload_aab
-        uses: r0adkll/upload-google-play@v1
+        uses: KevinRohn/github-action-upload-play-store@v1.0.0
         with:
-          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-          packageName: com.flipdigitals.cardvest
-          releaseFiles: /outputs/release/app-release.aab
-          track: internal
-          status: inProgress
-          # userFraction: 0.33
+          service_account_json: "ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAiY2FyZHZlc3QtZWQyYjciLAogICJwcml2YXRlX2tleV9pZCI6ICI1MThhY2U4ZTk1ODE2ZTRkODEwMTdjNTZhMDUyZDY5YjY5NzY4YjU1IiwKICAicHJpdmF0ZV9rZXkiOiAiLS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tXG5NSUlFdlFJQkFEQU5CZ2txaGtpRzl3MEJBUUVGQUFTQ0JLY3dnZ1NqQWdFQUFvSUJBUUM2NjNBUXlMU0U3NVFxXG55ak42QnpjWDVZZGtwL2s2VkZRNzNmSGF6blV6bEdoRmJCek1OTWcrMDZPMnpxZzYvQkJ5ek1NTUVBTXZSZW1LXG5pTWY2M012NnE4aGJSS1NlY0xTZ0dNRGQxS1lkSGlmL29Tc25tRXdsS0JQODltVkRzUU5QZGVJdG9hamNwZ0FTXG4ycUxmbXpGMXB6WjVxQ0xuaG5jOXIwZU1ZaVUvOTBoUDlqd0Z6dXdDcTBMWFNYVit1VnpWS0dzS0hHQXBNQlJvXG5jOUFiSk1CdWdhcFc1NEZWdU5ZdmFMbHp3T2ZmdEVuNWtPa1oxQ0NiVjQ0MkpWVlJ6K2JJditRWHl1MEY0bjdpXG5naTBFbW91cm5KbW53U2JmZHBuQ1dkOTlubXErNkFFV3NPY2p6NXM4bXhxMFpIcWpsTVBVeU1SVVJNQWRDdndjXG4zem1ZQzJlcEFnTUJBQUVDZ2dFQUpHY3c2cHZrQ0ZYT2NlenlUSXcyTHhtOUhoM1duSVVLNktQbmM5a3NtekNHXG5oQ3F6aXhPbWdoSGV1djRSWm5kcnpxZlJQcnFwbkIzT0IzUnZHZ3pCVHg4QWhNSGdHNWxRbkRObDhHMzNNZ21LXG4rYTZPUklaVkloRmxueWp2Zk5qdkQ1MGlRUWZRWnJTUHBCeGZoeFBtOUladHhoQzRSNFg1R0JMWWFOOCthTy92XG5IR2Zpa2RPQit5UUZ0amJIakRhSkR0ejJDSjVaSWF0alhybDFlNlFkYTNJNjhVRDlVOUNpeGM3YjhkbWZvU2U2XG51S2RQcFh1TWJOc0Y2WVFsWDRCbHc4cDRpMFdMMStOakc4QWRxbVhielc1TmpGTWxQdjEwOGJ0OVJLaEZ5bUFHXG5UWDd3OWZFMUR0UEFJeVFmR0JHU2RicndQODNCaCthZkMyKzU4SUxuYndLQmdRRG1UR1dSbkliVXFMN0d3cmwrXG4zYndUb0puK3BNV3RIdG5wT25IVm44b3A2NWgzZDI4OWFqN3dTWDZYK0tHM1BZZkNodXVEVElIK3VmL3Y0ZTBwXG5KVXFTaE1qM0JCdk96Z1VINHp5UGZKYzMwMk5rOUYwcFRhSTJkVndyLzNRaEVIOGFEZWtRbVczTWh1TVMySnNCXG5kR0J0NEZvODBycy9kRWZsVXB0UTBZMjJTd0tCZ1FEUHg3YnFUSmtuL3VvSDJCbWhkMWJHbGJrWTRFZ1h2TGNCXG5CdnJZRFRwVnNnQ1JUWEhhL0FpN3pKYjM5VmJIWmRoQVVUMThRQXRJTzBVTTErVE1DV3ppVmp0ZjQ3SUdKcUdmXG56NCszNVczTUQ4ZWZWUTdHcmkrNnkrVHJvOWVBdHh1NEJSTStjdjN6NVNzQ1lBVFdoRWlpRU5oRmNWblI1ZEs1XG5oZUtHS00zeFd3S0JnRFBsSXo0Y3Q0VlVRU2tvMkFQdWsyTVkzWnEwSnBkTVRHNXg3UlRtWFBmMVR2WWN3OFJqXG5IS3VvNUEzNnlQWXh0MVh1Y1VPMUNkWU1zOCtxYVhiTUlISEQya1ZQZDdTeVdBL2U5TmFnakxMWHY1NFFNcTRNXG5BSEdsSUpBSmtIR2k5Z0U1QVR2c1Z3R3ZvNXVyazhKUUp5cWJVN3BCQWxEYU14bEo5QlhTSXN6aEFvR0JBSk1vXG5qNVJCeS9kWHc4anFkTHkzR081cy9EdHlIWjB5T3lxdkZ0b09CRkxOVHptWjhCbDRoM2I2MzdHZVFXZlg2ZUVqXG5xTGhuWTVZMDVDTEVoWGM4OWJFWUFkVllIcTNjam52eE5ZaTVKWnB4VXFDMlRWREo3V1FQSklMLzk1RmlIbSttXG5xSXFDUnZxR1JIL2FJWk1NL2FSSzZlSEU5aWlDN1V3WVZ1ZE4zdzRoQW9HQVVmbE1XT1c3eVg0bFd4OGJIRldLXG5pamI1YkVWKzZleXByWEcxZlI3Qll1MEdLampDMS9EV2owUWE4czlCZ0VXL2xveXVHaGx2ZXd5azFRMlNQNVZCXG5ReUx1M0FpZitLaHRFK2xjUVlKRWRRNW5BazY4UnlrSkY5dCtqOVY2OEZJcXAvb0pMejR0RlJNZFo4M0ZCdi9BXG56ZlpBVGVDTGZtNjZvMjdjSmZ1SzNDUT1cbi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS1cbiIsCiAgImNsaWVudF9lbWFpbCI6ICJmaXJlYmFzZS1hZG1pbnNkay1zbjl1Z0BjYXJkdmVzdC1lZDJiNy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsCiAgImNsaWVudF9pZCI6ICIxMDE5MTgyODM3MzcyNzkxNzI0NjUiLAogICJhdXRoX3VyaSI6ICJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvYXV0aCIsCiAgInRva2VuX3VyaSI6ICJodHRwczovL29hdXRoMi5nb29nbGVhcGlzLmNvbS90b2tlbiIsCiAgImF1dGhfcHJvdmlkZXJfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9vYXV0aDIvdjEvY2VydHMiLAogICJjbGllbnRfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9yb2JvdC92MS9tZXRhZGF0YS94NTA5L2ZpcmViYXNlLWFkbWluc2RrLXNuOXVnJTQwY2FyZHZlc3QtZWQyYjcuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iCn0="
+          package_name: "com.flipdigitals.cardvest"
+          aab_file_path: "./android/app/build/outputs/bundle/release/app-release.aab"
+          track: "internal"
+          release_status: "completed"
 
   build-ios:
     runs-on: macos-latest
