@@ -45,56 +45,39 @@ jobs:
           track: "internal"
           release_status: "completed"
 
-  build-ios:
+  deploy-ios:
     runs-on: macos-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          node-version: '16'
+          ruby-version: 2.7.5 # Set the Ruby version
+
+      - name: Install fastlane
+        run: gem install fastlane
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Set the node version
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods
-          cd ios
-          pod install --repo-update
+        run: bundle exec pod install --project-directory=ios/
 
-      - name: Build iOS
-        run: |
-          xcodebuild -workspace ios/Cardvest.xcworkspace \
-            -scheme Cardvest \
-            -sdk iphoneos \
-            -configuration Release \
-            archive \
-            -archivePath $PWD/build/Cardvest.xcarchive
-          xcodebuild -exportArchive \
-            -archivePath $PWD/build/Cardvest.xcarchive \
-            -exportOptionsPlist ios/exportOptions.plist \
-            -exportPath $PWD/build
-
-  deploy-ios:
-    needs: build-ios
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install Fastlane
-        run: sudo gem install fastlane
-
-      - name: Upload to TestFlighttou
+      - name: Set up Match for certificates
+        run: fastlane match adhoc --readonly
         env:
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-        run: |
-          cd ios
-          fastlane pilot upload --ipa ../build/Cardvest.ipa
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Set in GitHub Secrets
+
+      - name: Deploy to TestFlight
+        run: fastlane ios deploy_testflight
+        env:
+          APP_STORE_CONNECT_EMAIL: ${{ secrets.APP_STORE_CONNECT_EMAIL }} # Set your Apple ID email in GitHub Secrets
+          APP_STORE_CONNECT_API_KEY_PATH: ${{ secrets.APP_STORE_CONNECT_API_KEY_PATH }} # Path to your App Store Connect API key
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Your match password for the encrypted certificates
