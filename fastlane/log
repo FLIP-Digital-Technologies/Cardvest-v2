@@ -1,0 +1,186 @@
+BigUncleYemi ~/Desktop/Work/Cardvest-v2: fastlane match adhoc
+
+[✔] 🚀 
+[20:45:43]: fastlane detected a Gemfile in the current directory
+[20:45:43]: However, it seems like you didn't use `bundle exec`
+[20:45:43]: To launch fastlane faster, please use
+[20:45:43]: 
+[20:45:43]: $ bundle exec fastlane match adhoc
+[20:45:43]: 
+[20:45:43]: Get started using a Gemfile for fastlane https://docs.fastlane.tools/getting-started/ios/setup/#use-a-gemfile
+[20:45:44]: Successfully loaded '/Users/Apple/Desktop/Work/Cardvest-v2/fastlane/Matchfile' 📄
+
++--------------------------------------------------------------------------------+
+|                  Detected Values from './fastlane/Matchfile'                   |
++--------------+-----------------------------------------------------------------+
+| git_url      | https://github.com/FLIP-Digital-Technologies/ios-certificates.  |
+|              | git                                                             |
+| storage_mode | git                                                             |
+| type         | development                                                     |
++--------------+-----------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+|                                        Summary for match 2.222.0                                         |
++----------------------------------------+-----------------------------------------------------------------+
+| type                                   | adhoc                                                           |
+| readonly                               | false                                                           |
+| generate_apple_certs                   | true                                                            |
+| skip_provisioning_profiles             | false                                                           |
+| api_key_path                           | ./fastlane/API_KEY.json                                         |
+| storage_mode                           | git                                                             |
+| git_url                                | https://github.com/FLIP-Digital-Technologies/ios-certificates.  |
+|                                        | git                                                             |
+| git_branch                             | master                                                          |
+| shallow_clone                          | false                                                           |
+| clone_branch_directly                  | false                                                           |
+| skip_google_cloud_account_confirmation | false                                                           |
+| s3_skip_encryption                     | false                                                           |
+| gitlab_host                            | https://gitlab.com                                              |
+| keychain_name                          | login.keychain                                                  |
+| force                                  | false                                                           |
+| force_for_new_devices                  | false                                                           |
+| include_mac_in_profiles                | false                                                           |
+| include_all_certificates               | false                                                           |
+| force_for_new_certificates             | false                                                           |
+| skip_confirmation                      | false                                                           |
+| safe_remove_certs                      | false                                                           |
+| skip_docs                              | false                                                           |
+| platform                               | ios                                                             |
+| derive_catalyst_app_identifier         | false                                                           |
+| fail_on_name_taken                     | false                                                           |
+| skip_certificate_matching              | false                                                           |
+| skip_set_partition_list                | false                                                           |
+| verbose                                | false                                                           |
++----------------------------------------+-----------------------------------------------------------------+
+
+[20:45:44]: Cloning remote git repo...
+[20:45:44]: If cloning the repo takes too long, you can use the `clone_branch_directly` option in match.
+[20:45:45]: Checking out branch master...
+[20:45:45]: 🔓  Successfully decrypted certificates repo
+[20:45:45]: Verifying that the certificate and profile are still valid on the Dev Portal...
+[20:45:45]: Creating authorization token for App Store Connect API
+[20:45:45]: To not be asked about this value, you can specify it using 'app_identifier'
+[20:45:45]: The bundle identifier(s) of your app (comma-separated string or array of strings): com.flipdigitals.cardvest
+[20:45:53]: Couldn't find a valid code signing identity for distribution... creating one for you now
+
++----------------------------------------------------------------------------+
+|                          Summary for cert 2.222.0                          |
++-------------------------+--------------------------------------------------+
+| platform                | ios                                              |
+| development             | false                                            |
+| generate_apple_certs    | true                                             |
+| force                   | true                                             |
+| api_key_path            | ./fastlane/API_KEY.json                          |
+| keychain_path           | /Users/Apple/Library/Keychains/login.keychain-db |
+| skip_set_partition_list | false                                            |
++-------------------------+--------------------------------------------------+
+
+[20:45:53]: Creating authorization token for App Store Connect API
+[20:45:54]: Enter the password for /Users/Apple/Library/Keychains/login.keychain-db
+[20:45:54]: This passphrase will be stored in your local keychain with the name fastlane_keychain_login and used in future runs
+[20:45:54]: This prompt can be avoided by specifying the 'keychain_password' option or 'MATCH_KEYCHAIN_PASSWORD' environment variable
+[20:45:54]: Password for login keychain: ********
+[20:48:45]: Type password for login keychain again: ********
+[⠋] Setting key partition list... (this can take a minute if there are a lot of keys installed) keychain: "/Users/Apple/Library/Keychains/login.keychain-db"
+version: 512
+class: "inet"
+attributes:
+    0x00000007 <blob>="fastlane_keychain_login"
+    0x00000008 <blob>=<NULL>
+    "acct"<blob>=<NULL>
+    "atyp"<blob>="dflt"
+    "cdat"<timedate>=0x32303234303931383139343930305A00  "20240918194900Z\000"
+    "crtr"<uint32>=<NULL>
+    "cusi"<sint32>=<NULL>
+    "desc"<blob>=<NULL>
+    "icmt"<blob>=<NULL>
+    "invi"<sint32>=<NULL>
+    "mdat"<timedate>=0x32303234303931383139343930305A00  "20240918194900Z\000"
+    "nega"<sint32>=<NULL>
+    "path"<blob>=<NULL>
+    "port"<uint32>=0x00000000 
+    "prot"<blob>=<NULL>
+    "ptcl"<uint32>=0x00000000 
+    "scrp"<sint32>=<NULL>
+    "sdmn"<blob>=<NULL>
+    "srvr"<blob>="fastlane_keychain_login"
+    "type"<uint32>=<NULL>
+password has been deleted.
+[20:49:00]: 
+[20:49:00]: Could not configure imported keychain item (certificate) to prevent UI permission popup when code signing
+Check if you supplied the correct `keychain_password` for keychain: `/Users/Apple/Library/Keychains/login.keychain-db`
+security: SecKeychainItemSetAccessWithPassword: The user name or passphrase you entered is not correct.
+[20:49:00]: 
+[20:49:00]: Please look at the following docs to see how to set a keychain password:
+[20:49:00]:  - https://docs.fastlane.tools/actions/sync_code_signing
+[20:49:00]:  - https://docs.fastlane.tools/actions/get_certificates
+[✔] Setting key partition list... (this can take a minute if there are a lot of keys installed) 
+[20:49:00]: Enter the password for /Users/Apple/Library/Keychains/login.keychain-db
+[20:49:00]: This passphrase will be stored in your local keychain with the name fastlane_keychain_login and used in future runs
+[20:49:00]: This prompt can be avoided by specifying the 'keychain_password' option or 'MATCH_KEYCHAIN_PASSWORD' environment variable
+[20:49:00]: Password for login keychain: *********
+[20:49:47]: Type password for login keychain again: *********
+[✔] Setting key partition list... (this can take a minute if there are a lot of keys installed) 
+[20:49:51]: Successfully generated J96FH3B5BX which was imported to the local machine.
+[20:49:55]: Verifying the certificate is properly installed locally...
+[20:49:55]: Successfully installed certificate J96FH3B5BX
+
++-----------------------------------------------------------------------------+
+|                          Summary for sigh 2.222.0                           |
++-------------------------------------+---------------------------------------+
+| app_identifier                      | com.flipdigitals.cardvest             |
+| force                               | false                                 |
+| cert_id                             | J96FH3B5BX                            |
+| provisioning_name                   | match AdHoc com.flipdigitals.cardvest |
+| ignore_profiles_with_different_name | true                                  |
+| api_key_path                        | ./fastlane/API_KEY.json               |
+| fail_on_name_taken                  | false                                 |
+| include_all_certificates            | false                                 |
+| include_mac_in_profiles             | false                                 |
+| platform                            | ios                                   |
+| adhoc                               | true                                  |
+| developer_id                        | false                                 |
+| development                         | false                                 |
+| skip_install                        | false                                 |
+| skip_fetch_profiles                 | false                                 |
+| skip_certificate_verification       | false                                 |
+| readonly                            | false                                 |
++-------------------------------------+---------------------------------------+
+
+[20:50:04]: Creating authorization token for App Store Connect API
+[20:50:04]: Fetching profiles...
+[20:50:04]: Verifying certificates...
+[20:50:04]: No existing profiles found, that match the certificates you have installed locally! Creating a new provisioning profile for you
+[20:50:06]: Creating new provisioning profile for 'com.flipdigitals.cardvest' with name 'match AdHoc com.flipdigitals.cardvest' for 'ios' platform
+[20:50:07]: Downloading provisioning profile...
+[20:50:07]: Successfully downloaded provisioning profile...
+[20:50:09]: Installing provisioning profile...
+/var/folders/_c/6d6xs355249_1852c1gygmp80000gn/T/d20240918-93616-q1uh9k/profiles/adhoc/AdHoc_com.flipdigitals.cardvest.mobileprovision
+[20:50:09]: Installing provisioning profile...
+[20:50:09]: 🔒  Successfully encrypted certificates repo
+[20:50:09]: Pushing changes to remote git repo...
+[20:50:12]: Finished uploading files to Git Repo [https://github.com/FLIP-Digital-Technologies/ios-certificates.git]
+
++-----------------------------------------------------------------------------------------------------------+
+|                                      Installed Provisioning Profile                                       |
++---------------------+------------------------------------------+------------------------------------------+
+| Parameter           | Environment Variable                     | Value                                    |
++---------------------+------------------------------------------+------------------------------------------+
+| App Identifier      |                                          | com.flipdigitals.cardvest                |
+| Type                |                                          | adhoc                                    |
+| Platform            |                                          | ios                                      |
+| Profile UUID        | sigh_com.flipdigitals.cardvest_adhoc     | 15f46388-5946-40e9-aaec-4621c5186978     |
+| Profile Name        | sigh_com.flipdigitals.cardvest_adhoc_pr  | match AdHoc com.flipdigitals.cardvest    |
+|                     | ofile-name                               |                                          |
+| Profile Path        | sigh_com.flipdigitals.cardvest_adhoc_pr  | /Users/Apple/Library/MobileDevice/Provi  |
+|                     | ofile-path                               | sioning                                  |
+|                     |                                          | Profiles/15f46388-5946-40e9-aaec-4621c5  |
+|                     |                                          | 186978.mobileprovision                   |
+| Development Team ID | sigh_com.flipdigitals.cardvest_adhoc_te  | ZG9LQXP6RV                               |
+|                     | am-id                                    |                                          |
+| Certificate Name    | sigh_com.flipdigitals.cardvest_adhoc_ce  | Apple Distribution: CARDVEST.NG LIMITED  |
+|                     | rtificate-name                           | (ZG9LQXP6RV)                             |
++---------------------+------------------------------------------+------------------------------------------+
+
+[20:50:12]: All required keys, certificates and provisioning profiles are installed 🙌

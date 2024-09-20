@@ -1,6 +1,6 @@
 {
   "name": "Cardvest",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "private": true,
   "scripts": {
     "prepare": "run-p assets:* debugger:install",

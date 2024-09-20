@@ -13,14 +13,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
-### make_badge
-
-```sh
-[bundle exec] fastlane make_badge
-```
-
-Make new versioned icon badges.
-
 ### bump_badge
 
 ```sh
@@ -28,43 +20,6 @@ Make new versioned icon badges.
 ```
 
 Bump and badge iOS and Android.
-
-----
-
-
-## Android
-
-### android deploy_staging
-
-```sh
-[bundle exec] fastlane android deploy_staging
-```
-
-Build, deploy staging Android.
-
-### android deploy_production
-
-```sh
-[bundle exec] fastlane android deploy_production
-```
-
-Build, deploy production Android.
-
-### android bump_badge_deploy_staging
-
-```sh
-[bundle exec] fastlane android bump_badge_deploy_staging
-```
-
-Bump, badge, deploy staging Android.
-
-### android bump_badge_deploy_prod
-
-```sh
-[bundle exec] fastlane android bump_badge_deploy_prod
-```
-
-Bump, badge, deploy production Android.
 
 ----
 
@@ -77,39 +32,39 @@ Bump, badge, deploy production Android.
 [bundle exec] fastlane ios certificates
 ```
 
-Set up certs and profiles for iOS.
+Set up certificates and provisioning profiles.
 
-### ios deploy_staging
-
-```sh
-[bundle exec] fastlane ios deploy_staging
-```
-
-Sign, build, deploy staging iOS.
-
-### ios deploy_production
+### ios deploy_testflight_staging
 
 ```sh
-[bundle exec] fastlane ios deploy_production
+[bundle exec] fastlane ios deploy_testflight_staging
 ```
 
-Sign, build, deploy production iOS.
+Sign, build, deploy to TestFlight (staging).
 
-### ios bump_badge_deploy_staging
+### ios deploy_testflight_production
 
 ```sh
-[bundle exec] fastlane ios bump_badge_deploy_staging
+[bundle exec] fastlane ios deploy_testflight_production
 ```
 
-Bump, badge, sign, build, deploy staging iOS.
+Sign, build, deploy to TestFlight (production).
 
-### ios bump_badge_deploy_prod
+### ios bump_badge_deploy_testflight_staging
 
 ```sh
-[bundle exec] fastlane ios bump_badge_deploy_prod
+[bundle exec] fastlane ios bump_badge_deploy_testflight_staging
 ```
 
-Bump, badge, sign, build, deploy production iOS.
+Bump, badge, sign, build, deploy to TestFlight (staging).
+
+### ios bump_badge_deploy_testflight_production
+
+```sh
+[bundle exec] fastlane ios bump_badge_deploy_testflight_production
+```
+
+Bump, badge, sign, build, deploy to TestFlight (production).
 
 ----
 
