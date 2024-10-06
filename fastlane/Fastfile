@@ -20,7 +20,7 @@ platform :ios do
   private_lane :build_staging do
     package = load_json(json_path: "./package.json")
     gym(
-      scheme: "PRODUCTION",
+      scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
       export_method: 'ad-hoc'
     )
@@ -30,7 +30,7 @@ platform :ios do
   private_lane :build_production do
     package = load_json(json_path: "./package.json")
     gym(
-      scheme: "PRODUCTION",
+      scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
       export_method: 'ad-hoc'
     )
@@ -106,5 +106,4 @@ end
 desc 'Bump and badge iOS and Android.'
 lane :bump_badge do
   bump
-  make_badge
 end
