@@ -119,3 +119,4 @@ deps-graph.svg
 .eslintcache
 cardvest copy
 fastlane/*.p8
+service-account.json
