@@ -27,7 +27,7 @@ jobs:
       - name: Build Android
         run: |
           java -version
-          yarn android:bundle:release
+          npm run android:bundle:release
 
       - name: Upload ABB for upload
         uses: actions/upload-artifact@v4
