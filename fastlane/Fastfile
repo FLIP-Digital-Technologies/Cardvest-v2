@@ -21,6 +21,7 @@ platform :ios do
     package = load_json(json_path: "./package.json")
     xcodes(
       version: '15.0',
+      username: ENV['APP_STORE_CONNECT_EMAIL'], # Apple ID email
       select_for_current_build_only: true,
     )
     gym(
@@ -35,6 +36,7 @@ platform :ios do
     package = load_json(json_path: "./package.json")
     xcodes(
       version: '15.0',
+      username: ENV['APP_STORE_CONNECT_EMAIL'], # Apple ID email
       select_for_current_build_only: true,
     )
     gym(
