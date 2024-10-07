@@ -18,6 +18,7 @@ platform :ios do
   desc 'Build the staging release iOS application.'
   private_lane :build_staging do
     package = load_json(json_path: "./package.json")
+    xcversion(version: "13.2.1")
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
@@ -28,6 +29,7 @@ platform :ios do
   desc 'Build the production release iOS application.'
   private_lane :build_production do
     package = load_json(json_path: "./package.json")
+    xcversion(version: "13.2.1")
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',

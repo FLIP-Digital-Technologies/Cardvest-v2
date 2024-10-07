@@ -71,6 +71,9 @@ jobs:
       - name: Install CocoaPods
         run: sudo gem install cocoapods
 
+      - name: Install xcodes
+        run: sudo gem install xcode-install
+
       - name: Set up node
         uses: actions/setup-node@v2
         with:
