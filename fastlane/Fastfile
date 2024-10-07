@@ -15,15 +15,14 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]  # Password for the Keychain
     )
   end
-
   desc 'Build the staging release iOS application.'
   private_lane :build_staging do
-    package = load_json(json_path: "./package.json")
     xcodes(
-      version: '15.0',
-      username: ENV['APP_STORE_CONNECT_EMAIL'], # Apple ID email
-      select_for_current_build_only: true,
+      version: "15.0",    # Ensure Xcode 15.0 is installed
+      installed: true,    # Install Xcode if not already installed
+      set_default: true   # Set Xcode 15.0 as the default version for the build
     )
+    package = load_json(json_path: "./package.json")
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
@@ -33,12 +32,12 @@ platform :ios do
 
   desc 'Build the production release iOS application.'
   private_lane :build_production do
-    package = load_json(json_path: "./package.json")
     xcodes(
-      version: '15.0',
-      username: ENV['APP_STORE_CONNECT_EMAIL'], # Apple ID email
-      select_for_current_build_only: true,
+      version: "15.0",    # Ensure Xcode 15.0 is installed
+      installed: true,    # Install Xcode if not already installed
+      set_default: true   # Set Xcode 15.0 as the default version for the build
     )
+    package = load_json(json_path: "./package.json")
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
