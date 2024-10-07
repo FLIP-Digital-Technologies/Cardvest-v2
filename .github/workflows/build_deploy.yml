@@ -9,47 +9,47 @@ on:
       - main
 
 jobs:
-  # deploy-android:
-  #   runs-on: ubuntu-latest
+  deploy-android:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-  #     - name: Set up Java 17
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         distribution: 'temurin' # Use the Temurin distribution
-  #         java-version: '17'      # Set the Java version to 17
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use the Temurin distribution
+          java-version: '17'      # Set the Java version to 17
 
-  #     - name: Install dependencies
-  #       run: npm install --force
+      - name: Install dependencies
+        run: npm install --force
 
-  #     - name: Build Android
-  #       run: |
-  #         java -version   # Verify Java version
-  #         npm run android:bundle:release
+      - name: Build Android
+        run: |
+          java -version   # Verify Java version
+          npm run android:bundle:release
 
-  #     - name: Upload ABB for upload
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: android_abb
-  #         path: "./android/app/build/outputs/bundle/release/app-release.aab"
+      - name: Upload ABB for upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: android_abb
+          path: "./android/app/build/outputs/bundle/release/app-release.aab"
 
-  #     - name: Upload Android App Bundle to Google Play Store
-  #       id: upload_aab
-  #       uses: KevinRohn/github-action-upload-play-store@v1.0.0
-  #       with:
-  #         service_account_json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-  #         package_name: "com.flipdigitals.cardvest"
-  #         aab_file_path: "./android/app/build/outputs/bundle/release/app-release.aab"
-  #         track: "internal"
-  #         release_status: "completed"
+      - name: Upload Android App Bundle to Google Play Store
+        id: upload_aab
+        uses: KevinRohn/github-action-upload-play-store@v1.0.0
+        with:
+          service_account_json: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          package_name: "com.flipdigitals.cardvest"
+          aab_file_path: "./android/app/build/outputs/bundle/release/app-release.aab"
+          track: "internal"
+          release_status: "completed"
 
   deploy-ios:
     runs-on: macos-latest
