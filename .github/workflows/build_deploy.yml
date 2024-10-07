@@ -89,6 +89,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
+      - name: Create App Store Connect API Key file
+        run: |
+          echo "${{ secrets.APP_STORE_CONNECT_API_KEY }}" > fastlane/AuthKey_3D4ADG3459.p8
+
       - name: Set up Match for certificates
         run: bundle exec fastlane match adhoc --readonly
         env:
