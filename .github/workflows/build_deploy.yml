@@ -76,6 +76,14 @@ jobs:
         with:
           node-version: '18.20.4'
 
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '15.0'  # Specify the Xcode version you want to use
+
+      - name: Show available Xcode versions
+        run: xcodebuild -showsdks
+
       - name: Install npm dependencies
         run: npm install --force
 
