@@ -33,7 +33,7 @@ platform :ios do
   desc 'Build the production release iOS application.'
   private_lane :build_production do
     package = load_json(json_path: "./package.json")
-    xcodes(
+    xcversion(
       version: "15.0",
       select_for_current_build_only: true
     )
