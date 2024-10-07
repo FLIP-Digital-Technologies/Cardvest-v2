@@ -18,35 +18,21 @@ platform :ios do
   desc 'Build the staging release iOS application.'
   private_lane :build_staging do
     package = load_json(json_path: "./package.json")
-    # UI.important "Important Message"
-    # UI.error "O NO!"
-    # UI.message "Basic blah"
-    answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
-    changelog = ask('Type Changelog message:') if answer == "Yes"
-    increment_build_number(xcodeproj: "AppName.xcodeproj")
-    build_app(scheme: "Cardvest")
-    if changelog
-      upload_to_testflight(changelog: changelog)
-    else
-      upload_to_testflight
-    end
+    gym(
+      scheme: "Cardvest",
+      workspace: './ios/' + package['name'] + '.xcworkspace',
+      export_method: 'ad-hoc'
+    )
   end
 
   desc 'Build the production release iOS application.'
   private_lane :build_production do
     package = load_json(json_path: "./package.json")
-    # UI.important "Important Message"
-    # UI.error "O NO!"
-    # UI.message "Basic blah"
-    # answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
-    # changelog = ask('Type Changelog message:') if answer == "Yes"
-    # increment_build_number(xcodeproj: "AppName.xcodeproj")
-    build_app(scheme: "Cardvest")
-    if changelog
-      upload_to_testflight(changelog: changelog)
-    else
-      upload_to_testflight
-    end
+    gym(
+      scheme: "Cardvest",
+      workspace: './ios/' + package['name'] + '.xcworkspace',
+      export_method: 'ad-hoc'
+    )
   end
 
   desc 'Upload the release IPA to TestFlight.'
