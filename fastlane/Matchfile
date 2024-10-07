@@ -1,4 +1,4 @@
-git_url("https://github.com/FLIP-Digital-Technologies/ios-certificates.git")
+git_url("git@github.com:FLIP-Digital-Technologies/ios-certificates.git")
 
 storage_mode("git")
 

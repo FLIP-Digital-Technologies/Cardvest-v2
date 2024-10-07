@@ -10,7 +10,7 @@ platform :ios do
     )
     match(
       type: "adhoc",
-      git_url: "git@github.com:your-org/your-certificates-repo.git",
+      git_url: "git@github.com:FLIP-Digital-Technologies/ios-certificates.git",
       readonly: true,
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]  # Password for the Keychain
     )
