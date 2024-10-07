@@ -76,19 +76,13 @@ jobs:
         with:
           node-version: '18.20.4'
 
-      - name: Install xcodes CLI
-        run: brew install robotsandpencils/made/xcodes
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'  # Specify the Xcode version you want to use
 
-      - name: Install and select Xcode 15.0
-        run: |
-          xcodes install 15.0
-          sudo xcode-select -s /Applications/Xcode-15.0.app
-
-      - name: Verify Xcode version
-        run: xcodebuild -version
-
-      - name: Install dependencies
-        run: npm install
+      - name: Show available Xcode versions
+        run: xcodebuild -showsdks
 
       - name: Install npm dependencies
         run: npm install --force
@@ -117,10 +111,13 @@ jobs:
         env:
           APP_STORE_CONNECT_EMAIL: ${{ secrets.APP_STORE_CONNECT_EMAIL }}
           APP_STORE_CONNECT_API_KEY_PATH: ${{ secrets.APP_STORE_CONNECT_API_KEY_PATH }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
       - name: Upload IPA for upload
         uses: actions/upload-artifact@v4
         with:
           name: ios_ipa
-          path: './Cardvest.app.dSYM.zip'
+          path: "./Cardvest.app.dSYM.zip"
+

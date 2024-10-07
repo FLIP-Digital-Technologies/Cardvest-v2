@@ -17,32 +17,36 @@ platform :ios do
   end
   desc 'Build the staging release iOS application.'
   private_lane :build_staging do
-    xcodes(
-      version: "15.0",    # Ensure Xcode 15.0 is installed
-      installed: true,    # Install Xcode if not already installed
-      set_default: true   # Set Xcode 15.0 as the default version for the build
-    )
     package = load_json(json_path: "./package.json")
-    gym(
-      scheme: "Cardvest",
-      workspace: './ios/' + package['name'] + '.xcworkspace',
-      export_method: 'ad-hoc'
-    )
+    # UI.important "Important Message"
+    # UI.error "O NO!"
+    # UI.message "Basic blah"
+    answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
+    changelog = ask('Type Changelog message:') if answer == "Yes"
+    increment_build_number(xcodeproj: "AppName.xcodeproj")
+    build_app(scheme: "Cardvest")
+    if changelog
+      upload_to_testflight(changelog: changelog)
+    else
+      upload_to_testflight
+    end
   end
 
   desc 'Build the production release iOS application.'
   private_lane :build_production do
-    xcodes(
-      version: "15.0",    # Ensure Xcode 15.0 is installed
-      installed: true,    # Install Xcode if not already installed
-      set_default: true   # Set Xcode 15.0 as the default version for the build
-    )
     package = load_json(json_path: "./package.json")
-    gym(
-      scheme: "Cardvest",
-      workspace: './ios/' + package['name'] + '.xcworkspace',
-      export_method: 'ad-hoc'
-    )
+    # UI.important "Important Message"
+    # UI.error "O NO!"
+    # UI.message "Basic blah"
+    answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
+    changelog = ask('Type Changelog message:') if answer == "Yes"
+    increment_build_number(xcodeproj: "AppName.xcodeproj")
+    build_app(scheme: "Cardvest")
+    if changelog
+      upload_to_testflight(changelog: changelog)
+    else
+      upload_to_testflight
+    end
   end
 
   desc 'Upload the release IPA to TestFlight.'
