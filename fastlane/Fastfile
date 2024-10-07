@@ -38,9 +38,9 @@ platform :ios do
     # UI.important "Important Message"
     # UI.error "O NO!"
     # UI.message "Basic blah"
-    answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
-    changelog = ask('Type Changelog message:') if answer == "Yes"
-    increment_build_number(xcodeproj: "AppName.xcodeproj")
+    # answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
+    # changelog = ask('Type Changelog message:') if answer == "Yes"
+    # increment_build_number(xcodeproj: "AppName.xcodeproj")
     build_app(scheme: "Cardvest")
     if changelog
       upload_to_testflight(changelog: changelog)
