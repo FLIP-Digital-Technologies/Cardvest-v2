@@ -22,7 +22,14 @@ platform :ios do
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
-      export_method: 'ad-hoc'
+      export_method: 'ad-hoc',
+      export_options: {
+        provisioningProfiles: {
+          "com.flipdigitals.cardvest" => "match AdHoc com.flipdigitals.cardvest"
+        },
+        signingStyle: "automatic",
+        allowProvisioningUpdates: true
+      }
     )
   end
 
@@ -32,7 +39,14 @@ platform :ios do
     gym(
       scheme: "Cardvest",
       workspace: './ios/' + package['name'] + '.xcworkspace',
-      export_method: 'ad-hoc'
+      export_method: 'ad-hoc',
+      export_options: {
+        provisioningProfiles: {
+          "com.flipdigitals.cardvest" => "match AdHoc com.flipdigitals.cardvest"
+        },
+        signingStyle: "automatic",
+        allowProvisioningUpdates: true
+      }
     )
   end
 
