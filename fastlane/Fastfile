@@ -20,8 +20,7 @@ platform :ios do
   private_lane :build_staging do
     package = load_json(json_path: "./package.json")
     xcversion(
-      version: "15.0",
-      select_for_current_build_only: true
+      version: "15.0"
     )
     gym(
       scheme: "Cardvest",
@@ -34,8 +33,7 @@ platform :ios do
   private_lane :build_production do
     package = load_json(json_path: "./package.json")
     xcversion(
-      version: "15.0",
-      select_for_current_build_only: true
+      version: "15.0"
     )
     gym(
       scheme: "Cardvest",
