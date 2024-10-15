@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - main
 
 jobs:
   deploy-android:
@@ -51,76 +48,76 @@ jobs:
           track: "internal"
           release_status: "completed"
 
-  deploy-ios:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  # deploy-ios:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      - name: Set up Ruby v3.1.2
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.2
+  #     - name: Set up Ruby v3.1.2
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: 3.1.2
 
-      - name: Install Bundler
-        run: gem install bundler
+  #     - name: Install Bundler
+  #       run: gem install bundler
 
-      - name: Install dependencies with Bundler
-        run: bundle install
+  #     - name: Install dependencies with Bundler
+  #       run: bundle install
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
+  #     - name: Install CocoaPods
+  #       run: sudo gem install cocoapods
 
-      - name: Install xcodes
-        run: sudo gem install xcode-install
+  #     - name: Install xcodes
+  #       run: sudo gem install xcode-install
 
-      - name: Set up node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.20.4'
+  #     - name: Set up node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '18.20.4'
 
-      - name: Set up Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '15.0'  # Specify the Xcode version you want to use
+  #     - name: Set up Xcode
+  #       uses: maxim-lobanov/setup-xcode@v1
+  #       with:
+  #         xcode-version: '15.0'  # Specify the Xcode version you want to use
 
-      - name: Show available Xcode versions
-        run: xcodebuild -showsdks
+  #     - name: Show available Xcode versions
+  #       run: xcodebuild -showsdks
 
-      - name: Install npm dependencies
-        run: npm install --force
+  #     - name: Install npm dependencies
+  #       run: npm install --force
 
-      - name: Install CocoaPods Dependencies
-        run: bundle exec pod install --project-directory=ios/
+  #     - name: Install CocoaPods Dependencies
+  #       run: bundle exec pod install --project-directory=ios/
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+  #     - name: Set up SSH
+  #       run: |
+  #         mkdir -p ~/.ssh
+  #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+  #         chmod 600 ~/.ssh/id_rsa
+  #         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Create App Store Connect API Key file
-        run: |
-          echo "${{ secrets.APP_STORE_CONNECT_API_KEY }}" > fastlane/AuthKey_3D4ADG3459.p8
+  #     - name: Create App Store Connect API Key file
+  #       run: |
+  #         echo "${{ secrets.APP_STORE_CONNECT_API_KEY }}" > fastlane/AuthKey_3D4ADG3459.p8
 
-      - name: Set up Match for certificates
-        run: bundle exec fastlane match adhoc --readonly
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  #     - name: Set up Match for certificates
+  #       run: bundle exec fastlane match adhoc --readonly
+  #       env:
+  #         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
-      - name: Deploy to TestFlight
-        run: bundle exec fastlane ios deploy_testflight_production
-        env:
-          APP_STORE_CONNECT_EMAIL: ${{ secrets.APP_STORE_CONNECT_EMAIL }}
-          APP_STORE_CONNECT_API_KEY_PATH: ${{ secrets.APP_STORE_CONNECT_API_KEY_PATH }}
-          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  #     - name: Deploy to TestFlight
+  #       run: bundle exec fastlane ios deploy_testflight_production
+  #       env:
+  #         APP_STORE_CONNECT_EMAIL: ${{ secrets.APP_STORE_CONNECT_EMAIL }}
+  #         APP_STORE_CONNECT_API_KEY_PATH: ${{ secrets.APP_STORE_CONNECT_API_KEY_PATH }}
+  #         APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+  #         APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+  #         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
-      - name: Upload IPA for upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios_ipa
-          path: "./Cardvest.app.dSYM.zip"
+  #     - name: Upload IPA for upload
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ios_ipa
+  #         path: "./Cardvest.app.dSYM.zip"
 
