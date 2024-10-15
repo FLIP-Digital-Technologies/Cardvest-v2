@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>812220298</string>
+	<string>812220299</string>
 	<key>FacebookAppID</key>
 	<string>753238116214519</string>
 	<key>FacebookClientToken</key>
@@ -38,9 +38,9 @@
 	<key>FacebookDisplayName</key>
 	<string>Cardvest</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<true />
+	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
-	<false />
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>itms</string>
@@ -48,11 +48,11 @@
 		<string>mailto</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
-	<true />
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true />
+		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>This permission is not needed by the app, but it is required by an underlying API. If you see this dialog, contact us.</string>
@@ -140,7 +140,9 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>12.0</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false />
+	<false/>
 </dict>
 </plist>

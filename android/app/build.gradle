@@ -85,7 +85,7 @@ android {
         applicationId "com.flipdigitals.cardvest"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 812220298
+        versionCode 812220299
         versionName "2.1.3"
     }
     signingConfigs {
