@@ -100,7 +100,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
+    "@babel/preset-env": "^7.25.8",
     "@babel/runtime": "^7.20.0",
     "@forward-software/react-native-toolbox": "^3.0.0",
     "@react-native-community/eslint-config": "^3.2.0",
