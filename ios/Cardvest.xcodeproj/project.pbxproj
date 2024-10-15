@@ -8,56 +8,51 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CardvestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CardvestTests.m */; };
-		064DD41E859E46BB8E4013F0 /* Satoshi-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6475CEC6DAC346589270CB8E /* Satoshi-Italic.ttf */; };
-		13B07FBD1A68108700A75B9A /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		07A23FB79A5A447CA42AE225 /* Satoshi-VariableItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 237BC93828B1485C9F62DAFF /* Satoshi-VariableItalic.ttf */; };
+		08ECD8883CD94CD9BDFB8580 /* Satoshi-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51C7C72E028741A4B5AF0365 /* Satoshi-Medium.ttf */; };
+		114DDC515F9348EA82442B99 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEC286959A1E4CD6AC2DB16A /* Lato-Black.ttf */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1678491C6C6109B72AD8EBC3 /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3239CD104A52C791605137DA /* libPods-Cardvest.a */; };
-		169CCFA811584301BB7961B6 /* Satoshi-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */; };
-		22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351AD53139B04D48A492DCC9 /* Lato-Bold.ttf */; };
-		259D0F17F29F4D2BB628341E /* Satoshi-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1976986C3A9496A94A2E7D5 /* Satoshi-Light.ttf */; };
-		2909319D33DD472694DDAF1F /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2152AF86EDF4EEDBD2D3F17 /* Lato-Thin.ttf */; };
-		2AFCCD3214335F99506C1147 /* libPods-Cardvest-CardvestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79DB480C47DB9EC78FFC1E /* libPods-Cardvest-CardvestTests.a */; };
-		2DB59C727D1F489F895C2CCC /* Satoshi-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC50D9EB71704248B5640701 /* Satoshi-MediumItalic.ttf */; };
-		323CDFD433DA4BB0B1E2C76E /* Satoshi-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12C95E49BEA4472A8104AF92 /* Satoshi-Medium.ttf */; };
-		391165B8EE75497793EADEC4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5490CC35D2D14595A5AF075E /* Lato-Regular.ttf */; };
-		3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1F77F252AF552005548BB /* LaunchScreen.storyboard */; };
-		3AE60BB7282A465A0009B11D /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AE60BB6282A46590009B11D /* AppDelegate.mm */; };
-		3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E5A87598B4B46995B7027 /* Lato-BlackItalic.ttf */; };
-		3BB8E813AC034E07B795FC96 /* Satoshi-VariableItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 275AFC30388943F8B94024D8 /* Satoshi-VariableItalic.ttf */; };
-		461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06933F48076D471682E306AD /* Lato-LightItalic.ttf */; };
-		4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */; };
-		86659DF594B74ECF996681F4 /* Satoshi-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */; };
-		88329CB129CDDED500706034 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 88329CB029CDDED500706034 /* FacebookCore */; };
-		884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */; };
-		884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */; };
-		884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */; };
-		884CBE3329559CA8001DD801 /* Satoshi-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */; };
-		884CBE3429559CA8001DD801 /* Satoshi-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */; };
-		884CBE3529559CA8001DD801 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */; };
-		884CBE3629559CA8001DD801 /* Satoshi-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2929559CA8001DD801 /* Satoshi-Light.otf */; };
-		884CBE3729559CA8001DD801 /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */; };
-		884CBE3829559CA8001DD801 /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */; };
-		884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */; };
-		885144D829B0FF7600852F8C /* Cardvest.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 8847745929AFD7F900F810BE /* Cardvest.entitlements */; };
-		885144DA29B1025200852F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885144D929B1025200852F8C /* GoogleService-Info.plist */; };
-		8866594C29ACFFB100A137FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8866594A29ACFFB100A137FA /* GoogleService-Info.plist */; };
-		889B7D6D29EFC1110095770C /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889B7D6C29EFC1110095770C /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		889B7D6F29EFC12D0095770C /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889B7D6E29EFC12D0095770C /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		889B7D7129EFC1380095770C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889B7D7029EFC1380095770C /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		889B7D7329EFC1420095770C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889B7D7229EFC1420095770C /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		889B7D7529EFC14C0095770C /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889B7D7429EFC14C0095770C /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68E5EF259E8E4558AB107594 /* Lato-Black.ttf */; };
-		92B1E2B2945D4F878B87AA7E /* Satoshi-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DE2C2B1E4884533A8B1A113 /* Satoshi-BoldItalic.ttf */; };
-		B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5EAEC40EF5D42C988F42853 /* Satoshi-Black.ttf */; };
-		B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A378A42799C4B828204CFE3 /* Satoshi-BlackItalic.ttf */; };
-		BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */; };
-		C76B35D81790484D83EEF8FC /* Satoshi-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D0BFE70CFEA4176911E5AD0 /* Satoshi-Bold.ttf */; };
-		C8342581F70D47B98C3CEDB4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF4036C513F840B19AF034A2 /* Lato-Light.ttf */; };
-		DD565953DF7F4851AC7002AF /* Satoshi-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0079EA82CCF9484EAE66E1FD /* Satoshi-Variable.ttf */; };
-		DE491222477449B0893478F9 /* Satoshi-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A6E7BCE59664DD1BD389A3B /* Satoshi-ThinItalic.ttf */; };
-		F3B965A1D39745CFA3370C4B /* Satoshi-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13ADB9EA05BE4397A6CDA5C0 /* Satoshi-Regular.ttf */; };
-		FA8B7193E87645ABA6EEB43E /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DEA598EFC5B4EF2B839E4D6 /* Lato-BoldItalic.ttf */; };
+		16C37CF712B8C402ACCBA51A /* libPods-Cardvest-CardvestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 895B59988ABCD987F8B3E5C4 /* libPods-Cardvest-CardvestTests.a */; };
+		188714602CB2BF770099D8DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1887145F2CB2BF770099D8DE /* GoogleService-Info.plist */; };
+		188714622CB2C3EE0099D8DE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188714612CB2C3EE0099D8DE /* AdSupport.framework */; };
+		188714642CB2C3FB0099D8DE /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188714632CB2C3FB0099D8DE /* AdServices.framework */; };
+		188714682CB2C4540099D8DE /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188714672CB2C4540099D8DE /* AppTrackingTransparency.framework */; };
+		284D828C418A4B5E8AA26D0D /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 800A647575FA43AC93CE749D /* Lato-Bold.ttf */; };
+		2AAE11353EA44EA68C24BD14 /* Satoshi-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FAC97C6A0984B918FC5AD67 /* Satoshi-Light.ttf */; };
+		380E19882B394ED48DAA9CBC /* Satoshi-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4F4603B009914BF2973DB3F0 /* Satoshi-BlackItalic.otf */; };
+		40FB2DC07226454AB332BAFA /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CF6A8E946074B65ACC7346F /* Lato-Thin.ttf */; };
+		4844AE63A20E43D99C8AD86D /* Satoshi-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377434CCB22548E4B8AE3699 /* Satoshi-MediumItalic.ttf */; };
+		4FE07F43A6B6481FA3A19207 /* Satoshi-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEC880A2DB254445BA871F69 /* Satoshi-Thin.ttf */; };
+		547C78FFDA2B4DC234F9CC55 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3AA13E4CD0037CB5CDBC1BCC /* PrivacyInfo.xcprivacy */; };
+		58A872C2841B42FBB73C3CFC /* Satoshi-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 70852C553B8245E6A67BA176 /* Satoshi-BoldItalic.otf */; };
+		5CACDA24A90C406A8E68107C /* Satoshi-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAEEA76736C4492D93E86C89 /* Satoshi-BoldItalic.ttf */; };
+		60E2C4247A5D49538602992C /* Satoshi-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8DC31D0B30E24B79A61775B6 /* Satoshi-Light.otf */; };
+		636F9EA75D944FAABE47EA27 /* Satoshi-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 186AD7DD36F3492A99979217 /* Satoshi-Italic.ttf */; };
+		65391A2E0CA5478EBCD2B0EB /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 936FA3F503214DFB9CCD836D /* Lato-Regular.ttf */; };
+		727CA21844D94E7E97EADC28 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D172477A00541128B11FE7A /* Lato-Italic.ttf */; };
+		765C5913A419454AABC91784 /* Satoshi-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4FEBC0B296C48118E78477D /* Satoshi-Variable.ttf */; };
+		7F99189F5F0D48C880D8E6F4 /* Satoshi-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC32CA99F79E440F8CFDCF7E /* Satoshi-Regular.otf */; };
+		80C983377D964318A5922A5B /* Satoshi-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = BA33ECB1D9B44A7EAB920698 /* Satoshi-LightItalic.otf */; };
+		8192D6928C57466FA5028476 /* Satoshi-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB89E1B98D4A4E40890E09AB /* Satoshi-Regular.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8512FDEDF8EA42639392C815 /* Satoshi-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73401BA651324CB2BDDCB062 /* Satoshi-LightItalic.ttf */; };
+		8A0B92741678476CBD2C5E50 /* Satoshi-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F64093BDA4F1DA35FDACB /* Satoshi-Bold.ttf */; };
+		94B03A39858A4D17AD656F38 /* Satoshi-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 440E2D2E81F4433F9BDAA1B8 /* Satoshi-ThinItalic.ttf */; };
+		B74C15E466F04C23ADD65E27 /* Satoshi-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C21ADF0477E54B578A10DDDC /* Satoshi-MediumItalic.otf */; };
+		B930CFCDD7014324B089D7D6 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC99DAE9B35C46F8A27C7EE0 /* Lato-BoldItalic.ttf */; };
+		C146428927142E09A249DE9E /* libPods-Cardvest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F128D1F3ABBF776B2A077F /* libPods-Cardvest.a */; };
+		CC1F4489D9BC4F1792A18512 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84333D97D197434CAB88E77E /* Lato-BlackItalic.ttf */; };
+		CC850F00985E457CB61B5D63 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8431713D4FA54B2C85F4FFD3 /* Lato-Light.ttf */; };
+		D15BF472A2A845D68F4A62E1 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55D43698CDC44D62B77ADCB1 /* Lato-LightItalic.ttf */; };
+		D6975508817D4E9E9FDFF879 /* Satoshi-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE4235CDD0495699E77683 /* Satoshi-Italic.otf */; };
+		DAB8522908D84C80824D0DE5 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB9A2D8F55544FC1A7354F98 /* Lato-ThinItalic.ttf */; };
+		F161D1B39BF24198BA82B854 /* Satoshi-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A7774F5E8D794AACA0C2DCE8 /* Satoshi-Bold.otf */; };
+		F32A5C5D19CB4C5E92D0D02B /* Satoshi-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 771ED9AA59A04085B0EFC488 /* Satoshi-Medium.otf */; };
+		F639F582EE284A01B2A182FD /* Satoshi-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8AF9DCDAFFFA4211BB8CF9FA /* Satoshi-Black.otf */; };
+		F959F03802CB40DDA6299B0C /* Satoshi-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A29A8B8383C4D6B85DB287F /* Satoshi-Black.ttf */; };
+		FF3DAC4EA8BC4601999B415D /* Satoshi-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2E402DC4DA44387B00C8891 /* Satoshi-BlackItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,93 +66,68 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0079EA82CCF9484EAE66E1FD /* Satoshi-Variable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Variable.ttf"; path = "../src/assets/fonts/Satoshi-Variable.ttf"; sourceTree = "<group>"; };
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* CardvestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardvestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CardvestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardvestTests.m; sourceTree = "<group>"; };
-		06933F48076D471682E306AD /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
-		12C95E49BEA4472A8104AF92 /* Satoshi-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Medium.ttf"; path = "../src/assets/fonts/Satoshi-Medium.ttf"; sourceTree = "<group>"; };
-		13ADB9EA05BE4397A6CDA5C0 /* Satoshi-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Regular.ttf"; path = "../src/assets/fonts/Satoshi-Regular.ttf"; sourceTree = "<group>"; };
+		0A29A8B8383C4D6B85DB287F /* Satoshi-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Black.ttf"; path = "../src/assets/fonts/Satoshi-Black.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Cardvest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardvest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Cardvest/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Cardvest/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Cardvest/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Cardvest/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Cardvest/main.m; sourceTree = "<group>"; };
-		1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Thin.ttf"; path = "../src/assets/fonts/Satoshi-Thin.ttf"; sourceTree = "<group>"; };
-		2436BC37CFF14845A08BC38C /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		275AFC30388943F8B94024D8 /* Satoshi-VariableItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-VariableItalic.ttf"; path = "../src/assets/fonts/Satoshi-VariableItalic.ttf"; sourceTree = "<group>"; };
-		303D7E515107464A9F756BF5 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		30726AAD7FA34C7497832E61 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		3239CD104A52C791605137DA /* libPods-Cardvest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		351AD53139B04D48A492DCC9 /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
-		38C6204123C84D08A2509CA4 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		3A378A42799C4B828204CFE3 /* Satoshi-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BlackItalic.ttf"; path = "../src/assets/fonts/Satoshi-BlackItalic.ttf"; sourceTree = "<group>"; };
-		3AC1F77F252AF552005548BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3AE60BB6282A46590009B11D /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Cardvest/AppDelegate.mm; sourceTree = "<group>"; };
-		3D2E5A87598B4B46995B7027 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BlackItalic.ttf"; path = "../src/assets/fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
-		3DEA598EFC5B4EF2B839E4D6 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
-		3E8C23CB15454F85A8EDD801 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		420D36B2635142179BFA04C6 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		4BE5321DCB604D30A34B98FE /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		4D0BFE70CFEA4176911E5AD0 /* Satoshi-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Bold.ttf"; path = "../src/assets/fonts/Satoshi-Bold.ttf"; sourceTree = "<group>"; };
-		4FEC52FF7C5B47C68067D9F9 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		5490CC35D2D14595A5AF075E /* Lato-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
-		5A6E7BCE59664DD1BD389A3B /* Satoshi-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-ThinItalic.ttf"; path = "../src/assets/fonts/Satoshi-ThinItalic.ttf"; sourceTree = "<group>"; };
-		6475CEC6DAC346589270CB8E /* Satoshi-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Italic.ttf"; path = "../src/assets/fonts/Satoshi-Italic.ttf"; sourceTree = "<group>"; };
-		68E5EF259E8E4558AB107594 /* Lato-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Black.ttf"; path = "../src/assets/fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
-		71214528D2EC48BF83240B17 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		8847745929AFD7F900F810BE /* Cardvest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Cardvest.entitlements; path = Cardvest/Cardvest.entitlements; sourceTree = "<group>"; };
-		884CBE1C29559CA8001DD801 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
-		884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-LightItalic.otf"; path = "../src/assets/fonts/Satoshi-LightItalic.otf"; sourceTree = "<group>"; };
-		884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Bold.otf"; path = "../src/assets/fonts/Satoshi-Bold.otf"; sourceTree = "<group>"; };
-		884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-MediumItalic.otf"; path = "../src/assets/fonts/Satoshi-MediumItalic.otf"; sourceTree = "<group>"; };
-		884CBE2029559CA8001DD801 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
-		884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-BoldItalic.otf"; path = "../src/assets/fonts/Satoshi-BoldItalic.otf"; sourceTree = "<group>"; };
-		884CBE2229559CA8001DD801 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../src/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
-		884CBE2329559CA8001DD801 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
-		884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-BlackItalic.otf"; path = "../src/assets/fonts/Satoshi-BlackItalic.otf"; sourceTree = "<group>"; };
-		884CBE2529559CA8001DD801 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Thin.ttf"; path = "../src/assets/fonts/Lato-Thin.ttf"; sourceTree = "<group>"; };
-		884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Regular.otf"; path = "../src/assets/fonts/Satoshi-Regular.otf"; sourceTree = "<group>"; };
-		884CBE2729559CA8001DD801 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "../src/assets/fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
-		884CBE2829559CA8001DD801 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-BlackItalic.ttf"; path = "../src/assets/fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
-		884CBE2929559CA8001DD801 /* Satoshi-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Light.otf"; path = "../src/assets/fonts/Satoshi-Light.otf"; sourceTree = "<group>"; };
-		884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Medium.otf"; path = "../src/assets/fonts/Satoshi-Medium.otf"; sourceTree = "<group>"; };
-		884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Italic.otf"; path = "../src/assets/fonts/Satoshi-Italic.otf"; sourceTree = "<group>"; };
-		884CBE2C29559CA8001DD801 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
-		884CBE2D29559CA8001DD801 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
-		884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
-		884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Satoshi-Black.otf"; path = "../src/assets/fonts/Satoshi-Black.otf"; sourceTree = "<group>"; };
-		885144D929B1025200852F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "fastlane/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8866594A29ACFFB100A137FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Cardvest/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		889B7D6C29EFC1110095770C /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		889B7D6E29EFC12D0095770C /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
-		889B7D7029EFC1380095770C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		889B7D7229EFC1420095770C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		889B7D7429EFC14C0095770C /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
-		88BB9518D2748BD163C478D0 /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
-		8B268DFF4A6AE4D604587788 /* Pods-Cardvest-CardvestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.debug.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.debug.xcconfig"; sourceTree = "<group>"; };
-		992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-LightItalic.ttf"; path = "../src/assets/fonts/Satoshi-LightItalic.ttf"; sourceTree = "<group>"; };
-		9A24869C88D743A5A01D67B0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		9B58E33039ED4B5A83C5FE58 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		9DE2C2B1E4884533A8B1A113 /* Satoshi-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BoldItalic.ttf"; path = "../src/assets/fonts/Satoshi-BoldItalic.ttf"; sourceTree = "<group>"; };
-		A2C8F480800B4B1C91CE2F11 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		B5EAEC40EF5D42C988F42853 /* Satoshi-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Black.ttf"; path = "../src/assets/fonts/Satoshi-Black.ttf"; sourceTree = "<group>"; };
-		BC50D9EB71704248B5640701 /* Satoshi-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-MediumItalic.ttf"; path = "../src/assets/fonts/Satoshi-MediumItalic.ttf"; sourceTree = "<group>"; };
-		C0537DAAD666E5B5491D1792 /* Pods-Cardvest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest.debug.xcconfig"; path = "Target Support Files/Pods-Cardvest/Pods-Cardvest.debug.xcconfig"; sourceTree = "<group>"; };
-		C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Italic.ttf"; path = "../src/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
-		DC9F2B34D5D441E1BF160FA8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		DF4036C513F840B19AF034A2 /* Lato-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
-		E2152AF86EDF4EEDBD2D3F17 /* Lato-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Thin.ttf"; path = "../src/assets/fonts/Lato-Thin.ttf"; sourceTree = "<group>"; };
-		E80451E76DC14E3F80CCE2DE /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		E95B9C6930DE4255A97A3A0D /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = Cardvest/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		186AD7DD36F3492A99979217 /* Satoshi-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Italic.ttf"; path = "../src/assets/fonts/Satoshi-Italic.ttf"; sourceTree = "<group>"; };
+		1887145C2CB2B22A0099D8DE /* Cardvest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Cardvest.entitlements; path = Cardvest/Cardvest.entitlements; sourceTree = "<group>"; };
+		1887145F2CB2BF770099D8DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Cardvest/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		188714612CB2C3EE0099D8DE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		188714632CB2C3FB0099D8DE /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
+		188714652CB2C4410099D8DE /* StoreKitTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKitTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/StoreKitTest.framework; sourceTree = DEVELOPER_DIR; };
+		188714672CB2C4540099D8DE /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		1887146C2CB2E5CF0099D8DE /* FBSDKShareKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKShareKit.xcframework; path = Pods/FBSDKShareKit/XCFrameworks/FBSDKShareKit.xcframework; sourceTree = "<group>"; };
+		1887146E2CB2E5D90099D8DE /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Pods/FBSDKCoreKit_Basics/XCFrameworks/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
+		188714702CB2E6020099D8DE /* FBSDKCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit.xcframework; path = Pods/FBSDKCoreKit/XCFrameworks/FBSDKCoreKit.xcframework; sourceTree = "<group>"; };
+		2283F5E83BF63BE1B71186E1 /* Pods-Cardvest-CardvestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.debug.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		237BC93828B1485C9F62DAFF /* Satoshi-VariableItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-VariableItalic.ttf"; path = "../src/assets/fonts/Satoshi-VariableItalic.ttf"; sourceTree = "<group>"; };
+		28F128D1F3ABBF776B2A077F /* libPods-Cardvest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		377434CCB22548E4B8AE3699 /* Satoshi-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-MediumItalic.ttf"; path = "../src/assets/fonts/Satoshi-MediumItalic.ttf"; sourceTree = "<group>"; };
+		3AA13E4CD0037CB5CDBC1BCC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Cardvest/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		440E2D2E81F4433F9BDAA1B8 /* Satoshi-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-ThinItalic.ttf"; path = "../src/assets/fonts/Satoshi-ThinItalic.ttf"; sourceTree = "<group>"; };
+		4D8F64093BDA4F1DA35FDACB /* Satoshi-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Bold.ttf"; path = "../src/assets/fonts/Satoshi-Bold.ttf"; sourceTree = "<group>"; };
+		4F4603B009914BF2973DB3F0 /* Satoshi-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BlackItalic.otf"; path = "../src/assets/fonts/Satoshi-BlackItalic.otf"; sourceTree = "<group>"; };
+		51C7C72E028741A4B5AF0365 /* Satoshi-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Medium.ttf"; path = "../src/assets/fonts/Satoshi-Medium.ttf"; sourceTree = "<group>"; };
+		55D43698CDC44D62B77ADCB1 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-LightItalic.ttf"; path = "../src/assets/fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		5CF6A8E946074B65ACC7346F /* Lato-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Thin.ttf"; path = "../src/assets/fonts/Lato-Thin.ttf"; sourceTree = "<group>"; };
+		6D172477A00541128B11FE7A /* Lato-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Italic.ttf"; path = "../src/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
+		6FAC97C6A0984B918FC5AD67 /* Satoshi-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Light.ttf"; path = "../src/assets/fonts/Satoshi-Light.ttf"; sourceTree = "<group>"; };
+		70852C553B8245E6A67BA176 /* Satoshi-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BoldItalic.otf"; path = "../src/assets/fonts/Satoshi-BoldItalic.otf"; sourceTree = "<group>"; };
+		73401BA651324CB2BDDCB062 /* Satoshi-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-LightItalic.ttf"; path = "../src/assets/fonts/Satoshi-LightItalic.ttf"; sourceTree = "<group>"; };
+		7538767F3D1FF2909076F7F4 /* Pods-Cardvest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest.debug.xcconfig"; path = "Target Support Files/Pods-Cardvest/Pods-Cardvest.debug.xcconfig"; sourceTree = "<group>"; };
+		771ED9AA59A04085B0EFC488 /* Satoshi-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Medium.otf"; path = "../src/assets/fonts/Satoshi-Medium.otf"; sourceTree = "<group>"; };
+		7BEE4235CDD0495699E77683 /* Satoshi-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Italic.otf"; path = "../src/assets/fonts/Satoshi-Italic.otf"; sourceTree = "<group>"; };
+		800A647575FA43AC93CE749D /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Cardvest/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8431713D4FA54B2C85F4FFD3 /* Lato-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
+		84333D97D197434CAB88E77E /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BlackItalic.ttf"; path = "../src/assets/fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		895B59988ABCD987F8B3E5C4 /* libPods-Cardvest-CardvestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest-CardvestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AF9DCDAFFFA4211BB8CF9FA /* Satoshi-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Black.otf"; path = "../src/assets/fonts/Satoshi-Black.otf"; sourceTree = "<group>"; };
+		8DC31D0B30E24B79A61775B6 /* Satoshi-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Light.otf"; path = "../src/assets/fonts/Satoshi-Light.otf"; sourceTree = "<group>"; };
+		936FA3F503214DFB9CCD836D /* Lato-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A2E402DC4DA44387B00C8891 /* Satoshi-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BlackItalic.ttf"; path = "../src/assets/fonts/Satoshi-BlackItalic.ttf"; sourceTree = "<group>"; };
+		A7774F5E8D794AACA0C2DCE8 /* Satoshi-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Bold.otf"; path = "../src/assets/fonts/Satoshi-Bold.otf"; sourceTree = "<group>"; };
+		AC32CA99F79E440F8CFDCF7E /* Satoshi-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Regular.otf"; path = "../src/assets/fonts/Satoshi-Regular.otf"; sourceTree = "<group>"; };
+		AEC286959A1E4CD6AC2DB16A /* Lato-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Black.ttf"; path = "../src/assets/fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
+		B6AA1195348F5C41D3E6A360 /* Pods-Cardvest-CardvestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest-CardvestTests.release.xcconfig"; path = "Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests.release.xcconfig"; sourceTree = "<group>"; };
+		BA33ECB1D9B44A7EAB920698 /* Satoshi-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-LightItalic.otf"; path = "../src/assets/fonts/Satoshi-LightItalic.otf"; sourceTree = "<group>"; };
+		BEC880A2DB254445BA871F69 /* Satoshi-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Thin.ttf"; path = "../src/assets/fonts/Satoshi-Thin.ttf"; sourceTree = "<group>"; };
+		C21ADF0477E54B578A10DDDC /* Satoshi-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-MediumItalic.otf"; path = "../src/assets/fonts/Satoshi-MediumItalic.otf"; sourceTree = "<group>"; };
+		CC99DAE9B35C46F8A27C7EE0 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-BoldItalic.ttf"; path = "../src/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		E4FEBC0B296C48118E78477D /* Satoshi-Variable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Variable.ttf"; path = "../src/assets/fonts/Satoshi-Variable.ttf"; sourceTree = "<group>"; };
+		EAEEA76736C4492D93E86C89 /* Satoshi-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-BoldItalic.ttf"; path = "../src/assets/fonts/Satoshi-BoldItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F00BD5B8F69A0C177A21C369 /* Pods-Cardvest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest.release.xcconfig"; path = "Target Support Files/Pods-Cardvest/Pods-Cardvest.release.xcconfig"; sourceTree = "<group>"; };
-		F1976986C3A9496A94A2E7D5 /* Satoshi-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Light.ttf"; path = "../src/assets/fonts/Satoshi-Light.ttf"; sourceTree = "<group>"; };
-		FC79DB480C47DB9EC78FFC1E /* libPods-Cardvest-CardvestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cardvest-CardvestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF211B23FF1E4272AE91FA62 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		FB89E1B98D4A4E40890E09AB /* Satoshi-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Satoshi-Regular.ttf"; path = "../src/assets/fonts/Satoshi-Regular.ttf"; sourceTree = "<group>"; };
+		FB9A2D8F55544FC1A7354F98 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-ThinItalic.ttf"; path = "../src/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		FC2B42FCC91450B3C8241006 /* Pods-Cardvest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardvest.release.xcconfig"; path = "Target Support Files/Pods-Cardvest/Pods-Cardvest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AFCCD3214335F99506C1147 /* libPods-Cardvest-CardvestTests.a in Frameworks */,
+				16C37CF712B8C402ACCBA51A /* libPods-Cardvest-CardvestTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,13 +143,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				889B7D7529EFC14C0095770C /* AppTrackingTransparency.framework in Frameworks */,
-				889B7D7329EFC1420095770C /* StoreKit.framework in Frameworks */,
-				889B7D7129EFC1380095770C /* AdSupport.framework in Frameworks */,
-				889B7D6F29EFC12D0095770C /* AdServices.framework in Frameworks */,
-				889B7D6D29EFC1110095770C /* iAd.framework in Frameworks */,
-				88329CB129CDDED500706034 /* FacebookCore in Frameworks */,
-				1678491C6C6109B72AD8EBC3 /* libPods-Cardvest.a in Frameworks */,
+				188714682CB2C4540099D8DE /* AppTrackingTransparency.framework in Frameworks */,
+				188714642CB2C3FB0099D8DE /* AdServices.framework in Frameworks */,
+				188714622CB2C3EE0099D8DE /* AdSupport.framework in Frameworks */,
+				C146428927142E09A249DE9E /* libPods-Cardvest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,15 +173,15 @@
 		13B07FAE1A68108700A75B9A /* Cardvest */ = {
 			isa = PBXGroup;
 			children = (
-				885144D929B1025200852F8C /* GoogleService-Info.plist */,
-				8847745929AFD7F900F810BE /* Cardvest.entitlements */,
-				3AE60BB6282A46590009B11D /* AppDelegate.mm */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				1887145C2CB2B22A0099D8DE /* Cardvest.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				3AC1F77F252AF552005548BB /* LaunchScreen.storyboard */,
+				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				3AA13E4CD0037CB5CDBC1BCC /* PrivacyInfo.xcprivacy */,
 			);
 			name = Cardvest;
 			sourceTree = "<group>";
@@ -222,17 +189,59 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				889B7D7429EFC14C0095770C /* AppTrackingTransparency.framework */,
-				889B7D7229EFC1420095770C /* StoreKit.framework */,
-				889B7D7029EFC1380095770C /* AdSupport.framework */,
-				889B7D6E29EFC12D0095770C /* AdServices.framework */,
-				889B7D6C29EFC1110095770C /* iAd.framework */,
+				188714702CB2E6020099D8DE /* FBSDKCoreKit.xcframework */,
+				1887146E2CB2E5D90099D8DE /* FBSDKCoreKit_Basics.xcframework */,
+				1887146C2CB2E5CF0099D8DE /* FBSDKShareKit.xcframework */,
+				188714672CB2C4540099D8DE /* AppTrackingTransparency.framework */,
+				188714652CB2C4410099D8DE /* StoreKitTest.framework */,
+				188714632CB2C3FB0099D8DE /* AdServices.framework */,
+				188714612CB2C3EE0099D8DE /* AdSupport.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				3239CD104A52C791605137DA /* libPods-Cardvest.a */,
-				FC79DB480C47DB9EC78FFC1E /* libPods-Cardvest-CardvestTests.a */,
+				28F128D1F3ABBF776B2A077F /* libPods-Cardvest.a */,
+				895B59988ABCD987F8B3E5C4 /* libPods-Cardvest-CardvestTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7119B5F0555C46A298A0851A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AF9DCDAFFFA4211BB8CF9FA /* Satoshi-Black.otf */,
+				4F4603B009914BF2973DB3F0 /* Satoshi-BlackItalic.otf */,
+				A7774F5E8D794AACA0C2DCE8 /* Satoshi-Bold.otf */,
+				70852C553B8245E6A67BA176 /* Satoshi-BoldItalic.otf */,
+				7BEE4235CDD0495699E77683 /* Satoshi-Italic.otf */,
+				8DC31D0B30E24B79A61775B6 /* Satoshi-Light.otf */,
+				BA33ECB1D9B44A7EAB920698 /* Satoshi-LightItalic.otf */,
+				771ED9AA59A04085B0EFC488 /* Satoshi-Medium.otf */,
+				C21ADF0477E54B578A10DDDC /* Satoshi-MediumItalic.otf */,
+				AC32CA99F79E440F8CFDCF7E /* Satoshi-Regular.otf */,
+				AEC286959A1E4CD6AC2DB16A /* Lato-Black.ttf */,
+				84333D97D197434CAB88E77E /* Lato-BlackItalic.ttf */,
+				800A647575FA43AC93CE749D /* Lato-Bold.ttf */,
+				CC99DAE9B35C46F8A27C7EE0 /* Lato-BoldItalic.ttf */,
+				6D172477A00541128B11FE7A /* Lato-Italic.ttf */,
+				8431713D4FA54B2C85F4FFD3 /* Lato-Light.ttf */,
+				55D43698CDC44D62B77ADCB1 /* Lato-LightItalic.ttf */,
+				936FA3F503214DFB9CCD836D /* Lato-Regular.ttf */,
+				5CF6A8E946074B65ACC7346F /* Lato-Thin.ttf */,
+				FB9A2D8F55544FC1A7354F98 /* Lato-ThinItalic.ttf */,
+				0A29A8B8383C4D6B85DB287F /* Satoshi-Black.ttf */,
+				A2E402DC4DA44387B00C8891 /* Satoshi-BlackItalic.ttf */,
+				4D8F64093BDA4F1DA35FDACB /* Satoshi-Bold.ttf */,
+				EAEEA76736C4492D93E86C89 /* Satoshi-BoldItalic.ttf */,
+				186AD7DD36F3492A99979217 /* Satoshi-Italic.ttf */,
+				6FAC97C6A0984B918FC5AD67 /* Satoshi-Light.ttf */,
+				73401BA651324CB2BDDCB062 /* Satoshi-LightItalic.ttf */,
+				51C7C72E028741A4B5AF0365 /* Satoshi-Medium.ttf */,
+				377434CCB22548E4B8AE3699 /* Satoshi-MediumItalic.ttf */,
+				FB89E1B98D4A4E40890E09AB /* Satoshi-Regular.ttf */,
+				BEC880A2DB254445BA871F69 /* Satoshi-Thin.ttf */,
+				440E2D2E81F4433F9BDAA1B8 /* Satoshi-ThinItalic.ttf */,
+				E4FEBC0B296C48118E78477D /* Satoshi-Variable.ttf */,
+				237BC93828B1485C9F62DAFF /* Satoshi-VariableItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -245,34 +254,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				8866594A29ACFFB100A137FA /* GoogleService-Info.plist */,
-				884CBE2729559CA8001DD801 /* Lato-Black.ttf */,
-				884CBE2829559CA8001DD801 /* Lato-BlackItalic.ttf */,
-				884CBE2E29559CA8001DD801 /* Lato-Bold.ttf */,
-				884CBE2C29559CA8001DD801 /* Lato-BoldItalic.ttf */,
-				884CBE2229559CA8001DD801 /* Lato-Italic.ttf */,
-				884CBE2329559CA8001DD801 /* Lato-Light.ttf */,
-				884CBE2D29559CA8001DD801 /* Lato-LightItalic.ttf */,
-				884CBE2029559CA8001DD801 /* Lato-Regular.ttf */,
-				884CBE2529559CA8001DD801 /* Lato-Thin.ttf */,
-				884CBE1C29559CA8001DD801 /* Lato-ThinItalic.ttf */,
-				884CBE2F29559CA8001DD801 /* Satoshi-Black.otf */,
-				884CBE2429559CA8001DD801 /* Satoshi-BlackItalic.otf */,
-				884CBE1E29559CA8001DD801 /* Satoshi-Bold.otf */,
-				884CBE2129559CA8001DD801 /* Satoshi-BoldItalic.otf */,
-				884CBE2B29559CA8001DD801 /* Satoshi-Italic.otf */,
-				884CBE2929559CA8001DD801 /* Satoshi-Light.otf */,
-				884CBE1D29559CA8001DD801 /* Satoshi-LightItalic.otf */,
-				884CBE2A29559CA8001DD801 /* Satoshi-Medium.otf */,
-				884CBE1F29559CA8001DD801 /* Satoshi-MediumItalic.otf */,
-				884CBE2629559CA8001DD801 /* Satoshi-Regular.otf */,
+				1887145F2CB2BF770099D8DE /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Cardvest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CardvestTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				A957892C321B4A5850B954E3 /* Pods */,
-				8548A2AD02F54A188E8BC948 /* Resources */,
+				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				7119B5F0555C46A298A0851A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -288,60 +277,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8548A2AD02F54A188E8BC948 /* Resources */ = {
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				68E5EF259E8E4558AB107594 /* Lato-Black.ttf */,
-				3D2E5A87598B4B46995B7027 /* Lato-BlackItalic.ttf */,
-				351AD53139B04D48A492DCC9 /* Lato-Bold.ttf */,
-				3DEA598EFC5B4EF2B839E4D6 /* Lato-BoldItalic.ttf */,
-				C9E578FF46F04016A9FEA731 /* Lato-Italic.ttf */,
-				DF4036C513F840B19AF034A2 /* Lato-Light.ttf */,
-				06933F48076D471682E306AD /* Lato-LightItalic.ttf */,
-				5490CC35D2D14595A5AF075E /* Lato-Regular.ttf */,
-				E2152AF86EDF4EEDBD2D3F17 /* Lato-Thin.ttf */,
-				FF69C08483504C9AB6BA50EB /* Lato-ThinItalic.ttf */,
-				E95B9C6930DE4255A97A3A0D /* AntDesign.ttf */,
-				FF211B23FF1E4272AE91FA62 /* Entypo.ttf */,
-				420D36B2635142179BFA04C6 /* EvilIcons.ttf */,
-				38C6204123C84D08A2509CA4 /* Feather.ttf */,
-				4BE5321DCB604D30A34B98FE /* FontAwesome.ttf */,
-				71214528D2EC48BF83240B17 /* FontAwesome5_Brands.ttf */,
-				3E8C23CB15454F85A8EDD801 /* FontAwesome5_Regular.ttf */,
-				2436BC37CFF14845A08BC38C /* FontAwesome5_Solid.ttf */,
-				9B58E33039ED4B5A83C5FE58 /* Fontisto.ttf */,
-				9A24869C88D743A5A01D67B0 /* Foundation.ttf */,
-				E80451E76DC14E3F80CCE2DE /* Ionicons.ttf */,
-				DC9F2B34D5D441E1BF160FA8 /* MaterialCommunityIcons.ttf */,
-				30726AAD7FA34C7497832E61 /* MaterialIcons.ttf */,
-				4FEC52FF7C5B47C68067D9F9 /* Octicons.ttf */,
-				303D7E515107464A9F756BF5 /* SimpleLineIcons.ttf */,
-				A2C8F480800B4B1C91CE2F11 /* Zocial.ttf */,
-				B5EAEC40EF5D42C988F42853 /* Satoshi-Black.ttf */,
-				3A378A42799C4B828204CFE3 /* Satoshi-BlackItalic.ttf */,
-				4D0BFE70CFEA4176911E5AD0 /* Satoshi-Bold.ttf */,
-				9DE2C2B1E4884533A8B1A113 /* Satoshi-BoldItalic.ttf */,
-				6475CEC6DAC346589270CB8E /* Satoshi-Italic.ttf */,
-				F1976986C3A9496A94A2E7D5 /* Satoshi-Light.ttf */,
-				992A5D3AAB1D4F29B6ECE6EF /* Satoshi-LightItalic.ttf */,
-				12C95E49BEA4472A8104AF92 /* Satoshi-Medium.ttf */,
-				BC50D9EB71704248B5640701 /* Satoshi-MediumItalic.ttf */,
-				13ADB9EA05BE4397A6CDA5C0 /* Satoshi-Regular.ttf */,
-				1FD82E82945B402A9F0E9BD7 /* Satoshi-Thin.ttf */,
-				5A6E7BCE59664DD1BD389A3B /* Satoshi-ThinItalic.ttf */,
-				0079EA82CCF9484EAE66E1FD /* Satoshi-Variable.ttf */,
-				275AFC30388943F8B94024D8 /* Satoshi-VariableItalic.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		A957892C321B4A5850B954E3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C0537DAAD666E5B5491D1792 /* Pods-Cardvest.debug.xcconfig */,
-				F00BD5B8F69A0C177A21C369 /* Pods-Cardvest.release.xcconfig */,
-				8B268DFF4A6AE4D604587788 /* Pods-Cardvest-CardvestTests.debug.xcconfig */,
-				88BB9518D2748BD163C478D0 /* Pods-Cardvest-CardvestTests.release.xcconfig */,
+				7538767F3D1FF2909076F7F4 /* Pods-Cardvest.debug.xcconfig */,
+				FC2B42FCC91450B3C8241006 /* Pods-Cardvest.release.xcconfig */,
+				2283F5E83BF63BE1B71186E1 /* Pods-Cardvest-CardvestTests.debug.xcconfig */,
+				B6AA1195348F5C41D3E6A360 /* Pods-Cardvest-CardvestTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -353,12 +295,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CardvestTests" */;
 			buildPhases = (
-				E5F992B8C00EEB7CA6CE49D2 /* [CP] Check Pods Manifest.lock */,
+				40C39540DA20F312BE660F29 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				D0AE27D10098ACDD5713CDD7 /* [CP] Embed Pods Frameworks */,
-				48D40A0602E150E047CEF257 /* [CP] Copy Pods Resources */,
+				62F8D2BBE39055E43D74CDE0 /* [CP] Embed Pods Frameworks */,
+				90E5031DB85EAC3C4D6DA662 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -374,25 +316,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Cardvest" */;
 			buildPhases = (
-				35E39858286843DA0030DD78 /* [CP] Check Pods Manifest.lock */,
-				FD10A7F022414F080027D42C /* Start Packager */,
+				02FED0022D94E0A3E9827A0E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1FBBAD36A5DE412E816242C1 /* Upload Debug Symbols to Sentry */,
-				A6487A510AD4A9237739FBD3 /* [CP] Embed Pods Frameworks */,
-				ADC7566E1D9395BBE27CF43C /* [CP] Copy Pods Resources */,
-				3B28BA6734EBD1E766ADD286 /* [CP-User] [RNFB] Core Configuration */,
+				D277E8D731650862B221A6DB /* [CP] Embed Pods Frameworks */,
+				EF945F7815AAB217B2260CC6 /* [CP] Copy Pods Resources */,
+				9643AF5363A4339ABD34CFB1 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Cardvest;
-			packageProductDependencies = (
-				88329CB029CDDED500706034 /* FacebookCore */,
-			);
 			productName = Cardvest;
 			productReference = 13B07F961A680F5B00A75B9A /* Cardvest.app */;
 			productType = "com.apple.product-type.application";
@@ -424,9 +361,6 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
-			packageReferences = (
-				88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -442,7 +376,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8866594C29ACFFB100A137FA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,45 +383,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				885144D829B0FF7600852F8C /* Cardvest.entitlements in Resources */,
-				BF5B626091A94AA5B6977CA8 /* Lato-ThinItalic.ttf in Resources */,
-				884CBE3029559CA8001DD801 /* Satoshi-LightItalic.otf in Resources */,
-				884CBE3129559CA8001DD801 /* Satoshi-Bold.otf in Resources */,
-				884CBE3229559CA8001DD801 /* Satoshi-MediumItalic.otf in Resources */,
-				391165B8EE75497793EADEC4 /* Lato-Regular.ttf in Resources */,
-				884CBE3329559CA8001DD801 /* Satoshi-BoldItalic.otf in Resources */,
-				4FAAC9AA4B0947AE8117D6B5 /* Lato-Italic.ttf in Resources */,
-				C8342581F70D47B98C3CEDB4 /* Lato-Light.ttf in Resources */,
-				884CBE3429559CA8001DD801 /* Satoshi-BlackItalic.otf in Resources */,
-				2909319D33DD472694DDAF1F /* Lato-Thin.ttf in Resources */,
-				884CBE3529559CA8001DD801 /* Satoshi-Regular.otf in Resources */,
-				90993A44AFA64CEABC683D6D /* Lato-Black.ttf in Resources */,
-				3AFC7D7205A3428596AB4954 /* Lato-BlackItalic.ttf in Resources */,
-				884CBE3629559CA8001DD801 /* Satoshi-Light.otf in Resources */,
-				884CBE3729559CA8001DD801 /* Satoshi-Medium.otf in Resources */,
-				884CBE3829559CA8001DD801 /* Satoshi-Italic.otf in Resources */,
-				FA8B7193E87645ABA6EEB43E /* Lato-BoldItalic.ttf in Resources */,
-				461C6D5F605F4ACDAE4035F7 /* Lato-LightItalic.ttf in Resources */,
-				22C0ED508F664C29A722E4AF /* Lato-Bold.ttf in Resources */,
-				884CBE3929559CA8001DD801 /* Satoshi-Black.otf in Resources */,
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* BuildFile in Resources */,
-				3AC1F780252AF552005548BB /* LaunchScreen.storyboard in Resources */,
-				B54EA6820691411F97BD4445 /* Satoshi-Black.ttf in Resources */,
-				B6840527974D4FC89E1A592F /* Satoshi-BlackItalic.ttf in Resources */,
-				885144DA29B1025200852F8C /* GoogleService-Info.plist in Resources */,
-				C76B35D81790484D83EEF8FC /* Satoshi-Bold.ttf in Resources */,
-				92B1E2B2945D4F878B87AA7E /* Satoshi-BoldItalic.ttf in Resources */,
-				064DD41E859E46BB8E4013F0 /* Satoshi-Italic.ttf in Resources */,
-				259D0F17F29F4D2BB628341E /* Satoshi-Light.ttf in Resources */,
-				169CCFA811584301BB7961B6 /* Satoshi-LightItalic.ttf in Resources */,
-				323CDFD433DA4BB0B1E2C76E /* Satoshi-Medium.ttf in Resources */,
-				2DB59C727D1F489F895C2CCC /* Satoshi-MediumItalic.ttf in Resources */,
-				F3B965A1D39745CFA3370C4B /* Satoshi-Regular.ttf in Resources */,
-				86659DF594B74ECF996681F4 /* Satoshi-Thin.ttf in Resources */,
-				DE491222477449B0893478F9 /* Satoshi-ThinItalic.ttf in Resources */,
-				DD565953DF7F4851AC7002AF /* Satoshi-Variable.ttf in Resources */,
-				3BB8E813AC034E07B795FC96 /* Satoshi-VariableItalic.ttf in Resources */,
+				547C78FFDA2B4DC234F9CC55 /* PrivacyInfo.xcprivacy in Resources */,
+				F639F582EE284A01B2A182FD /* Satoshi-Black.otf in Resources */,
+				380E19882B394ED48DAA9CBC /* Satoshi-BlackItalic.otf in Resources */,
+				F161D1B39BF24198BA82B854 /* Satoshi-Bold.otf in Resources */,
+				58A872C2841B42FBB73C3CFC /* Satoshi-BoldItalic.otf in Resources */,
+				D6975508817D4E9E9FDFF879 /* Satoshi-Italic.otf in Resources */,
+				60E2C4247A5D49538602992C /* Satoshi-Light.otf in Resources */,
+				80C983377D964318A5922A5B /* Satoshi-LightItalic.otf in Resources */,
+				F32A5C5D19CB4C5E92D0D02B /* Satoshi-Medium.otf in Resources */,
+				188714602CB2BF770099D8DE /* GoogleService-Info.plist in Resources */,
+				B74C15E466F04C23ADD65E27 /* Satoshi-MediumItalic.otf in Resources */,
+				7F99189F5F0D48C880D8E6F4 /* Satoshi-Regular.otf in Resources */,
+				114DDC515F9348EA82442B99 /* Lato-Black.ttf in Resources */,
+				CC1F4489D9BC4F1792A18512 /* Lato-BlackItalic.ttf in Resources */,
+				284D828C418A4B5E8AA26D0D /* Lato-Bold.ttf in Resources */,
+				B930CFCDD7014324B089D7D6 /* Lato-BoldItalic.ttf in Resources */,
+				727CA21844D94E7E97EADC28 /* Lato-Italic.ttf in Resources */,
+				CC850F00985E457CB61B5D63 /* Lato-Light.ttf in Resources */,
+				D15BF472A2A845D68F4A62E1 /* Lato-LightItalic.ttf in Resources */,
+				65391A2E0CA5478EBCD2B0EB /* Lato-Regular.ttf in Resources */,
+				40FB2DC07226454AB332BAFA /* Lato-Thin.ttf in Resources */,
+				DAB8522908D84C80824D0DE5 /* Lato-ThinItalic.ttf in Resources */,
+				F959F03802CB40DDA6299B0C /* Satoshi-Black.ttf in Resources */,
+				FF3DAC4EA8BC4601999B415D /* Satoshi-BlackItalic.ttf in Resources */,
+				8A0B92741678476CBD2C5E50 /* Satoshi-Bold.ttf in Resources */,
+				5CACDA24A90C406A8E68107C /* Satoshi-BoldItalic.ttf in Resources */,
+				636F9EA75D944FAABE47EA27 /* Satoshi-Italic.ttf in Resources */,
+				2AAE11353EA44EA68C24BD14 /* Satoshi-Light.ttf in Resources */,
+				8512FDEDF8EA42639392C815 /* Satoshi-LightItalic.ttf in Resources */,
+				08ECD8883CD94CD9BDFB8580 /* Satoshi-Medium.ttf in Resources */,
+				4844AE63A20E43D99C8AD86D /* Satoshi-MediumItalic.ttf in Resources */,
+				8192D6928C57466FA5028476 /* Satoshi-Regular.ttf in Resources */,
+				4FE07F43A6B6481FA3A19207 /* Satoshi-Thin.ttf in Resources */,
+				94B03A39858A4D17AD656F38 /* Satoshi-ThinItalic.ttf in Resources */,
+				765C5913A419454AABC91784 /* Satoshi-Variable.ttf in Resources */,
+				07A23FB79A5A447CA42AE225 /* Satoshi-VariableItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,29 +433,17 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
 			);
 			name = "Bundle React Native code and images";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nset -e\n\nexport NODE_BINARY=/Users/cremirdevio/.nvm/versions/node/v16.19.1/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n\n/bin/sh ../node_modules/@sentry/react-native/scripts/collect-modules.sh\n\n/bin/sh ../node_modules/@sentry/react-native/scripts/collect-modules.sh\n\n/bin/sh ../node_modules/@sentry/react-native/scripts/collect-modules.sh\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		1FBBAD36A5DE412E816242C1 /* Upload Debug Symbols to Sentry */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Upload Debug Symbols to Sentry";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\nexport SENTRY_PROPERTIES=sentry.properties\n[[ $SENTRY_INCLUDE_NATIVE_SOURCES == \"true\" ]] && INCLUDE_SOURCES_FLAG=\"--include-sources\" || INCLUDE_SOURCES_FLAG=\"\"\n../node_modules/@sentry/cli/bin/sentry-cli debug-files upload \"$INCLUDE_SOURCES_FLAG\"\n";
-		};
-		35E39858286843DA0030DD78 /* [CP] Check Pods Manifest.lock */ = {
+		02FED0022D94E0A3E9827A0E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -545,88 +465,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B28BA6734EBD1E766ADD286 /* [CP-User] [RNFB] Core Configuration */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "[CP-User] [RNFB] Core Configuration";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n";
-		};
-		48D40A0602E150E047CEF257 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A6487A510AD4A9237739FBD3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ADC7566E1D9395BBE27CF43C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D0AE27D10098ACDD5713CDD7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E5F992B8C00EEB7CA6CE49D2 /* [CP] Check Pods Manifest.lock */ = {
+		40C39540DA20F312BE660F29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -648,23 +487,85 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD10A7F022414F080027D42C /* Start Packager */ = {
+		62F8D2BBE39055E43D74CDE0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
-			name = "Start Packager";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90E5031DB85EAC3C4D6DA662 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest-CardvestTests/Pods-Cardvest-CardvestTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9643AF5363A4339ABD34CFB1 /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n\n##########################################################################\n##########################################################################\n#\n#  NOTE THAT IF YOU CHANGE THIS FILE YOU MUST RUN pod install AFTERWARDS\n#\n#  This file is installed as an Xcode build script in the project file\n#  by cocoapods, and you will not see your changes until you pod install\n#\n##########################################################################\n##########################################################################\n\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_analytics_storage\n  _ANALYTICS_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_analytics_storage\")\n  if [[ $_ANALYTICS_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_storage\n  _ANALYTICS_AD_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_storage\")\n  if [[ $_ANALYTICS_AD_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_user_data\n  _ANALYTICS_AD_USER_DATA=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_user_data\")\n  if [[ $_ANALYTICS_AD_USER_DATA ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_USER_DATA\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n";
+		};
+		D277E8D731650862B221A6DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF945F7815AAB217B2260CC6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cardvest/Pods-Cardvest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -682,7 +583,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE60BB7282A465A0009B11D /* AppDelegate.mm in Sources */,
+				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,17 +601,15 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B268DFF4A6AE4D604587788 /* Pods-Cardvest-CardvestTests.debug.xcconfig */;
+			baseConfigurationReference = 2283F5E83BF63BE1B71186E1 /* Pods-Cardvest-CardvestTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = CardvestTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -721,7 +620,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flipdigitals.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipdigitals.cardvest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
 			};
@@ -729,14 +628,12 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88BB9518D2748BD163C478D0 /* Pods-Cardvest-CardvestTests.release.xcconfig */;
+			baseConfigurationReference = B6AA1195348F5C41D3E6A360 /* Pods-Cardvest-CardvestTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				INFOPLIST_FILE = CardvestTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -747,7 +644,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flipdigitals.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipdigitals.cardvest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardvest.app/Cardvest";
 			};
@@ -755,23 +652,22 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0537DAAD666E5B5491D1792 /* Pods-Cardvest.debug.xcconfig */;
+			baseConfigurationReference = 7538767F3D1FF2909076F7F4 /* Pods-Cardvest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 812220257;
+				CODE_SIGN_ENTITLEMENTS = Cardvest/Cardvest.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 812220298;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
 				ENABLE_BITCODE = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CardVest;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -787,22 +683,21 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F00BD5B8F69A0C177A21C369 /* Pods-Cardvest.release.xcconfig */;
+			baseConfigurationReference = FC2B42FCC91450B3C8241006 /* Pods-Cardvest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Cardvest/cardvest.entitlements;
-				CURRENT_PROJECT_VERSION = 812220257;
+				CODE_SIGN_ENTITLEMENTS = Cardvest/Cardvest.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 812220298;
 				DEVELOPMENT_TEAM = ZG9LQXP6RV;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Cardvest/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CardVest;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -819,8 +714,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -846,6 +743,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -865,7 +763,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -882,9 +782,14 @@
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -892,8 +797,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -919,10 +826,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_lato = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimuSatoshir*]" = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -932,7 +839,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -948,9 +857,13 @@
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
+					"-DFOLLY_CFG_NO_COROUTINES=1",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -986,25 +899,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		88329CB029CDDED500706034 /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 88329CAF29CDDED400706034 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

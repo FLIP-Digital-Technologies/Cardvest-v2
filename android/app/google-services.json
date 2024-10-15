@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "607499492274",
+    "project_id": "cardvest-ed2b7",
+    "storage_bucket": "cardvest-ed2b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607499492274:android:296e1cbf2414f62d0ae2ab",
+        "android_client_info": {
+          "package_name": "com.flipdigitals.cardvest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607499492274-dq1kdjk397h5n9bdd235henqvpe889uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCobUulrmgZiL2qThs2RgxOvy-NazSsJkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607499492274-dq1kdjk397h5n9bdd235henqvpe889uk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607499492274-24s7bb02pat0nlb27pr253ojpd7fhhb8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flipdigitals.cardvest",
+                "app_store_id": "1598288580"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,29 +1,32 @@
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
+
 /**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
  *
- * @format
+ * @type {import('metro-config').MetroConfig}
  */
 
-const {getDefaultConfig} = require('metro-config');
+const config = {
+  resolver: {
+    // Exclude 'svg' from asset extensions and include it in source extensions
+    assetExts: [],
+    sourceExts: [],
+  },
+  transformer: {
+    // Use react-native-svg-transformer for handling svg files
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+  },
+};
 
 module.exports = (async () => {
-  const {
-    resolver: { sourceExts, assetExts },
-  } = await getDefaultConfig()
-  return {
+  const defaultConfig = await getDefaultConfig(__dirname);
+
+  return mergeConfig(defaultConfig, {
     resolver: {
-      assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
+      assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
+      sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
     },
-    transformer: {
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
-      // getTransformOptions: async () => ({
-      //   transform: {
-      //     experimentalImportSupport: false,
-      //     inlineRequires: true,
-      //   },
-      // }),
-    },
-  }
+    transformer: config.transformer, // Keep the transformer configuration for SVG
+  });
 })();
