@@ -34,7 +34,7 @@ const RNLanguageDetector = {
   },
   init: noop,
   cacheUserLanguage: (locale: string): void => {
-    AsyncStorage.setItem(LOCALE_PERSISTENCE_KEY, locale);
+    AsyncStorage.setItem(LOCALE_PERSISTENCE_KEY, locale?.toString());
   },
 };
 
