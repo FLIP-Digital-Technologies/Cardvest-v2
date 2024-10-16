@@ -1,14 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.flipdigitals.cardvest">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
@@ -21,6 +19,7 @@
       android:allowBackup="false"
       android:usesCleartextTraffic="true"
       android:theme="@style/AppTheme"
+      android:supportsRtl="true"
     >
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
       <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
@@ -70,13 +69,12 @@
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
         android:exported="true">
         <intent-filter android:label="Cardvest">
-          <action android:name="android.intent.action.VIEW" />
-          <category android:name="android.intent.category.DEFAULT" />
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="http" android:host="https://app.cardvest.ng" />
           <data android:scheme="cardvest" android:host="cardvest" />
         </intent-filter>
       </activity>
     </application>
-
 </manifest>

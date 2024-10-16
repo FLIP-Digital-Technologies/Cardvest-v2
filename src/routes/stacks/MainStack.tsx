@@ -34,6 +34,9 @@ import CalculateGiftcardPricePage from '@scenes/CalculateGiftcardPricePage';
 import CalculatorPage from '@scenes/CalculatorPage';
 import CardPage from '@scenes/CardPage';
 import ChangePinPage from '@scenes/ChangePinPage';
+import SellCryptoPage from '@scenes/Crypto/SellCryptoPage';
+import PaymentWalletPage from '@scenes/Crypto/subpages/PaymentWalletPage';
+import TradeFeedbackPage from '@scenes/Crypto/subpages/TradeFeedbackPage';
 import DashboardPage from '@scenes/DashboardPage';
 import DeleteAccountFeedbackPage from '@scenes/DeleteAccountFeedbackPage';
 import DeleteAccountPage from '@scenes/DeleteAccountPage';
@@ -689,6 +692,29 @@ export const MainStackScreen: FC = () => {
             headerShown: false,
           }}
         />
+        {/* Crypto Pages */}
+        <MainStack.Screen
+          name="SellCryptoPage"
+          component={SellCryptoPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="SellCryptoPaymentPage"
+          component={PaymentWalletPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="SellCryptoFeedbackPage"
+          component={TradeFeedbackPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* End Crypto Pages */}
       </MainStack.Navigator>
     </NotificationContainer>
   );

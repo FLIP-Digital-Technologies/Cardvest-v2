@@ -156,6 +156,7 @@ export const CountrySelect = (props: any) => {
 
 const SelectItem = memo(({ value, item, setValue }: any) => {
   const active = value === item.value;
+
   return (
     <Pressable p={3} onPress={() => setValue(item.value)}>
       <HStack flex={1} py="2" justifyContent="space-between" alignItems="center">

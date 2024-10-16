@@ -3,7 +3,7 @@
   "displayName": "Cardvest",
   "environments": {
     "development": {
-      "API_URL": "https://staging.cardvest.ng/api/v2",
+      "API_URL": "http://cardvest.test/api/v2",
       "ENV": "development"
     },
     "staging": {

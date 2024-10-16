@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const put = async (key: string, value: string) => {
   try {
     if (typeof value === 'string') {
-      await AsyncStorage.setItem(key, value);
+      await AsyncStorage.setItem(key, value?.toString());
     } else {
       await AsyncStorage.setItem(key, JSON.stringify(value));
     }
